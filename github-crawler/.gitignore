@@ -1,0 +1,6 @@
+.env
+results/
+final_leads.csv
+__pycache__/
+*.pyc
+*.csv
