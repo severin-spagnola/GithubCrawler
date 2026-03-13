@@ -1,0 +1,19 @@
+[Unit]
+Description=GitHub Crawler Supervisor
+Documentation=https://github.com/Nayab-23/GithubCrawler
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nayab
+WorkingDirectory=/home/nayab/GithubCrawler
+EnvironmentFile=/home/nayab/GithubCrawler/.env
+ExecStart=/home/nayab/GithubCrawler/.venv/bin/python3 supervisor.py
+Restart=always
+RestartSec=30
+StandardOutput=append:/home/nayab/GithubCrawler/supervisor.log
+StandardError=append:/home/nayab/GithubCrawler/supervisor.log
+
+[Install]
+WantedBy=multi-user.target
