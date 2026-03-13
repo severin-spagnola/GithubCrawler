@@ -6,7 +6,7 @@ import time
 import threading
 import re
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError as FutureTimeoutError
 
 import requests
 from dotenv import load_dotenv
@@ -31,7 +31,30 @@ HEADERS = {
     "Accept": "application/vnd.github+json",
 }
 
-RATE_LIMIT_DELAY = 2.1  # seconds between every API call
+RATE_LIMIT_DELAY  = 2.1   # seconds between every API call
+REQUEST_TIMEOUT   = 30    # seconds before requests.get() gives up
+ENRICH_TIMEOUT    = 60    # seconds before a per-lead enrichment future is abandoned
+
+# ---------------------------------------------------------------------------
+# Logging to crawl.log
+# ---------------------------------------------------------------------------
+
+LOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "crawl.log")
+_log_lock = threading.Lock()
+
+
+def _ts():
+    return datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def log_line(msg):
+    """Append a timestamped line to crawl.log (thread-safe) and echo to stdout."""
+    line = f"[{_ts()}] {msg}"
+    print(line, flush=True)
+    with _log_lock:
+        with open(LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(line + "\n")
+
 
 # ---------------------------------------------------------------------------
 # Thread-safe rate limiter
@@ -47,6 +70,10 @@ def rate_limited_get(url, params=None, extra_headers=None):
     Each thread atomically reserves the next available time slot and then
     sleeps *outside* the lock so that threads don't pile up blocking one
     another while sleeping.
+
+    Raises requests.exceptions.Timeout or requests.exceptions.ConnectionError
+    to callers — do not swallow them here so individual functions can decide
+    how to handle them.
     """
     global _next_call_at
 
@@ -65,7 +92,7 @@ def rate_limited_get(url, params=None, extra_headers=None):
         if wait > 0:
             time.sleep(wait)
 
-        resp = requests.get(url, headers=headers, params=params, timeout=30)
+        resp = requests.get(url, headers=headers, params=params, timeout=REQUEST_TIMEOUT)
 
         if resp.status_code == 403:
             reset_ts = resp.headers.get("X-RateLimit-Reset")
@@ -106,7 +133,15 @@ def search_commits(query):
     extra = {"Accept": "application/vnd.github.cloak-preview+json"}
 
     print(f"  [commits] searching: {query}")
-    resp = rate_limited_get(url, params=params, extra_headers=extra)
+    try:
+        resp = rate_limited_get(url, params=params, extra_headers=extra)
+    except requests.exceptions.Timeout:
+        print(f"  [warn] commit search timed out for query: {query}")
+        return leads
+    except requests.exceptions.ConnectionError as exc:
+        print(f"  [warn] commit search connection error for query '{query}': {exc}")
+        return leads
+
     if not resp.ok:
         print(f"  [warn] commit search failed ({resp.status_code}): {resp.text[:200]}")
         return leads
@@ -147,7 +182,15 @@ def search_issues(query):
     params = {"q": query, "per_page": 30, "page": 1}
 
     print(f"  [issues]  searching: {query}")
-    resp = rate_limited_get(url, params=params)
+    try:
+        resp = rate_limited_get(url, params=params)
+    except requests.exceptions.Timeout:
+        print(f"  [warn] issue search timed out for query: {query}")
+        return leads
+    except requests.exceptions.ConnectionError as exc:
+        print(f"  [warn] issue search connection error for query '{query}': {exc}")
+        return leads
+
     if not resp.ok:
         print(f"  [warn] issue search failed ({resp.status_code}): {resp.text[:200]}")
         return leads
@@ -183,9 +226,17 @@ def search_issues(query):
 # ---------------------------------------------------------------------------
 
 def enrich_user(username):
-    """Fetch GitHub profile data for a username."""
+    """Fetch GitHub profile data for a username. Returns {} on any network error."""
     url = f"https://api.github.com/users/{username}"
-    resp = rate_limited_get(url)
+    try:
+        resp = rate_limited_get(url)
+    except requests.exceptions.Timeout:
+        print(f"  [warn] user enrich timed out: {username}")
+        return {}
+    except requests.exceptions.ConnectionError as exc:
+        print(f"  [warn] user enrich connection error for {username}: {exc}")
+        return {}
+
     if not resp.ok:
         print(f"  [warn] user enrichment failed for {username} ({resp.status_code})")
         return {}
@@ -214,14 +265,11 @@ def _parse_contributor_count(resp):
     """
     link_header = resp.headers.get("Link", "")
     if link_header:
-        # last page number gives us (page-1)*per_page < count <= page*per_page
         match = re.search(r'page=(\d+)>;\s*rel="last"', link_header)
         if match:
             last_page = int(match.group(1))
-            # default per_page for contributors endpoint is 30
             return last_page * 30
 
-    # No pagination — count directly
     try:
         return len(resp.json())
     except Exception:
@@ -229,9 +277,17 @@ def _parse_contributor_count(resp):
 
 
 def enrich_repo(repo_full):
-    """Fetch repo metadata and contributor count."""
+    """Fetch repo metadata and contributor count. Returns {} on any network error."""
     repo_url = f"https://api.github.com/repos/{repo_full}"
-    resp = rate_limited_get(repo_url)
+    try:
+        resp = rate_limited_get(repo_url)
+    except requests.exceptions.Timeout:
+        print(f"  [warn] repo enrich timed out: {repo_full}")
+        return {}
+    except requests.exceptions.ConnectionError as exc:
+        print(f"  [warn] repo enrich connection error for {repo_full}: {exc}")
+        return {}
+
     if not resp.ok:
         print(f"  [warn] repo enrichment failed for {repo_full} ({resp.status_code})")
         return {}
@@ -245,12 +301,16 @@ def enrich_repo(repo_full):
     language = data.get("language") or ""
     stars = data.get("stargazers_count") or 0
 
-    # Contributor count via Link header trick
-    contrib_url = f"https://api.github.com/repos/{repo_full}/contributors"
-    contrib_resp = rate_limited_get(contrib_url, params={"per_page": 30, "anon": "true"})
     contributor_count = 0
-    if contrib_resp.ok:
-        contributor_count = _parse_contributor_count(contrib_resp)
+    contrib_url = f"https://api.github.com/repos/{repo_full}/contributors"
+    try:
+        contrib_resp = rate_limited_get(contrib_url, params={"per_page": 30, "anon": "true"})
+        if contrib_resp.ok:
+            contributor_count = _parse_contributor_count(contrib_resp)
+    except requests.exceptions.Timeout:
+        print(f"  [warn] contributor fetch timed out: {repo_full}")
+    except requests.exceptions.ConnectionError as exc:
+        print(f"  [warn] contributor fetch connection error for {repo_full}: {exc}")
 
     return {
         "repo_name": repo_name,
@@ -317,15 +377,21 @@ def main():
     print(f"=== GitHub Crawler starting ===")
     print(f"  Queries : {len(queries)}")
     print(f"  Output  : {output_path}")
+    print(f"  Log     : {LOG_PATH}")
     print()
 
     # ------------------------------------------------------------------
-    # Phase 1: Search
+    # Phase 1: Search — log after every query completes
     # ------------------------------------------------------------------
     raw_leads = []
     for query in queries:
-        raw_leads.extend(search_commits(query))
-        raw_leads.extend(search_issues(query))
+        commit_leads = search_commits(query)
+        issue_leads  = search_issues(query)
+        raw_leads.extend(commit_leads)
+        raw_leads.extend(issue_leads)
+        log_line(
+            f'query="{query}" commits={len(commit_leads)} issues={len(issue_leads)}'
+        )
 
     print(f"\n[phase 1] collected {len(raw_leads)} raw leads")
 
@@ -342,21 +408,30 @@ def main():
     print(f"[phase 2] {len(unique_leads)} unique leads after deduplication\n")
 
     # ------------------------------------------------------------------
-    # Phase 3: Enrich (threaded, rate-limited)
+    # Phase 3: Enrich (threaded, rate-limited, per-future timeout)
     # ------------------------------------------------------------------
     print("[phase 3] enriching leads …")
     enriched = []
+    skipped  = 0
 
     with ThreadPoolExecutor(max_workers=6) as executor:
         futures = {executor.submit(enrich_lead, lead): lead for lead in unique_leads}
         for future in as_completed(futures):
+            lead = futures[future]
             try:
-                result = future.result()
+                result = future.result(timeout=ENRICH_TIMEOUT)
                 enriched.append(result)
+            except FutureTimeoutError:
+                skipped += 1
+                print(
+                    f"  [warn] enrichment timed out after {ENRICH_TIMEOUT}s — "
+                    f"skipping {lead.get('username')} @ {lead.get('repo')}"
+                )
             except Exception as exc:
+                skipped += 1
                 print(f"  [error] enrichment exception: {exc}")
 
-    print(f"\n[phase 3] enriched {len(enriched)} leads")
+    print(f"\n[phase 3] enriched {len(enriched)} leads, skipped {skipped}")
 
     # ------------------------------------------------------------------
     # Phase 4: Filter
@@ -377,6 +452,11 @@ def main():
             writer.writerow({field: lead.get(field, "") for field in CSV_FIELDS})
 
     print(f"[done] wrote {len(filtered)} leads to {output_path}")
+
+    # ------------------------------------------------------------------
+    # Final log entry
+    # ------------------------------------------------------------------
+    log_line(f"CRAWL COMPLETE total_leads={len(filtered)}")
 
 
 if __name__ == "__main__":
