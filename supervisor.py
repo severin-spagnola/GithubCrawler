@@ -7,7 +7,7 @@ Lifecycle:
      10 minutes, treat the crawler as stalled: kill it and restart.
   3. After a clean exit, merge /tmp/results_local_run.csv into
      results_local.csv (deduplicating on username+repo).
-  4. Sleep 6 hours, then go back to step 1.
+  4. Sleep for SLEEP_BETWEEN seconds, then go back to step 1.
 
 Run with:
     .venv/bin/python3 supervisor.py &
@@ -35,9 +35,9 @@ RESULTS_TMP      = "/tmp/results_local_run.csv"
 # Tuning
 # ---------------------------------------------------------------------------
 
-STALL_TIMEOUT    = 10 * 60   # seconds of no log change before declaring stall
-POLL_INTERVAL    = 60        # seconds between stall checks
-SLEEP_BETWEEN    = 6 * 3600  # seconds to sleep after a completed run
+STALL_TIMEOUT    = int(os.environ.get("STALL_TIMEOUT_SECONDS", 10 * 60))
+POLL_INTERVAL    = int(os.environ.get("POLL_INTERVAL_SECONDS", 60))
+SLEEP_BETWEEN    = int(os.environ.get("SLEEP_BETWEEN_SECONDS", 0))
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -98,14 +98,15 @@ def _load_seen_keys(path):
     return seen
 
 
-def merge_results():
+def merge_results(log_noop=False):
     """
     Append rows from RESULTS_TMP into RESULTS_FINAL, skipping any
     (username, repo) pair already present in RESULTS_FINAL.
     Returns number of new rows written.
     """
     if not os.path.exists(RESULTS_TMP):
-        slog("[merge] /tmp/results_local_run.csv not found — nothing to merge")
+        if log_noop:
+            slog("[merge] /tmp/results_local_run.csv not found — nothing to merge")
         return 0
 
     seen = _load_seen_keys(RESULTS_FINAL)
@@ -126,7 +127,8 @@ def merge_results():
         return 0
 
     if not new_rows:
-        slog("[merge] 0 new leads (all already in results_local.csv)")
+        if log_noop:
+            slog("[merge] 0 new leads (all already in results_local.csv)")
         return 0
 
     write_header = not os.path.exists(RESULTS_FINAL)
@@ -185,6 +187,9 @@ def watch(proc):
                         break
             except Exception:
                 pass
+
+        # Publish any new leads discovered so far even before the run ends.
+        merge_results(log_noop=False)
 
         ret = proc.poll()
         if ret is not None:
@@ -256,7 +261,7 @@ def main():
     slog(f"[supervisor] results      : {RESULTS_FINAL}")
     slog(f"[supervisor] crawl log    : {CRAWL_LOG}")
     slog(f"[supervisor] stall timeout: {STALL_TIMEOUT}s")
-    slog(f"[supervisor] sleep between: {SLEEP_BETWEEN // 3600}h")
+    slog(f"[supervisor] sleep between: {SLEEP_BETWEEN}s")
     slog("=" * 60)
 
     cycle = 0
@@ -264,8 +269,9 @@ def main():
         cycle += 1
         slog(f"[supervisor] === cycle {cycle} starting ===")
         run_once()
-        slog(f"[supervisor] === cycle {cycle} done — sleeping {SLEEP_BETWEEN // 3600}h ===")
-        time.sleep(SLEEP_BETWEEN)
+        slog(f"[supervisor] === cycle {cycle} done — sleeping {SLEEP_BETWEEN}s ===")
+        if SLEEP_BETWEEN > 0:
+            time.sleep(SLEEP_BETWEEN)
 
 
 if __name__ == "__main__":

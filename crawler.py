@@ -125,6 +125,16 @@ CSV_FIELDS = [
 ]
 
 
+def write_snapshot(leads, output_path):
+    """Persist an incremental CSV snapshot for live monitoring."""
+    os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else ".", exist_ok=True)
+    with open(output_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS, extrasaction="ignore")
+        writer.writeheader()
+        for lead in leads:
+            writer.writerow({field: lead.get(field, "") for field in CSV_FIELDS})
+
+
 def search_commits(query):
     """Return list of raw lead dicts from commit search."""
     leads = []
@@ -389,6 +399,7 @@ def main():
         issue_leads  = search_issues(query)
         raw_leads.extend(commit_leads)
         raw_leads.extend(issue_leads)
+        write_snapshot(raw_leads, output_path)
         log_line(
             f'query="{query}" commits={len(commit_leads)} issues={len(issue_leads)}'
         )
@@ -421,6 +432,8 @@ def main():
             try:
                 result = future.result(timeout=ENRICH_TIMEOUT)
                 enriched.append(result)
+                filtered_snapshot = [item for item in enriched if not should_filter_out(item)]
+                write_snapshot(filtered_snapshot, output_path)
             except FutureTimeoutError:
                 skipped += 1
                 print(
@@ -443,13 +456,7 @@ def main():
     # ------------------------------------------------------------------
     # Phase 5: Write CSV
     # ------------------------------------------------------------------
-    os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else ".", exist_ok=True)
-
-    with open(output_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS, extrasaction="ignore")
-        writer.writeheader()
-        for lead in filtered:
-            writer.writerow({field: lead.get(field, "") for field in CSV_FIELDS})
+    write_snapshot(filtered, output_path)
 
     print(f"[done] wrote {len(filtered)} leads to {output_path}")
 

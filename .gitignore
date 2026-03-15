@@ -5,3 +5,6 @@ final_leads.csv
 __pycache__/
 *.pyc
 *.csv
+.venv/
+*.log
+contacted.json
