@@ -34,7 +34,7 @@
 "fix driver conflict"
 "fix register map"
 
-# TIER 4 — Hardware/FPGA Deep Dive
+# TIER 4 — Hardware/FPGA Structural
 "fix entity"
 "fix module"
 "signal width mismatch"
@@ -42,3 +42,31 @@
 "fix instantiation"
 "synthesis failure"
 "fix rtl"
+
+# TIER 5 — FPGA/HDL Behavioral Bugs (training data for Choo play)
+"fix sensitivity list" language:vhdl
+"fix sensitivity list" language:verilog
+"fix clock domain crossing"
+"fix reset logic"
+"latch inferred" language:vhdl
+"latch inferred" language:verilog
+"fix simulation mismatch"
+"fix testbench"
+"fix timing violation"
+"fix state machine" language:vhdl
+"fix state machine" language:verilog
+"missing case statement" language:vhdl
+"missing case statement" language:verilog
+"fix always block" language:verilog
+"fix process block" language:vhdl
+"fix constraint"
+"fix timing constraint"
+"simulation synthesis mismatch"
+"fix combinational loop"
+"fix race condition" language:vhdl
+"fix race condition" language:verilog
+"behavioral mismatch" language:vhdl
+"behavioral mismatch" language:verilog
+"fix assertion"
+"incomplete case" language:vhdl
+"incomplete case" language:verilog

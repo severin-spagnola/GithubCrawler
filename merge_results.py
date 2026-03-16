@@ -8,7 +8,7 @@ import glob
 # ---------------------------------------------------------------------------
 
 BASE_FIELDS = [
-    "query", "source_type", "repo", "repo_name", "org", "org_type",
+    "query", "query_tier", "source_type", "repo", "repo_name", "org", "org_type",
     "contributor_count", "language", "stars", "username", "display_name",
     "email", "company", "bio", "location", "github_profile", "linkedin",
     "twitter", "blog", "commit_message", "commit_url", "commit_date",
@@ -29,6 +29,15 @@ QUERY_BOOST_PHRASES = {
     "breaking change",
     "port mismatch",
     "synthesis error",
+    # Tier 5 behavioral
+    "fix sensitivity list",
+    "latch inferred",
+    "fix clock domain crossing",
+    "simulation synthesis mismatch",
+    "fix state machine",
+    "fix timing violation",
+    "behavioral mismatch",
+    "fix combinational loop",
 }
 
 
