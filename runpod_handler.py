@@ -49,7 +49,7 @@ from extract_training_data import process_lead_batch
 ORCHESTRATOR_URL = os.environ.get("ORCHESTRATOR_URL", "").strip().rstrip("/")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
 WORKER_ID = os.environ.get("WORKER_ID", f"w-{uuid.uuid4().hex[:8]}")
-BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "3"))
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "1"))
 MAX_IDLE_POLLS = int(os.environ.get("MAX_IDLE_POLLS", "30"))
 DO_ENRICH = os.environ.get("ENRICH_LEADS", "1").strip() == "1"
 POLL_SLEEP = 10  # seconds between idle polls
