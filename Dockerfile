@@ -12,4 +12,4 @@ COPY extract_training_data.py .
 COPY runpod_handler.py .
 
 # RunPod serverless entry point
-CMD ["python", "-u", "runpod_handler.py"]
+ENTRYPOINT ["python", "-u", "runpod_handler.py"]
