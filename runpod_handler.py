@@ -45,6 +45,7 @@ from extract_training_data import process_lead_batch
 # Config
 # ---------------------------------------------------------------------------
 
+# Defaults from env — can be overridden per-job via handler(event) input
 ORCHESTRATOR_URL = os.environ.get("ORCHESTRATOR_URL", "").strip().rstrip("/")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
 WORKER_ID = os.environ.get("WORKER_ID", f"w-{uuid.uuid4().hex[:8]}")
@@ -172,8 +173,21 @@ def execute_unit(unit):
 # Main loop
 # ---------------------------------------------------------------------------
 
-def worker_loop():
-    """Main worker loop: pull work, execute, report, repeat."""
+def worker_loop(token=None, worker_id=None, orchestrator_url=None):
+    """Main worker loop: pull work, execute, report, repeat.
+
+    Args can override env vars — use this to pass per-job config from
+    RunPod's shared template (where all workers share the same env).
+    """
+    global GITHUB_TOKEN, WORKER_ID, ORCHESTRATOR_URL
+
+    if token:
+        GITHUB_TOKEN = token
+    if worker_id:
+        WORKER_ID = worker_id
+    if orchestrator_url:
+        ORCHESTRATOR_URL = orchestrator_url.strip().rstrip("/")
+
     if not ORCHESTRATOR_URL:
         log("ERROR: ORCHESTRATOR_URL not set")
         return {"status": "error", "reason": "ORCHESTRATOR_URL not set"}
@@ -241,8 +255,19 @@ def worker_loop():
 # ---------------------------------------------------------------------------
 
 def handler(event):
-    """RunPod serverless handler."""
-    return worker_loop()
+    """RunPod serverless handler.
+
+    Accepts per-job overrides in event["input"]:
+        github_token      — GitHub PAT for this worker
+        worker_id         — unique worker identifier
+        orchestrator_url  — URL of the orchestrator
+    """
+    job_input = event.get("input", {}) or {}
+    return worker_loop(
+        token=job_input.get("github_token"),
+        worker_id=job_input.get("worker_id"),
+        orchestrator_url=job_input.get("orchestrator_url"),
+    )
 
 
 # Support both RunPod serverless and direct execution
