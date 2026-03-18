@@ -7,6 +7,8 @@
 
 set -euo pipefail
 
+export PYTHONUNBUFFERED=1
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Load .env if present

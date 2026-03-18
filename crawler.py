@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 import json
@@ -10,6 +11,12 @@ from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
+
+logging.basicConfig(
+    filename='/Users/severinspagnola/Desktop/GithubCrawler/crawl.log',
+    level=logging.INFO,
+    format='%(asctime)s %(message)s',
+)
 
 load_dotenv()
 
@@ -345,6 +352,7 @@ def search_commits(query, page=None, per_page=SEARCH_PER_PAGE):
     while current_page <= max_pages:
         params = {"q": query, "per_page": per_page, "page": current_page}
         print(f"  [commits] searching: {query} (page {current_page})")
+        logging.info(f'fetched commits page {current_page} for {query[:40]}')
         resp = rate_limited_get(url, params=params, extra_headers=extra)
         if not resp.ok:
             print(f"  [warn] commit search failed ({resp.status_code}): {resp.text[:200]}")
@@ -397,6 +405,7 @@ def search_issues(query, page=None, per_page=SEARCH_PER_PAGE):
     while current_page <= max_pages:
         params = {"q": query, "per_page": per_page, "page": current_page}
         print(f"  [issues]  searching: {query} (page {current_page})")
+        logging.info(f'fetched issues page {current_page} for {query[:40]}')
         resp = rate_limited_get(url, params=params)
         if not resp.ok:
             print(f"  [warn] issue search failed ({resp.status_code}): {resp.text[:200]}")
@@ -606,6 +615,7 @@ def run_search(queries, output_path, language_filter=False, resume=False):
 
     print(f"\n=== Search Phase ===")
     for qi, query in enumerate(queries, 1):
+        logging.info(f'query {qi}/{len(queries)}: {query[:60]}')
         query_new = 0
         query_dup = 0
 
@@ -704,9 +714,11 @@ def run_full(queries, output_path, language_filter=False):
     # Search with in-flight dedup + incremental writes to a temp file
     tmp_path = output_path + ".search_tmp.csv"
     run_search(queries, tmp_path, language_filter=False)  # already expanded
+    logging.info('search complete, starting enrich')
 
     # Enrich the search results
     run_enrich(tmp_path, output_path)
+    logging.info('enrich complete')
 
     # Clean up temp
     try:
@@ -777,6 +789,7 @@ def _load_queries(raw):
 
 def main():
     _init_token()
+    logging.info('crawler started')
 
     parser = build_parser()
     args = parser.parse_args()
