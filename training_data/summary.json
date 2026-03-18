@@ -1,24 +1,26 @@
 {
-  "total_repos": 5,
-  "total_examples": 60,
-  "clean_examples": 58,
-  "clean_pct": 96.7,
+  "total_repos": 16,
+  "total_examples": 150,
+  "clean_examples": 144,
+  "clean_pct": 96.0,
   "category_counts": {
-    "synthesis_error": 5
+    "synthesis_error": 14,
+    "sensitivity_list": 2
   },
   "language_counts": {
-    "c": 8,
+    "c": 20,
     "other": 5,
-    "systemverilog": 19,
+    "systemverilog": 83,
     "linker_script": 1,
-    "rust": 18,
-    "python": 3,
-    "cpp": 1,
-    "verilog": 5
+    "rust": 27,
+    "python": 6,
+    "cpp": 2,
+    "verilog": 5,
+    "vhdl": 1
   },
   "validation_counts": {
-    "clean": 58,
-    "trivial_diff": 2,
+    "clean": 144,
+    "trivial_diff": 6,
     "partial": 0,
     "no_code": 0
   },
@@ -52,6 +54,72 @@
       "bug_category": "synthesis_error",
       "file_count": 6,
       "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 9,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "sensitivity_list",
+      "file_count": 18,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 15,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "fransschreuder/xpm_vhdl",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
     }
   ]
 }
