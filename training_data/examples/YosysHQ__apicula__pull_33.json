@@ -1,0 +1,43 @@
+{
+  "repo": "YosysHQ/apicula",
+  "before_ref": "02421adb720ba1e4ffce5ec625279d5489e7b3ad",
+  "after_ref": "ecfdeb9775425eb3f03c60231290d1da5530a8f2",
+  "bug_category": "sensitivity_list",
+  "query": "fix entity language:Verilog",
+  "commit_message": "examples: fix the number of leds according to the targeted board examples: fix the number of leds according to the targeted board By default the number of leds is hardcoded to 8. But depending to the targeted board this value is not always true and randoms pins are used for physical output not availables.\r\n\r\nThis PR add a verilog define to pass real number of leds:\r\n- now it's no more possible to use a generic blinky.json to address all boards -> rule is renamed to append expliciitly board name ",
+  "file_count": 2,
+  "examples": [
+    {
+      "repo": "YosysHQ/apicula",
+      "filename": "examples/Makefile",
+      "before_ref": "02421adb720ba1e4ffce5ec625279d5489e7b3ad",
+      "after_ref": "ecfdeb9775425eb3f03c60231290d1da5530a8f2",
+      "bug_category": "sensitivity_list",
+      "query": "fix entity language:Verilog",
+      "commit_message": "examples: fix the number of leds according to the targeted board examples: fix the number of leds according to the targeted board By default the number of leds is hardcoded to 8. But depending to the targeted board this value is not always true and randoms pins are used for physical output not availables.\r\n\r\nThis PR add a verilog define to pass real number of leds:\r\n- now it's no more possible to use a generic blinky.json to address all boards -> rule is renamed to append expliciitly board name ",
+      "patch": "@@ -1,31 +1,36 @@\n+runber_leds=8\n+tangnano_leds=3\n+tec0117_leds=8\n+\n all: attosoc-tec0117.fs blinky-tec0117.fs blinky-runber.fs blinky-tangnano.fs\n \n %-tec0117.fs: %-tec0117.json\n \tgowin_pack -d GW1N-9 -o $@ $^\n \n-%-tec0117.json: %.json\n+%-tec0117.json: %-tec0117-synth.json\n \tnextpnr-gowin --json $^ --write $@ --device GW1NR-UV9QN881C6/I5 --cst tec0117.cst\n \n %-runber.fs: %-runber.json\n \tgowin_pack -d GW1N-4 -o $@ $^\n \n-%-runber.json: %.json\n+%-runber.json: %-runber-synth.json\n \tnextpnr-gowin --json $^ --write $@ --device GW1N-UV4LQ144C6/I5 --cst runber.cst\n \n %-tangnano.fs: %-tangnano.json\n \tgowin_pack -d GW1N-1 -o $@ $^\n \n-%-tangnano.json: %.json\n+%-tangnano.json: %-tangnano-synth.json\n \tnextpnr-gowin --json $^ --write $@ --device GW1N-LV1QN48C6/I5 --cst tangnano.cst\n \n-attosoc.json: attosoc/attosoc.v attosoc/picorv32.v\n+attosoc-tec0117-synth.json: attosoc/attosoc.v attosoc/picorv32.v\n \tyosys -p \"synth_gowin -json $@\" $^\n \n-nanolcd.json: nanolcd/TOP.v nanolcd/VGAMod.v\n+nanolcd-tangano-synth.json: nanolcd/TOP.v nanolcd/VGAMod.v\n \tyosys -p \"synth_gowin -json $@\" $^\n \n-%.json: %.v\n-\tyosys -p \"synth_gowin -json $@\" $^\n+%-synth.json: blinky.v\n+\tyosys -D LEDS_NR=$($(shell echo $(@) | cut -d\\- -f 2)_leds) \\\n+\t\t-p \"synth_gowin -json $@\" $^\n \n %-tec0117-prog: %-tec0117.fs\n \topenFPGALoader -b tec0117 $^",
+      "before_code": "all: attosoc-tec0117.fs blinky-tec0117.fs blinky-runber.fs blinky-tangnano.fs\n\n%-tec0117.fs: %-tec0117.json\n\tgowin_pack -d GW1N-9 -o $@ $^\n\n%-tec0117.json: %.json\n\tnextpnr-gowin --json $^ --write $@ --device GW1NR-UV9QN881C6/I5 --cst tec0117.cst\n\n%-runber.fs: %-runber.json\n\tgowin_pack -d GW1N-4 -o $@ $^\n\n%-runber.json: %.json\n\tnextpnr-gowin --json $^ --write $@ --device GW1N-UV4LQ144C6/I5 --cst runber.cst\n\n%-tangnano.fs: %-tangnano.json\n\tgowin_pack -d GW1N-1 -o $@ $^\n\n%-tangnano.json: %.json\n\tnextpnr-gowin --json $^ --write $@ --device GW1N-LV1QN48C6/I5 --cst tangnano.cst\n\nattosoc.json: attosoc/attosoc.v attosoc/picorv32.v\n\tyosys -p \"synth_gowin -json $@\" $^\n\nnanolcd.json: nanolcd/TOP.v nanolcd/VGAMod.v\n\tyosys -p \"synth_gowin -json $@\" $^\n\n%.json: %.v\n\tyosys -p \"synth_gowin -json $@\" $^\n\n%-tec0117-prog: %-tec0117.fs\n\topenFPGALoader -b tec0117 $^\n\n%-runber-prog: %-runber.fs\n\topenFPGALoader -b runber $^\n\n%-tangnano-prog: %-tangnano.fs\n\topenFPGALoader -b tangnano $^\n\nclean:\n\trm -f *.json *.fs\n\n.PHONY: %-tangnano-prog clean all\n",
+      "after_code": "runber_leds=8\ntangnano_leds=3\ntec0117_leds=8\n\nall: attosoc-tec0117.fs blinky-tec0117.fs blinky-runber.fs blinky-tangnano.fs\n\n%-tec0117.fs: %-tec0117.json\n\tgowin_pack -d GW1N-9 -o $@ $^\n\n%-tec0117.json: %-tec0117-synth.json\n\tnextpnr-gowin --json $^ --write $@ --device GW1NR-UV9QN881C6/I5 --cst tec0117.cst\n\n%-runber.fs: %-runber.json\n\tgowin_pack -d GW1N-4 -o $@ $^\n\n%-runber.json: %-runber-synth.json\n\tnextpnr-gowin --json $^ --write $@ --device GW1N-UV4LQ144C6/I5 --cst runber.cst\n\n%-tangnano.fs: %-tangnano.json\n\tgowin_pack -d GW1N-1 -o $@ $^\n\n%-tangnano.json: %-tangnano-synth.json\n\tnextpnr-gowin --json $^ --write $@ --device GW1N-LV1QN48C6/I5 --cst tangnano.cst\n\nattosoc-tec0117-synth.json: attosoc/attosoc.v attosoc/picorv32.v\n\tyosys -p \"synth_gowin -json $@\" $^\n\nnanolcd-tangano-synth.json: nanolcd/TOP.v nanolcd/VGAMod.v\n\tyosys -p \"synth_gowin -json $@\" $^\n\n%-synth.json: blinky.v\n\tyosys -D LEDS_NR=$($(shell echo $(@) | cut -d\\- -f 2)_leds) \\\n\t\t-p \"synth_gowin -json $@\" $^\n\n%-tec0117-prog: %-tec0117.fs\n\topenFPGALoader -b tec0117 $^\n\n%-runber-prog: %-runber.fs\n\topenFPGALoader -b runber $^\n\n%-tangnano-prog: %-tangnano.fs\n\topenFPGALoader -b tangnano $^\n\nclean:\n\trm -f *.json *.fs\n\n.PHONY: %-tangnano-prog clean all\n",
+      "language": "other",
+      "additions": 12,
+      "deletions": 7,
+      "validation": "clean"
+    },
+    {
+      "repo": "YosysHQ/apicula",
+      "filename": "examples/blinky.v",
+      "before_ref": "02421adb720ba1e4ffce5ec625279d5489e7b3ad",
+      "after_ref": "ecfdeb9775425eb3f03c60231290d1da5530a8f2",
+      "bug_category": "sensitivity_list",
+      "query": "fix entity language:Verilog",
+      "commit_message": "examples: fix the number of leds according to the targeted board examples: fix the number of leds according to the targeted board By default the number of leds is hardcoded to 8. But depending to the targeted board this value is not always true and randoms pins are used for physical output not availables.\r\n\r\nThis PR add a verilog define to pass real number of leds:\r\n- now it's no more possible to use a generic blinky.json to address all boards -> rule is renamed to append expliciitly board name ",
+      "patch": "@@ -1,6 +1,6 @@\n module top (\n \tinput clk,\n-\toutput reg [7:0] led\n+\toutput [`LEDS_NR-1:0] led\n );\n \n reg [25:0] ctr_q;\n@@ -12,6 +12,6 @@ always @(posedge clk)\n \n // Combinational code (boolean logic)\n assign ctr_d = ctr_q + 1'b1;\n-assign led = ctr_q[25:18];\n+assign led = ctr_q[25:25-`LEDS_NR];\n \n endmodule",
+      "before_code": "module top (\n\tinput clk,\n\toutput reg [7:0] led\n);\n\nreg [25:0] ctr_q;\nwire [25:0] ctr_d;\n\n// Sequential code (flip-flop)\nalways @(posedge clk)\n\tctr_q <= ctr_d;\n\n// Combinational code (boolean logic)\nassign ctr_d = ctr_q + 1'b1;\nassign led = ctr_q[25:18];\n\nendmodule\n",
+      "after_code": "module top (\n\tinput clk,\n\toutput [`LEDS_NR-1:0] led\n);\n\nreg [25:0] ctr_q;\nwire [25:0] ctr_d;\n\n// Sequential code (flip-flop)\nalways @(posedge clk)\n\tctr_q <= ctr_d;\n\n// Combinational code (boolean logic)\nassign ctr_d = ctr_q + 1'b1;\nassign led = ctr_q[25:25-`LEDS_NR];\n\nendmodule\n",
+      "language": "verilog",
+      "additions": 2,
+      "deletions": 2,
+      "validation": "clean"
+    }
+  ]
+}

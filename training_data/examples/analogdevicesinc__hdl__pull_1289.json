@@ -1,0 +1,27 @@
+{
+  "repo": "analogdevicesinc/hdl",
+  "before_ref": "f2a00c8528e270e66260bc8f8e94445deb4725b2",
+  "after_ref": "1f9e5bcf9e1e94ec4d0e5f56d8bd0b2b3013d60e",
+  "bug_category": "clock_domain",
+  "query": "fix entity language:Verilog",
+  "commit_message": "spi_engine: Remove nonexistent interface, add dep spi_engine: Remove nonexistent interface, add dep ## PR Description\r\nRemove nonexistant pulse_gen_* interface on axi_spi_engine_hw.\r\nAdd sync_event.v to spi_engine_offload's intel_deps.\r\nThis commit:\r\n* Fixes simulation on questa-intel.\r\n* Resolves the following critical warning for spi-engine intel projects:\r\n```\r\ncn0540/de10nano$ grep -rn 'Critical Warning' .\r\ncn0540_de10nano.map.rpt:; pulse_gen_period ; Unknown ; Critical Warning ; Named port ",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "analogdevicesinc/hdl",
+      "filename": "library/spi_engine/spi_engine_offload/Makefile",
+      "before_ref": "f2a00c8528e270e66260bc8f8e94445deb4725b2",
+      "after_ref": "1f9e5bcf9e1e94ec4d0e5f56d8bd0b2b3013d60e",
+      "bug_category": "clock_domain",
+      "query": "fix entity language:Verilog",
+      "commit_message": "spi_engine: Remove nonexistent interface, add dep spi_engine: Remove nonexistent interface, add dep ## PR Description\r\nRemove nonexistant pulse_gen_* interface on axi_spi_engine_hw.\r\nAdd sync_event.v to spi_engine_offload's intel_deps.\r\nThis commit:\r\n* Fixes simulation on questa-intel.\r\n* Resolves the following critical warning for spi-engine intel projects:\r\n```\r\ncn0540/de10nano$ grep -rn 'Critical Warning' .\r\ncn0540_de10nano.map.rpt:; pulse_gen_period ; Unknown ; Critical Warning ; Named port ",
+      "patch": "@@ -21,6 +21,7 @@ XILINX_LIB_DEPS += util_cdc\n XILINX_INTERFACE_DEPS += spi_engine/interfaces\n \n INTEL_DEPS += ../../util_cdc/sync_bits.v\n+INTEL_DEPS += ../../util_cdc/sync_event.v\n INTEL_DEPS += spi_engine_offload_hw.tcl\n \n include ../../scripts/library.mk",
+      "before_code": "####################################################################################\n## Copyright (c) 2018 - 2024 Analog Devices, Inc.\n### SPDX short identifier: BSD-1-Clause\n## Auto-generated, do not modify!\n####################################################################################\n\nLIBRARY_NAME := spi_engine_offload\n\nGENERIC_DEPS += spi_engine_offload.v\n\nXILINX_DEPS += spi_engine_offload_constr.ttcl\nXILINX_DEPS += spi_engine_offload_ip.tcl\n\nXILINX_DEPS += ../../spi_engine/interfaces/spi_engine_ctrl.xml\nXILINX_DEPS += ../../spi_engine/interfaces/spi_engine_ctrl_rtl.xml\nXILINX_DEPS += ../../spi_engine/interfaces/spi_engine_offload_ctrl.xml\nXILINX_DEPS += ../../spi_engine/interfaces/spi_engine_offload_ctrl_rtl.xml\n\nXILINX_LIB_DEPS += util_cdc\n\nXILINX_INTERFACE_DEPS += spi_engine/interfaces\n\nINTEL_DEPS += ../../util_cdc/sync_bits.v\nINTEL_DEPS += spi_engine_offload_hw.tcl\n\ninclude ../../scripts/library.mk\n",
+      "after_code": "####################################################################################\n## Copyright (c) 2018 - 2024 Analog Devices, Inc.\n### SPDX short identifier: BSD-1-Clause\n## Auto-generated, do not modify!\n####################################################################################\n\nLIBRARY_NAME := spi_engine_offload\n\nGENERIC_DEPS += spi_engine_offload.v\n\nXILINX_DEPS += spi_engine_offload_constr.ttcl\nXILINX_DEPS += spi_engine_offload_ip.tcl\n\nXILINX_DEPS += ../../spi_engine/interfaces/spi_engine_ctrl.xml\nXILINX_DEPS += ../../spi_engine/interfaces/spi_engine_ctrl_rtl.xml\nXILINX_DEPS += ../../spi_engine/interfaces/spi_engine_offload_ctrl.xml\nXILINX_DEPS += ../../spi_engine/interfaces/spi_engine_offload_ctrl_rtl.xml\n\nXILINX_LIB_DEPS += util_cdc\n\nXILINX_INTERFACE_DEPS += spi_engine/interfaces\n\nINTEL_DEPS += ../../util_cdc/sync_bits.v\nINTEL_DEPS += ../../util_cdc/sync_event.v\nINTEL_DEPS += spi_engine_offload_hw.tcl\n\ninclude ../../scripts/library.mk\n",
+      "language": "other",
+      "additions": 1,
+      "deletions": 0,
+      "validation": "trivial_diff"
+    }
+  ]
+}

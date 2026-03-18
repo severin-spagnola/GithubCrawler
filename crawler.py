@@ -17,7 +17,8 @@ load_dotenv()
 # Startup validation (deferred so imports work without GITHUB_TOKEN)
 # ---------------------------------------------------------------------------
 
-RATE_LIMIT_DELAY = 2.5  # seconds between API calls per token
+RATE_LIMIT_DELAY = 3.0  # seconds between API calls per token
+GLOBAL_MIN_DELAY = 2.0  # minimum seconds between ANY API calls (IP-level)
 MAX_SEARCH_RESULTS = 1000  # GitHub hard cap per query
 SEARCH_PER_PAGE = 100      # max allowed by GitHub search API
 
@@ -84,13 +85,15 @@ def configure_token(token):
 _rate_lock = threading.Lock()
 # Per-token rate limiting: each token gets its own next-fire time
 _token_next_call = {}  # token_index -> monotonic time
+_global_next_call = 0.0  # IP-level: earliest time for ANY request
 
 
-MAX_RETRIES = 3
+MAX_RETRIES = 5
 
 
 def rate_limited_get(url, params=None, extra_headers=None):
-    """GET with per-token rate limiting and round-robin rotation."""
+    """GET with per-token + global (IP-level) rate limiting and round-robin rotation."""
+    global _global_next_call
     retries = 0
     while True:
         # Pick token and get per-token rate limit
@@ -106,9 +109,11 @@ def rate_limited_get(url, params=None, extra_headers=None):
 
         with _rate_lock:
             now = time.monotonic()
+            # Enforce both per-token AND global minimum delay
             token_fire = _token_next_call.get(ti, 0.0)
-            fire_at = max(now, token_fire)
+            fire_at = max(now, token_fire, _global_next_call)
             _token_next_call[ti] = fire_at + RATE_LIMIT_DELAY
+            _global_next_call = fire_at + GLOBAL_MIN_DELAY
 
         wait = fire_at - time.monotonic()
         if wait > 0:
@@ -131,11 +136,24 @@ def rate_limited_get(url, params=None, extra_headers=None):
             retry_after = resp.headers.get("Retry-After")
             reset_ts = resp.headers.get("X-RateLimit-Reset")
 
-            # Secondary rate limit (abuse detection) — use Retry-After or short backoff
+            # Check for non-rate-limit 403s (e.g. repo too large, DMCA, etc.)
+            # These will never succeed — return immediately instead of retrying
+            try:
+                body = resp.json()
+                msg = body.get("message", "")
+            except Exception:
+                msg = ""
+            if "too large" in msg or "blocked" in msg or "DMCA" in msg or "access" in msg.lower():
+                return resp
+
+            # Secondary rate limit (abuse detection) — use Retry-After
             if retry_after:
                 sleep_secs = int(retry_after) + 5
                 print(f"  [secondary limit] 403 + Retry-After. Sleeping {sleep_secs}s …")
                 time.sleep(sleep_secs)
+                # Slow down globally after hitting a limit
+                with _rate_lock:
+                    _global_next_call = time.monotonic() + 10
                 continue
 
             # Primary rate limit exhausted (remaining == 0)
@@ -145,7 +163,7 @@ def rate_limited_get(url, params=None, extra_headers=None):
                 time.sleep(sleep_secs)
                 continue
 
-            # Secondary limit without Retry-After — use escalating backoff, max 5 min
+            # Secondary limit without Retry-After — escalating backoff
             retries += 1
             if retries > MAX_RETRIES:
                 print(f"  [warn] 403 after {MAX_RETRIES} retries for {url}")
@@ -153,6 +171,9 @@ def rate_limited_get(url, params=None, extra_headers=None):
             backoff = min(60 * retries, 300)
             print(f"  [secondary limit] 403, attempt {retries}/{MAX_RETRIES}, backoff {backoff}s …")
             time.sleep(backoff)
+            # Slow down globally after hitting a limit
+            with _rate_lock:
+                _global_next_call = time.monotonic() + 10
             continue
 
         return resp
@@ -463,6 +484,9 @@ def enrich_repo(repo_full):
     contributor_count = 0
     if contrib_resp.ok:
         contributor_count = _parse_contributor_count(contrib_resp)
+    elif contrib_resp.status_code == 403:
+        # Large repos return 403 for contributors — assume many contributors
+        contributor_count = 100
 
     return {
         "repo_name": repo_name,

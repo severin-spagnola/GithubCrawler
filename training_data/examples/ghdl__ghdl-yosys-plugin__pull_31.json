@@ -1,0 +1,27 @@
+{
+  "repo": "ghdl/ghdl-yosys-plugin",
+  "before_ref": "c924837dd7f9164aabb37983fb036ee34a9f1e40",
+  "after_ref": "6fada4ce2dfde1ebc698809b14907af3c55c18b1",
+  "bug_category": "synthesis_error",
+  "query": "fix entity language:VHDL",
+  "commit_message": "Run testsuite in Travis CI with docker images Run testsuite in Travis CI with docker images The main contribution in this PR is to add a Travis CI job to build GHDL and ghdlsynth-beta, and test them along with yosys by running the testsuite. The procedure is as follows:\r\n\r\n- Periodically, docker image `ghdl/synth:yosys` is built in a Travis job from repo [ghdl/docker](https://github.com/ghdl/docker). See the corresponding [dockerfile](https://github.com/ghdl/docker/blob/master/dockerfiles/yosys)",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "ghdl/ghdl-yosys-plugin",
+      "filename": "Makefile",
+      "before_ref": "c924837dd7f9164aabb37983fb036ee34a9f1e40",
+      "after_ref": "6fada4ce2dfde1ebc698809b14907af3c55c18b1",
+      "bug_category": "synthesis_error",
+      "query": "fix entity language:VHDL",
+      "commit_message": "Run testsuite in Travis CI with docker images Run testsuite in Travis CI with docker images The main contribution in this PR is to add a Travis CI job to build GHDL and ghdlsynth-beta, and test them along with yosys by running the testsuite. The procedure is as follows:\r\n\r\n- Periodically, docker image `ghdl/synth:yosys` is built in a Travis job from repo [ghdl/docker](https://github.com/ghdl/docker). See the corresponding [dockerfile](https://github.com/ghdl/docker/blob/master/dockerfiles/yosys)",
+      "patch": "@@ -16,15 +16,13 @@ ALL_LDFLAGS=$(LIBGHDL_LIB) -Wl,-rpath,$(dir $(LIBGHDL_LIB)) $(LDFLAGS)\n \n ALL_CFLAGS=-fPIC -DYOSYS_ENABLE_GHDL -I$(LIBGHDL_INC) $(CFLAGS)\n \n-COMPILE=$(YOSYS_CONFIG) --exec --cxx\n-\n all: ghdl.$(SOEXT)\n \n ghdl.$(SOEXT): ghdl.o\n-\t$(COMPILE) -o $@ -shared $< $(ALL_LDFLAGS) --ldflags --ldlibs\n+\t$(YOSYS_CONFIG) --build $@ $< -shared $(ALL_LDFLAGS)\n \n-ghdl.o: ghdl/ghdl.cc\n-\t$(COMPILE) -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n+ghdl.o: src/ghdl.cc\n+\t$(YOSYS_CONFIG) --exec --cxx -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n \n clean: force\n \t$(RM) -f ghdl.$(SOEXT) ghdl.o",
+      "before_code": "# Build ghdl module for yosys\n\n# Name or path to the ghdl executable.\nGHDL=ghdl\n\nYOSYS_CONFIG=yosys-config\nSOEXT=so\n\nLDFLAGS=\nCFLAGS=-O\n\nLIBGHDL_LIB:=$(shell $(GHDL) --libghdl-library-path)\nLIBGHDL_INC:=$(shell $(GHDL) --libghdl-include-dir)\n\nALL_LDFLAGS=$(LIBGHDL_LIB) -Wl,-rpath,$(dir $(LIBGHDL_LIB)) $(LDFLAGS)\n\nALL_CFLAGS=-fPIC -DYOSYS_ENABLE_GHDL -I$(LIBGHDL_INC) $(CFLAGS)\n\nCOMPILE=$(YOSYS_CONFIG) --exec --cxx\n\nall: ghdl.$(SOEXT)\n\nghdl.$(SOEXT): ghdl.o\n\t$(COMPILE) -o $@ -shared $< $(ALL_LDFLAGS) --ldflags --ldlibs\n\nghdl.o: ghdl/ghdl.cc\n\t$(COMPILE) -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n\nclean: force\n\t$(RM) -f ghdl.$(SOEXT) ghdl.o\n\ninstall: ghdl.$(SOEXT)\n\t$(YOSYS_CONFIG) --exec mkdir -p --datdir/plugins\n\t$(YOSYS_CONFIG) --exec cp $< --datdir/plugins\n\nforce:\n",
+      "after_code": "# Build ghdl module for yosys\n\n# Name or path to the ghdl executable.\nGHDL=ghdl\n\nYOSYS_CONFIG=yosys-config\nSOEXT=so\n\nLDFLAGS=\nCFLAGS=-O\n\nLIBGHDL_LIB:=$(shell $(GHDL) --libghdl-library-path)\nLIBGHDL_INC:=$(shell $(GHDL) --libghdl-include-dir)\n\nALL_LDFLAGS=$(LIBGHDL_LIB) -Wl,-rpath,$(dir $(LIBGHDL_LIB)) $(LDFLAGS)\n\nALL_CFLAGS=-fPIC -DYOSYS_ENABLE_GHDL -I$(LIBGHDL_INC) $(CFLAGS)\n\nall: ghdl.$(SOEXT)\n\nghdl.$(SOEXT): ghdl.o\n\t$(YOSYS_CONFIG) --build $@ $< -shared $(ALL_LDFLAGS)\n\nghdl.o: src/ghdl.cc\n\t$(YOSYS_CONFIG) --exec --cxx -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n\nclean: force\n\t$(RM) -f ghdl.$(SOEXT) ghdl.o\n\ninstall: ghdl.$(SOEXT)\n\t$(YOSYS_CONFIG) --exec mkdir -p --datdir/plugins\n\t$(YOSYS_CONFIG) --exec cp $< --datdir/plugins\n\nforce:\n",
+      "language": "other",
+      "additions": 3,
+      "deletions": 5,
+      "validation": "clean"
+    }
+  ]
+}

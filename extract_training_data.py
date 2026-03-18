@@ -407,6 +407,16 @@ def _passes_quality_gate(lead):
     if stars < 2 and org_type != "Organization" and not company:
         return False
 
+    # Tier 4/5 leads must be from VHDL/Verilog/SystemVerilog repos — no C/Python/etc.
+    try:
+        tier = int(lead.get("query_tier") or 0)
+    except (ValueError, TypeError):
+        tier = 0
+    if tier in (4, 5):
+        hdl_languages = {"vhdl", "verilog", "systemverilog"}
+        if language.lower() not in hdl_languages:
+            return False
+
     return True
 
 
