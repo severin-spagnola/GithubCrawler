@@ -1,15 +1,57 @@
 {
-  "total_repos": 0,
-  "total_examples": 0,
-  "clean_examples": 0,
-  "clean_pct": 0,
-  "category_counts": {},
-  "language_counts": {},
+  "total_repos": 5,
+  "total_examples": 60,
+  "clean_examples": 58,
+  "clean_pct": 96.7,
+  "category_counts": {
+    "synthesis_error": 5
+  },
+  "language_counts": {
+    "c": 8,
+    "other": 5,
+    "systemverilog": 19,
+    "linker_script": 1,
+    "rust": 18,
+    "python": 3,
+    "cpp": 1,
+    "verilog": 5
+  },
   "validation_counts": {
-    "clean": 0,
-    "trivial_diff": 0,
+    "clean": 58,
+    "trivial_diff": 2,
     "partial": 0,
     "no_code": 0
   },
-  "repos": []
+  "repos": [
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/redmule",
+      "bug_category": "synthesis_error",
+      "file_count": 20,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 19,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 13,
+      "query": "fix entity language:SystemVerilog"
+    },
+    {
+      "repo": "HoneyGol-Microsystems/vesp-alpha",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix entity language:SystemVerilog"
+    }
+  ]
 }
