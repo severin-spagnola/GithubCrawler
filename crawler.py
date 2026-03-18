@@ -7,6 +7,7 @@ import time
 import threading
 import re
 import argparse
+import sqlite3
 from datetime import datetime
 
 import requests
@@ -19,6 +20,13 @@ logging.basicConfig(
 )
 
 load_dotenv()
+
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(_SCRIPT_DIR, "orchestrator.db")
 
 # ---------------------------------------------------------------------------
 # Startup validation (deferred so imports work without GITHUB_TOKEN)
@@ -602,6 +610,43 @@ class IncrementalCSV:
 # Main — search-only mode
 # ---------------------------------------------------------------------------
 
+def _load_work_unit_checkpoint():
+    """Load work_unit id and done-status from orchestrator.db.
+
+    Returns (query -> wu_id dict, set of already-done query strings).
+    Gracefully returns empty structures if the DB is unavailable.
+    """
+    query_to_wu_id = {}
+    done_queries = set()
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        for row in conn.execute(
+            "SELECT id, query, status FROM work_units WHERE mode='search'"
+        ):
+            wu_id, wu_query, wu_status = row
+            query_to_wu_id[wu_query] = wu_id
+            if wu_status == 'done':
+                done_queries.add(wu_query)
+        conn.close()
+    except Exception as exc:
+        logging.warning(f'checkpoint: could not load work_units from DB: {exc}')
+    return query_to_wu_id, done_queries
+
+
+def _mark_work_unit_done(wu_id):
+    """Mark a single work_unit as done in orchestrator.db."""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.execute(
+            "UPDATE work_units SET status='done', completed_at=? WHERE id=?",
+            (time.time(), wu_id),
+        )
+        conn.commit()
+        conn.close()
+    except Exception as exc:
+        logging.warning(f'checkpoint: could not mark work_unit {wu_id} done: {exc}')
+
+
 def run_search(queries, output_path, language_filter=False, resume=False):
     """Search-only: collect leads, dedup in-flight, write incrementally."""
     if language_filter:
@@ -618,28 +663,52 @@ def run_search(queries, output_path, language_filter=False, resume=False):
                 seen.add((row.get("username", ""), row.get("repo", "")))
         print(f"  [resume] loaded {len(seen)} existing (username, repo) pairs for dedup")
 
+    # Load checkpoint: which queries are already done from a prior run
+    query_to_wu_id, done_queries = _load_work_unit_checkpoint()
+    if done_queries:
+        print(f"  [checkpoint] {len(done_queries)} queries already done — skipping them")
+
     print(f"\n=== Search Phase ===")
     for qi, query in enumerate(queries, 1):
+        # Skip queries already completed in a prior run
+        if query in done_queries:
+            logging.info(f'query {qi}/{len(queries)}: {query[:60]} [checkpoint: skipping]')
+            print(f"  [{qi}/{len(queries)}] {query}: skipped (already done)")
+            continue
+
         logging.info(f'query {qi}/{len(queries)}: {query[:60]}')
         query_new = 0
         query_dup = 0
 
-        for search_fn in (search_commits, search_issues):
-            leads = search_fn(query)
-            new_leads = []
-            for lead in leads:
-                key = (lead["username"], lead["repo"])
-                if key not in seen:
-                    seen.add(key)
-                    new_leads.append(lead)
-                else:
-                    query_dup += 1
-            if new_leads:
-                writer.write_leads(new_leads)
-                query_new += len(new_leads)
+        try:
+            for search_fn in (search_commits, search_issues):
+                leads = search_fn(query)
+                new_leads = []
+                for lead in leads:
+                    key = (lead["username"], lead["repo"])
+                    if key not in seen:
+                        seen.add(key)
+                        new_leads.append(lead)
+                    else:
+                        query_dup += 1
+                if new_leads:
+                    writer.write_leads(new_leads)
+                    query_new += len(new_leads)
+        except Exception as exc:
+            logging.error(
+                f'query {qi}/{len(queries)} "{query[:40]}" failed: {exc}',
+                exc_info=True,
+            )
+            print(f"  [{qi}/{len(queries)}] {query}: ERROR — {exc} (skipping, will retry next run)")
+            continue
 
         print(f"  [{qi}/{len(queries)}] {query}: +{query_new} new, {query_dup} dupes "
               f"(total unique: {writer.count})")
+
+        # Mark this query done in the checkpoint DB so restarts skip it
+        wu_id = query_to_wu_id.get(query)
+        if wu_id is not None:
+            _mark_work_unit_done(wu_id)
 
     print(f"\n[done] wrote {writer.count} unique leads to {output_path}")
     return writer.count
