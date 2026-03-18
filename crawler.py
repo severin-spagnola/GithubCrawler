@@ -102,6 +102,7 @@ def rate_limited_get(url, params=None, extra_headers=None):
     """GET with per-token + global (IP-level) rate limiting and round-robin rotation."""
     global _global_next_call
     retries = 0
+    primary_retries = 0
     while True:
         # Pick token and get per-token rate limit
         with _token_lock:
@@ -165,8 +166,12 @@ def rate_limited_get(url, params=None, extra_headers=None):
 
             # Primary rate limit exhausted (remaining == 0)
             if remaining == "0" and reset_ts:
+                primary_retries += 1
+                if primary_retries > MAX_RETRIES:
+                    print(f"  [warn] primary rate limit persists after {MAX_RETRIES} resets for {url}")
+                    return resp
                 sleep_secs = max(int(reset_ts) - int(time.time()), 0) + 5
-                print(f"  [primary limit] exhausted. Sleeping {sleep_secs}s until reset …")
+                print(f"  [primary limit] exhausted (attempt {primary_retries}/{MAX_RETRIES}). Sleeping {sleep_secs}s until reset …")
                 time.sleep(sleep_secs)
                 continue
 
@@ -686,6 +691,8 @@ def run_enrich(input_path, output_path, resume=False):
         key = (lead.get("username", ""), lead.get("repo", ""))
         if key in already_done:
             continue
+        username = lead.get("username", "")
+        logging.info(f'enriching user {i}/{total}: {username}')
         try:
             enriched = enrich_lead(lead)
         except Exception as exc:
@@ -699,6 +706,7 @@ def run_enrich(input_path, output_path, resume=False):
         if i % 50 == 0:
             print(f"  [enrich] {i}/{total} processed, {writer.count} written, {filtered_out} filtered out")
 
+    logging.info('enrich complete')
     print(f"\n[done] wrote {writer.count} enriched leads to {output_path} ({filtered_out} filtered out)")
 
 

@@ -15,6 +15,7 @@ Run with:
 
 import csv
 import os
+import select
 import subprocess
 import sys
 import time
@@ -172,16 +173,16 @@ def watch(proc):
         "failed"    — proc exited with non-zero code
         "restarted" — stall detected; proc was killed
     """
-    last_line    = _last_log_line()
-    last_changed = time.monotonic()
+    last_changed = time.monotonic()  # fallback when crawl.log doesn't exist yet
 
     while True:
         time.sleep(POLL_INTERVAL)
 
-        # Drain stdout so the pipe buffer doesn't fill and block the child
+        # Drain stdout so the pipe buffer doesn't fill and block the child.
+        # Use select with 0 timeout to avoid blocking when there is no output.
         if proc.stdout:
             try:
-                while True:
+                while select.select([proc.stdout], [], [], 0)[0]:
                     line = proc.stdout.readline()
                     if not line:
                         break
@@ -200,29 +201,29 @@ def watch(proc):
                 slog(f"[supervisor] pid={proc.pid} exited with rc={ret}")
                 return "failed"
 
-        # Stall detection
-        current_line = _last_log_line()
-        if current_line != last_line:
-            last_line    = current_line
-            last_changed = time.monotonic()
+        # Stall detection — check crawl.log mtime rather than content so that
+        # phases that produce no log output (e.g. enrich) are caught correctly.
+        if os.path.exists(CRAWL_LOG):
+            log_age = time.time() - os.path.getmtime(CRAWL_LOG)
         else:
-            stalled_for = time.monotonic() - last_changed
-            if stalled_for >= STALL_TIMEOUT:
-                slog(
-                    f"[supervisor] STALL detected — crawl.log unchanged for "
-                    f"{int(stalled_for)}s. Killing pid={proc.pid} and restarting."
-                )
-                try:
-                    proc.kill()
-                    proc.wait(timeout=10)
-                except Exception as exc:
-                    slog(f"[supervisor] error killing pid={proc.pid}: {exc}")
-                return "restarted"
-            else:
-                slog(
-                    f"[supervisor] pid={proc.pid} still running — "
-                    f"log unchanged for {int(stalled_for)}s / {STALL_TIMEOUT}s"
-                )
+            log_age = time.monotonic() - last_changed
+
+        if log_age >= STALL_TIMEOUT:
+            slog(
+                f"[supervisor] STALL detected — crawl.log not written for "
+                f"{int(log_age)}s. Killing pid={proc.pid} and restarting."
+            )
+            try:
+                proc.kill()
+                proc.wait(timeout=10)
+            except Exception as exc:
+                slog(f"[supervisor] error killing pid={proc.pid}: {exc}")
+            return "restarted"
+        else:
+            slog(
+                f"[supervisor] pid={proc.pid} still running — "
+                f"log age {int(log_age)}s / {STALL_TIMEOUT}s"
+            )
 
 
 # ---------------------------------------------------------------------------
