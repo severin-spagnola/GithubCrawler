@@ -1,0 +1,27 @@
+{
+  "repo": "ghdl/ghdl-yosys-plugin",
+  "before_ref": "98f4594b67ef650b115653185022e46876fb08ce",
+  "after_ref": "5b24da4be53226a475b04bb19417c63dd8fb64a4",
+  "bug_category": "sensitivity_list",
+  "query": "fix module language:VHDL",
+  "commit_message": "[WIP] Implement a VHDL backend [WIP] Implement a VHDL backend This will be a VHDL backend from #112, and I will be using this PR to track what has been finished and what still needs work.\r\n\r\n- [ ] Adjust command line options as necessary\r\n- [ ] Ensure identifiers are valid VHDL identifiers\r\n  - [x] Keyword collisions (merely updating the keyword list?)\r\n  - [ ] Handling `$`\r\n  - [x] Extended identifiers (now used when syntactically needed and to avoid collisions with internally generated names)\r",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "ghdl/ghdl-yosys-plugin",
+      "filename": "Makefile",
+      "before_ref": "98f4594b67ef650b115653185022e46876fb08ce",
+      "after_ref": "5b24da4be53226a475b04bb19417c63dd8fb64a4",
+      "bug_category": "sensitivity_list",
+      "query": "fix module language:VHDL",
+      "commit_message": "[WIP] Implement a VHDL backend [WIP] Implement a VHDL backend This will be a VHDL backend from #112, and I will be using this PR to track what has been finished and what still needs work.\r\n\r\n- [ ] Adjust command line options as necessary\r\n- [ ] Ensure identifiers are valid VHDL identifiers\r\n  - [x] Keyword collisions (merely updating the keyword list?)\r\n  - [ ] Handling `$`\r\n  - [x] Extended identifiers (now used when syntactically needed and to avoid collisions with internally generated names)\r",
+      "patch": "@@ -2,6 +2,8 @@\n \n # Name or path to the ghdl executable.\n GHDL=ghdl\n+GIT_VERSION_RAW := \"$(shell git describe --dirty --always --tags)\"\n+GIT_VERSION = '$(GIT_VERSION_RAW)'\n \n YOSYS_CONFIG=yosys-config\n SOEXT=so\n@@ -13,18 +15,21 @@ LIBGHDL_INC:=$(shell $(GHDL) --libghdl-include-dir)\n \n ALL_LDFLAGS=$(LIBGHDL_LIB) -Wl,-rpath,$(dir $(LIBGHDL_LIB)) $(LDFLAGS)\n \n-ALL_CFLAGS=-fPIC -DYOSYS_ENABLE_GHDL -I$(LIBGHDL_INC) $(CFLAGS)\n+ALL_CFLAGS=-fPIC -DYOSYS_ENABLE_GHDL -DVERSION=$(GIT_VERSION) -I$(LIBGHDL_INC) $(CFLAGS)\n \n all: ghdl.$(SOEXT)\n \n-ghdl.$(SOEXT): ghdl.o\n-\t$(YOSYS_CONFIG) --build $@ $< -shared $(ALL_LDFLAGS)\n+ghdl.$(SOEXT): ghdl.o vhdl_backend.o\n+\t$(YOSYS_CONFIG) --build $@ $^ -shared $(ALL_LDFLAGS)\n \n ghdl.o: src/ghdl.cc\n \t$(YOSYS_CONFIG) --exec --cxx -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n \n+vhdl_backend.o: src/vhdl_backend.cc\n+\t$(YOSYS_CONFIG) --exec --cxx -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n+\n clean: force\n-\t$(RM) -f ghdl.$(SOEXT) ghdl.o\n+\t$(RM) -f ghdl.$(SOEXT) ghdl.o vhdl_backend.o\n \n install: ghdl.$(SOEXT)\n \t$(YOSYS_CONFIG) --exec mkdir -p --datdir/plugins",
+      "before_code": "# Build ghdl module for yosys\n\n# Name or path to the ghdl executable.\nGHDL=ghdl\n\nYOSYS_CONFIG=yosys-config\nSOEXT=so\n\nCFLAGS ?= -O\n\nLIBGHDL_LIB:=$(shell $(GHDL) --libghdl-library-path)\nLIBGHDL_INC:=$(shell $(GHDL) --libghdl-include-dir)\n\nALL_LDFLAGS=$(LIBGHDL_LIB) -Wl,-rpath,$(dir $(LIBGHDL_LIB)) $(LDFLAGS)\n\nALL_CFLAGS=-fPIC -DYOSYS_ENABLE_GHDL -I$(LIBGHDL_INC) $(CFLAGS)\n\nall: ghdl.$(SOEXT)\n\nghdl.$(SOEXT): ghdl.o\n\t$(YOSYS_CONFIG) --build $@ $< -shared $(ALL_LDFLAGS)\n\nghdl.o: src/ghdl.cc\n\t$(YOSYS_CONFIG) --exec --cxx -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n\nclean: force\n\t$(RM) -f ghdl.$(SOEXT) ghdl.o\n\ninstall: ghdl.$(SOEXT)\n\t$(YOSYS_CONFIG) --exec mkdir -p --datdir/plugins\n\t$(YOSYS_CONFIG) --exec cp $< --datdir/plugins\n\nforce:\n",
+      "after_code": "# Build ghdl module for yosys\n\n# Name or path to the ghdl executable.\nGHDL=ghdl\nGIT_VERSION_RAW := \"$(shell git describe --dirty --always --tags)\"\nGIT_VERSION = '$(GIT_VERSION_RAW)'\n\nYOSYS_CONFIG=yosys-config\nSOEXT=so\n\nCFLAGS ?= -O\n\nLIBGHDL_LIB:=$(shell $(GHDL) --libghdl-library-path)\nLIBGHDL_INC:=$(shell $(GHDL) --libghdl-include-dir)\n\nALL_LDFLAGS=$(LIBGHDL_LIB) -Wl,-rpath,$(dir $(LIBGHDL_LIB)) $(LDFLAGS)\n\nALL_CFLAGS=-fPIC -DYOSYS_ENABLE_GHDL -DVERSION=$(GIT_VERSION) -I$(LIBGHDL_INC) $(CFLAGS)\n\nall: ghdl.$(SOEXT)\n\nghdl.$(SOEXT): ghdl.o vhdl_backend.o\n\t$(YOSYS_CONFIG) --build $@ $^ -shared $(ALL_LDFLAGS)\n\nghdl.o: src/ghdl.cc\n\t$(YOSYS_CONFIG) --exec --cxx -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n\nvhdl_backend.o: src/vhdl_backend.cc\n\t$(YOSYS_CONFIG) --exec --cxx -c --cxxflags -o $@ $< $(ALL_CFLAGS)\n\nclean: force\n\t$(RM) -f ghdl.$(SOEXT) ghdl.o vhdl_backend.o\n\ninstall: ghdl.$(SOEXT)\n\t$(YOSYS_CONFIG) --exec mkdir -p --datdir/plugins\n\t$(YOSYS_CONFIG) --exec cp $< --datdir/plugins\n\nforce:\n",
+      "language": "other",
+      "additions": 9,
+      "deletions": 4,
+      "validation": "clean"
+    }
+  ]
+}

@@ -1,27 +1,37 @@
 {
-  "total_repos": 16,
-  "total_examples": 150,
-  "clean_examples": 144,
+  "total_repos": 999,
+  "total_examples": 8473,
+  "clean_examples": 8132,
   "clean_pct": 96.0,
   "category_counts": {
-    "synthesis_error": 14,
-    "sensitivity_list": 2
+    "synthesis_error": 414,
+    "sensitivity_list": 112,
+    "port_mismatch": 198,
+    "clock_domain": 44,
+    "api_breaking": 7,
+    "build_regression": 1,
+    "merge_conflict": 1,
+    "reset_logic": 3,
+    "linker_error": 2,
+    "latch_inferred": 14,
+    "other": 203
   },
   "language_counts": {
-    "c": 20,
-    "other": 5,
-    "systemverilog": 83,
-    "linker_script": 1,
-    "rust": 27,
-    "python": 6,
-    "cpp": 2,
-    "verilog": 5,
-    "vhdl": 1
+    "c": 562,
+    "other": 441,
+    "systemverilog": 3446,
+    "linker_script": 5,
+    "rust": 138,
+    "python": 808,
+    "cpp": 484,
+    "verilog": 1778,
+    "vhdl": 807,
+    "devicetree": 4
   },
   "validation_counts": {
-    "clean": 144,
-    "trivial_diff": 6,
-    "partial": 0,
+    "clean": 8132,
+    "trivial_diff": 303,
+    "partial": 38,
     "no_code": 0
   },
   "repos": [
@@ -120,6 +130,5904 @@
       "bug_category": "sensitivity_list",
       "file_count": 1,
       "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "byuccl/bfasst",
+      "bug_category": "synthesis_error",
+      "file_count": 120,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/SNES_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "ADSD-SoC-FPGA/Code",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "nipo/nsl",
+      "bug_category": "synthesis_error",
+      "file_count": 18,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/l2si-core",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "kevinpt/vhdl-extras",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "tacertain/Arcade-Bagman_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "ghdl/ghdl-yosys-plugin",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/SNES_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "JulianKemmerer/PipelineC",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/Atari800_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 7,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "Exo1i/5-Stage-Pipelined-Processor",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "lnls-dig/dsp-cores",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MohamedAbdelaiem/RISCify",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/Arcade-MysticMarathon_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "PandABlocks/PandABlocks-FPGA",
+      "bug_category": "synthesis_error",
+      "file_count": 26,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32-setups",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/surf",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/l2si-core",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "lnls-dig/dsp-cores",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "PandABlocks/PandABlocks-FPGA",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "open-logic/open-logic",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "bug_category": "sensitivity_list",
+      "file_count": 8,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "pllab/elephant",
+      "bug_category": "synthesis_error",
+      "file_count": 13,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "hdl-modules/hdl-modules",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "Ledger-Donjon/scaffold",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "PandABlocks/PandABlocks-FPGA",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "firesim/garnet-firesim",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "NuQuantum/wr-cores",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "NuQuantum/wr-cores",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "NuQuantum/wr-cores",
+      "bug_category": "clock_domain",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "TE2003B-601-AES/Encriptador",
+      "bug_category": "port_mismatch",
+      "file_count": 10,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "Cypher-Bruce/RISC-V-CPU",
+      "bug_category": "sensitivity_list",
+      "file_count": 5,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "TE2003B-601-AES/Desencriptador",
+      "bug_category": "port_mismatch",
+      "file_count": 9,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "t-crest/patmos",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "TE2003B-601-AES/Keys",
+      "bug_category": "port_mismatch",
+      "file_count": 6,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "lnls-dig/fofb-ctrl-gw",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "byuccl/bfasst",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "synthesis_error",
+      "file_count": 70,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32-setups",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/TurboGrafx16_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "byuccl/bfasst",
+      "bug_category": "synthesis_error",
+      "file_count": 48,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "ikorb/gcvideo",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "ee-uet/UETRV-PCore",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "ncsurobotics/SW8A-AcousticsFPGA",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/lcls-timing-core",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "PandABlocks/PandABlocks-FPGA",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "talonmyburgh/casper_dspdevel",
+      "bug_category": "synthesis_error",
+      "file_count": 58,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 18,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/surf",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "ipbus/ipbus-firmware",
+      "bug_category": "port_mismatch",
+      "file_count": 29,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "byuccl/bfasst",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "vgacentrifuge/fpga",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/SNES_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "JdeRobot/FPGA-robotics",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32-setups",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/X68000_MiSTer",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/PSX_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/lcls-timing-core",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "paulscherrerinstitute/psi_fix",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "LinuxCNC/hostmot2-firmware",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/lcls-timing-core",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/QL_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 12,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "DiamondLightSource/DLS-MBF",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/Atari2600_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/surf",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/lcls2-pgp-fw-lib",
+      "bug_category": "synthesis_error",
+      "file_count": 9,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "ghdl/ghdl-yosys-plugin",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/rce-gen3-fw-lib",
+      "bug_category": "synthesis_error",
+      "file_count": 16,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "wsoltys/mist-cores",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/SMS_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "GSI-CS-CO/bel_projects",
+      "bug_category": "synthesis_error",
+      "file_count": 29,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "casper-astro/mlib_devel",
+      "bug_category": "sensitivity_list",
+      "file_count": 18,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/amc-carrier-core",
+      "bug_category": "synthesis_error",
+      "file_count": 9,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/surf",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "MEGA65/mega65-core",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "aws/aws-fpga",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "slaclab/lcls-timing-core",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "evka85/GEM_AMC",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "fpga-logi/logi-hard",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "timvideos/HDMI2USB-jahanzeb-firmware",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "timvideos/HDMI2USB-jahanzeb-firmware",
+      "bug_category": "synthesis_error",
+      "file_count": 15,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "nativechips/EF_SHA256",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "ben-marshall/uart",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "google/globalfoundries-pdk-libs-gf180mcu_fd_sc_mcu7t5v0",
+      "bug_category": "synthesis_error",
+      "file_count": 229,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "shaheer-suhaib/picorv32-aes-co-processor",
+      "bug_category": "sensitivity_list",
+      "file_count": 7,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "XUANTIE-RV/openc910",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel_mgmt_soc_litex",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD-flow-scripts",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "zeroasiccorp/logikbench",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "alexforencich/corundum",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "siliconcompiler/lambdalib",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "chipfoundry/caravel_user_project",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "daxzio/cocotbext-dvi",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "google/globalfoundries-pdk-libs-gf180mcu_fd_sc_mcu9t5v0",
+      "bug_category": "synthesis_error",
+      "file_count": 458,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "synthesis_error",
+      "file_count": 36,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "corundum/corundum",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "scarv/scarv-cpu",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "chipsalliance/yosys-f4pga-plugins",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "clock_domain",
+      "file_count": 6,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "scale-lab/DRUM",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "saint2706/cpu",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel_mpw-one",
+      "bug_category": "synthesis_error",
+      "file_count": 73,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "NetFPGA/netfpga",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "jotego/jt49",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "intv0id/tt-ihp-TinyKalman",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel_mgmt_soc_litex",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "esa-tu-darmstadt/tapasco",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD-flow-scripts",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "clock_domain",
+      "file_count": 14,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "mopfel-winrux/NockPU",
+      "bug_category": "synthesis_error",
+      "file_count": 14,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "pulp-platform/cheshire",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "Seiraiyu/RyuSim-Validation",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "Dasharo/verilog-lpc-module",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "VerticalResearchGroup/miaow",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "YosysHQ/apicula",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "samitbasu/rhdl",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "siliconcompiler/scgallery",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "api_breaking",
+      "file_count": 3,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "Mazamars312/Analogue_Pocket_Neogeo",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "antonblanchard/microwatt",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "litex-hub/pythondata-cpu-vexriscv",
+      "bug_category": "synthesis_error",
+      "file_count": 18,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "siliconcompiler/lambdalib",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "IObundle/iob-uart16550",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "NCHU-HSUN/Vip_Final",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "darklife/darkriscv",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "pulp-platform/FlooNoC",
+      "bug_category": "synthesis_error",
+      "file_count": 22,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "EfficientComputer/verilator",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/obi",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "UTOSS/risc-v",
+      "bug_category": "sensitivity_list",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/redmule",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/pulpissimo",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hci",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/croc",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/i3c-core",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi",
+      "bug_category": "synthesis_error",
+      "file_count": 9,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/common_cells",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/neureka",
+      "bug_category": "synthesis_error",
+      "file_count": 19,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/pulpissimo",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilog-meetup/systemverilog-microarchitecture-challenge-for-ai-2",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hwpe-stream",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hwpe-ctrl",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "OpenXiangShan/XS-Verilog-Library",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/sv-tests",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "featherweight-ip/fwrisc",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/redundancy_cells",
+      "bug_category": "synthesis_error",
+      "file_count": 15,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot-hdk/black-parrot-subsystems",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "zerorisc/expo",
+      "bug_category": "port_mismatch",
+      "file_count": 10,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "port_mismatch",
+      "file_count": 34,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/ITA",
+      "bug_category": "synthesis_error",
+      "file_count": 13,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/pulp",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi_llc",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "adam-maj/tiny-gpu",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/obi",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/common_cells",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/cvfpu",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "sensitivity_list",
+      "file_count": 4,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi",
+      "bug_category": "synthesis_error",
+      "file_count": 61,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "FondazioneChipsIT/hyperbus",
+      "bug_category": "synthesis_error",
+      "file_count": 15,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "apoj-inc/AXI-NoC-with-built-in-PMUs",
+      "bug_category": "synthesis_error",
+      "file_count": 17,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "IEEE-UCF/Gaming-CPU-Project",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cvfpu",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "bug_category": "clock_domain",
+      "file_count": 4,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/i3c-core",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "bsc-loca/core_tile",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot-hdk/zynq-parrot",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hyperbus",
+      "bug_category": "synthesis_error",
+      "file_count": 9,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e41p",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cve2",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "KULeuven-MICAS/lagd-im",
+      "bug_category": "synthesis_error",
+      "file_count": 23,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "fpgasystems/Coyote",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/i3c-core",
+      "bug_category": "synthesis_error",
+      "file_count": 23,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/core-v-mcu",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "ADN-VLSI/SC-SoC",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "PMohan-27/FPGA-IEEE-HACKATHON",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "adam-maj/tiny-gpu",
+      "bug_category": "api_breaking",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipstack-ai/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "IEEEYorkU/ascon-sp800-232-sv",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/serial_link",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "siliconcompiler/zerosoc",
+      "bug_category": "build_regression",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "zerorisc/expo-otbn-pqc",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/sv-tests",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "fpgasystems/Coyote",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 20,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "IEEE-UCF/Gaming-CPU-Project",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "fpgasystems/Coyote",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "tenstorrent/tt-dfd",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "FondazioneChipsIT/pulp_cluster",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "veripool/verilog-mode",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/i3c-core",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "bug_category": "clock_domain",
+      "file_count": 44,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "TheusHen/ternary-ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "HiSA-Team/Simply-V",
+      "bug_category": "synthesis_error",
+      "file_count": 9,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "manny-serrano/ObjectDetection",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "UTOSS/risc-v",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hci",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "Cal-Poly-RAMP/carp-core",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 15,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "ADN-VLSI/apb-uart",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "FondazioneChipsIT/pulp_cluster",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "merge_conflict",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "CSCE-685-FA25/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 83,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "Silimate/sv-tests",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "TecknozBD/Hyper-Titan",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv-hpdcache",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cvw",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "TDT4295-2025-GruppeA/FPGA",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/common_cells",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 31,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "UTOSS/risc-v",
+      "bug_category": "sensitivity_list",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 22,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/common_cells",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "MiSTer-devel/Saturn_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "bug_category": "clock_domain",
+      "file_count": 4,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "port_mismatch",
+      "file_count": 17,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/pulp_cluster",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "ANL-ASIC/matvec",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hwpe-stream",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "ANL-ASIC/matvec",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/FlooNoC",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "HiSA-Team/Simply-V",
+      "bug_category": "synthesis_error",
+      "file_count": 13,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "Purdue-SoCET/RISCVBusiness",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/sv-tests",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cvw",
+      "bug_category": "synthesis_error",
+      "file_count": 27,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/rv_tracer",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "MiSTer-devel/S32X_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 26,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hci",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "0xArt/Tiny_But_Mighty_I2C_Master_Verilog",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "CHERIoT-Platform/cheriot-dbg-module",
+      "bug_category": "clock_domain",
+      "file_count": 4,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 20,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "nipo/nsl",
+      "bug_category": "port_mismatch",
+      "file_count": 35,
+      "query": "signal width mismatch language:VHDL"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "IObundle/iob-picorv32",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "IObundle/iob-uart16550",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "chipsalliance/yosys-f4pga-plugins",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "antonblanchard/microwatt",
+      "bug_category": "port_mismatch",
+      "file_count": 28,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "port_mismatch",
+      "file_count": 9,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "signal width mismatch language:Verilog"
+    },
+    {
+      "repo": "ADN-VLSI/apb-uart",
+      "bug_category": "port_mismatch",
+      "file_count": 7,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/Cores-VeeR-EL2",
+      "bug_category": "port_mismatch",
+      "file_count": 10,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/pulp_cluster",
+      "bug_category": "port_mismatch",
+      "file_count": 11,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "port_mismatch",
+      "file_count": 20,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/Cores-VeeR-EL2",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "analogdevicesinc/testbenches",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e40s",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 10,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/iDMA",
+      "bug_category": "port_mismatch",
+      "file_count": 11,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e40x",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 21,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e40x",
+      "bug_category": "port_mismatch",
+      "file_count": 28,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "MiSTer-devel/C64_MiSTer",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "port_mismatch",
+      "file_count": 33,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 6,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "port_mismatch",
+      "file_count": 15,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hci",
+      "bug_category": "port_mismatch",
+      "file_count": 20,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e40p",
+      "bug_category": "port_mismatch",
+      "file_count": 15,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 22,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 11,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "port_mismatch",
+      "file_count": 6,
+      "query": "signal width mismatch language:SystemVerilog"
+    },
+    {
+      "repo": "slaclab/epix-quad",
+      "bug_category": "port_mismatch",
+      "file_count": 6,
+      "query": "fix port map language:VHDL"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 12,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Jaguar_MiSTer",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 31,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 15,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys_verific_rs",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "port_mismatch",
+      "file_count": 9,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "zeroasiccorp/umi",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "chipsalliance/f4pga-xc-fasm2bels",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "cucapra/filament",
+      "bug_category": "port_mismatch",
+      "file_count": 29,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "YosysHQ/apicula",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "lnis-uofu/OpenFPGA",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "chipsalliance/yosys-f4pga-plugins",
+      "bug_category": "port_mismatch",
+      "file_count": 6,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Genesis_MiSTer",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "google/CFU-Playground",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "secworks/sha256",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "aolofsson/oh",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/NES_MiSTer",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "fpgasystems/Coyote",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e40p",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "KULeuven-MICAS/snax_cluster",
+      "bug_category": "port_mismatch",
+      "file_count": 16,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "KULeuven-MICAS/snax_cluster",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi_llc",
+      "bug_category": "port_mismatch",
+      "file_count": 11,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 64,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/snitch",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/snitch",
+      "bug_category": "port_mismatch",
+      "file_count": 59,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/axi",
+      "bug_category": "port_mismatch",
+      "file_count": 7,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "port_mismatch",
+      "file_count": 9,
+      "query": "fix port map language:SystemVerilog"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:VHDL"
+    },
+    {
+      "repo": "fransschreuder/xpm_vhdl",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:VHDL"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:VHDL"
+    },
+    {
+      "repo": "slaclab/surf",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:VHDL"
+    },
+    {
+      "repo": "casper-astro/mlib_devel",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:VHDL"
+    },
+    {
+      "repo": "firesim/aws-fpga-firesim",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix instantiation language:VHDL"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:VHDL"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "pConst/basic_verilog",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "Origin0804/Digital-electricity-experiments-verilog",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "Sudhamshu091/32-Verilog-Mini-Projects",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "IObundle/iob-spi",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "pulp-platform/cheshire",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "jon011235/MARVIN",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "zeroasiccorp/umi",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "zeroasiccorp/umi",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "port_mismatch",
+      "file_count": 6,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/bsg_manycore",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/bsg_manycore",
+      "bug_category": "port_mismatch",
+      "file_count": 57,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "antmicro/yosys-f4pga-plugins",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "openrisc/mor1kx",
+      "bug_category": "port_mismatch",
+      "file_count": 22,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "antonblanchard/microwatt",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "virtualagc/agc_simulation",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "ucb-bar/sha3",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "XUANTIE-RV/wujian100_open",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "jotego/jt12",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "secworks/sha256",
+      "bug_category": "port_mismatch",
+      "file_count": 6,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "cfelton/test_jpeg",
+      "bug_category": "port_mismatch",
+      "file_count": 9,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "openrisc/orpsoc-cores",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "analogdevicesinc/testbenches",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cvfpu",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 90,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "Purdue-SoCET/RISCVBusiness",
+      "bug_category": "port_mismatch",
+      "file_count": 26,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/adams-bridge",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "port_mismatch",
+      "file_count": 9,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cvfpu",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "OFS/examples-afu",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/iDMA",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "port_mismatch",
+      "file_count": 6,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/common_cells",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/snitch",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hier-icache",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/riscv-dbg",
+      "bug_category": "port_mismatch",
+      "file_count": 8,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 14,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e40x",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 8,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "MikeOpenHWGroup/pulp_soc",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/cluster_interconnect",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/tech_cells_generic",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 19,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e40p",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 7,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv32e40p",
+      "bug_category": "port_mismatch",
+      "file_count": 35,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "sgherbst/svreal",
+      "bug_category": "port_mismatch",
+      "file_count": 11,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "port_mismatch",
+      "file_count": 24,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/riscv-dbg",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/common_cells",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cvfpu",
+      "bug_category": "port_mismatch",
+      "file_count": 10,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "melt-umn/ableC-templating",
+      "bug_category": "port_mismatch",
+      "file_count": 8,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "hdl-modules/hdl-modules",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "synthesis failure language:VHDL"
+    },
+    {
+      "repo": "ghdl/ghdl",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "synthesis failure language:VHDL"
+    },
+    {
+      "repo": "enclustra/en_cl_fix",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "synthesis failure language:VHDL"
+    },
+    {
+      "repo": "VLSI-EDA/PoC",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "synthesis failure language:VHDL"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "synthesis_error",
+      "file_count": 13,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Arcade-Cave_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "chipsalliance/synlig",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "olofk/serv",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys_verific_rs",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "os-fpga/Raptor",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "sensitivity_list",
+      "file_count": 5,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "google/CFU-Playground",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "google/CFU-Playground",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD-flow-scripts",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD-flow-scripts",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "lnis-uofu/OpenFPGA",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "vaughnbetz/COFFE",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "synthesis failure language:Verilog"
+    },
+    {
+      "repo": "Purdue-SoCET/chiplet-components",
+      "bug_category": "synthesis_error",
+      "file_count": 23,
+      "query": "synthesis failure language:SystemVerilog"
+    },
+    {
+      "repo": "vogelpi/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "synthesis failure language:SystemVerilog"
+    },
+    {
+      "repo": "OFS/oneapi-asp",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "synthesis failure language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "clock_domain",
+      "file_count": 100,
+      "query": "synthesis failure language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "synthesis failure language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "synthesis failure language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/lowrisc-chip",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "synthesis failure language:SystemVerilog"
+    },
+    {
+      "repo": "MiSTer-devel/Arcade-Astrocade_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "stnolting/neorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "tgingold-cern/cheby",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "slaclab/surf",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "slaclab/epix-quad",
+      "bug_category": "synthesis_error",
+      "file_count": 13,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "ipbus-contrib/enclustra",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "MiSTer-devel/SMS_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "slaclab/epix",
+      "bug_category": "clock_domain",
+      "file_count": 207,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "RV-BOSC/OpenNoC",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "MiSTeX-devel/MiSTeX-ports",
+      "bug_category": "sensitivity_list",
+      "file_count": 4,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "furrtek/Arcade-TMNT_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "RTimothyEdwards/caravel_openframe_project",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "vortexgpgpu/vortex",
+      "bug_category": "synthesis_error",
+      "file_count": 112,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD-flow-scripts",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "chipfoundry/caravel_user_project_analog",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "amonemi/ProNoC",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "vortexgpgpu/vortex",
+      "bug_category": "synthesis_error",
+      "file_count": 220,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "vortexgpgpu/vortex",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/EF_PSRAM_CTRL",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "HKUSTGZ-MICS-LYU/FlattenRTL",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "vicharak-in/f_to_f",
+      "bug_category": "sensitivity_list",
+      "file_count": 7,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "openrisc/mor1kx",
+      "bug_category": "sensitivity_list",
+      "file_count": 4,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "darklife/darkriscv",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "synthesis_error",
+      "file_count": 10,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "siliconcompiler/lambdalib",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "zeroasiccorp/umi",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/Raptor_Tools",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/EF_SRAM_1024x32",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/Validation",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/Validation",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "openrisc/mor1kx",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys_verific_rs",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/EF_TMR32",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "ZipCPU/zipcpu",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys_verific_rs",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "rafaelcalcada/rvx",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys_verific_rs",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel_user_project",
+      "bug_category": "reset_logic",
+      "file_count": 8,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "olofk/serv",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "RTimothyEdwards/caravel_openframe_project",
+      "bug_category": "synthesis_error",
+      "file_count": 9,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/EF_PSRAM_CTRL_OLD-DONT-USE-",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys_verific_rs",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "siliconcompiler/lambdalib",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/IP_Catalog",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/RTL_Benchmark",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/Raptor",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "jotego/jt12",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys_verific_rs",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "esa-tu-darmstadt/tapasco",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel-gf180mcu",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "black-parrot-hdk/zynq-parrot",
+      "bug_category": "synthesis_error",
+      "file_count": 9,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Arcade-Druaga_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 17,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel-gf180mcu",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/IP_Catalog",
+      "bug_category": "synthesis_error",
+      "file_count": 13,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "TinyTapeout/tinytapeout-mpw7",
+      "bug_category": "synthesis_error",
+      "file_count": 20,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Genesis_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "tangxifan/micro_benchmark",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "coralmw/tinytapeout-css-feedback",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "antonblanchard/microwatt",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "sensitivity_list",
+      "file_count": 4,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "tangxifan/micro_benchmark",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/MegaCD_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/yosys_verific_rs",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "os-fpga/RTL_Benchmark",
+      "bug_category": "synthesis_error",
+      "file_count": 42,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/MegaCD_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "black-parrot-hdk/zynq-parrot",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "ucb-bar/nvdla-wrapper",
+      "bug_category": "synthesis_error",
+      "file_count": 30,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel_mpw-one",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "Arlet/verilog-65C02-microcode",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "furrtek/SiliconRE",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/bsg_manycore",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "Wren6991/Hazard3",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "QuickLogic-Corp/s3-gateware",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "efabless/caravel_mpw-one",
+      "bug_category": "synthesis_error",
+      "file_count": 6,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "reset_logic",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "antonblanchard/microwatt",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "acceleratedtech/ssith-aws-fpga",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "chipsalliance/aib-phy-hardware",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Arduboy_MiSTer",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/bsg_manycore",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "bug_category": "synthesis_error",
+      "file_count": 16,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "openrisc/mor1kx",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "YosysHQ/picorv32",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "alangarf/apple-one",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "nvdla/hw",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "diegovalverde/papiGB",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "openrisc/mor1kx",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "IEEE-UCF/Gaming-CPU-Project",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/croc",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/adams-bridge",
+      "bug_category": "clock_domain",
+      "file_count": 4,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/neureka",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/adams-bridge",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 14,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "NVlabs/verilog-eval",
+      "bug_category": "port_mismatch",
+      "file_count": 9,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cvfpu",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "zerorisc/expo",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "westerndigitalcorporation/swerv_eh1",
+      "bug_category": "synthesis_error",
+      "file_count": 27,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "NVlabs/verilog-eval",
+      "bug_category": "sensitivity_list",
+      "file_count": 5,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "westerndigitalcorporation/swerv_eh1",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cv-hpdcache-verif",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "vproc/vicuna2_core",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 33,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "zerorisc/expo",
+      "bug_category": "synthesis_error",
+      "file_count": 86,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/adams-bridge",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "QREM-CORE/poly-arith-unit",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "SAMOS-76/RISC-V-Team7",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "antmicro/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hwpe-stream",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "openhwgroup/cvw",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "HiSA-Team/Simply-V",
+      "bug_category": "linker_error",
+      "file_count": 14,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "tenstorrent/tt-dfd",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "Edu4Chip/Didactic-SoC",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "clock_domain",
+      "file_count": 4,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/adams-bridge",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/i3c-core",
+      "bug_category": "synthesis_error",
+      "file_count": 21,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "CCTQ-CIMATEC/genius-pbl3-grupo2",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipmind/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "githubhjs/axis_skid_buffer",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "zerorisc/expo-otbn-pqc",
+      "bug_category": "synthesis_error",
+      "file_count": 15,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/bsg_manycore",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipmind/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-ss",
+      "bug_category": "synthesis_error",
+      "file_count": 7,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "CS350C-SP25/ozone-processor",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "pulp-platform/hyperbus",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "microsoft/cheriot-ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "Edu4Chip/Didactic-SoC",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "lowRISC/ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 11,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "vogelpi/opentitan",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "chipsalliance/caliptra-rtl",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:SystemVerilog"
+    },
+    {
+      "repo": "PacktPublishing/Learn-FPGA-Programming",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix sensitivity list\" language:vhdl"
+    },
+    {
+      "repo": "abs-tudelft/fletcher",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix sensitivity list\" language:vhdl"
+    },
+    {
+      "repo": "robinsonb5/ZPUFlex",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix sensitivity list\" language:vhdl"
+    },
+    {
+      "repo": "Rhialto/PET_MEGA65",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "clock_domain",
+      "file_count": 4,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "BerkeleyLab/Bedrock",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "zerorisc/expo-otbn-pqc",
+      "bug_category": "clock_domain",
+      "file_count": 2,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "zerorisc/expo",
+      "bug_category": "clock_domain",
+      "file_count": 2,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "phamhnh/improving-mlkem-and-mldsa-on-opentitan",
+      "bug_category": "clock_domain",
+      "file_count": 2,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "PQC-OpenTitan/improving-ml-kem-and-ml-dsa-on-opentitan",
+      "bug_category": "clock_domain",
+      "file_count": 2,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "randyrossi/vicii-kawari",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "maximilianheer/eurosys_rdma_scatter_app",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "Zueri-Aaron/MT-ROCE",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "somhi/PCXT_DeMiSTify",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "spark2k06/PCXT_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "mist-devel/archimedes",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "MiSTer-devel/PSX_MiSTer",
+      "bug_category": "clock_domain",
+      "file_count": 5,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "jeras/sockit_spi",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "OpenAutomationTechnologies/VHDL_IP-Cores",
+      "bug_category": "clock_domain",
+      "file_count": 2,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "terriellis120/Researchfpga",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "Digilent/Zybo-Z7-20-pcam-5c",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "casper-astro/mlib_devel",
+      "bug_category": "clock_domain",
+      "file_count": 3,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "dirjud/Nitro-Parts-lib-Imager",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "ericlewis/openfpga-lunarlander",
+      "bug_category": "port_mismatch",
+      "file_count": 4,
+      "query": "fix entity language:VHDL"
+    },
+    {
+      "repo": "daniloRubio30/MicroProcessador",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix entity language:VHDL"
+    },
+    {
+      "repo": "gpetruc/GlobalCorrelator",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix entity language:VHDL"
+    },
+    {
+      "repo": "pabennett/uart",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "CLopMan/JACAA",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "mist-devel/T80",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "sorgelig/Amstrad_MiST",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:VHDL"
+    },
+    {
+      "repo": "alexforencich/verilog-ethernet",
+      "bug_category": "port_mismatch",
+      "file_count": 37,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "alexforencich/verilog-ethernet",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:Verilog"
+    },
+    {
+      "repo": "hm-aemy/librelane-template",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "hulohot/tiny-npu",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "FondazioneChipsIT/cfi-snooper",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "ijor/fx68k",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "ion-concepts/DiRT",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "coredac/accelerator_soc",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "GregAC/ibex_super_system",
+      "bug_category": "synthesis_error",
+      "file_count": 8,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "fpgasystems/libstf",
+      "bug_category": "synthesis_error",
+      "file_count": 5,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "9vvert/DigitalDesign-FIFA4FPGA",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "IObundle/iob-ibex",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "fix module language:SystemVerilog"
+    },
+    {
+      "repo": "alexforencich/verilog-ethernet",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "paudiaz99/Z-Core",
+      "bug_category": "port_mismatch",
+      "file_count": 20,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "Unicamp-Odhin/MFCC_Core",
+      "bug_category": "port_mismatch",
+      "file_count": 12,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "colognechip/gatemate-pipe",
+      "bug_category": "port_mismatch",
+      "file_count": 5,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "IObundle/iob-naxriscv",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:Verilog"
+    },
+    {
+      "repo": "UTOSS/risc-v-ttsky",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "msinger/dmg-sim",
+      "bug_category": "port_mismatch",
+      "file_count": 2,
+      "query": "fix instantiation language:SystemVerilog"
+    },
+    {
+      "repo": "AdrianMarotzke/SNTRUP",
+      "bug_category": "synthesis_error",
+      "file_count": 3,
+      "query": "synthesis failure language:VHDL"
+    },
+    {
+      "repo": "GMUCERG/TinyJAMBU",
+      "bug_category": "synthesis_error",
+      "file_count": 4,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "slaclab/epix-hr-leap-common",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:VHDL"
+    },
+    {
+      "repo": "bkerler/LibreSDR_UHD_B220_Mini_FPGA",
+      "bug_category": "sensitivity_list",
+      "file_count": 18,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "KarimmYasser/VLSI-Convolution-Systolic-Accelerator",
+      "bug_category": "synthesis_error",
+      "file_count": 12,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "cpu-dev/caravel_jacaranda-8_GF180",
+      "bug_category": "synthesis_error",
+      "file_count": 1,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "cliffordwolf/SimpleVOut",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix rtl language:Verilog"
+    },
+    {
+      "repo": "msinger/iceboy",
+      "bug_category": "clock_domain",
+      "file_count": 19,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "newaetech/chipwhisperer-husky-fpga",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "kramble/FPGA-Litecoin-Miner",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "jpendlum/crush",
+      "bug_category": "clock_domain",
+      "file_count": 2,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "jimfangx/caliptra-rtl-sky130",
+      "bug_category": "sensitivity_list",
+      "file_count": 16,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "Gordon-Cao/caliptra-rtl",
+      "bug_category": "sensitivity_list",
+      "file_count": 16,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "antmicro/caliptra-rtl-ci",
+      "bug_category": "sensitivity_list",
+      "file_count": 16,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "myrelabs/chipwhisperer",
+      "bug_category": "clock_domain",
+      "file_count": 7,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "Gordon-Cao/caliptra-rtl",
+      "bug_category": "clock_domain",
+      "file_count": 6,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "jimfangx/caliptra-rtl-sky130",
+      "bug_category": "clock_domain",
+      "file_count": 6,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "antmicro/caliptra-rtl-ci",
+      "bug_category": "clock_domain",
+      "file_count": 6,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "betrusted-io/gateware",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "realtimeradio/mlib_devel",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "HERA-Team/mlib_devel",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "pmonta/GNSS_Firehose",
+      "bug_category": "clock_domain",
+      "file_count": 14,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "pulp-platform/common_cells",
+      "bug_category": "clock_domain",
+      "file_count": 4,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "pulp-platform/snitch",
+      "bug_category": "clock_domain",
+      "file_count": 5,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "Gehstock/Mist_FPGA",
+      "bug_category": "clock_domain",
+      "file_count": 2,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "pulp-platform/pulpissimo",
+      "bug_category": "clock_domain",
+      "file_count": 7,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "mbus/ice",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix clock domain crossing"
+    },
+    {
+      "repo": "slaclab/l2si-core",
+      "bug_category": "latch_inferred",
+      "file_count": 3,
+      "query": "latch inferred\" language:vhdl"
+    },
+    {
+      "repo": "aweditya/superscalar",
+      "bug_category": "sensitivity_list",
+      "file_count": 5,
+      "query": "latch inferred\" language:vhdl"
+    },
+    {
+      "repo": "CNES/spacefibrelight",
+      "bug_category": "latch_inferred",
+      "file_count": 16,
+      "query": "latch inferred\" language:verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "latch inferred\" language:verilog"
+    },
+    {
+      "repo": "os-fpga/yosys-rs-plugin",
+      "bug_category": "latch_inferred",
+      "file_count": 1,
+      "query": "latch inferred\" language:verilog"
+    },
+    {
+      "repo": "Flinner/PacmanFPGA",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix simulation mismatch"
+    },
+    {
+      "repo": "feaksel/5level-inverter",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix simulation mismatch"
+    },
+    {
+      "repo": "open-logic/open-logic",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix simulation mismatch"
+    },
+    {
+      "repo": "Jvlachos/TM-NoC",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "20lfr/ELEC_498-Capstone-LiteLM",
+      "bug_category": "other",
+      "file_count": 43,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "MrUnknownUser/IC-Design",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "JediKnightDragonWarrior/Single-Cycle-RV32I",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "memstick/rv32i-base-fpga",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "w1s4sh1i/CID-TO-1-G3",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "UTOSS/risc-v-ttsky",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "fernandnsp/Microarquitetura_RISC-V_Single-Cycle",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "lzxindustries/videomancer-sdk",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "Ka10kenHQ/FloatingPointUnit",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "AGH-engineering-thesis-SM-PK-2026/core-draft",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "ponto-de-vista/ULA-8bits---Verilog",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "FPGA-Research/heichips25-tapeout",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "chipsalliance/sv-tests",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "DiamondLightSource/fpga-common",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "umarFarooq-emb/WS25_Digital_Multimeter_G4_Basys3",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "gameswu/fpga_project1",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "wesalmagdi/Computer-Architecture",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "BAT-LAB69/CRYPTO_SOC",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "Arrmando/semctl",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "theOfficeCat/tartaruga",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "chili-chips-ba/wireguard-fpga",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "pedro-psb/semctl",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "AhmedSobhy01/convolution-accelerator",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "JeferssonQE/Proyecto2-Arqui",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "Esraa-Hassan0/Pipelined-Von-neumann-processor",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "Grazen0/riscv-cpu",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "im-saif/pipelined-processor-vhdl",
+      "bug_category": "other",
+      "file_count": 16,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "UW-ASIC/Crypto-SHA",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "SJTU-YONGFU-RESEARCH-GRP/spi-customizer",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "phinitylabs/AXI4_DV_ENV",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "knosmos/peep",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "rajeshrah22/fpga-fractal-pipeline",
+      "bug_category": "port_mismatch",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "etf-unibl/SCore-V",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "QREM-CORE/poly-arith-unit",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "galelo04/pipelined-processor",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "ElektroMannen/Semesterprosjekt-UART-modul",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "Junu18/PROJECT-_I2C_baysys3_communication",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "Wren6991/Hazard3",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "mole99/gf180mcu-fabulous-fpga",
+      "bug_category": "other",
+      "file_count": 15,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "johnMamish/verilog-ice40-tutorial",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "nairel-git/convolution_module",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "JingyaoWang666/rv32i-core",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "byu-cpe/ecen520_student",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "lollo004/cpu",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "NoahTunesLaunchpadYT/Whac-A-Mole",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "MichaelLevin5908/bruinmachine",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "ioanadicu/STUMP",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "CESNET/ndk-fpga",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "meds-uet/AHB-Bus",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "b1shtream/conv_differentiable_logic_gate_networks",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "openhwgroup/cvw-arch-verif",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "TDT4295-2025-Group3/FPGA",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "pulp-platform/datamover",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "dpiegdon/verilog-buildingblocks",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "galelo04/pipelined-processor",
+      "bug_category": "port_mismatch",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "etf-unibl/SCore-V",
+      "bug_category": "other",
+      "file_count": 8,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "STARS-Design-Track-2025/nebula-iii",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "galelo04/pipelined-processor",
+      "bug_category": "other",
+      "file_count": 20,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "STARS-Design-Track-2025/nebula-iii-team-01",
+      "bug_category": "synthesis_error",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "analogdevicesinc/testbenches",
+      "bug_category": "api_breaking",
+      "file_count": 6,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "lnls-dig/infra-cores",
+      "bug_category": "other",
+      "file_count": 8,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "YosysHQ/picorv32",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "lawrie/fpga_pio",
+      "bug_category": "clock_domain",
+      "file_count": 29,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "RoaLogic/Hamming-ECC",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "0xArt/Tiny_But_Mighty_I2C_Master_Verilog",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "freecores/i2c",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "XUANTIE-RV/openc906",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "olofk/i2c",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "kitune-san/KFPCJr",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix testbench"
+    },
+    {
+      "repo": "RISC-V-Azedinha/RISC-V",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "Elison-debug/Cmamba_reconstruct",
+      "bug_category": "other",
+      "file_count": 6,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "firesim/aws-fpga-firesim-f2",
+      "bug_category": "clock_domain",
+      "file_count": 3,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "zhangjunwei0233/UCAS-CA-Lab",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "Open-ChipHub/OpenC910-LoongArch64",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "sicajc/Master_Thesis_MC",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "mozerj2001/fp_accel",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "PIONEER-Experiment/mfpga",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "mkmik/fcounter",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "piotro888/ppcpu_caravel",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix timing violation"
+    },
+    {
+      "repo": "mist-devel/c64",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix state machine\" language:vhdl"
+    },
+    {
+      "repo": "andykarpov/karabas-pro",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix state machine\" language:vhdl"
+    },
+    {
+      "repo": "enjoy-digital/litex_wr_nic",
+      "bug_category": "clock_domain",
+      "file_count": 1,
+      "query": "fix state machine\" language:vhdl"
+    },
+    {
+      "repo": "t-crest/patmos",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix state machine\" language:vhdl"
+    },
+    {
+      "repo": "slaclab/surf",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix state machine\" language:vhdl"
+    },
+    {
+      "repo": "fsmiamoto/EasyFPGA-VGA",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix state machine\" language:vhdl"
+    },
+    {
+      "repo": "apertus-open-source-cinema/axiom-firmware",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix state machine\" language:vhdl"
+    },
+    {
+      "repo": "tle0193/FaceDetectionFPGA",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix state machine\" language:vhdl"
+    },
+    {
+      "repo": "intv0id/TinyKalman",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "lpn-plant/lpntpm-lpc-verilog",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "greatscottgadgets/luna-soc",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "os-fpga/Raptor",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "api_breaking",
+      "file_count": 7,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "JeffDeCola/my-verilog-examples",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "Dasharo/verilog-lpc-module",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "jkelley/irig-decoder",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "yuyuranium/fpga-hw3",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "PauloHJ/ProyectoFinal_SistemasEmbebidosFJ21",
+      "bug_category": "other",
+      "file_count": 13,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "SySS-Research/icestick-lpc-tpm-sniffer",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "denandz/lpc_sniffer_tpm",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "davidthings/tinyfpga_bx_usbserial",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "jotego/jtcores",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "kevqiu/cpen391-group13-de1",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "pervices/uhd",
+      "bug_category": "clock_domain",
+      "file_count": 7,
+      "query": "fix state machine\" language:verilog"
+    },
+    {
+      "repo": "m1hu666/minimip32-lite",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "missing case statement\" language:vhdl"
+    },
+    {
+      "repo": "OSVVM/OSVVM",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "missing case statement\" language:vhdl"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "vortexgpgpu/vortex",
+      "bug_category": "other",
+      "file_count": 15,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "LaLigaDelMal/arqui-tp3",
+      "bug_category": "other",
+      "file_count": 35,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "RISCV-RV32I-MCU/Matrix-Multiplier",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "KietLe11/KLP32-RISCV",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "latch_inferred",
+      "file_count": 2,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 13,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "ispras/hdl-benchmarks",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "vyomasystems-lab/challenges-malivinayak",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "antonblanchard/microwatt",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "google/CFU-Playground",
+      "bug_category": "other",
+      "file_count": 6,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 35,
+      "query": "missing case statement\" language:verilog"
+    },
+    {
+      "repo": "ZipCPU/wb2axip",
+      "bug_category": "other",
+      "file_count": 15,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "olofk/serv",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "intel-aero/intel-aero-fpga",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "cavnex/mc6809",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "other",
+      "file_count": 13,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "michaelscutari/mini-tpu",
+      "bug_category": "other",
+      "file_count": 18,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "analogdevicesinc/hdl",
+      "bug_category": "api_breaking",
+      "file_count": 7,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Template_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 11,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "api_breaking",
+      "file_count": 9,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "AhmedSobhy01/AES-Verilog",
+      "bug_category": "sensitivity_list",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "vortexgpgpu/vortex",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "MiSTeX-devel/Template_MiSTeX",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "TinyTapeout/tt-multiplexer",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "chipsalliance/synlig",
+      "bug_category": "linker_error",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 17,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 15,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "chipsalliance/yosys-f4pga-plugins",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "black-parrot-hdk/zynq-parrot",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "antmicro/yosys-f4pga-plugins",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "google/CFU-Playground",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Genesis_MiSTer",
+      "bug_category": "other",
+      "file_count": 3,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "YosysHQ/yosys-tests",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "tinyfpga/TinyFPGA-B-Series",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "cfelton/test_jpeg",
+      "bug_category": "other",
+      "file_count": 14,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "YosysHQ/picorv32",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix always block\" language:verilog"
+    },
+    {
+      "repo": "UVVM/UVVM",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix process block\" language:vhdl"
+    },
+    {
+      "repo": "strath-sdr/rfsoc_ofdm",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "fix process block\" language:vhdl"
+    },
+    {
+      "repo": "myriadrf/LimeDFB",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix constraint"
+    },
+    {
+      "repo": "nhk2712/EITF35-Kelvin-och-Alvin",
+      "bug_category": "other",
+      "file_count": 7,
+      "query": "fix timing constraint"
+    },
+    {
+      "repo": "ieee-ceda-datc/OpenROAD-Research",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix timing constraint"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "other",
+      "file_count": 6,
+      "query": "fix timing constraint"
+    },
+    {
+      "repo": "planetofwar/SecureBoot",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "zerorisc/expo-otbn-pqc",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "ShasiyaTN/VLSI_SECURITY_HW-SW",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "nmoroze/opentitan-kronos",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "dop-amin/opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "sairamesh1973/OpenTitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "ogoldste/OpenTitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "zerorisc/expo",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "phamhnh/improving-mlkem-and-mldsa-on-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "lin-snail/opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "MultiVic/opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "planetofwar/SecureBoot",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "Silicon-Assurance/Opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "etterli/opentitan-otbn-pqc-isa",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "PQC-OpenTitan/improving-ml-kem-and-ml-dsa-on-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "KiranaGowda/https-github.com-lowRISC-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "zhengrong666/EarlyOT",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "blu2018/OpenTitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "silicanet/opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "comsec-group/cellift-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "litex-hub/pythondata-misc-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "zerorisc/expo-otbn-pqc",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "ShasiyaTN/VLSI_SECURITY_HW-SW",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "sairamesh1973/OpenTitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "dop-amin/opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "ogoldste/OpenTitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "zerorisc/expo",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "phamhnh/improving-mlkem-and-mldsa-on-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "lin-snail/opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "Silicon-Assurance/Opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "MultiVic/opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "PQC-OpenTitan/improving-ml-kem-and-ml-dsa-on-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "KiranaGowda/https-github.com-lowRISC-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "zhengrong666/EarlyOT",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "silicanet/opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "litex-hub/pythondata-misc-opentitan",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "CTSRD-CHERI/ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "pierregobin/my_ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "hcallahan-lowrisc/cheriot-ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "jhill0408/ibextesting",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "TheusHen/ternary-ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "SamuelEbbz07/ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "kalabYibeltal/ibex_snowflake",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "viniul/ibex-private",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "soc-hub-fi/rt-ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "jorendumoulin/ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "kalabYibeltal/se",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "ibnelwalid/ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "microsoft/cheriot-ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "pierregobin/myibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "litex-hub/pythondata-cpu-ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "ggs2ggs/ibex",
+      "bug_category": "other",
+      "file_count": 86,
+      "query": "simulation synthesis mismatch"
+    },
+    {
+      "repo": "soc-hub-fi/rt-ibex",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "pulp-platform/obi",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "Mani-0441/obi",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "Purdue-SoCET/RISCVBusiness",
+      "bug_category": "port_mismatch",
+      "file_count": 9,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "bsc-loca/sargantana",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "scale-lab/BLASYS",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "bsc-loca/core_tile",
+      "bug_category": "other",
+      "file_count": 4,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "jimmy312495/LSV_Final",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "uob-mu3e/test_stand_frontend",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "UMJI-VE450-21SU/Ria",
+      "bug_category": "latch_inferred",
+      "file_count": 2,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "oscourse-tsinghua/OS2018spring-projects-g05",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "pulp-platform/iDMA",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "vocoder712/final-experiment-tetris",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "Purdue-SoCET/RISCVBusiness",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "Purdue-SoCET/RISCVBusiness",
+      "bug_category": "other",
+      "file_count": 13,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "bug_category": "other",
+      "file_count": 6,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "pulp-platform/axi",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "verilator/verilator",
+      "bug_category": "other",
+      "file_count": 41,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "bug_category": "other",
+      "file_count": 14,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "Purdue-SoCET/RISCVBusiness",
+      "bug_category": "other",
+      "file_count": 8,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "black-parrot/black-parrot",
+      "bug_category": "other",
+      "file_count": 15,
+      "query": "fix combinational loop"
+    },
+    {
+      "repo": "MiSTer-devel/PSX_MiSTer",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix race condition\" language:vhdl"
+    },
+    {
+      "repo": "VUnit/vunit",
+      "bug_category": "other",
+      "file_count": 2,
+      "query": "fix race condition\" language:vhdl"
+    },
+    {
+      "repo": "the-aerospace-corporation/satcat5",
+      "bug_category": "api_breaking",
+      "file_count": 6,
+      "query": "fix race condition\" language:vhdl"
+    },
+    {
+      "repo": "MiSTer-devel/TurboGrafx16_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix race condition\" language:vhdl"
+    },
+    {
+      "repo": "MiSTer-devel/TurboGrafx16_MiSTer",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "fix race condition\" language:vhdl"
+    },
+    {
+      "repo": "aws/aws-fpga",
+      "bug_category": "sensitivity_list",
+      "file_count": 3,
+      "query": "fix race condition\" language:vhdl"
+    },
+    {
+      "repo": "KastnerRG/riffa",
+      "bug_category": "other",
+      "file_count": 1,
+      "query": "fix race condition\" language:verilog"
+    },
+    {
+      "repo": "EttusResearch/uhd",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix race condition\" language:verilog"
+    },
+    {
+      "repo": "os-fpga/IP_Catalog",
+      "bug_category": "clock_domain",
+      "file_count": 6,
+      "query": "fix race condition\" language:verilog"
+    },
+    {
+      "repo": "bespoke-silicon-group/bsg_manycore",
+      "bug_category": "other",
+      "file_count": 5,
+      "query": "fix race condition\" language:verilog"
+    },
+    {
+      "repo": "dunewires/ElectricalMethod",
+      "bug_category": "latch_inferred",
+      "file_count": 5,
+      "query": "incomplete case\" language:vhdl"
+    },
+    {
+      "repo": "malarisch/AES67",
+      "bug_category": "sensitivity_list",
+      "file_count": 6,
+      "query": "incomplete case\" language:vhdl"
+    },
+    {
+      "repo": "apertus-open-source-cinema/axiom-firmware",
+      "bug_category": "latch_inferred",
+      "file_count": 6,
+      "query": "incomplete case\" language:vhdl"
+    },
+    {
+      "repo": "SKravitsky/ECEC412",
+      "bug_category": "sensitivity_list",
+      "file_count": 1,
+      "query": "incomplete case\" language:vhdl"
+    },
+    {
+      "repo": "MiSTer-devel/C64_MiSTer",
+      "bug_category": "latch_inferred",
+      "file_count": 3,
+      "query": "incomplete case\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "latch_inferred",
+      "file_count": 6,
+      "query": "incomplete case\" language:verilog"
+    },
+    {
+      "repo": "greatscottgadgets/luna-soc",
+      "bug_category": "latch_inferred",
+      "file_count": 1,
+      "query": "incomplete case\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD",
+      "bug_category": "latch_inferred",
+      "file_count": 2,
+      "query": "incomplete case\" language:verilog"
+    },
+    {
+      "repo": "The-OpenROAD-Project/OpenROAD-flow-scripts",
+      "bug_category": "latch_inferred",
+      "file_count": 2,
+      "query": "incomplete case\" language:verilog"
+    },
+    {
+      "repo": "MiSTer-devel/Template_MiSTer",
+      "bug_category": "reset_logic",
+      "file_count": 1,
+      "query": "incomplete case\" language:verilog"
+    },
+    {
+      "repo": "fjullien/jtag_vpi",
+      "bug_category": "latch_inferred",
+      "file_count": 5,
+      "query": "incomplete case\" language:verilog"
+    },
+    {
+      "repo": "mkatsimpris/test_jpeg",
+      "bug_category": "latch_inferred",
+      "file_count": 2,
+      "query": "incomplete case\" language:verilog"
     }
   ]
 }

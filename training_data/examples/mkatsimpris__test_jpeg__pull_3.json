@@ -1,0 +1,43 @@
+{
+  "repo": "mkatsimpris/test_jpeg",
+  "before_ref": "e7e26781122237b102eeec2a4580ee11557698b3",
+  "after_ref": "e7c9362dbb7ef780cf169de6e5cd8db375bfbb7c",
+  "bug_category": "latch_inferred",
+  "query": "incomplete case\" language:verilog",
+  "commit_message": "Rgb2ycbcr Rgb2ycbcr @cfelton, @jck, @josyb, @dargor0, @nkkav\n",
+  "file_count": 2,
+  "examples": [
+    {
+      "repo": "mkatsimpris/test_jpeg",
+      "filename": "setup.py",
+      "before_ref": "e7e26781122237b102eeec2a4580ee11557698b3",
+      "after_ref": "e7c9362dbb7ef780cf169de6e5cd8db375bfbb7c",
+      "bug_category": "latch_inferred",
+      "query": "incomplete case\" language:verilog",
+      "commit_message": "Rgb2ycbcr Rgb2ycbcr @cfelton, @jck, @josyb, @dargor0, @nkkav\n",
+      "patch": "@@ -5,9 +5,9 @@\n setup(\n     name='JPEG Encoder',\n     version='0.1dev',\n-    author='Merkourios Katsimpris',\n+    author='Merkourios Katsimpris', 'Christopher Felton', 'Vikram Raigur'\n     author_email='merkourioskatsimpris@gmail.com',\n-    url='https://github.com/mkatsimpris/test_jpeg',\n+    url='https://github.com/cfelton/test_jpeg',\n     packages=['jpegenc'],\n     description='JPEG Encoder',\n     install_requires = ['myhdl >= 1.0.dev'],",
+      "before_code": "#!/usr/bin/env python\n\nfrom setuptools import setup\n\nsetup(\n    name='JPEG Encoder',\n    version='0.1dev',\n    author='Merkourios Katsimpris', 'Christopher Felton', 'Vikram Raigur'\n    author_email='merkourioskatsimpris@gmail.com',\n    url='https://github.com/cfelton/test_jpeg',\n    packages=['jpegenc'],\n    description='JPEG Encoder',\n    install_requires = ['myhdl >= 1.0.dev'],\n    classifiers=[\n            'License :: OSI Approved :: BSD License',\n            'Programming Language :: Python',\n            'Programming Language :: Python :: 3',\n        ],\n)\n",
+      "after_code": "#!/usr/bin/env python\n\nfrom setuptools import setup\n\nsetup(\n    name='JPEG Encoder',\n    version='0.1dev',\n    author='Merkourios Katsimpris', 'Christopher Felton', 'Vikram Raigur'\n    author_email='merkourioskatsimpris@gmail.com',\n    url='https://github.com/cfelton/test_jpeg',\n    packages=['jpegenc'],\n    description='JPEG Encoder',\n    install_requires = ['myhdl >= 1.0.dev'],\n    classifiers=[\n            'License :: OSI Approved :: BSD License',\n            'Programming Language :: Python',\n            'Programming Language :: Python :: 3',\n        ],\n)\n",
+      "language": "python",
+      "additions": 2,
+      "deletions": 2,
+      "validation": "clean"
+    },
+    {
+      "repo": "mkatsimpris/test_jpeg",
+      "filename": "test/support/__init__.py",
+      "before_ref": "e7e26781122237b102eeec2a4580ee11557698b3",
+      "after_ref": "e7c9362dbb7ef780cf169de6e5cd8db375bfbb7c",
+      "bug_category": "latch_inferred",
+      "query": "incomplete case\" language:verilog",
+      "commit_message": "Rgb2ycbcr Rgb2ycbcr @cfelton, @jck, @josyb, @dargor0, @nkkav\n",
+      "patch": "@@ -4,3 +4,5 @@\n from .jpeg_prep_cosim import prep_cosim\n from .jpeg_v1_intf import JPEGEncV1\n from .jpeg_v2_intf import JPEGEncV2\n+\n+from .jpegenc_v1_top import convert as convertv1",
+      "before_code": "\nfrom __future__ import absolute_import\n\nfrom .jpeg_prep_cosim import prep_cosim\nfrom .jpeg_v1_intf import JPEGEncV1\nfrom .jpeg_v2_intf import JPEGEncV2\n",
+      "after_code": "\nfrom __future__ import absolute_import\n\nfrom .jpeg_prep_cosim import prep_cosim\nfrom .jpeg_v1_intf import JPEGEncV1\nfrom .jpeg_v2_intf import JPEGEncV2\n\nfrom .jpegenc_v1_top import convert as convertv1\n",
+      "language": "python",
+      "additions": 2,
+      "deletions": 0,
+      "validation": "clean"
+    }
+  ]
+}

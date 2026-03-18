@@ -1,0 +1,27 @@
+{
+  "repo": "EPFL-LAP/dynamatic",
+  "before_ref": "d3b331e6a797fbb25385c5010234ec6680012053",
+  "after_ref": "d804f29364d59bb518b47ed8a6192f0bbf5b31e5",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:VHDL",
+  "commit_message": "[SMV] Fixed delay_buffer [SMV] Fixed delay_buffer A very small fix on a dataless module I forgot to report!",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "filename": "experimental/tools/unit-generators/smv/generators/support/delay_buffer.py",
+      "before_ref": "d3b331e6a797fbb25385c5010234ec6680012053",
+      "after_ref": "d804f29364d59bb518b47ed8a6192f0bbf5b31e5",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:VHDL",
+      "commit_message": "[SMV] Fixed delay_buffer [SMV] Fixed delay_buffer A very small fix on a dataless module I forgot to report!",
+      "patch": "@@ -26,7 +26,7 @@ def _generate_no_lat_delay_buffer(name):\n def _generate_single_delay_buffer(name):\n     return f\"\"\"\n MODULE {name}(ins_valid, outs_ready)\n-  VAR inner_one_slot_break_dv : {name}__one_slot_break_dv_dataless(ins, ins_valid, outs_ready);\n+  VAR inner_one_slot_break_dv : {name}__one_slot_break_dv_dataless(ins_valid, outs_ready);\n \n   -- output\n   DEFINE ins_ready := inner_one_slot_break_dv.ins_ready;",
+      "before_code": "from generators.handshake.buffers.one_slot_break_dv import generate_one_slot_break_dv\nfrom generators.support.utils import *\n\n\ndef generate_delay_buffer(name, params):\n    latency = params[ATTR_LATENCY]\n\n    if latency == 0:\n        return _generate_no_lat_delay_buffer(name)\n    elif latency == 1:\n        return _generate_single_delay_buffer(name)\n    else:\n        return _generate_delay_buffer(name, latency)\n\n\ndef _generate_no_lat_delay_buffer(name):\n    return f\"\"\"\nMODULE {name}(ins_valid, outs_ready)\n\n  -- output\n  DEFINE ins_ready := outs_ready;\n  DEFINE outs_valid := ins_valid;\n\"\"\"\n\n\ndef _generate_single_delay_buffer(name):\n    return f\"\"\"\nMODULE {name}(ins_valid, outs_ready)\n  VAR inner_one_slot_break_dv : {name}__one_slot_break_dv_dataless(ins, ins_valid, outs_ready);\n\n  -- output\n  DEFINE ins_ready := inner_one_slot_break_dv.ins_ready;\n  DEFINE outs_valid := inner_one_slot_break_dv.outs_valid;\n\n{generate_one_slot_break_dv(f\"{name}__one_slot_break_dv_dataless\", {ATTR_BITWIDTH: 0})}\n\"\"\"\n\n\ndef _generate_delay_buffer(name, latency):\n    no_one_slot_break_dv_latency = latency - 1\n    return f\"\"\"\nMODULE {name}(ins_valid, outs_ready)\n  VAR inner_one_slot_break_dv : {name}__one_slot_break_dv_dataless(v{no_one_slot_break_dv_latency - 1}, outs_ready);\n  {\"\\n  \".join([f\"VAR v{n} : boolean;\" for n in range(no_one_slot_break_dv_latency)])}\n\n  ASSIGN init(v0) := FALSE;\n  ASSIGN next(v0) := ins_valid;\n\n  {\"\\n  \".join([f\"\"\"ASSIGN init(v{n + 1}) := FALSE;\n  ASSIGN next(v{n + 1}) := inner_one_slot_break_dv.ins_ready ? v{n} : v{n + 1};\n\"\"\" for n in range(no_one_slot_break_dv_latency - 1)])}\n\n  -- output\n  DEFINE ins_ready := inner_one_slot_break_dv.ins_ready;\n  DEFINE outs_valid := inner_one_slot_break_dv.outs_valid;\n\n{generate_one_slot_break_dv(f\"{name}__one_slot_break_dv_dataless\", {ATTR_BITWIDTH: 0})}\n\"\"\"\n",
+      "after_code": "from generators.handshake.buffers.one_slot_break_dv import generate_one_slot_break_dv\nfrom generators.support.utils import *\n\n\ndef generate_delay_buffer(name, params):\n    latency = params[ATTR_LATENCY]\n\n    if latency == 0:\n        return _generate_no_lat_delay_buffer(name)\n    elif latency == 1:\n        return _generate_single_delay_buffer(name)\n    else:\n        return _generate_delay_buffer(name, latency)\n\n\ndef _generate_no_lat_delay_buffer(name):\n    return f\"\"\"\nMODULE {name}(ins_valid, outs_ready)\n\n  -- output\n  DEFINE ins_ready := outs_ready;\n  DEFINE outs_valid := ins_valid;\n\"\"\"\n\n\ndef _generate_single_delay_buffer(name):\n    return f\"\"\"\nMODULE {name}(ins_valid, outs_ready)\n  VAR inner_one_slot_break_dv : {name}__one_slot_break_dv_dataless(ins_valid, outs_ready);\n\n  -- output\n  DEFINE ins_ready := inner_one_slot_break_dv.ins_ready;\n  DEFINE outs_valid := inner_one_slot_break_dv.outs_valid;\n\n{generate_one_slot_break_dv(f\"{name}__one_slot_break_dv_dataless\", {ATTR_BITWIDTH: 0})}\n\"\"\"\n\n\ndef _generate_delay_buffer(name, latency):\n    no_one_slot_break_dv_latency = latency - 1\n    return f\"\"\"\nMODULE {name}(ins_valid, outs_ready)\n  VAR inner_one_slot_break_dv : {name}__one_slot_break_dv_dataless(v{no_one_slot_break_dv_latency - 1}, outs_ready);\n  {\"\\n  \".join([f\"VAR v{n} : boolean;\" for n in range(no_one_slot_break_dv_latency)])}\n\n  ASSIGN init(v0) := FALSE;\n  ASSIGN next(v0) := ins_valid;\n\n  {\"\\n  \".join([f\"\"\"ASSIGN init(v{n + 1}) := FALSE;\n  ASSIGN next(v{n + 1}) := inner_one_slot_break_dv.ins_ready ? v{n} : v{n + 1};\n\"\"\" for n in range(no_one_slot_break_dv_latency - 1)])}\n\n  -- output\n  DEFINE ins_ready := inner_one_slot_break_dv.ins_ready;\n  DEFINE outs_valid := inner_one_slot_break_dv.outs_valid;\n\n{generate_one_slot_break_dv(f\"{name}__one_slot_break_dv_dataless\", {ATTR_BITWIDTH: 0})}\n\"\"\"\n",
+      "language": "python",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

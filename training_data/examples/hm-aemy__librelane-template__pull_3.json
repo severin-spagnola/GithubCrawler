@@ -1,0 +1,27 @@
+{
+  "repo": "hm-aemy/librelane-template",
+  "before_ref": "c6192e31f9b6b7e1ea18e8f56dd4e7b09c68af10",
+  "after_ref": "aa80829d9d55283b028121c9c85dfc12f48616b1",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:SystemVerilog",
+  "commit_message": "Cleanup and Pipeline fixes Cleanup and Pipeline fixes None",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "hm-aemy/librelane-template",
+      "filename": "Makefile",
+      "before_ref": "c6192e31f9b6b7e1ea18e8f56dd4e7b09c68af10",
+      "after_ref": "aa80829d9d55283b028121c9c85dfc12f48616b1",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:SystemVerilog",
+      "commit_message": "Cleanup and Pipeline fixes Cleanup and Pipeline fixes None",
+      "patch": "@@ -1,16 +1,43 @@\n-TOP = spm_chip\n-TAG = spm\n-PROJECT_DIR = $(shell pwd)\n+# Top-level Makefile (GNU make)\n+SRC_DIR := src\n \n-LIBRELANE_DIR ?= $(PROJECT_DIR)/librelane\n-PDK_ROOT ?= $(PROJECT_DIR)/pdk\n+# Subdir name (under src/) that must run last. Override like:\n+#   make TOP=top\n+TOP ?= top\n \n-PDK = ihp-sg13g2\n+# Auto-detect all immediate subdirs that contain a Makefile: src/*/Makefile\n+SUBDIRS := $(sort $(dir $(wildcard $(SRC_DIR)/*/Makefile)))\n+SUBDIRS := $(patsubst %/,%,$(SUBDIRS)) # strip trailing /\n \n-CONFIG_FILE = $(PROJECT_DIR)/config.json\n+# Everything except the LAST one\n+FIRST := $(filter-out $(SRC_DIR)/$(TOP),$(SUBDIRS))\n \n-gds-base: run/${TAG}final/gds/$(TOP).gds\n-.PHONY: gds-base\n+.PHONY: librelane librelane-macros components top librelane-% view-% list refresh-obi-deps\n \n-run/${TAG}final/gds/$(TOP).gds:\n-\tPDK_ROOT=$(PDK_ROOT) PDK=$(PDK) librelane --run-tag $(TAG) --condensed --overwrite --manual-pdk $(CONFIG_FILE)\n\\ No newline at end of file\n+.NOTPARALLEL: librelane\n+librelane: librelane-top\n+\n+librelane-macros: components\n+\n+# Build all non-last blocks (parallelizable with -j)\n+components: $(addprefix librelane-,$(notdir $(FIRST)))\n+\n+# Enforce ordering for \"all\" without making \"make last\" rebuild \"first\"\n+top: librelane-$(TOP)\n+\n+# Convenience: show what got detected\n+list:\n+\t@echo \"Detected:       $(notdir $(SUBDIRS))\"\n+\t@echo \"components:     $(notdir $(FIRST))\"\n+\t@echo \"macros target:  librelane-macros\"\n+\t@echo \"top:            $(TOP)\"\n+\n+# Delegate to child makefiles\n+librelane-%:\n+\t$(MAKE) -C $(SRC_DIR)/$* librelane\n+\n+view-%:\n+\t$(MAKE) -C $(SRC_DIR)/$* view-results\n+\n+refresh-obi-deps:\n+\tbash scripts/refresh_obi_deps.sh",
+      "before_code": "TOP = spm_chip\nTAG = spm\nPROJECT_DIR = $(shell pwd)\n\nLIBRELANE_DIR ?= $(PROJECT_DIR)/librelane\nPDK_ROOT ?= $(PROJECT_DIR)/pdk\n\nPDK = ihp-sg13g2\n\nCONFIG_FILE = $(PROJECT_DIR)/config.json\n\ngds-base: run/${TAG}final/gds/$(TOP).gds\n.PHONY: gds-base\n\nrun/${TAG}final/gds/$(TOP).gds:\n\tPDK_ROOT=$(PDK_ROOT) PDK=$(PDK) librelane --run-tag $(TAG) --condensed --overwrite --manual-pdk $(CONFIG_FILE)",
+      "after_code": "# Top-level Makefile (GNU make)\nSRC_DIR := src\n\n# Subdir name (under src/) that must run last. Override like:\n#   make TOP=top\nTOP ?= top\n\n# Auto-detect all immediate subdirs that contain a Makefile: src/*/Makefile\nSUBDIRS := $(sort $(dir $(wildcard $(SRC_DIR)/*/Makefile)))\nSUBDIRS := $(patsubst %/,%,$(SUBDIRS)) # strip trailing /\n\n# Everything except the LAST one\nFIRST := $(filter-out $(SRC_DIR)/$(TOP),$(SUBDIRS))\n\n.PHONY: librelane librelane-macros components top librelane-% view-% list refresh-obi-deps\n\n.NOTPARALLEL: librelane\nlibrelane: librelane-top\n\nlibrelane-macros: components\n\n# Build all non-last blocks (parallelizable with -j)\ncomponents: $(addprefix librelane-,$(notdir $(FIRST)))\n\n# Enforce ordering for \"all\" without making \"make last\" rebuild \"first\"\ntop: librelane-$(TOP)\n\n# Convenience: show what got detected\nlist:\n\t@echo \"Detected:       $(notdir $(SUBDIRS))\"\n\t@echo \"components:     $(notdir $(FIRST))\"\n\t@echo \"macros target:  librelane-macros\"\n\t@echo \"top:            $(TOP)\"\n\n# Delegate to child makefiles\nlibrelane-%:\n\t$(MAKE) -C $(SRC_DIR)/$* librelane\n\nview-%:\n\t$(MAKE) -C $(SRC_DIR)/$* view-results\n\nrefresh-obi-deps:\n\tbash scripts/refresh_obi_deps.sh\n",
+      "language": "other",
+      "additions": 38,
+      "deletions": 11,
+      "validation": "clean"
+    }
+  ]
+}

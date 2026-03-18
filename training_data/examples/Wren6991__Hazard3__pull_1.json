@@ -1,0 +1,27 @@
+{
+  "repo": "Wren6991/Hazard3",
+  "before_ref": "e95b465e2647e5b116000710a219a3615778e3a8",
+  "after_ref": "4bfb38ddc2d93dcb3478e21057bd7c290447203e",
+  "bug_category": "synthesis_error",
+  "query": "fix rtl language:Verilog",
+  "commit_message": "Make CXXRTL testbench ~25% faster Make CXXRTL testbench ~25% faster The splitnets command removes a few feedback arcs.",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "Wren6991/Hazard3",
+      "filename": "test/sim/tb_cxxrtl/Makefile",
+      "before_ref": "e95b465e2647e5b116000710a219a3615778e3a8",
+      "after_ref": "4bfb38ddc2d93dcb3478e21057bd7c290447203e",
+      "bug_category": "synthesis_error",
+      "query": "fix rtl language:Verilog",
+      "commit_message": "Make CXXRTL testbench ~25% faster Make CXXRTL testbench ~25% faster The splitnets command removes a few feedback arcs.",
+      "patch": "@@ -23,6 +23,7 @@ SYNTH_CMD += chparam -set REDUCED_BYPASS $(REDUCED_BYPASS) $(TOP);\n SYNTH_CMD += chparam -set MULDIV_UNROLL $(MULDIV_UNROLL) $(TOP);\n SYNTH_CMD += chparam -set MUL_FAST $(MUL_FAST) $(TOP);\n SYNTH_CMD += prep -flatten -top $(TOP); async2sync;\n+SYNTH_CMD += splitnets -driver;\n SYNTH_CMD += write_cxxrtl dut.cpp\n \n dut.cpp:",
+      "before_code": "TOP              := hazard3_cpu_2port\nCDEFINES         := DUAL_PORT\n\nCPU_RESET_VECTOR := 32'hc0\nEXTENSION_C      := 1\nEXTENSION_M      := 1\nDEBUG_SUPPORT    := 0\nMULDIV_UNROLL    := 2\nMUL_FAST         := 1\nREDUCED_BYPASS   := 0\n\n.PHONY: clean tb all\n\nall: tb\n\nSYNTH_CMD += read_verilog -I ../../../hdl $(shell listfiles ../../../hdl/hazard3.f);\nSYNTH_CMD += chparam -set EXTENSION_C $(EXTENSION_C) $(TOP);\nSYNTH_CMD += chparam -set EXTENSION_M $(EXTENSION_M) $(TOP);\nSYNTH_CMD += chparam -set DEBUG_SUPPORT $(DEBUG_SUPPORT) $(TOP);\nSYNTH_CMD += chparam -set CSR_COUNTER 1 $(TOP);\nSYNTH_CMD += chparam -set RESET_VECTOR $(CPU_RESET_VECTOR) $(TOP);\nSYNTH_CMD += chparam -set REDUCED_BYPASS $(REDUCED_BYPASS) $(TOP);\nSYNTH_CMD += chparam -set MULDIV_UNROLL $(MULDIV_UNROLL) $(TOP);\nSYNTH_CMD += chparam -set MUL_FAST $(MUL_FAST) $(TOP);\nSYNTH_CMD += prep -flatten -top $(TOP); async2sync;\nSYNTH_CMD += write_cxxrtl dut.cpp\n\ndut.cpp:\n\tyosys -p \"$(SYNTH_CMD)\" 2>&1 > cxxrtl.log\n\nclean::\n\trm -f dut.cpp cxxrtl.log tb\n\ntb: dut.cpp\n\tclang++ -O3 -std=c++14 $(addprefix -D,$(CDEFINES)) -I $(shell yosys-config --datdir)/include tb.cpp -o tb\n",
+      "after_code": "TOP              := hazard3_cpu_2port\nCDEFINES         := DUAL_PORT\n\nCPU_RESET_VECTOR := 32'hc0\nEXTENSION_C      := 1\nEXTENSION_M      := 1\nDEBUG_SUPPORT    := 0\nMULDIV_UNROLL    := 2\nMUL_FAST         := 1\nREDUCED_BYPASS   := 0\n\n.PHONY: clean tb all\n\nall: tb\n\nSYNTH_CMD += read_verilog -I ../../../hdl $(shell listfiles ../../../hdl/hazard3.f);\nSYNTH_CMD += chparam -set EXTENSION_C $(EXTENSION_C) $(TOP);\nSYNTH_CMD += chparam -set EXTENSION_M $(EXTENSION_M) $(TOP);\nSYNTH_CMD += chparam -set DEBUG_SUPPORT $(DEBUG_SUPPORT) $(TOP);\nSYNTH_CMD += chparam -set CSR_COUNTER 1 $(TOP);\nSYNTH_CMD += chparam -set RESET_VECTOR $(CPU_RESET_VECTOR) $(TOP);\nSYNTH_CMD += chparam -set REDUCED_BYPASS $(REDUCED_BYPASS) $(TOP);\nSYNTH_CMD += chparam -set MULDIV_UNROLL $(MULDIV_UNROLL) $(TOP);\nSYNTH_CMD += chparam -set MUL_FAST $(MUL_FAST) $(TOP);\nSYNTH_CMD += prep -flatten -top $(TOP); async2sync;\nSYNTH_CMD += splitnets -driver;\nSYNTH_CMD += write_cxxrtl dut.cpp\n\ndut.cpp:\n\tyosys -p \"$(SYNTH_CMD)\" 2>&1 > cxxrtl.log\n\nclean::\n\trm -f dut.cpp cxxrtl.log tb\n\ntb: dut.cpp\n\tclang++ -O3 -std=c++14 $(addprefix -D,$(CDEFINES)) -I $(shell yosys-config --datdir)/include tb.cpp -o tb\n",
+      "language": "other",
+      "additions": 1,
+      "deletions": 0,
+      "validation": "trivial_diff"
+    }
+  ]
+}

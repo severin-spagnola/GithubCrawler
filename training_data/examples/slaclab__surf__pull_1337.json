@@ -1,0 +1,27 @@
+{
+  "repo": "slaclab/surf",
+  "before_ref": "ce02b3079885928f04ee81587b8e02ae076b6007",
+  "after_ref": "5eaeecf3f66d18cb1fd2c609f68c9b3c8f4f3ed4",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:VHDL",
+  "commit_message": "Axi Stream timing infrastructure Axi Stream timing infrastructure Included two IPs allowing to batch a user-selectable number of frames together, and to measure the start-of-frame and end-of-frame times between several channels.\r\n\r\n### Description\r\nThis contribution adds two IPs:\r\n- AxiStreamBatchingFifo.vhd\r\n- AxiStreamTimer.vhd\r\n\r\nAxiStreamBatchingFifo is meant to accumulate a user-defined number of frames to then output them continuously with no pauses. This is important to smooth out streams",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "slaclab/surf",
+      "filename": "python/surf/axi/__init__.py",
+      "before_ref": "ce02b3079885928f04ee81587b8e02ae076b6007",
+      "after_ref": "5eaeecf3f66d18cb1fd2c609f68c9b3c8f4f3ed4",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:VHDL",
+      "commit_message": "Axi Stream timing infrastructure Axi Stream timing infrastructure Included two IPs allowing to batch a user-selectable number of frames together, and to measure the start-of-frame and end-of-frame times between several channels.\r\n\r\n### Description\r\nThis contribution adds two IPs:\r\n- AxiStreamBatchingFifo.vhd\r\n- AxiStreamTimer.vhd\r\n\r\nAxiStreamBatchingFifo is meant to accumulate a user-defined number of frames to then output them continuously with no pauses. This is important to smooth out streams",
+      "patch": "@@ -23,4 +23,5 @@\n from surf.axi._AxiStreamRingBuffer          import *\n from surf.axi._AxiStreamScatterGather       import *\n from surf.axi._AxiLiteMasterProxy           import *\n-\n+from surf.axi._AxiStreamBatchingFifo        import *\n+from surf.axi._AxiStreamTimer               import *",
+      "before_code": "##############################################################################\n## This file is part of 'SLAC Firmware Standard Library'.\n## It is subject to the license terms in the LICENSE.txt file found in the\n## top-level directory of this distribution and at:\n##    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.\n## No part of 'SLAC Firmware Standard Library', including this file,\n## may be copied, modified, propagated, or distributed except according to\n## the terms contained in the LICENSE.txt file.\n##############################################################################\nfrom surf.axi._AxiLiteEmpty                 import *\nfrom surf.axi._AxiLiteRingBuffer            import *\nfrom surf.axi._AxiMemTester                 import *\nfrom surf.axi._AxiStreamDmaRingWrite        import *\nfrom surf.axi._AxiStreamMonAxiL             import *\nfrom surf.axi._AxiMonAxiL                   import *\nfrom surf.axi._AxiRateGen                   import *\nfrom surf.axi._AxiRingBuffer                import *\nfrom surf.axi._AxiVersion                   import *\nfrom surf.axi._AxiStreamDmaFifo             import *\nfrom surf.axi._AxiStreamDmaV2Fifo           import *\nfrom surf.axi._AxiStreamDmaV2               import *\nfrom surf.axi._AxiStreamFrameRateLimiter    import *\nfrom surf.axi._AxiStreamRingBuffer          import *\nfrom surf.axi._AxiStreamScatterGather       import *\nfrom surf.axi._AxiLiteMasterProxy           import *\n\n",
+      "after_code": "##############################################################################\n## This file is part of 'SLAC Firmware Standard Library'.\n## It is subject to the license terms in the LICENSE.txt file found in the\n## top-level directory of this distribution and at:\n##    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.\n## No part of 'SLAC Firmware Standard Library', including this file,\n## may be copied, modified, propagated, or distributed except according to\n## the terms contained in the LICENSE.txt file.\n##############################################################################\nfrom surf.axi._AxiLiteEmpty                 import *\nfrom surf.axi._AxiLiteRingBuffer            import *\nfrom surf.axi._AxiMemTester                 import *\nfrom surf.axi._AxiStreamDmaRingWrite        import *\nfrom surf.axi._AxiStreamMonAxiL             import *\nfrom surf.axi._AxiMonAxiL                   import *\nfrom surf.axi._AxiRateGen                   import *\nfrom surf.axi._AxiRingBuffer                import *\nfrom surf.axi._AxiVersion                   import *\nfrom surf.axi._AxiStreamDmaFifo             import *\nfrom surf.axi._AxiStreamDmaV2Fifo           import *\nfrom surf.axi._AxiStreamDmaV2               import *\nfrom surf.axi._AxiStreamFrameRateLimiter    import *\nfrom surf.axi._AxiStreamRingBuffer          import *\nfrom surf.axi._AxiStreamScatterGather       import *\nfrom surf.axi._AxiLiteMasterProxy           import *\nfrom surf.axi._AxiStreamBatchingFifo        import *\nfrom surf.axi._AxiStreamTimer               import *\n",
+      "language": "python",
+      "additions": 2,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

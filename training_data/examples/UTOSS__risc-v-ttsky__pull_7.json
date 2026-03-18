@@ -1,0 +1,27 @@
+{
+  "repo": "UTOSS/risc-v-ttsky",
+  "before_ref": "7cc90fbe3234b9b69cd86f239e2fdc8ea693588d",
+  "after_ref": "71bf5b6e3ccadbffcb2339e82ae089d36de0c9ad",
+  "bug_category": "port_mismatch",
+  "query": "fix instantiation language:SystemVerilog",
+  "commit_message": "Fix MA memory index width - this was one of the 35 linter warnings Fix MA memory index width - this was one of the 35 linter warnings pushing to origin",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "UTOSS/risc-v-ttsky",
+      "filename": "src/MA.sv",
+      "before_ref": "7cc90fbe3234b9b69cd86f239e2fdc8ea693588d",
+      "after_ref": "71bf5b6e3ccadbffcb2339e82ae089d36de0c9ad",
+      "bug_category": "port_mismatch",
+      "query": "fix instantiation language:SystemVerilog",
+      "commit_message": "Fix MA memory index width - this was one of the 35 linter warnings Fix MA memory index width - this was one of the 35 linter warnings pushing to origin",
+      "patch": "@@ -8,6 +8,11 @@ module MA #( parameter SIZE = 1024 )\n \n   reg [31:0] M[0:SIZE -1];\n \n+  localparam int WORDS = SIZE;\n+  localparam int IDX_W = (WORDS <= 1) ? 1 : $clog2(WORDS);\n+  wire [IDX_W-1:0] word_idx = address[IDX_W+1:2]; // word address bits (byte addr -> word idx)\n+\n+\n `ifndef UTOSS_RISCV_HARDENING\n   initial begin\n     string mem_file;\n@@ -21,12 +26,12 @@ module MA #( parameter SIZE = 1024 )\n `endif\n \n   always @(posedge clk) begin\n-    read_data <= M[address[31:2]]; // 2 LSBs used for byte addressing\n+    read_data <= M[word_idx]; // 2 LSBs used for byte addressing\n \n-    if (write_enable[0]) M[address[31:2]][7:0]   <= write_data[7:0];\n-    if (write_enable[1]) M[address[31:2]][15:8]  <= write_data[15:8];\n-    if (write_enable[2]) M[address[31:2]][23:16] <= write_data[23:16];\n-    if (write_enable[3]) M[address[31:2]][31:24] <= write_data[31:24];\n+    if (write_enable[0]) M[word_idx][7:0]   <= write_data[7:0];\n+    if (write_enable[1]) M[word_idx][15:8]  <= write_data[15:8];\n+    if (write_enable[2]) M[word_idx][23:16] <= write_data[23:16];\n+    if (write_enable[3]) M[word_idx][31:24] <= write_data[31:24];\n   end\n \n endmodule",
+      "before_code": "module MA #( parameter SIZE = 1024 )\n  ( input  wire         clk\n  , input  addr_t       address\n  , input  data_t       write_data\n  , input  wire   [3:0] write_enable\n  , output data_t       read_data\n  );\n\n  reg [31:0] M[0:SIZE -1];\n\n`ifndef UTOSS_RISCV_HARDENING\n  initial begin\n    string mem_file;\n\n    if ($value$plusargs(\"MEM=%s\", mem_file)) begin\n      $display(\"loading memory from <%s>\", mem_file);\n      $readmemh(mem_file, M);\n      $display(\"memory loaded\");\n    end\n  end\n`endif\n\n  always @(posedge clk) begin\n    read_data <= M[address[31:2]]; // 2 LSBs used for byte addressing\n\n    if (write_enable[0]) M[address[31:2]][7:0]   <= write_data[7:0];\n    if (write_enable[1]) M[address[31:2]][15:8]  <= write_data[15:8];\n    if (write_enable[2]) M[address[31:2]][23:16] <= write_data[23:16];\n    if (write_enable[3]) M[address[31:2]][31:24] <= write_data[31:24];\n  end\n\nendmodule\n",
+      "after_code": "module MA #( parameter SIZE = 1024 )\n  ( input  wire         clk\n  , input  addr_t       address\n  , input  data_t       write_data\n  , input  wire   [3:0] write_enable\n  , output data_t       read_data\n  );\n\n  reg [31:0] M[0:SIZE -1];\n\n  localparam int WORDS = SIZE;\n  localparam int IDX_W = (WORDS <= 1) ? 1 : $clog2(WORDS);\n  wire [IDX_W-1:0] word_idx = address[IDX_W+1:2]; // word address bits (byte addr -> word idx)\n\n\n`ifndef UTOSS_RISCV_HARDENING\n  initial begin\n    string mem_file;\n\n    if ($value$plusargs(\"MEM=%s\", mem_file)) begin\n      $display(\"loading memory from <%s>\", mem_file);\n      $readmemh(mem_file, M);\n      $display(\"memory loaded\");\n    end\n  end\n`endif\n\n  always @(posedge clk) begin\n    read_data <= M[word_idx]; // 2 LSBs used for byte addressing\n\n    if (write_enable[0]) M[word_idx][7:0]   <= write_data[7:0];\n    if (write_enable[1]) M[word_idx][15:8]  <= write_data[15:8];\n    if (write_enable[2]) M[word_idx][23:16] <= write_data[23:16];\n    if (write_enable[3]) M[word_idx][31:24] <= write_data[31:24];\n  end\n\nendmodule\n",
+      "language": "systemverilog",
+      "additions": 10,
+      "deletions": 5,
+      "validation": "clean"
+    }
+  ]
+}

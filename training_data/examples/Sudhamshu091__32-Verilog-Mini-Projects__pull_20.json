@@ -1,0 +1,27 @@
+{
+  "repo": "Sudhamshu091/32-Verilog-Mini-Projects",
+  "before_ref": "63ef5d4595803a9d1451dac2d50eeab97c45702c",
+  "after_ref": "7ba019837de3c3982cba1872af1a68e4eb0a0003",
+  "bug_category": "port_mismatch",
+  "query": "fix instantiation language:Verilog",
+  "commit_message": "Fix undefined signal reference in sequential multiplier (v → v1) Fix undefined signal reference in sequential multiplier (v → v1) ### Description\r\n\r\nThis PR corrects a signal reference error in the sequential multiplier implementation that was causing simulation/synthesis issues due to an undefined signal.\r\n\r\n### Bug Fix\r\n\r\nChanged undefined signal `v` to correctly use defined signal `v1` in the `s4` module instantiation\r\n\r\n### Files Changed\r\n\r\nLine 17 of `sequential_multiplication.v`.\r\n",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "Sudhamshu091/32-Verilog-Mini-Projects",
+      "filename": "Sequential Multiplier/sequential_multiplication.v",
+      "before_ref": "63ef5d4595803a9d1451dac2d50eeab97c45702c",
+      "after_ref": "7ba019837de3c3982cba1872af1a68e4eb0a0003",
+      "bug_category": "port_mismatch",
+      "query": "fix instantiation language:Verilog",
+      "commit_message": "Fix undefined signal reference in sequential multiplier (v → v1) Fix undefined signal reference in sequential multiplier (v → v1) ### Description\r\n\r\nThis PR corrects a signal reference error in the sequential multiplier implementation that was causing simulation/synthesis issues due to an undefined signal.\r\n\r\n### Bug Fix\r\n\r\nChanged undefined signal `v` to correctly use defined signal `v1` in the `s4` module instantiation\r\n\r\n### Files Changed\r\n\r\nLine 17 of `sequential_multiplication.v`.\r\n",
+      "patch": "@@ -14,7 +14,7 @@ counter u5 (t,l,clk);\n assign valid=l;\n adder u3 (y,po,c,s);\n s3 u4 (clk,v1,{c,s[7:1]},l,po);\n- s4 e1 (clk,v,s[0],l,lo);\n+ s4 e1 (clk,v1,s[0],l,lo);\n assign op={po,lo};\n assign v1= reset|load;\n assign t=reset|load;",
+      "before_code": "\nmodule final12 (a,b,op,load,reset,clk,valid);\ninput [7:0] a,b;\noutput [15:0] op;\noutput valid;\ninput clk,reset,load;\nwire [7:0] x,y,z,s,po,lo;\nwire c,v1,l,t;\n\ns1 u1 (reset,a,clk,x,load);\ns2 u2 (reset,load,clk,z,b);\nassign y=x & {8{z[0]}};\ncounter u5 (t,l,clk);\nassign valid=l;\nadder u3 (y,po,c,s);\ns3 u4 (clk,v1,{c,s[7:1]},l,po);\n s4 e1 (clk,v,s[0],l,lo);\nassign op={po,lo};\nassign v1= reset|load;\nassign t=reset|load;\n\nalways @(l)\nbegin\nif(op==a*b)\n$display(\"the product of a=%d ,b=%d  is p=%d\",a,b,op);\nelse\n$display(\"Incorrect operation\");\nend\nendmodule\n",
+      "after_code": "\nmodule final12 (a,b,op,load,reset,clk,valid);\ninput [7:0] a,b;\noutput [15:0] op;\noutput valid;\ninput clk,reset,load;\nwire [7:0] x,y,z,s,po,lo;\nwire c,v1,l,t;\n\ns1 u1 (reset,a,clk,x,load);\ns2 u2 (reset,load,clk,z,b);\nassign y=x & {8{z[0]}};\ncounter u5 (t,l,clk);\nassign valid=l;\nadder u3 (y,po,c,s);\ns3 u4 (clk,v1,{c,s[7:1]},l,po);\n s4 e1 (clk,v1,s[0],l,lo);\nassign op={po,lo};\nassign v1= reset|load;\nassign t=reset|load;\n\nalways @(l)\nbegin\nif(op==a*b)\n$display(\"the product of a=%d ,b=%d  is p=%d\",a,b,op);\nelse\n$display(\"Incorrect operation\");\nend\nendmodule\n",
+      "language": "verilog",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

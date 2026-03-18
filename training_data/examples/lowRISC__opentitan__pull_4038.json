@@ -1,0 +1,59 @@
+{
+  "repo": "lowRISC/opentitan",
+  "before_ref": "f833e06c21ce55658ba7629a4b128a7a203b886e",
+  "after_ref": "e7827d1419376f8330166aa93d2994ac2d7287b5",
+  "bug_category": "port_mismatch",
+  "query": "fix instantiation language:SystemVerilog",
+  "commit_message": "[edn/dv] Initial dv environment [edn/dv] Initial dv environment Signed-off-by: Steve Nelson <steve.nelson@wdc.com>",
+  "file_count": 3,
+  "examples": [
+    {
+      "repo": "lowRISC/opentitan",
+      "filename": "hw/ip/csrng/rtl/csrng_pkg.sv",
+      "before_ref": "f833e06c21ce55658ba7629a4b128a7a203b886e",
+      "after_ref": "e7827d1419376f8330166aa93d2994ac2d7287b5",
+      "bug_category": "port_mismatch",
+      "query": "fix instantiation language:SystemVerilog",
+      "commit_message": "[edn/dv] Initial dv environment [edn/dv] Initial dv environment Signed-off-by: Steve Nelson <steve.nelson@wdc.com>",
+      "patch": "@@ -10,6 +10,8 @@ package csrng_pkg;\n   // Application Interfaces\n   //-------------------------\n \n+  parameter int unsigned   GENBITS_BUS_WIDTH = 128;\n+\n   // instantiation interface\n   typedef struct packed {\n     logic         csrng_req_valid;\n@@ -31,7 +33,7 @@ package csrng_pkg;\n     logic         csrng_rsp_sts;\n     logic         genbits_valid;\n     logic         genbits_fips;\n-    logic [127:0] genbits_bus;\n+    logic [GENBITS_BUS_WIDTH-1:0] genbits_bus;\n   } csrng_rsp_t;\n \n   // default value of csrng_rsp_t (for dangling ports)",
+      "before_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n//\n\n\npackage csrng_pkg;\n\n  //-------------------------\n  // Application Interfaces\n  //-------------------------\n\n  // instantiation interface\n  typedef struct packed {\n    logic         csrng_req_valid;\n    logic [31:0]  csrng_req_bus;\n    logic         genbits_ready;\n  } csrng_req_t;\n\n  // default value of csrng_req_t (for dangling ports)\n  parameter csrng_req_t CSRNG_REQ_DEFAULT = '{\n    csrng_req_valid: 1'b0,\n    csrng_req_bus:   '0,\n    genbits_ready:   1'b0\n  };\n\n\n  typedef struct packed {\n    logic         csrng_req_ready;\n    logic         csrng_rsp_ack;\n    logic         csrng_rsp_sts;\n    logic         genbits_valid;\n    logic         genbits_fips;\n    logic [127:0] genbits_bus;\n  } csrng_rsp_t;\n\n  // default value of csrng_rsp_t (for dangling ports)\n  parameter csrng_rsp_t CSRNG_RSP_DEFAULT = '{\n    csrng_req_ready: 1'b0,\n    csrng_rsp_ack: 1'b0,\n    csrng_rsp_sts: 1'b0,\n    genbits_valid:   1'b0,\n    genbits_fips:   1'b0,\n    genbits_bus:     '0\n  };\n\n\n  typedef enum logic [2:0] {\n    INV = 3'h0,\n    INS = 3'h1,\n    RES = 3'h2,\n    GEN = 3'h3,\n    UPD = 3'h4,\n    UNI = 3'h5,\n    GENB = 3'h6,\n    GENU = 3'h7\n  } acmd_e;\n\n\n\nendpackage : csrng_pkg\n",
+      "after_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n//\n\n\npackage csrng_pkg;\n\n  //-------------------------\n  // Application Interfaces\n  //-------------------------\n\n  parameter int unsigned   GENBITS_BUS_WIDTH = 128;\n\n  // instantiation interface\n  typedef struct packed {\n    logic         csrng_req_valid;\n    logic [31:0]  csrng_req_bus;\n    logic         genbits_ready;\n  } csrng_req_t;\n\n  // default value of csrng_req_t (for dangling ports)\n  parameter csrng_req_t CSRNG_REQ_DEFAULT = '{\n    csrng_req_valid: 1'b0,\n    csrng_req_bus:   '0,\n    genbits_ready:   1'b0\n  };\n\n\n  typedef struct packed {\n    logic         csrng_req_ready;\n    logic         csrng_rsp_ack;\n    logic         csrng_rsp_sts;\n    logic         genbits_valid;\n    logic         genbits_fips;\n    logic [GENBITS_BUS_WIDTH-1:0] genbits_bus;\n  } csrng_rsp_t;\n\n  // default value of csrng_rsp_t (for dangling ports)\n  parameter csrng_rsp_t CSRNG_RSP_DEFAULT = '{\n    csrng_req_ready: 1'b0,\n    csrng_rsp_ack: 1'b0,\n    csrng_rsp_sts: 1'b0,\n    genbits_valid:   1'b0,\n    genbits_fips:   1'b0,\n    genbits_bus:     '0\n  };\n\n\n  typedef enum logic [2:0] {\n    INV = 3'h0,\n    INS = 3'h1,\n    RES = 3'h2,\n    GEN = 3'h3,\n    UPD = 3'h4,\n    UNI = 3'h5,\n    GENB = 3'h6,\n    GENU = 3'h7\n  } acmd_e;\n\n\n\nendpackage : csrng_pkg\n",
+      "language": "systemverilog",
+      "additions": 3,
+      "deletions": 1,
+      "validation": "clean"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "filename": "hw/ip/edn/rtl/edn_pkg.sv",
+      "before_ref": "f833e06c21ce55658ba7629a4b128a7a203b886e",
+      "after_ref": "e7827d1419376f8330166aa93d2994ac2d7287b5",
+      "bug_category": "port_mismatch",
+      "query": "fix instantiation language:SystemVerilog",
+      "commit_message": "[edn/dv] Initial dv environment [edn/dv] Initial dv environment Signed-off-by: Steve Nelson <steve.nelson@wdc.com>",
+      "patch": "@@ -9,14 +9,16 @@ package edn_pkg;\n   // Peripheral Interfaces //\n   ///////////////////////////\n \n+  parameter int unsigned   ENDPOINT_BUS_WIDTH = 32;\n+\n   // EDN request interface\n   typedef struct packed {\n     logic                                 edn_req;\n   } edn_req_t;\n   typedef struct packed {\n     logic                                 edn_ack;\n     logic                                 edn_fips;\n-    logic [31:0]                          edn_bus;\n+    logic [ENDPOINT_BUS_WIDTH-1:0]        edn_bus;\n   } edn_rsp_t;\n \n   parameter edn_req_t EDN_REQ_DEFAULT = '{default: '0};",
+      "before_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n//\n\n\npackage edn_pkg;\n  ///////////////////////////\n  // Peripheral Interfaces //\n  ///////////////////////////\n\n  // EDN request interface\n  typedef struct packed {\n    logic                                 edn_req;\n  } edn_req_t;\n  typedef struct packed {\n    logic                                 edn_ack;\n    logic                                 edn_fips;\n    logic [31:0]                          edn_bus;\n  } edn_rsp_t;\n\n  parameter edn_req_t EDN_REQ_DEFAULT = '{default: '0};\n  parameter edn_rsp_t EDN_RSP_DEFAULT = '{default: '0};\n\nendpackage : edn_pkg\n",
+      "after_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n//\n\n\npackage edn_pkg;\n  ///////////////////////////\n  // Peripheral Interfaces //\n  ///////////////////////////\n\n  parameter int unsigned   ENDPOINT_BUS_WIDTH = 32;\n\n  // EDN request interface\n  typedef struct packed {\n    logic                                 edn_req;\n  } edn_req_t;\n  typedef struct packed {\n    logic                                 edn_ack;\n    logic                                 edn_fips;\n    logic [ENDPOINT_BUS_WIDTH-1:0]        edn_bus;\n  } edn_rsp_t;\n\n  parameter edn_req_t EDN_REQ_DEFAULT = '{default: '0};\n  parameter edn_rsp_t EDN_RSP_DEFAULT = '{default: '0};\n\nendpackage : edn_pkg\n",
+      "language": "systemverilog",
+      "additions": 3,
+      "deletions": 1,
+      "validation": "clean"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "filename": "hw/ip/entropy_src/rtl/entropy_src_pkg.sv",
+      "before_ref": "f833e06c21ce55658ba7629a4b128a7a203b886e",
+      "after_ref": "e7827d1419376f8330166aa93d2994ac2d7287b5",
+      "bug_category": "port_mismatch",
+      "query": "fix instantiation language:SystemVerilog",
+      "commit_message": "[edn/dv] Initial dv environment [edn/dv] Initial dv environment Signed-off-by: Steve Nelson <steve.nelson@wdc.com>",
+      "patch": "@@ -10,7 +10,9 @@ package entropy_src_pkg;\n   // Entropy Interface\n   //-------------------------\n \n-  parameter int  RNG_DATA_WIDTH = 4, CSRNG_DATA_WIDTH = 384;\n+  parameter int  RNG_DATA_WIDTH   = 4;\n+  parameter int  CSRNG_DATA_WIDTH = 384;\n+  parameter int  FIPS_WIDTH       = 1;\n \n   // es entropy i/f\n   typedef struct packed {",
+      "before_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n//\n\n\npackage entropy_src_pkg;\n\n  //-------------------------\n  // Entropy Interface\n  //-------------------------\n\n  parameter int  RNG_DATA_WIDTH = 4, CSRNG_DATA_WIDTH = 384;\n\n  // es entropy i/f\n  typedef struct packed {\n    logic         es_ack;\n    logic [CSRNG_DATA_WIDTH-1:0] es_bits;\n    logic         es_fips;\n  } entropy_src_hw_if_rsp_t;\n\n  typedef struct packed {\n    logic es_req;\n  } entropy_src_hw_if_req_t;\n\n\n  // ast rng i/f\n  typedef struct packed {\n    logic rng_enable;\n  } entropy_src_rng_req_t;\n\n  typedef struct packed {\n    logic rng_valid;\n    logic [RNG_DATA_WIDTH-1:0] rng_b;\n  } entropy_src_rng_rsp_t;\n\n  // external health test i/f\n  typedef struct packed {\n    logic [3:0] entropy_bit;\n    logic entropy_bit_valid;\n    logic clear;\n    logic active;\n    logic [15:0] thresh_hi;\n    logic [15:0] thresh_lo;\n    logic [15:0] window;\n  } entropy_src_xht_req_t;\n\n  typedef struct packed {\n    logic[15:0] test_cnt;\n    logic test_fail_hi_pulse;\n    logic test_fail_lo_pulse;\n  } entropy_src_xht_rsp_t;\n\n\nendpackage : entropy_src_pkg\n",
+      "after_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n//\n\n\npackage entropy_src_pkg;\n\n  //-------------------------\n  // Entropy Interface\n  //-------------------------\n\n  parameter int  RNG_DATA_WIDTH   = 4;\n  parameter int  CSRNG_DATA_WIDTH = 384;\n  parameter int  FIPS_WIDTH       = 1;\n\n  // es entropy i/f\n  typedef struct packed {\n    logic         es_ack;\n    logic [CSRNG_DATA_WIDTH-1:0] es_bits;\n    logic         es_fips;\n  } entropy_src_hw_if_rsp_t;\n\n  typedef struct packed {\n    logic es_req;\n  } entropy_src_hw_if_req_t;\n\n\n  // ast rng i/f\n  typedef struct packed {\n    logic rng_enable;\n  } entropy_src_rng_req_t;\n\n  typedef struct packed {\n    logic rng_valid;\n    logic [RNG_DATA_WIDTH-1:0] rng_b;\n  } entropy_src_rng_rsp_t;\n\n  // external health test i/f\n  typedef struct packed {\n    logic [3:0] entropy_bit;\n    logic entropy_bit_valid;\n    logic clear;\n    logic active;\n    logic [15:0] thresh_hi;\n    logic [15:0] thresh_lo;\n    logic [15:0] window;\n  } entropy_src_xht_req_t;\n\n  typedef struct packed {\n    logic[15:0] test_cnt;\n    logic test_fail_hi_pulse;\n    logic test_fail_lo_pulse;\n  } entropy_src_xht_rsp_t;\n\n\nendpackage : entropy_src_pkg\n",
+      "language": "systemverilog",
+      "additions": 3,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "repo": "QREM-CORE/poly-arith-unit",
+  "before_ref": "a245def8353aba377ca46c848769c71f80f46644",
+  "after_ref": "37b0c5b4679b633f179073966fc671069bdecc63",
+  "bug_category": "other",
+  "query": "fix testbench",
+  "commit_message": "MOD: Implement Montgomery Modular Reduction (#2)\r\n\r\n* MOD: Implement Montgomery Modular Reduction\r\n\r\n* MOD: Modulo testbench\r\n\r\n* MOD: Lint automatic fix",
+  "file_count": 2,
+  "examples": [
+    {
+      "repo": "QREM-CORE/poly-arith-unit",
+      "filename": "Makefile",
+      "before_ref": "a245def8353aba377ca46c848769c71f80f46644",
+      "after_ref": "37b0c5b4679b633f179073966fc671069bdecc63",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "MOD: Implement Montgomery Modular Reduction (#2)\r\n\r\n* MOD: Implement Montgomery Modular Reduction\r\n\r\n* MOD: Modulo testbench\r\n\r\n* MOD: Lint automatic fix",
+      "patch": "@@ -3,7 +3,7 @@\n # =====================\n \n # List of testbenches (example: TESTBENCHES = theta_step_tb rho_step_tb)\n-TESTBENCHES = \n+TESTBENCHES = modular_reduce_tb\n \n # RTL design and package files\n PKG_SRCS = rtl/poly_arith_pkg.sv",
+      "before_code": "# =====================\n# ModelSim Multi-TB Makefile (Updated for new file structure)\n# =====================\n\n# List of testbenches (example: TESTBENCHES = theta_step_tb rho_step_tb)\nTESTBENCHES = \n\n# RTL design and package files\nPKG_SRCS = rtl/poly_arith_pkg.sv\nDESIGN_SRCS = $(wildcard rtl/*.sv)\nCOMMON_SRCS = $(wildcard rtl/*.svh)\n\n# Work library\nWORK = work\n\n# Default target\nall: $(WORK)\n\t@if [ -z \"$(strip $(TESTBENCHES))\" ]; then \\\n\t\techo \"No testbenches specified. Compiling RTL only...\"; \\\n\t\tvlog -work $(WORK) -sv $(PKG_SRCS); \\\n\t\tvlog -work $(WORK) -sv $(filter-out $(PKG_SRCS), $(DESIGN_SRCS)) $(COMMON_SRCS); \\\n\telse \\\n\t\t$(MAKE) run_all TESTBENCHES=\"$(TESTBENCHES)\"; \\\n\tfi\n\n\n# Create ModelSim work library\n$(WORK):\n\tvlib $(WORK)\n\n# Run all testbenches\n.PHONY: run_all clean run_%\n\nrun_all:\n\t@for tb in $(TESTBENCHES); do \\\n\t\t$(MAKE) run_$$tb; \\\n\tdone\n\n# Rule for each testbench\nrun_%: $(WORK)\n\t@if [ \"$*\" = \"all\" ]; then exit 0; fi\n\t@echo \"=== Running $* ===\"\n\tvlog -work $(WORK) -sv $(PKG_SRCS)\n\tvlog -work $(WORK) -sv $(filter-out $(PKG_SRCS), $(DESIGN_SRCS)) $(COMMON_SRCS) tb/$*.sv\n\t@echo 'vcd file \"$*.vcd\"' > run_$*.macro\n\t@echo 'vcd add -r /$*/*' >> run_$*.macro\n\t@echo 'run -all' >> run_$*.macro\n\t@echo 'quit' >> run_$*.macro\n\tvsim -c -do run_$*.macro $(WORK).$*\n\trm -f run_$*.macro\n\n# Clean build files\nclean:\n\trm -rf $(WORK) *.vcd transcript vsim.wlf run_*.macro\n",
+      "after_code": "# =====================\n# ModelSim Multi-TB Makefile (Updated for new file structure)\n# =====================\n\n# List of testbenches (example: TESTBENCHES = theta_step_tb rho_step_tb)\nTESTBENCHES = modular_reduce_tb\n\n# RTL design and package files\nPKG_SRCS = rtl/poly_arith_pkg.sv\nDESIGN_SRCS = $(wildcard rtl/*.sv)\nCOMMON_SRCS = $(wildcard rtl/*.svh)\n\n# Work library\nWORK = work\n\n# Default target\nall: $(WORK)\n\t@if [ -z \"$(strip $(TESTBENCHES))\" ]; then \\\n\t\techo \"No testbenches specified. Compiling RTL only...\"; \\\n\t\tvlog -work $(WORK) -sv $(PKG_SRCS); \\\n\t\tvlog -work $(WORK) -sv $(filter-out $(PKG_SRCS), $(DESIGN_SRCS)) $(COMMON_SRCS); \\\n\telse \\\n\t\t$(MAKE) run_all TESTBENCHES=\"$(TESTBENCHES)\"; \\\n\tfi\n\n\n# Create ModelSim work library\n$(WORK):\n\tvlib $(WORK)\n\n# Run all testbenches\n.PHONY: run_all clean run_%\n\nrun_all:\n\t@for tb in $(TESTBENCHES); do \\\n\t\t$(MAKE) run_$$tb; \\\n\tdone\n\n# Rule for each testbench\nrun_%: $(WORK)\n\t@if [ \"$*\" = \"all\" ]; then exit 0; fi\n\t@echo \"=== Running $* ===\"\n\tvlog -work $(WORK) -sv $(PKG_SRCS)\n\tvlog -work $(WORK) -sv $(filter-out $(PKG_SRCS), $(DESIGN_SRCS)) $(COMMON_SRCS) tb/$*.sv\n\t@echo 'vcd file \"$*.vcd\"' > run_$*.macro\n\t@echo 'vcd add -r /$*/*' >> run_$*.macro\n\t@echo 'run -all' >> run_$*.macro\n\t@echo 'quit' >> run_$*.macro\n\tvsim -c -do run_$*.macro $(WORK).$*\n\trm -f run_$*.macro\n\n# Clean build files\nclean:\n\trm -rf $(WORK) *.vcd transcript vsim.wlf run_*.macro\n",
+      "language": "other",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    },
+    {
+      "repo": "QREM-CORE/poly-arith-unit",
+      "filename": "rtl/poly_arith_pkg.sv",
+      "before_ref": "a245def8353aba377ca46c848769c71f80f46644",
+      "after_ref": "37b0c5b4679b633f179073966fc671069bdecc63",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "MOD: Implement Montgomery Modular Reduction (#2)\r\n\r\n* MOD: Implement Montgomery Modular Reduction\r\n\r\n* MOD: Modulo testbench\r\n\r\n* MOD: Lint automatic fix",
+      "patch": "@@ -24,4 +24,9 @@ package poly_arith_pkg;\n     // How many beats to transfer one full polynomial? (256 / 16 = 16 beats)\n     parameter int BEATS_PER_POLY  = N / COEFFS_PER_BEAT;\n \n+    // =========================================================================\n+    // 3. Modular Reduction\n+    // =========================================================================\n+    parameter int Q_INV_NEG     = 3327;         // -Q^-1 mod R\n+\n endpackage : poly_arith_pkg",
+      "before_code": "package poly_arith_pkg;\n    // =========================================================================\n    // 1. Bus & Interface Configuration (AXI4-Stream)\n    // =========================================================================\n    parameter int DWIDTH        = 256;          // Main data bus width (32 bytes)\n    parameter int KEEP_WIDTH    = DWIDTH / 8;   // TKEEP width (32 bits)\n    parameter int BYTE_SIZE     = 8;\n\n    // =========================================================================\n    // 2. ML-KEM Specific Constants (FIPS 203)\n    // =========================================================================\n    parameter int Q             = 3329;         // The Modulus\n    parameter int N             = 256;          // Polynomial degree\n    parameter int LOG_N         = 8;            // log2(256)\n\n    // Coefficient sizing\n    parameter int COEFF_WIDTH   = 12;           // Mathematical width (min needed)\n    parameter int STORE_WIDTH   = 16;           // Storage width (aligned for hardware)\n\n    // Throughput Calculations\n    // How many coefficients fit in one AXI beat? (256 / 16 = 16 coefficients)\n    parameter int COEFFS_PER_BEAT = DWIDTH / STORE_WIDTH;\n\n    // How many beats to transfer one full polynomial? (256 / 16 = 16 beats)\n    parameter int BEATS_PER_POLY  = N / COEFFS_PER_BEAT;\n\nendpackage : poly_arith_pkg\n",
+      "after_code": "package poly_arith_pkg;\n    // =========================================================================\n    // 1. Bus & Interface Configuration (AXI4-Stream)\n    // =========================================================================\n    parameter int DWIDTH        = 256;          // Main data bus width (32 bytes)\n    parameter int KEEP_WIDTH    = DWIDTH / 8;   // TKEEP width (32 bits)\n    parameter int BYTE_SIZE     = 8;\n\n    // =========================================================================\n    // 2. ML-KEM Specific Constants (FIPS 203)\n    // =========================================================================\n    parameter int Q             = 3329;         // The Modulus\n    parameter int N             = 256;          // Polynomial degree\n    parameter int LOG_N         = 8;            // log2(256)\n\n    // Coefficient sizing\n    parameter int COEFF_WIDTH   = 12;           // Mathematical width (min needed)\n    parameter int STORE_WIDTH   = 16;           // Storage width (aligned for hardware)\n\n    // Throughput Calculations\n    // How many coefficients fit in one AXI beat? (256 / 16 = 16 coefficients)\n    parameter int COEFFS_PER_BEAT = DWIDTH / STORE_WIDTH;\n\n    // How many beats to transfer one full polynomial? (256 / 16 = 16 beats)\n    parameter int BEATS_PER_POLY  = N / COEFFS_PER_BEAT;\n\n    // =========================================================================\n    // 3. Modular Reduction\n    // =========================================================================\n    parameter int Q_INV_NEG     = 3327;         // -Q^-1 mod R\n\nendpackage : poly_arith_pkg\n",
+      "language": "systemverilog",
+      "additions": 5,
+      "deletions": 0,
+      "validation": "clean"
+    }
+  ]
+}

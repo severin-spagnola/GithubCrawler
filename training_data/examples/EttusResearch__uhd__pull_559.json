@@ -1,0 +1,27 @@
+{
+  "repo": "EttusResearch/uhd",
+  "before_ref": "cdcd39aeb508298e28e8a2a89db5ab9fefd70435",
+  "after_ref": "4ecb79d8980fcf7cd0ff25c8c21bf473156fdb19",
+  "bug_category": "other",
+  "query": "fix always block\" language:verilog",
+  "commit_message": "Build uhd_test library as static when `-DBUILD_SHARED_LIBS=ON` Build uhd_test library as static when `-DBUILD_SHARED_LIBS=ON` # Pull Request Details\r\n<!--- The title of the PR should summarize the change implemented. -->\r\n<!--- Example commit message format: -->\r\n<!--- `product: summary of change` -->\r\n<!--- (leave blank) -->\r\n<!--- `details of what/why/how an issue was addressed` -->\r\n<!--- Keep subject lines to 50 characters, and other lines to 72 -->\r\n<!--- characters. Refer to the \"Revision ",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "EttusResearch/uhd",
+      "filename": "host/tests/common/CMakeLists.txt",
+      "before_ref": "cdcd39aeb508298e28e8a2a89db5ab9fefd70435",
+      "after_ref": "4ecb79d8980fcf7cd0ff25c8c21bf473156fdb19",
+      "bug_category": "other",
+      "query": "fix always block\" language:verilog",
+      "commit_message": "Build uhd_test library as static when `-DBUILD_SHARED_LIBS=ON` Build uhd_test library as static when `-DBUILD_SHARED_LIBS=ON` # Pull Request Details\r\n<!--- The title of the PR should summarize the change implemented. -->\r\n<!--- Example commit message format: -->\r\n<!--- `product: summary of change` -->\r\n<!--- (leave blank) -->\r\n<!--- `details of what/why/how an issue was addressed` -->\r\n<!--- Keep subject lines to 50 characters, and other lines to 72 -->\r\n<!--- characters. Refer to the \"Revision ",
+      "patch": "@@ -8,6 +8,6 @@\n # Build uhd_test static lib\n ########################################################################\n include_directories(\"${UHD_SOURCE_DIR}/lib/include\")\n-add_library(uhd_test\n+add_library(uhd_test STATIC\n     ${CMAKE_CURRENT_SOURCE_DIR}/mock_zero_copy.cpp\n )",
+      "before_code": "#\n# Copyright 2018 Ettus Research, a National Instruments Company\n#\n# SPDX-License-Identifier: GPL-3.0-or-later\n#\n\n########################################################################\n# Build uhd_test static lib\n########################################################################\ninclude_directories(\"${UHD_SOURCE_DIR}/lib/include\")\nadd_library(uhd_test\n    ${CMAKE_CURRENT_SOURCE_DIR}/mock_zero_copy.cpp\n)\n",
+      "after_code": "#\n# Copyright 2018 Ettus Research, a National Instruments Company\n#\n# SPDX-License-Identifier: GPL-3.0-or-later\n#\n\n########################################################################\n# Build uhd_test static lib\n########################################################################\ninclude_directories(\"${UHD_SOURCE_DIR}/lib/include\")\nadd_library(uhd_test STATIC\n    ${CMAKE_CURRENT_SOURCE_DIR}/mock_zero_copy.cpp\n)\n",
+      "language": "other",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

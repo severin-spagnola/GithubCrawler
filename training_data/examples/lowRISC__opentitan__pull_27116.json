@@ -1,0 +1,27 @@
+{
+  "repo": "lowRISC/opentitan",
+  "before_ref": "aed52e773595314e25f85918b3d55c62f32e08da",
+  "after_ref": "98e193ca6d8a73128cd135c67bfbce5dba8bae6e",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:SystemVerilog",
+  "commit_message": "[soc_dbg_ctrl,dv] Fix JTAG CSR assert [soc_dbg_ctrl,dv] Fix JTAG CSR assert - Fix typo for soc_dbg_ctrl_jtag_csr_assert_fpv binding module",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "lowRISC/opentitan",
+      "filename": "hw/ip/soc_dbg_ctrl/dv/sva/soc_dbg_ctrl_bind.sv",
+      "before_ref": "aed52e773595314e25f85918b3d55c62f32e08da",
+      "after_ref": "98e193ca6d8a73128cd135c67bfbce5dba8bae6e",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:SystemVerilog",
+      "commit_message": "[soc_dbg_ctrl,dv] Fix JTAG CSR assert [soc_dbg_ctrl,dv] Fix JTAG CSR assert - Fix typo for soc_dbg_ctrl_jtag_csr_assert_fpv binding module",
+      "patch": "@@ -15,8 +15,8 @@ module soc_dbg_ctrl_bind;\n   bind soc_dbg_ctrl soc_dbg_ctrl_core_csr_assert_fpv soc_dbg_ctrl_core_csr_assert (\n     .clk_i,\n     .rst_ni,\n-    .h2d    (core_tl_i),\n-    .d2h    (core_tl_o)\n+    .h2d  (core_tl_i),\n+    .d2h  (core_tl_o)\n   );\n \n   bind soc_dbg_ctrl tlul_assert #(\n@@ -31,7 +31,7 @@ module soc_dbg_ctrl_bind;\n   bind soc_dbg_ctrl soc_dbg_ctrl_jtag_csr_assert_fpv soc_dbg_ctrl_jtag_csr_assert (\n     .clk_i,\n     .rst_ni,\n-    .h2d    (core_tl_i),\n-    .d2h    (core_tl_o)\n+    .h2d  (jtag_tl_i),\n+    .d2h  (jtag_tl_o)\n   );\n endmodule : soc_dbg_ctrl_bind",
+      "before_code": "// Copyright lowRISC contributors (OpenTitan project).\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n\nmodule soc_dbg_ctrl_bind;\n  bind soc_dbg_ctrl tlul_assert #(\n    .EndpointType(\"Device\")\n  ) tlul_core_assert_device (\n    .clk_i,\n    .rst_ni,\n    .h2d  (core_tl_i),\n    .d2h  (core_tl_o)\n  );\n\n  bind soc_dbg_ctrl soc_dbg_ctrl_core_csr_assert_fpv soc_dbg_ctrl_core_csr_assert (\n    .clk_i,\n    .rst_ni,\n    .h2d    (core_tl_i),\n    .d2h    (core_tl_o)\n  );\n\n  bind soc_dbg_ctrl tlul_assert #(\n    .EndpointType(\"Device\")\n    ) tlul_jtag_assert_device (\n      .clk_i,\n      .rst_ni,\n      .h2d  (jtag_tl_i),\n      .d2h  (jtag_tl_o)\n  );\n\n  bind soc_dbg_ctrl soc_dbg_ctrl_jtag_csr_assert_fpv soc_dbg_ctrl_jtag_csr_assert (\n    .clk_i,\n    .rst_ni,\n    .h2d    (core_tl_i),\n    .d2h    (core_tl_o)\n  );\nendmodule : soc_dbg_ctrl_bind\n",
+      "after_code": "// Copyright lowRISC contributors (OpenTitan project).\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n\nmodule soc_dbg_ctrl_bind;\n  bind soc_dbg_ctrl tlul_assert #(\n    .EndpointType(\"Device\")\n  ) tlul_core_assert_device (\n    .clk_i,\n    .rst_ni,\n    .h2d  (core_tl_i),\n    .d2h  (core_tl_o)\n  );\n\n  bind soc_dbg_ctrl soc_dbg_ctrl_core_csr_assert_fpv soc_dbg_ctrl_core_csr_assert (\n    .clk_i,\n    .rst_ni,\n    .h2d  (core_tl_i),\n    .d2h  (core_tl_o)\n  );\n\n  bind soc_dbg_ctrl tlul_assert #(\n    .EndpointType(\"Device\")\n    ) tlul_jtag_assert_device (\n      .clk_i,\n      .rst_ni,\n      .h2d  (jtag_tl_i),\n      .d2h  (jtag_tl_o)\n  );\n\n  bind soc_dbg_ctrl soc_dbg_ctrl_jtag_csr_assert_fpv soc_dbg_ctrl_jtag_csr_assert (\n    .clk_i,\n    .rst_ni,\n    .h2d  (jtag_tl_i),\n    .d2h  (jtag_tl_o)\n  );\nendmodule : soc_dbg_ctrl_bind\n",
+      "language": "systemverilog",
+      "additions": 4,
+      "deletions": 4,
+      "validation": "clean"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "repo": "EttusResearch/uhd",
+  "before_ref": "02558b69f73a03318424a52459c6f87d0fc6e18c",
+  "after_ref": "9b5458e98c993f71e0f9cbd94e183363fb5a5c93",
+  "bug_category": "synthesis_error",
+  "query": "fix rtl language:Verilog",
+  "commit_message": "Add in OpenBSD support to uhd::path_expandvars Add in OpenBSD support to uhd::path_expandvars OpenBSD has explicitly declined[1] to support 'wordexp' on their platform, which just leaves glob(3) for expanding strings according to shell-like rules. The API is similar, but -- notably -- does not support environment variable expansion (for instance, the string \"/home/${USER_NAME}/\" will be left unchanged, whereas wordexp(3) would expand it).\r\n\r\nHowever, OpenBSD supports the well understood but non-",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "EttusResearch/uhd",
+      "filename": "host/lib/utils/pathslib.cpp",
+      "before_ref": "02558b69f73a03318424a52459c6f87d0fc6e18c",
+      "after_ref": "9b5458e98c993f71e0f9cbd94e183363fb5a5c93",
+      "bug_category": "synthesis_error",
+      "query": "fix rtl language:Verilog",
+      "commit_message": "Add in OpenBSD support to uhd::path_expandvars Add in OpenBSD support to uhd::path_expandvars OpenBSD has explicitly declined[1] to support 'wordexp' on their platform, which just leaves glob(3) for expanding strings according to shell-like rules. The API is similar, but -- notably -- does not support environment variable expansion (for instance, the string \"/home/${USER_NAME}/\" will be left unchanged, whereas wordexp(3) would expand it).\r\n\r\nHowever, OpenBSD supports the well understood but non-",
+      "patch": "@@ -9,6 +9,8 @@\n \n #ifdef BOOST_MSVC\n #    include <windows.h>\n+#elif defined(__OpenBSD__)\n+#    include <glob.h>\n #else\n #    include <wordexp.h>\n #endif\n@@ -27,6 +29,17 @@ std::string uhd::path_expandvars(const std::string& path)\n         return path;\n     }\n     return std::string(result, result + result_len);\n+#elif defined(__OpenBSD__)\n+    glob_t p;\n+    std::string return_value;\n+    memset(&p, 0, sizeof(p));\n+    if (glob(path.c_str(), GLOB_TILDE, NULL, &p) == 0 && p.gl_pathc > 0) {\n+        return_value = std::string(p.gl_pathv[0]);\n+    } else {\n+        return_value = path;\n+    }\n+    globfree(&p);\n+    return return_value;\n #else\n     wordexp_t p;\n     std::string return_value;",
+      "before_code": "//\n// Copyright 2018 Ettus Research, a National Instruments Company\n//\n// SPDX-License-Identifier: GPL-3.0-or-later\n//\n\n#include <uhd/config.hpp>\n#include <uhdlib/utils/paths.hpp>\n\n#ifdef BOOST_MSVC\n#    include <windows.h>\n#else\n#    include <wordexp.h>\n#endif\n\nstd::string uhd::path_expandvars(const std::string& path)\n{\n    if (path.empty()) {\n        return path;\n    }\n#ifdef BOOST_MSVC\n    constexpr size_t max_pathlen = 4096;\n    char result[max_pathlen];\n    const size_t result_len =\n        ExpandEnvironmentStrings(path.c_str(), &result[0], max_pathlen);\n    if (result == 0) {\n        return path;\n    }\n    return std::string(result, result + result_len);\n#else\n    wordexp_t p;\n    std::string return_value;\n    if (wordexp(path.c_str(), &p, 0) == 0 && p.we_wordc > 0) {\n        return_value = std::string(p.we_wordv[0]);\n    } else {\n        return_value = path;\n    }\n    wordfree(&p);\n    return return_value;\n#endif\n}\n",
+      "after_code": "//\n// Copyright 2018 Ettus Research, a National Instruments Company\n//\n// SPDX-License-Identifier: GPL-3.0-or-later\n//\n\n#include <uhd/config.hpp>\n#include <uhdlib/utils/paths.hpp>\n\n#ifdef BOOST_MSVC\n#    include <windows.h>\n#elif defined(__OpenBSD__)\n#    include <glob.h>\n#else\n#    include <wordexp.h>\n#endif\n\nstd::string uhd::path_expandvars(const std::string& path)\n{\n    if (path.empty()) {\n        return path;\n    }\n#ifdef BOOST_MSVC\n    constexpr size_t max_pathlen = 4096;\n    char result[max_pathlen];\n    const size_t result_len =\n        ExpandEnvironmentStrings(path.c_str(), &result[0], max_pathlen);\n    if (result == 0) {\n        return path;\n    }\n    return std::string(result, result + result_len);\n#elif defined(__OpenBSD__)\n    glob_t p;\n    std::string return_value;\n    memset(&p, 0, sizeof(p));\n    if (glob(path.c_str(), GLOB_TILDE, NULL, &p) == 0 && p.gl_pathc > 0) {\n        return_value = std::string(p.gl_pathv[0]);\n    } else {\n        return_value = path;\n    }\n    globfree(&p);\n    return return_value;\n#else\n    wordexp_t p;\n    std::string return_value;\n    if (wordexp(path.c_str(), &p, 0) == 0 && p.we_wordc > 0) {\n        return_value = std::string(p.we_wordv[0]);\n    } else {\n        return_value = path;\n    }\n    wordfree(&p);\n    return return_value;\n#endif\n}\n",
+      "language": "cpp",
+      "additions": 13,
+      "deletions": 0,
+      "validation": "clean"
+    }
+  ]
+}

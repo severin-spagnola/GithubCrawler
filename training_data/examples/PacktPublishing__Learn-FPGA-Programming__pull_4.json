@@ -1,0 +1,27 @@
+{
+  "repo": "PacktPublishing/Learn-FPGA-Programming",
+  "before_ref": "b0c11bf206a637e33542135af1e800926172e957",
+  "after_ref": "0c14c1a26139c9503238578d2e66629bed9fab5f",
+  "bug_category": "sensitivity_list",
+  "query": "fix sensitivity list\" language:vhdl",
+  "commit_message": "Update tb.sv Update tb.sv Hello, \r\nin vivado 2022.1 on my linux laptop the simulation was always failing, so I had to add this delay to fix the simulation and saw that some time was needed for LEDs to be computed",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "PacktPublishing/Learn-FPGA-Programming",
+      "filename": "CH1/tb/tb.sv",
+      "before_ref": "b0c11bf206a637e33542135af1e800926172e957",
+      "after_ref": "0c14c1a26139c9503238578d2e66629bed9fab5f",
+      "bug_category": "sensitivity_list",
+      "query": "fix sensitivity list\" language:vhdl",
+      "commit_message": "Update tb.sv Update tb.sv Hello, \r\nin vivado 2022.1 on my linux laptop the simulation was always failing, so I had to add this delay to fix the simulation and saw that some time was needed for LEDs to be computed",
+      "patch": "@@ -22,6 +22,10 @@ module tb;\n \n   // Checking\n   always @(SW, LED) begin\n+  $display(\"1 SW %2b  : LED %db \", SW[1:0], LED[3:0] );\n+  #20;\n+  $display(\"2 SW %2b  : LED %db \", SW[1:0], LED[3:0] );\n+  \n     if (!SW[0] !== LED[0]) begin\n       $display(\"FAIL: NOT Gate mismatch\");\n       $stop;",
+      "before_code": "`timescale 1ns/ 100ps;\n\nmodule tb;\n\n  logic [1:0] SW;\n  logic [3:0] LED;\n\n  logic_ex u_logic_ex (.*);\n\n  // Stimulus\n  initial begin\n    $printtimescale(tb);\n    SW = '0;\n    for (int i = 0; i < 4; i++) begin\n      $display(\"Setting switches to %2b\", i[1:0]);\n      SW  = i[1:0];\n      #100;\n    end\n    $display(\"PASS: logic_ex test PASSED!\");\n    $stop;\n  end\n\n  // Checking\n  always @(SW, LED) begin\n    if (!SW[0] !== LED[0]) begin\n      $display(\"FAIL: NOT Gate mismatch\");\n      $stop;\n    end\n    if (&SW[1:0] !== LED[1]) begin\n      $display(\"FAIL: AND Gate mismatch\");\n      $stop;\n    end\n    if (|SW[1:0] !== LED[2]) begin\n      $display(\"FAIL: OR Gate mismatch\");\n      $stop;\n    end\n    if (^SW[1:0] !== LED[3]) begin\n      $display(\"FAIL: XOR Gate mismatch\");\n      $stop;\n    end\n  end\nendmodule // tb\n",
+      "after_code": "`timescale 1ns/ 100ps;\n\nmodule tb;\n\n  logic [1:0] SW;\n  logic [3:0] LED;\n\n  logic_ex u_logic_ex (.*);\n\n  // Stimulus\n  initial begin\n    $printtimescale(tb);\n    SW = '0;\n    for (int i = 0; i < 4; i++) begin\n      $display(\"Setting switches to %2b\", i[1:0]);\n      SW  = i[1:0];\n      #100;\n    end\n    $display(\"PASS: logic_ex test PASSED!\");\n    $stop;\n  end\n\n  // Checking\n  always @(SW, LED) begin\n  $display(\"1 SW %2b  : LED %db \", SW[1:0], LED[3:0] );\n  #20;\n  $display(\"2 SW %2b  : LED %db \", SW[1:0], LED[3:0] );\n  \n    if (!SW[0] !== LED[0]) begin\n      $display(\"FAIL: NOT Gate mismatch\");\n      $stop;\n    end\n    if (&SW[1:0] !== LED[1]) begin\n      $display(\"FAIL: AND Gate mismatch\");\n      $stop;\n    end\n    if (|SW[1:0] !== LED[2]) begin\n      $display(\"FAIL: OR Gate mismatch\");\n      $stop;\n    end\n    if (^SW[1:0] !== LED[3]) begin\n      $display(\"FAIL: XOR Gate mismatch\");\n      $stop;\n    end\n  end\nendmodule // tb\n",
+      "language": "systemverilog",
+      "additions": 4,
+      "deletions": 0,
+      "validation": "clean"
+    }
+  ]
+}

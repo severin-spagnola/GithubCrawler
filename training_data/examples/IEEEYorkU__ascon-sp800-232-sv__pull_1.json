@@ -1,0 +1,27 @@
+{
+  "repo": "IEEEYorkU/ascon-sp800-232-sv",
+  "before_ref": "20f8e73e7f49bae90b800d9706de4860dc678746",
+  "after_ref": "1375866b1e9fa01c38c371dcaa6f2f5972f70f1d",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:SystemVerilog",
+  "commit_message": "Ascon Permutation: Implement Linear Diffusion Layer pL Ascon Permutation: Implement Linear Diffusion Layer pL None",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "IEEEYorkU/ascon-sp800-232-sv",
+      "filename": "Makefile",
+      "before_ref": "20f8e73e7f49bae90b800d9706de4860dc678746",
+      "after_ref": "1375866b1e9fa01c38c371dcaa6f2f5972f70f1d",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:SystemVerilog",
+      "commit_message": "Ascon Permutation: Implement Linear Diffusion Layer pL Ascon Permutation: Implement Linear Diffusion Layer pL None",
+      "patch": "@@ -3,7 +3,7 @@\n # =====================\n \n # List of testbenches (example: TESTBENCHES = theta_step_tb rho_step_tb)\n-TESTBENCHES = substitution_layer_tb constant_addition_layer_tb\n+TESTBENCHES = substitution_layer_tb constant_addition_layer_tb linear_diffusion_layer_tb\n \n # --- PATH DEFINITIONS ---\n LIB_DIR     =",
+      "before_code": "# =====================\n# ModelSim Multi-TB Makefile\n# =====================\n\n# List of testbenches (example: TESTBENCHES = theta_step_tb rho_step_tb)\nTESTBENCHES = substitution_layer_tb constant_addition_layer_tb\n\n# --- PATH DEFINITIONS ---\nLIB_DIR     =\n# Assuming the submodule has its own 'rtl' folder inside\nLIB_SRCS    = $(wildcard $(LIB_DIR)/rtl/*.sv)\n\n# --- SOURCE FILES ---\n# Packages must be compiled first\nPKG_SRCS    = rtl/ascon_pkg.sv\n\n# Your local design files\nDESIGN_SRCS = $(wildcard rtl/*.sv)\nCOMMON_SRCS = $(wildcard rtl/*.svh)\n\n# Work library\nWORK = work\n\n# Default target\nall: $(WORK)\n\t@if [ -z \"$(strip $(TESTBENCHES))\" ]; then \\\n\t\techo \"No testbenches specified. Compiling RTL only...\"; \\\n\t\tvlog -work $(WORK) -sv +incdir+$(LIB_DIR)/rtl $(PKG_SRCS) $(LIB_SRCS); \\\n\t\tvlog -work $(WORK) -sv +incdir+$(LIB_DIR)/rtl $(filter-out $(PKG_SRCS), $(DESIGN_SRCS)) $(COMMON_SRCS); \\\n\telse \\\n\t\t$(MAKE) run_all TESTBENCHES=\"$(TESTBENCHES)\"; \\\n\tfi\n\n# Create ModelSim work library\n$(WORK):\n\tvlib $(WORK)\n\n# Run all testbenches\n.PHONY: run_all clean run_%\n\nrun_all:\n\t@for tb in $(TESTBENCHES); do \\\n\t\t$(MAKE) run_$$tb; \\\n\tdone\n\n# Rule for each testbench\nrun_%: $(WORK)\n\t@if [ \"$*\" = \"all\" ]; then exit 0; fi\n\t@echo \"=== Running $* ===\"\n# 1. Compile Packages & Common Lib (Interfaces)\n\tvlog -work $(WORK) -sv +incdir+$(LIB_DIR)/rtl $(PKG_SRCS) $(LIB_SRCS)\n# 2. Compile Design & Testbench\n\tvlog -work $(WORK) -sv +incdir+$(LIB_DIR)/rtl $(filter-out $(PKG_SRCS), $(DESIGN_SRCS)) $(COMMON_SRCS) tb/$*.sv\n\n# 3. Create Macro & Run\n\t@echo 'vcd file \"$*.vcd\"' > run_$*.macro\n\t@echo 'vcd add -r /$*/*' >> run_$*.macro\n\t@echo 'run -all' >> run_$*.macro\n\t@echo 'quit' >> run_$*.macro\n\tvsim -c -do run_$*.macro $(WORK).$*\n\trm -f run_$*.macro\n\n# Clean build files\nclean:\n\trm -rf $(WORK) *.vcd transcript vsim.wlf run_*.macro\n",
+      "after_code": "# =====================\n# ModelSim Multi-TB Makefile\n# =====================\n\n# List of testbenches (example: TESTBENCHES = theta_step_tb rho_step_tb)\nTESTBENCHES = substitution_layer_tb constant_addition_layer_tb linear_diffusion_layer_tb\n\n# --- PATH DEFINITIONS ---\nLIB_DIR     =\n# Assuming the submodule has its own 'rtl' folder inside\nLIB_SRCS    = $(wildcard $(LIB_DIR)/rtl/*.sv)\n\n# --- SOURCE FILES ---\n# Packages must be compiled first\nPKG_SRCS    = rtl/ascon_pkg.sv\n\n# Your local design files\nDESIGN_SRCS = $(wildcard rtl/*.sv)\nCOMMON_SRCS = $(wildcard rtl/*.svh)\n\n# Work library\nWORK = work\n\n# Default target\nall: $(WORK)\n\t@if [ -z \"$(strip $(TESTBENCHES))\" ]; then \\\n\t\techo \"No testbenches specified. Compiling RTL only...\"; \\\n\t\tvlog -work $(WORK) -sv +incdir+$(LIB_DIR)/rtl $(PKG_SRCS) $(LIB_SRCS); \\\n\t\tvlog -work $(WORK) -sv +incdir+$(LIB_DIR)/rtl $(filter-out $(PKG_SRCS), $(DESIGN_SRCS)) $(COMMON_SRCS); \\\n\telse \\\n\t\t$(MAKE) run_all TESTBENCHES=\"$(TESTBENCHES)\"; \\\n\tfi\n\n# Create ModelSim work library\n$(WORK):\n\tvlib $(WORK)\n\n# Run all testbenches\n.PHONY: run_all clean run_%\n\nrun_all:\n\t@for tb in $(TESTBENCHES); do \\\n\t\t$(MAKE) run_$$tb; \\\n\tdone\n\n# Rule for each testbench\nrun_%: $(WORK)\n\t@if [ \"$*\" = \"all\" ]; then exit 0; fi\n\t@echo \"=== Running $* ===\"\n# 1. Compile Packages & Common Lib (Interfaces)\n\tvlog -work $(WORK) -sv +incdir+$(LIB_DIR)/rtl $(PKG_SRCS) $(LIB_SRCS)\n# 2. Compile Design & Testbench\n\tvlog -work $(WORK) -sv +incdir+$(LIB_DIR)/rtl $(filter-out $(PKG_SRCS), $(DESIGN_SRCS)) $(COMMON_SRCS) tb/$*.sv\n\n# 3. Create Macro & Run\n\t@echo 'vcd file \"$*.vcd\"' > run_$*.macro\n\t@echo 'vcd add -r /$*/*' >> run_$*.macro\n\t@echo 'run -all' >> run_$*.macro\n\t@echo 'quit' >> run_$*.macro\n\tvsim -c -do run_$*.macro $(WORK).$*\n\trm -f run_$*.macro\n\n# Clean build files\nclean:\n\trm -rf $(WORK) *.vcd transcript vsim.wlf run_*.macro\n",
+      "language": "other",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

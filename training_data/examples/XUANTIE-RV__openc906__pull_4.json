@@ -1,0 +1,43 @@
+{
+  "repo": "XUANTIE-RV/openc906",
+  "before_ref": "77bfd0e91af0d95d386d4f520ea819c9549d2d75",
+  "after_ref": "f5e836372fbfe4f96f61b133d614aaf2e12ee717",
+  "bug_category": "other",
+  "query": "fix testbench",
+  "commit_message": "fix bug on the realization path of printf function fix bug on the realization path of printf function 1、modify the store address in fputc function.\r\n2、modify the PMA of the store address to Strong Order according to smart testbench.\r\n3、remove the redefine of printc under clib directory.",
+  "file_count": 2,
+  "examples": [
+    {
+      "repo": "XUANTIE-RV/openc906",
+      "filename": "C906_RTL_FACTORY/gen_rtl/mmu/rtl/sysmap.h",
+      "before_ref": "77bfd0e91af0d95d386d4f520ea819c9549d2d75",
+      "after_ref": "f5e836372fbfe4f96f61b133d614aaf2e12ee717",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "fix bug on the realization path of printf function fix bug on the realization path of printf function 1、modify the store address in fputc function.\r\n2、modify the PMA of the store address to Strong Order according to smart testbench.\r\n3、remove the redefine of printc under clib directory.",
+      "patch": "@@ -16,26 +16,26 @@ limitations under the License.\n // ADDR is 28-bit, 4K address\n // Flag includes: Strong Order, Cacheable, Bufferable, Shareable, Security\n \n-  `define SYSMAP_BASE_ADDR0  28'h8ffff\n+  `define SYSMAP_BASE_ADDR0  28'h01000\n   `define SYSMAP_FLG0        5'b01111\n   \n-  `define SYSMAP_BASE_ADDR1  28'hbffff\n+  `define SYSMAP_BASE_ADDR1  28'h02000\n   `define SYSMAP_FLG1        5'b10011\n   \n-  `define SYSMAP_BASE_ADDR2  28'hcffff\n-  `define SYSMAP_FLG2        5'b00011\n+  `define SYSMAP_BASE_ADDR2  28'hd0000\n+  `define SYSMAP_FLG2        5'b10011\n   \n   `define SYSMAP_BASE_ADDR3  28'heffff\n-  `define SYSMAP_FLG3        5'b01101\n+  `define SYSMAP_FLG3        5'b01111\n   \n   `define SYSMAP_BASE_ADDR4  28'hfffff\n   `define SYSMAP_FLG4        5'b01111\n   \n-  `define SYSMAP_BASE_ADDR5  28'h3ffffff\n+  `define SYSMAP_BASE_ADDR5  28'h4000000\n   `define SYSMAP_FLG5        5'b01111\n   \n-  `define SYSMAP_BASE_ADDR6  28'h4ffffff \n-  `define SYSMAP_FLG6        5'b10010\n+  `define SYSMAP_BASE_ADDR6  28'h5000000 \n+  `define SYSMAP_FLG6        5'b10011\n \n   `define SYSMAP_BASE_ADDR7  28'hfffffff \n   `define SYSMAP_FLG7        5'b01111",
+      "before_code": "/*Copyright 2020-2021 T-Head Semiconductor Co., Ltd.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n*/\n\n// ADDR is 28-bit, 4K address\n// Flag includes: Strong Order, Cacheable, Bufferable, Shareable, Security\n\n  `define SYSMAP_BASE_ADDR0  28'h8ffff\n  `define SYSMAP_FLG0        5'b01111\n  \n  `define SYSMAP_BASE_ADDR1  28'hbffff\n  `define SYSMAP_FLG1        5'b10011\n  \n  `define SYSMAP_BASE_ADDR2  28'hcffff\n  `define SYSMAP_FLG2        5'b00011\n  \n  `define SYSMAP_BASE_ADDR3  28'heffff\n  `define SYSMAP_FLG3        5'b01101\n  \n  `define SYSMAP_BASE_ADDR4  28'hfffff\n  `define SYSMAP_FLG4        5'b01111\n  \n  `define SYSMAP_BASE_ADDR5  28'h3ffffff\n  `define SYSMAP_FLG5        5'b01111\n  \n  `define SYSMAP_BASE_ADDR6  28'h4ffffff \n  `define SYSMAP_FLG6        5'b10010\n\n  `define SYSMAP_BASE_ADDR7  28'hfffffff \n  `define SYSMAP_FLG7        5'b01111\n\n//End ct_mmu_sysmap\n",
+      "after_code": "/*Copyright 2020-2021 T-Head Semiconductor Co., Ltd.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n*/\n\n// ADDR is 28-bit, 4K address\n// Flag includes: Strong Order, Cacheable, Bufferable, Shareable, Security\n\n  `define SYSMAP_BASE_ADDR0  28'h01000\n  `define SYSMAP_FLG0        5'b01111\n  \n  `define SYSMAP_BASE_ADDR1  28'h02000\n  `define SYSMAP_FLG1        5'b10011\n  \n  `define SYSMAP_BASE_ADDR2  28'hd0000\n  `define SYSMAP_FLG2        5'b10011\n  \n  `define SYSMAP_BASE_ADDR3  28'heffff\n  `define SYSMAP_FLG3        5'b01111\n  \n  `define SYSMAP_BASE_ADDR4  28'hfffff\n  `define SYSMAP_FLG4        5'b01111\n  \n  `define SYSMAP_BASE_ADDR5  28'h4000000\n  `define SYSMAP_FLG5        5'b01111\n  \n  `define SYSMAP_BASE_ADDR6  28'h5000000 \n  `define SYSMAP_FLG6        5'b10011\n\n  `define SYSMAP_BASE_ADDR7  28'hfffffff \n  `define SYSMAP_FLG7        5'b01111\n\n//End ct_mmu_sysmap\n",
+      "language": "c",
+      "additions": 8,
+      "deletions": 8,
+      "validation": "clean"
+    },
+    {
+      "repo": "XUANTIE-RV/openc906",
+      "filename": "smart_run/tests/lib/clib/fputc.c",
+      "before_ref": "77bfd0e91af0d95d386d4f520ea819c9549d2d75",
+      "after_ref": "f5e836372fbfe4f96f61b133d614aaf2e12ee717",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "fix bug on the realization path of printf function fix bug on the realization path of printf function 1、modify the store address in fputc function.\r\n2、modify the PMA of the store address to Strong Order according to smart testbench.\r\n3、remove the redefine of printc under clib directory.",
+      "patch": "@@ -16,7 +16,7 @@ limitations under the License.\n int fputc(int ch, FILE *stream)\n { \n   asm(\n-      \"li   x13, 0x6000fff8 \\n\\t\" \n+      \"li   x13, 0x10015000 \\n\\t\" \n       \"sw   %0, 0(x13) \\n\\t\"\n       : :\"r\" (ch): \"x13\" );\n }",
+      "before_code": "/*Copyright 2020-2021 T-Head Semiconductor Co., Ltd.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n*/\n#include <stdio.h>\nint fputc(int ch, FILE *stream)\n{ \n  asm(\n      \"li   x13, 0x6000fff8 \\n\\t\" \n      \"sw   %0, 0(x13) \\n\\t\"\n      : :\"r\" (ch): \"x13\" );\n}\n\nvoid os_critical_enter(void)\n{\n}\n\nvoid os_critical_exit(void)\n{\n}\n\n",
+      "after_code": "/*Copyright 2020-2021 T-Head Semiconductor Co., Ltd.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n*/\n#include <stdio.h>\nint fputc(int ch, FILE *stream)\n{ \n  asm(\n      \"li   x13, 0x10015000 \\n\\t\" \n      \"sw   %0, 0(x13) \\n\\t\"\n      : :\"r\" (ch): \"x13\" );\n}\n\nvoid os_critical_enter(void)\n{\n}\n\nvoid os_critical_exit(void)\n{\n}\n\n",
+      "language": "c",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

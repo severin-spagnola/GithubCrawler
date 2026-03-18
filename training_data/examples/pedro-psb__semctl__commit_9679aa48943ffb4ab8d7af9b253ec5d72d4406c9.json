@@ -1,0 +1,27 @@
+{
+  "repo": "pedro-psb/semctl",
+  "before_ref": "647876c5187138c55585690930e219c6cb8ebaec",
+  "after_ref": "9679aa48943ffb4ab8d7af9b253ec5d72d4406c9",
+  "bug_category": "other",
+  "query": "fix testbench",
+  "commit_message": "Fix testbench do clock_converter",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "pedro-psb/semctl",
+      "filename": "tests/tb_clock_converter.vhd",
+      "before_ref": "647876c5187138c55585690930e219c6cb8ebaec",
+      "after_ref": "9679aa48943ffb4ab8d7af9b253ec5d72d4406c9",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "Fix testbench do clock_converter",
+      "patch": "@@ -48,8 +48,8 @@ begin\n       \twait for 5*C_CLK_PERIOD;\n       \ts_rst <= '0';\n \t\twait for 50*C_CLK_PERIOD;\n- \t \ts_rst <= '1';\n-\t\twait for 200*C_CLK_PERIOD;\n+ \t \t-- s_rst <= '1';\n+\t\t-- wait for 200*C_CLK_PERIOD;\n \n   \t\treport \"Fim da simulação\" severity note; \n ",
+      "before_code": "-- Integrantes:\n-- * Guilherme Augusto\n-- * Pedro Armando\n-- * Pedro Pessoa\n\nlibrary IEEE;\nuse IEEE.std_logic_1164.all;\nuse IEEE.numeric_std.all;\n\nentity tb_clock_converter is\nend entity tb_clock_converter;\n\narchitecture test of tb_clock_converter is\n    constant C_DIV_FACTOR : integer := 50;\n    constant C_CLK_PERIOD : time := 10 ns;\n    constant C_SIM_TIME : time := 2550 ns;\n    signal s_in_clk : std_logic := '0';\n    signal s_out_clk : std_logic;\n    signal s_rst : std_logic;\n\t\nbegin \n\tUUT: entity work.clock_converter(behavioral)\n    \tgeneric map (\n        \tDIV_FACTOR => C_DIV_FACTOR\n        )\n        port map (\n          \tin_clk => s_in_clk,\n    \t\tout_clk => s_out_clk,\n \t\t\tRST => s_rst\n        );\n        \n    clock_gen_proc: process is\n    begin\n        while now < C_SIM_TIME loop \n            s_in_clk <= '0';\n            wait for C_CLK_PERIOD / 2;\n            s_in_clk <= '1';\n            wait for C_CLK_PERIOD / 2;\n        end loop;\n        wait; \n    end process clock_gen_proc;\n    \n    \n    estimulo_proc: process is\n    begin\n        \n   \t\ts_rst <= '1';\n      \twait for 5*C_CLK_PERIOD;\n      \ts_rst <= '0';\n\t\twait for 50*C_CLK_PERIOD;\n \t \ts_rst <= '1';\n\t\twait for 200*C_CLK_PERIOD;\n\n  \t\treport \"Fim da simulação\" severity note; \n\n\t\twait;\n        \n\tend process estimulo_proc;\n    \nend architecture test;\n",
+      "after_code": "-- Integrantes:\n-- * Guilherme Augusto\n-- * Pedro Armando\n-- * Pedro Pessoa\n\nlibrary IEEE;\nuse IEEE.std_logic_1164.all;\nuse IEEE.numeric_std.all;\n\nentity tb_clock_converter is\nend entity tb_clock_converter;\n\narchitecture test of tb_clock_converter is\n    constant C_DIV_FACTOR : integer := 50;\n    constant C_CLK_PERIOD : time := 10 ns;\n    constant C_SIM_TIME : time := 2550 ns;\n    signal s_in_clk : std_logic := '0';\n    signal s_out_clk : std_logic;\n    signal s_rst : std_logic;\n\t\nbegin \n\tUUT: entity work.clock_converter(behavioral)\n    \tgeneric map (\n        \tDIV_FACTOR => C_DIV_FACTOR\n        )\n        port map (\n          \tin_clk => s_in_clk,\n    \t\tout_clk => s_out_clk,\n \t\t\tRST => s_rst\n        );\n        \n    clock_gen_proc: process is\n    begin\n        while now < C_SIM_TIME loop \n            s_in_clk <= '0';\n            wait for C_CLK_PERIOD / 2;\n            s_in_clk <= '1';\n            wait for C_CLK_PERIOD / 2;\n        end loop;\n        wait; \n    end process clock_gen_proc;\n    \n    \n    estimulo_proc: process is\n    begin\n        \n   \t\ts_rst <= '1';\n      \twait for 5*C_CLK_PERIOD;\n      \ts_rst <= '0';\n\t\twait for 50*C_CLK_PERIOD;\n \t \t-- s_rst <= '1';\n\t\t-- wait for 200*C_CLK_PERIOD;\n\n  \t\treport \"Fim da simulação\" severity note; \n\n\t\twait;\n        \n\tend process estimulo_proc;\n    \nend architecture test;\n",
+      "language": "vhdl",
+      "additions": 2,
+      "deletions": 2,
+      "validation": "clean"
+    }
+  ]
+}

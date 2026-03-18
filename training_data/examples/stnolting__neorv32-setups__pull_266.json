@@ -1,0 +1,27 @@
+{
+  "repo": "stnolting/neorv32-setups",
+  "before_ref": "eab6887a445e6dfcd9970f7b845fa080019850c8",
+  "after_ref": "b4d924c78d1497e7d39f353c42a844fa58bde5e2",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:VHDL",
+  "commit_message": "[osflow] enable yosys ghdl plugin module by default [osflow] enable yosys ghdl plugin module by default Fixing #254 ",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "stnolting/neorv32-setups",
+      "filename": "osflow/common.mk",
+      "before_ref": "eab6887a445e6dfcd9970f7b845fa080019850c8",
+      "after_ref": "b4d924c78d1497e7d39f353c42a844fa58bde5e2",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:VHDL",
+      "commit_message": "[osflow] enable yosys ghdl plugin module by default [osflow] enable yosys ghdl plugin module by default Fixing #254 ",
+      "patch": "@@ -16,9 +16,7 @@ endif\n \n include tools.mk\n \n-ifdef GHDL_PLUGIN_MODULE\n YOSYSFLAGS += -m $(GHDL_PLUGIN_MODULE)\n-endif\n \n include synthesis.mk\n include PnR_Bit.mk",
+      "before_code": "ID ?= impl_1\n\ninclude boards/index.mk\n\nifndef TOP\n$(error TOP needs to be specified!)\nendif\n\ninclude filesets.mk\n\nifndef DESIGN_SRC\nifndef BOARD_SRC\n$(error Neither DESIGN_SRC nor BOARD_SRC were set!)\nendif\nendif\n\ninclude tools.mk\n\nifdef GHDL_PLUGIN_MODULE\nYOSYSFLAGS += -m $(GHDL_PLUGIN_MODULE)\nendif\n\ninclude synthesis.mk\ninclude PnR_Bit.mk\n\n.PHONY: syn impl bit svf clean\n\nsyn: ${IMPL}.json\nimpl: ${IMPL}.${PNR2BIT_EXT}\nbit: ${IMPL}.bit\n\nifeq ($(DEVICE_SERIES),ecp5)\nsvf: ${IMPL}.svf\nendif\n\nclean:\n\trm -rf build *.{${PNR2BIT_EXT},bit,cf,dfu,history,json,o,svf} *-report.txt\n\ninclude boards/$(BOARD).mk\n",
+      "after_code": "ID ?= impl_1\n\ninclude boards/index.mk\n\nifndef TOP\n$(error TOP needs to be specified!)\nendif\n\ninclude filesets.mk\n\nifndef DESIGN_SRC\nifndef BOARD_SRC\n$(error Neither DESIGN_SRC nor BOARD_SRC were set!)\nendif\nendif\n\ninclude tools.mk\n\nYOSYSFLAGS += -m $(GHDL_PLUGIN_MODULE)\n\ninclude synthesis.mk\ninclude PnR_Bit.mk\n\n.PHONY: syn impl bit svf clean\n\nsyn: ${IMPL}.json\nimpl: ${IMPL}.${PNR2BIT_EXT}\nbit: ${IMPL}.bit\n\nifeq ($(DEVICE_SERIES),ecp5)\nsvf: ${IMPL}.svf\nendif\n\nclean:\n\trm -rf build *.{${PNR2BIT_EXT},bit,cf,dfu,history,json,o,svf} *-report.txt\n\ninclude boards/$(BOARD).mk\n",
+      "language": "other",
+      "additions": 0,
+      "deletions": 2,
+      "validation": "clean"
+    }
+  ]
+}

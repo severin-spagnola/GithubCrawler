@@ -1,0 +1,27 @@
+{
+  "repo": "fernandnsp/Microarquitetura_RISC-V_Single-Cycle",
+  "before_ref": "8c97f47d79fdb03d1847e0ad93fd336b6b7ad888",
+  "after_ref": "8d54bd4b150cf9d1d9b68c153937d26b628da497",
+  "bug_category": "other",
+  "query": "fix testbench",
+  "commit_message": "fix: ajuste no testbench da alu",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "fernandnsp/Microarquitetura_RISC-V_Single-Cycle",
+      "filename": "alu/alu_tb.v",
+      "before_ref": "8c97f47d79fdb03d1847e0ad93fd336b6b7ad888",
+      "after_ref": "8d54bd4b150cf9d1d9b68c153937d26b628da497",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "fix: ajuste no testbench da alu",
+      "patch": "@@ -15,37 +15,37 @@ module alu_tb;\n \n     initial begin\n         // ADD\n-        a = 32'd10; b = 32'd5; alu_ctrl = 3'b010;\n+        a = 32'd00; b = 32'd5; alu_ctrl = 3'b010;\n         #10;\n         $display(\"ADD: %d + %d = %d\", a, b, result);\n \n         // SUB\n-        alu_ctrl = 3'b110;\n+        alu_ctrl = 3'b001;\n         #10;\n         $display(\"SUB: %d - %d = %d | zero=%b\", a, b, result, zero);\n \n         // AND\n-        alu_ctrl = 3'b000;\n+        alu_ctrl = 3'b010;\n         #10;\n         $display(\"AND: %b & %b = %b\", a, b, result);\n \n         // OR\n-        alu_ctrl = 3'b001;\n+        alu_ctrl = 3'b011;\n         #10;\n         $display(\"OR : %b | %b = %b\", a, b, result);\n \n         // SLT\n-        a = 32'd5; b = 32'd10; alu_ctrl = 3'b111;\n+        a = 32'd5; b = 32'd10; alu_ctrl = 3'b101;\n         #10;\n         $display(\"SLT: %d < %d = %d\", a, b, result);\n \n         // BEQ (zero flag) iguais\n-        a = 32'd20; b = 32'd20; alu_ctrl = 3'b110;\n+        a = 32'd20; b = 32'd20; alu_ctrl = 3'001;\n         #10;\n         $display(\"BEQ test iguais: result=%d zero=%b\", result, zero);\n \n         // BEQ (zero flag) diferentes\n-        a = 32'd20; b = 32'd10; alu_ctrl = 3'b110;\n+        a = 32'd20; b = 32'd10; alu_ctrl = 3'001;\n         #10;\n         $display(\"BEQ test diferentes: result=%d zero=%b\", result, zero);\n ",
+      "before_code": "module alu_tb;\n    reg  [31:0] a;\n    reg  [31:0] b;\n    reg  [2:0]  alu_ctrl;\n    wire [31:0] result;\n    wire        zero;\n\n    alu DUT (\n        .a(a),\n        .b(b),\n        .alu_ctrl(alu_ctrl),\n        .result(result),\n        .zero(zero)\n    );\n\n    initial begin\n        // ADD\n        a = 32'd10; b = 32'd5; alu_ctrl = 3'b010;\n        #10;\n        $display(\"ADD: %d + %d = %d\", a, b, result);\n\n        // SUB\n        alu_ctrl = 3'b110;\n        #10;\n        $display(\"SUB: %d - %d = %d | zero=%b\", a, b, result, zero);\n\n        // AND\n        alu_ctrl = 3'b000;\n        #10;\n        $display(\"AND: %b & %b = %b\", a, b, result);\n\n        // OR\n        alu_ctrl = 3'b001;\n        #10;\n        $display(\"OR : %b | %b = %b\", a, b, result);\n\n        // SLT\n        a = 32'd5; b = 32'd10; alu_ctrl = 3'b111;\n        #10;\n        $display(\"SLT: %d < %d = %d\", a, b, result);\n\n        // BEQ (zero flag) iguais\n        a = 32'd20; b = 32'd20; alu_ctrl = 3'b110;\n        #10;\n        $display(\"BEQ test iguais: result=%d zero=%b\", result, zero);\n\n        // BEQ (zero flag) diferentes\n        a = 32'd20; b = 32'd10; alu_ctrl = 3'b110;\n        #10;\n        $display(\"BEQ test diferentes: result=%d zero=%b\", result, zero);\n\n        $finish;\n    end\n\n    initial begin\n        $dumpfile(\"alu_tb.vcd\");\n        $dumpvars(0, alu_tb);\n    end\nendmodule\n",
+      "after_code": "module alu_tb;\n    reg  [31:0] a;\n    reg  [31:0] b;\n    reg  [2:0]  alu_ctrl;\n    wire [31:0] result;\n    wire        zero;\n\n    alu DUT (\n        .a(a),\n        .b(b),\n        .alu_ctrl(alu_ctrl),\n        .result(result),\n        .zero(zero)\n    );\n\n    initial begin\n        // ADD\n        a = 32'd00; b = 32'd5; alu_ctrl = 3'b010;\n        #10;\n        $display(\"ADD: %d + %d = %d\", a, b, result);\n\n        // SUB\n        alu_ctrl = 3'b001;\n        #10;\n        $display(\"SUB: %d - %d = %d | zero=%b\", a, b, result, zero);\n\n        // AND\n        alu_ctrl = 3'b010;\n        #10;\n        $display(\"AND: %b & %b = %b\", a, b, result);\n\n        // OR\n        alu_ctrl = 3'b011;\n        #10;\n        $display(\"OR : %b | %b = %b\", a, b, result);\n\n        // SLT\n        a = 32'd5; b = 32'd10; alu_ctrl = 3'b101;\n        #10;\n        $display(\"SLT: %d < %d = %d\", a, b, result);\n\n        // BEQ (zero flag) iguais\n        a = 32'd20; b = 32'd20; alu_ctrl = 3'001;\n        #10;\n        $display(\"BEQ test iguais: result=%d zero=%b\", result, zero);\n\n        // BEQ (zero flag) diferentes\n        a = 32'd20; b = 32'd10; alu_ctrl = 3'001;\n        #10;\n        $display(\"BEQ test diferentes: result=%d zero=%b\", result, zero);\n\n        $finish;\n    end\n\n    initial begin\n        $dumpfile(\"alu_tb.vcd\");\n        $dumpvars(0, alu_tb);\n    end\nendmodule\n",
+      "language": "verilog",
+      "additions": 7,
+      "deletions": 7,
+      "validation": "clean"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "repo": "VUnit/vunit",
+  "before_ref": "2210608b191763fd5ada0854e488f721adcd689c",
+  "after_ref": "91db1a31df6929cab81eb15800e10baeeeb8a684",
+  "bug_category": "port_mismatch",
+  "query": "fix instantiation language:VHDL",
+  "commit_message": "Fix array_axis_vcs example  Fix array_axis_vcs example  Hi there!\r\n\r\nYesterday, I spoke to Unai M. C., and he gave me a hint to resolve #1081 by reviewing the `array_axis_vcs` example. I’ve fixed it to achieve correct simulation with QuestaSim.\r\n\r\n### Changes made:\r\n\r\n- Replaced `vu` with `VU` on line 32.\r\n- Corrected the instantiation of components in `runall_addwave.do`.\r\n\r\nThe following images illustrate the errors:\r\n\r\n**Error 1**:\r\n\r\n![vunit_PR_1](https://github.com/user-attachments/assets/d",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "VUnit/vunit",
+      "filename": "examples/vhdl/array_axis_vcs/run.py",
+      "before_ref": "2210608b191763fd5ada0854e488f721adcd689c",
+      "after_ref": "91db1a31df6929cab81eb15800e10baeeeb8a684",
+      "bug_category": "port_mismatch",
+      "query": "fix instantiation language:VHDL",
+      "commit_message": "Fix array_axis_vcs example  Fix array_axis_vcs example  Hi there!\r\n\r\nYesterday, I spoke to Unai M. C., and he gave me a hint to resolve #1081 by reviewing the `array_axis_vcs` example. I’ve fixed it to achieve correct simulation with QuestaSim.\r\n\r\n### Changes made:\r\n\r\n- Replaced `vu` with `VU` on line 32.\r\n- Corrected the instantiation of components in `runall_addwave.do`.\r\n\r\nThe following images illustrate the errors:\r\n\r\n**Error 1**:\r\n\r\n![vunit_PR_1](https://github.com/user-attachments/assets/d",
+      "patch": "@@ -29,6 +29,6 @@\n \n VU.add_library(\"lib\").add_source_files([SRC_PATH / \"*.vhd\", SRC_PATH / \"**\" / \"*.vhd\"])\n \n-# vu.set_sim_option('modelsim.init_files.after_load',['runall_addwave.do'])\n+VU.set_sim_option(\"modelsim.init_file.gui\", \"runall_addwave.do\")\n \n VU.main()",
+      "before_code": "#!/usr/bin/env python3\n\n# This Source Code Form is subject to the terms of the Mozilla Public\n# License, v. 2.0. If a copy of the MPL was not distributed with this file,\n# You can obtain one at http://mozilla.org/MPL/2.0/.\n#\n# Copyright (c) 2014-2024, Lars Asplund lars.anders.asplund@gmail.com\n\n\"\"\"\nArray and AXI4 Stream Verification Components\n---------------------------------------------\n\nShows how to use ``integer_array_t``, ``axi_stream_master_t`` and ``axi_stream_slave_t``.\nA CSV file is read, the content is sent in a row-major order to an AXI Stream buffer\n(FIFO) and it is received back to be saved in a different file. Further information can\nbe found in the :ref:`verification component library user guide <vc_user_guide>`,\nin subsection :ref:`Stream <stream_vci>` and in\n:vunit_file:`vhdl/verification_components/test/tb_axi_stream.vhd <vunit/vhdl/verification_components/test/tb_axi_stream.vhd>`.\n\"\"\"\n\nfrom pathlib import Path\nfrom vunit import VUnit\n\nVU = VUnit.from_argv()\nVU.add_vhdl_builtins()\nVU.add_verification_components()\n\nSRC_PATH = Path(__file__).parent / \"src\"\n\nVU.add_library(\"lib\").add_source_files([SRC_PATH / \"*.vhd\", SRC_PATH / \"**\" / \"*.vhd\"])\n\n# vu.set_sim_option('modelsim.init_files.after_load',['runall_addwave.do'])\n\nVU.main()\n",
+      "after_code": "#!/usr/bin/env python3\n\n# This Source Code Form is subject to the terms of the Mozilla Public\n# License, v. 2.0. If a copy of the MPL was not distributed with this file,\n# You can obtain one at http://mozilla.org/MPL/2.0/.\n#\n# Copyright (c) 2014-2024, Lars Asplund lars.anders.asplund@gmail.com\n\n\"\"\"\nArray and AXI4 Stream Verification Components\n---------------------------------------------\n\nShows how to use ``integer_array_t``, ``axi_stream_master_t`` and ``axi_stream_slave_t``.\nA CSV file is read, the content is sent in a row-major order to an AXI Stream buffer\n(FIFO) and it is received back to be saved in a different file. Further information can\nbe found in the :ref:`verification component library user guide <vc_user_guide>`,\nin subsection :ref:`Stream <stream_vci>` and in\n:vunit_file:`vhdl/verification_components/test/tb_axi_stream.vhd <vunit/vhdl/verification_components/test/tb_axi_stream.vhd>`.\n\"\"\"\n\nfrom pathlib import Path\nfrom vunit import VUnit\n\nVU = VUnit.from_argv()\nVU.add_vhdl_builtins()\nVU.add_verification_components()\n\nSRC_PATH = Path(__file__).parent / \"src\"\n\nVU.add_library(\"lib\").add_source_files([SRC_PATH / \"*.vhd\", SRC_PATH / \"**\" / \"*.vhd\"])\n\nVU.set_sim_option(\"modelsim.init_file.gui\", \"runall_addwave.do\")\n\nVU.main()\n",
+      "language": "python",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "repo": "lowRISC/opentitan",
+  "before_ref": "6766fc8a0f11f2000129f58d8f0c5dd8e7baf000",
+  "after_ref": "7a37e154129f72b132e5b9e69c57aeb38b6112bf",
+  "bug_category": "synthesis_error",
+  "query": "fix rtl language:SystemVerilog",
+  "commit_message": "[usbdev] rx_fifo_sequence [usbdev] rx_fifo_sequence This is the draft PR for rx_fifo sequence. It is just for code review.\r\n@jdonjdon kindly review it. Thanks\r\n",
+  "file_count": 2,
+  "examples": [
+    {
+      "repo": "lowRISC/opentitan",
+      "filename": "hw/ip/usbdev/dv/env/seq_lib/usbdev_out_trans_nak_vseq.sv",
+      "before_ref": "6766fc8a0f11f2000129f58d8f0c5dd8e7baf000",
+      "after_ref": "7a37e154129f72b132e5b9e69c57aeb38b6112bf",
+      "bug_category": "synthesis_error",
+      "query": "fix rtl language:SystemVerilog",
+      "commit_message": "[usbdev] rx_fifo_sequence [usbdev] rx_fifo_sequence This is the draft PR for rx_fifo sequence. It is just for code review.\r\n@jdonjdon kindly review it. Thanks\r\n",
+      "patch": "@@ -10,8 +10,6 @@ class usbdev_out_trans_nak_vseq extends usbdev_base_vseq;\n \n   task body();\n     super.dut_init(\"HARD\");\n-    cfg.clk_rst_vif.wait_clks(200);\n-    clear_all_interrupts();\n     // Configure out transaction\n     configure_out_trans();\n     // Clear RX Out",
+      "before_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n\n// Out trans nak vseq\nclass usbdev_out_trans_nak_vseq extends usbdev_base_vseq;\n  `uvm_object_utils(usbdev_out_trans_nak_vseq)\n\n  `uvm_object_new\n\n  task body();\n    super.dut_init(\"HARD\");\n    cfg.clk_rst_vif.wait_clks(200);\n    clear_all_interrupts();\n    // Configure out transaction\n    configure_out_trans();\n    // Clear RX Out\n    ral.rxenable_out[0].out[endp].set(1'b0);\n    csr_update(ral.rxenable_out[0]);\n    // Out token packet followed by a data packet\n    call_token_seq(PktTypeToken, PidTypeOutToken, endp);\n    cfg.clk_rst_vif.wait_clks(20);\n    call_data_seq(PktTypeData, PidTypeData0, rand_or_not, num_of_bytes);\n    cfg.clk_rst_vif.wait_clks(20);\n    get_response(m_response_item);\n    $cast(m_usb20_item, m_response_item);\n    get_out_response_from_device(m_usb20_item, PidTypeNak);\n  endtask\nendclass\n",
+      "after_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n\n// Out trans nak vseq\nclass usbdev_out_trans_nak_vseq extends usbdev_base_vseq;\n  `uvm_object_utils(usbdev_out_trans_nak_vseq)\n\n  `uvm_object_new\n\n  task body();\n    super.dut_init(\"HARD\");\n    // Configure out transaction\n    configure_out_trans();\n    // Clear RX Out\n    ral.rxenable_out[0].out[endp].set(1'b0);\n    csr_update(ral.rxenable_out[0]);\n    // Out token packet followed by a data packet\n    call_token_seq(PktTypeToken, PidTypeOutToken, endp);\n    cfg.clk_rst_vif.wait_clks(20);\n    call_data_seq(PktTypeData, PidTypeData0, rand_or_not, num_of_bytes);\n    cfg.clk_rst_vif.wait_clks(20);\n    get_response(m_response_item);\n    $cast(m_usb20_item, m_response_item);\n    get_out_response_from_device(m_usb20_item, PidTypeNak);\n  endtask\nendclass\n",
+      "language": "systemverilog",
+      "additions": 0,
+      "deletions": 2,
+      "validation": "clean"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "filename": "hw/ip/usbdev/dv/env/seq_lib/usbdev_vseq_list.sv",
+      "before_ref": "6766fc8a0f11f2000129f58d8f0c5dd8e7baf000",
+      "after_ref": "7a37e154129f72b132e5b9e69c57aeb38b6112bf",
+      "bug_category": "synthesis_error",
+      "query": "fix rtl language:SystemVerilog",
+      "commit_message": "[usbdev] rx_fifo_sequence [usbdev] rx_fifo_sequence This is the draft PR for rx_fifo sequence. It is just for code review.\r\n@jdonjdon kindly review it. Thanks\r\n",
+      "patch": "@@ -19,3 +19,4 @@\n `include \"usbdev_out_stall_vseq.sv\"\n `include \"usbdev_out_trans_nak_vseq.sv\"\n `include \"usbdev_fifo_rst_vseq.sv\"\n+`include \"usbdev_rx_fifo_vseq.sv\"",
+      "before_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n\n`include \"usbdev_base_vseq.sv\"\n`include \"usbdev_common_vseq.sv\"\n`include \"usbdev_csr_test_vseq.sv\"\n`include \"usbdev_smoke_vseq.sv\"\n`include \"usbdev_pkt_received_vseq.sv\"\n`include \"usbdev_av_buffer_vseq.sv\"\n`include \"usbdev_setup_trans_ignored_vseq.sv\"\n`include \"usbdev_pkt_sent_vseq.sv\"\n`include \"usbdev_nak_trans_vseq.sv\"\n`include \"usbdev_enable_vseq.sv\"\n`include \"usbdev_in_trans_vseq.sv\"\n`include \"usbdev_random_length_out_transaction_vseq.sv\"\n`include \"usbdev_min_length_out_transaction_vseq.sv\"\n`include \"usbdev_max_length_out_transaction_vseq.sv\"\n`include \"usbdev_out_stall_vseq.sv\"\n`include \"usbdev_out_trans_nak_vseq.sv\"\n`include \"usbdev_fifo_rst_vseq.sv\"\n",
+      "after_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n\n`include \"usbdev_base_vseq.sv\"\n`include \"usbdev_common_vseq.sv\"\n`include \"usbdev_csr_test_vseq.sv\"\n`include \"usbdev_smoke_vseq.sv\"\n`include \"usbdev_pkt_received_vseq.sv\"\n`include \"usbdev_av_buffer_vseq.sv\"\n`include \"usbdev_setup_trans_ignored_vseq.sv\"\n`include \"usbdev_pkt_sent_vseq.sv\"\n`include \"usbdev_nak_trans_vseq.sv\"\n`include \"usbdev_enable_vseq.sv\"\n`include \"usbdev_in_trans_vseq.sv\"\n`include \"usbdev_random_length_out_transaction_vseq.sv\"\n`include \"usbdev_min_length_out_transaction_vseq.sv\"\n`include \"usbdev_max_length_out_transaction_vseq.sv\"\n`include \"usbdev_out_stall_vseq.sv\"\n`include \"usbdev_out_trans_nak_vseq.sv\"\n`include \"usbdev_fifo_rst_vseq.sv\"\n`include \"usbdev_rx_fifo_vseq.sv\"\n",
+      "language": "systemverilog",
+      "additions": 1,
+      "deletions": 0,
+      "validation": "trivial_diff"
+    }
+  ]
+}

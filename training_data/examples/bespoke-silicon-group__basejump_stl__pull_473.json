@@ -1,0 +1,27 @@
+{
+  "repo": "bespoke-silicon-group/basejump_stl",
+  "before_ref": "b894dbdb3f1c8fd7b4b45b6e98dc190ba98cc95f",
+  "after_ref": "5d7a8fcdd658293f7055ec3757519dbb8484fd08",
+  "bug_category": "port_mismatch",
+  "query": "signal width mismatch language:Verilog",
+  "commit_message": "[WIP] 1RW bit-masked RAM using 1R1W RAM [WIP] 1RW bit-masked RAM using 1R1W RAM PR for design discussion. The testing infrastructure needs work; I'm on it.",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "bespoke-silicon-group/basejump_stl",
+      "filename": "hard/ultrascale_plus/bsg_misc/bsg_mul_add_unsigned.v",
+      "before_ref": "b894dbdb3f1c8fd7b4b45b6e98dc190ba98cc95f",
+      "after_ref": "5d7a8fcdd658293f7055ec3757519dbb8484fd08",
+      "bug_category": "port_mismatch",
+      "query": "signal width mismatch language:Verilog",
+      "commit_message": "[WIP] 1RW bit-masked RAM using 1R1W RAM [WIP] 1RW bit-masked RAM using 1R1W RAM PR for design discussion. The testing infrastructure needs work; I'm on it.",
+      "patch": "@@ -24,7 +24,7 @@ module bsg_mul_add_unsigned #(\n     ,output [width_o_p-1 : 0] o\n     );\n \n-  initial assert (pipeline_p > 2) else $warning (\"%m: pipeline_p is set quite low; most likely frequency will be impacted\")\n+  initial assert (pipeline_p > 2) else $warning (\"%m: pipeline_p is set quite low; most likely frequency will be impacted\");\n     localparam pre_pipeline_lp = pipeline_p > 2 ? 1 : 0;\n     localparam post_pipeline_lp = pipeline_p > 2 ? pipeline_p -1 : pipeline_p; //for excess\n ",
+      "before_code": "// 21 Jul 2021\n// A special module for use with HardFloat's mulAddRecFN for \n// easy absorption of pipeline stages by the DSPs that get\n// synthesised in some FPGAs. This helps in retiming the \n// paths in FPGA implementations as only immediate registers \n// are absorbed, and global retiming does not seem to do this.\n//\n// For Zynq 7020, pipeline_p = 3\n\n`include \"bsg_defines.v\"\n  \nmodule bsg_mul_add_unsigned #(\n    parameter  `BSG_INV_PARAM(width_a_p)\n    ,parameter `BSG_INV_PARAM(width_b_p)\n    ,parameter width_c_p = width_a_p + width_b_p\n    ,parameter width_o_p = `BSG_SAFE_CLOG2( ((1 << width_a_p) - 1) * ((1 << width_b_p) - 1) + \n                                                    ((1 << width_c_p)-1) + 1 )\n    ,parameter pipeline_p = 0\n  ) (\n    input clk_i\n    ,input [width_a_p-1 : 0] a_i\n    ,input [width_b_p-1 : 0] b_i\n    ,input [width_c_p-1 : 0] c_i\n    ,output [width_o_p-1 : 0] o\n    );\n\n  initial assert (pipeline_p > 2) else $warning (\"%m: pipeline_p is set quite low; most likely frequency will be impacted\")\n    localparam pre_pipeline_lp = pipeline_p > 2 ? 1 : 0;\n    localparam post_pipeline_lp = pipeline_p > 2 ? pipeline_p -1 : pipeline_p; //for excess\n\n    wire [width_a_p-1:0] a_r;\n    wire [width_b_p-1:0] b_r;\n    wire [width_c_p-1:0] c_r;\n\n    bsg_dff_chain #(width_a_p + width_b_p + width_c_p, pre_pipeline_lp)\n        pre_mul_add (\n            .clk_i(clk_i)\n            ,.data_i({a_i, b_i, c_i})\n            ,.data_o({a_r, b_r, c_r})\n        );\n\n    wire [width_o_p-1:0] o_r = a_r * b_r + c_r;\n\n    bsg_dff_chain #(width_o_p, post_pipeline_lp)\n        post_mul_add (\n            .clk_i(clk_i)\n            ,.data_i(o_r)\n            ,.data_o(o)\n        );\nendmodule\n\n`BSG_ABSTRACT_MODULE(bsg_mul_add_unsigned)\n",
+      "after_code": "// 21 Jul 2021\n// A special module for use with HardFloat's mulAddRecFN for \n// easy absorption of pipeline stages by the DSPs that get\n// synthesised in some FPGAs. This helps in retiming the \n// paths in FPGA implementations as only immediate registers \n// are absorbed, and global retiming does not seem to do this.\n//\n// For Zynq 7020, pipeline_p = 3\n\n`include \"bsg_defines.v\"\n  \nmodule bsg_mul_add_unsigned #(\n    parameter  `BSG_INV_PARAM(width_a_p)\n    ,parameter `BSG_INV_PARAM(width_b_p)\n    ,parameter width_c_p = width_a_p + width_b_p\n    ,parameter width_o_p = `BSG_SAFE_CLOG2( ((1 << width_a_p) - 1) * ((1 << width_b_p) - 1) + \n                                                    ((1 << width_c_p)-1) + 1 )\n    ,parameter pipeline_p = 0\n  ) (\n    input clk_i\n    ,input [width_a_p-1 : 0] a_i\n    ,input [width_b_p-1 : 0] b_i\n    ,input [width_c_p-1 : 0] c_i\n    ,output [width_o_p-1 : 0] o\n    );\n\n  initial assert (pipeline_p > 2) else $warning (\"%m: pipeline_p is set quite low; most likely frequency will be impacted\");\n    localparam pre_pipeline_lp = pipeline_p > 2 ? 1 : 0;\n    localparam post_pipeline_lp = pipeline_p > 2 ? pipeline_p -1 : pipeline_p; //for excess\n\n    wire [width_a_p-1:0] a_r;\n    wire [width_b_p-1:0] b_r;\n    wire [width_c_p-1:0] c_r;\n\n    bsg_dff_chain #(width_a_p + width_b_p + width_c_p, pre_pipeline_lp)\n        pre_mul_add (\n            .clk_i(clk_i)\n            ,.data_i({a_i, b_i, c_i})\n            ,.data_o({a_r, b_r, c_r})\n        );\n\n    wire [width_o_p-1:0] o_r = a_r * b_r + c_r;\n\n    bsg_dff_chain #(width_o_p, post_pipeline_lp)\n        post_mul_add (\n            .clk_i(clk_i)\n            ,.data_i(o_r)\n            ,.data_o(o)\n        );\nendmodule\n\n`BSG_ABSTRACT_MODULE(bsg_mul_add_unsigned)\n",
+      "language": "verilog",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

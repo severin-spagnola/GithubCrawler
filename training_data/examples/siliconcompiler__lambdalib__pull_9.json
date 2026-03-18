@@ -1,0 +1,27 @@
+{
+  "repo": "siliconcompiler/lambdalib",
+  "before_ref": "565c14146029b1e4f361e542d20bfdd2157ce7a0",
+  "after_ref": "6a19e17b656cdb6197a70712c445d3470c3ff96c",
+  "bug_category": "synthesis_error",
+  "query": "fix rtl language:Verilog",
+  "commit_message": "replace tran with pt block replace tran with pt block Yosis does not support tran so replacing with pt module (same as ioshort).\r\nPeter - please confirm it works and we'll merge.",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "siliconcompiler/lambdalib",
+      "filename": "iolib/rtl/la_ioanalog.v",
+      "before_ref": "565c14146029b1e4f361e542d20bfdd2157ce7a0",
+      "after_ref": "6a19e17b656cdb6197a70712c445d3470c3ff96c",
+      "bug_category": "synthesis_error",
+      "query": "fix rtl language:Verilog",
+      "commit_message": "replace tran with pt block replace tran with pt block Yosis does not support tran so replacing with pt module (same as ioshort).\r\nPeter - please confirm it works and we'll merge.",
+      "patch": "@@ -35,9 +35,10 @@ module la_ioanalog\n    assign aio[2] = pad;\n \n `else\n-   tran t0(pad, aio[0]);\n-   tran t1(pad, aio[1]);\n-   tran t2(pad, aio[2]);\n+   // replace tran with alias in order to work in Yosis\n+   la_pt la_pt_0(pad,aio[0]);\n+   la_pt la_pt_1(pad,aio[1]);\n+   la_pt la_pt_2(pad,aio[2]);\n `endif\n \n endmodule",
+      "before_code": "/*****************************************************************************\n * Function: IO analog pass-through cell\n * Copyright: Lambda Project Authors. ALl rights Reserved.\n * License:  MIT (see LICENSE file in Lambda repository)\n *\n * Docs:\n *\n * aio[0] = pass through from pad (with esd clamp)\n * aio[1] = small series resistance\n * aio[2] = big series resistance\n *\n ****************************************************************************/\nmodule la_ioanalog\n  #(\n    parameter TYPE = \"DEFAULT\", // cell type\n    parameter SIDE  = \"NO\",     // \"NO\", \"SO\", \"EA\", \"WE\"\n    parameter RINGW =  8        // width of io ring\n    )\n   (// io pad signals\n    inout \t      pad, // bidirectional pad signal\n    inout \t      vdd, // core supply\n    inout \t      vss, // core ground\n    inout \t      vddio, // io supply\n    inout \t      vssio, // io ground\n    inout [RINGW-1:0] ioring, // generic io-ring interface\n    // core interface\n    inout [2:0]       aio // analog core signal\n    );\n\n\n`ifdef VERILATOR\n   // TODO!: input only for verilator bases simulation\n   assign aio[0] = pad;\n   assign aio[1] = pad;\n   assign aio[2] = pad;\n\n`else\n   tran t0(pad, aio[0]);\n   tran t1(pad, aio[1]);\n   tran t2(pad, aio[2]);\n`endif\n\nendmodule\n",
+      "after_code": "/*****************************************************************************\n * Function: IO analog pass-through cell\n * Copyright: Lambda Project Authors. ALl rights Reserved.\n * License:  MIT (see LICENSE file in Lambda repository)\n *\n * Docs:\n *\n * aio[0] = pass through from pad (with esd clamp)\n * aio[1] = small series resistance\n * aio[2] = big series resistance\n *\n ****************************************************************************/\nmodule la_ioanalog\n  #(\n    parameter TYPE = \"DEFAULT\", // cell type\n    parameter SIDE  = \"NO\",     // \"NO\", \"SO\", \"EA\", \"WE\"\n    parameter RINGW =  8        // width of io ring\n    )\n   (// io pad signals\n    inout \t      pad, // bidirectional pad signal\n    inout \t      vdd, // core supply\n    inout \t      vss, // core ground\n    inout \t      vddio, // io supply\n    inout \t      vssio, // io ground\n    inout [RINGW-1:0] ioring, // generic io-ring interface\n    // core interface\n    inout [2:0]       aio // analog core signal\n    );\n\n\n`ifdef VERILATOR\n   // TODO!: input only for verilator bases simulation\n   assign aio[0] = pad;\n   assign aio[1] = pad;\n   assign aio[2] = pad;\n\n`else\n   // replace tran with alias in order to work in Yosis\n   la_pt la_pt_0(pad,aio[0]);\n   la_pt la_pt_1(pad,aio[1]);\n   la_pt la_pt_2(pad,aio[2]);\n`endif\n\nendmodule\n",
+      "language": "verilog",
+      "additions": 4,
+      "deletions": 3,
+      "validation": "clean"
+    }
+  ]
+}

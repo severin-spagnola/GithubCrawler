@@ -1,0 +1,27 @@
+{
+  "repo": "ElektroMannen/Semesterprosjekt-UART-modul",
+  "before_ref": "cd425999d8ff3b922bafa933c665ae89304d46a1",
+  "after_ref": "bc5d19e0a0fc617b08d661bf5199b8e3bcfc313a",
+  "bug_category": "port_mismatch",
+  "query": "fix testbench",
+  "commit_message": "Bug fix baud gen and simple baud gen testbench",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "ElektroMannen/Semesterprosjekt-UART-modul",
+      "filename": "FPGA/rtl/u_baudgen.vhd",
+      "before_ref": "cd425999d8ff3b922bafa933c665ae89304d46a1",
+      "after_ref": "bc5d19e0a0fc617b08d661bf5199b8e3bcfc313a",
+      "bug_category": "port_mismatch",
+      "query": "fix testbench",
+      "commit_message": "Bug fix baud gen and simple baud gen testbench",
+      "patch": "@@ -22,7 +22,7 @@ begin\n \t\tvariable count: natural range 0 to oversample_8x-1; --8x oversample (50_000_000/(9600*8))\n \tbegin\n \t\tif rising_edge(clk) then\n-\t\t\tif rst_n = '1' then\n+\t\t\tif rst_n = '0' then\n \t\t\t\ttick_8x <= '0';\n \t\t\telsif count=(oversample_8x-1) then\n \t\t\t\tcount := 0;",
+      "before_code": "library ieee; \nuse ieee.std_logic_1164.all;\nuse ieee.numeric_std.all;\n\nentity u_baudgen is\n\tgeneric (oversample_8x: natural := 651); --tick every 651 device clock cycle\n\tport (\n\t\tclk\t\t:\tin  std_logic;\n\t\trst_n\t\t:\tin  std_logic;\n\t\ttick\t\t:\tout std_logic\n\t);\nend entity;\n\n\narchitecture rtl of u_baudgen is\n--signals\nsignal tick_8x: std_logic;\n\nbegin\n\t--Generate baud-oversample tick\n\tp_main: process (clk, rst_n)\n\t\tvariable count: natural range 0 to oversample_8x-1; --8x oversample (50_000_000/(9600*8))\n\tbegin\n\t\tif rising_edge(clk) then\n\t\t\tif rst_n = '1' then\n\t\t\t\ttick_8x <= '0';\n\t\t\telsif count=(oversample_8x-1) then\n\t\t\t\tcount := 0;\n\t\t\t\ttick_8x <= '1';\n\t\t\telse\n\t\t\t\tcount := count + 1;\n\t\t\t\ttick_8x <= '0';\n\t\t\tend if;\n\t\tend if;\n\tend process;\n\t\n\ttick <= tick_8x;\n\t\nend architecture;\n",
+      "after_code": "library ieee; \nuse ieee.std_logic_1164.all;\nuse ieee.numeric_std.all;\n\nentity u_baudgen is\n\tgeneric (oversample_8x: natural := 651); --tick every 651 device clock cycle\n\tport (\n\t\tclk\t\t:\tin  std_logic;\n\t\trst_n\t\t:\tin  std_logic;\n\t\ttick\t\t:\tout std_logic\n\t);\nend entity;\n\n\narchitecture rtl of u_baudgen is\n--signals\nsignal tick_8x: std_logic;\n\nbegin\n\t--Generate baud-oversample tick\n\tp_main: process (clk, rst_n)\n\t\tvariable count: natural range 0 to oversample_8x-1; --8x oversample (50_000_000/(9600*8))\n\tbegin\n\t\tif rising_edge(clk) then\n\t\t\tif rst_n = '0' then\n\t\t\t\ttick_8x <= '0';\n\t\t\telsif count=(oversample_8x-1) then\n\t\t\t\tcount := 0;\n\t\t\t\ttick_8x <= '1';\n\t\t\telse\n\t\t\t\tcount := count + 1;\n\t\t\t\ttick_8x <= '0';\n\t\t\tend if;\n\t\tend if;\n\tend process;\n\t\n\ttick <= tick_8x;\n\t\nend architecture;\n",
+      "language": "vhdl",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

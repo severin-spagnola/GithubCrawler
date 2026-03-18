@@ -1,0 +1,27 @@
+{
+  "repo": "lowRISC/opentitan",
+  "before_ref": "be8fca144f8d0a01c68753cbcd9a36a58b5a9687",
+  "after_ref": "9849431ef1fa6fa24ee7afb9031930160b11a07d",
+  "bug_category": "port_mismatch",
+  "query": "fix port map language:SystemVerilog",
+  "commit_message": "[sw,tests] Test the wake from sleep using the ADC ctrl for debug cable wakeup [sw,tests] Test the wake from sleep using the ADC ctrl for debug cable wakeup For test: chip_sw_adc_ctrl_sleep_debug_cable_wakeup.\r\n\r\nConfigures the ADC_CTRL and filters then enters deep sleep. Checks that generated stimulus within the\r\nfilters' configured ranges provides a wakeup signal and the system reboots. After reboot checks the\r\nwakeup reason and the triggered values in the ADC_CTRL.\r\n\r\nSigned-off-by: Dave Willi",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "lowRISC/opentitan",
+      "filename": "hw/top_earlgrey/dv/env/seq_lib/chip_vseq_list.sv",
+      "before_ref": "be8fca144f8d0a01c68753cbcd9a36a58b5a9687",
+      "after_ref": "9849431ef1fa6fa24ee7afb9031930160b11a07d",
+      "bug_category": "port_mismatch",
+      "query": "fix port map language:SystemVerilog",
+      "commit_message": "[sw,tests] Test the wake from sleep using the ADC ctrl for debug cable wakeup [sw,tests] Test the wake from sleep using the ADC ctrl for debug cable wakeup For test: chip_sw_adc_ctrl_sleep_debug_cable_wakeup.\r\n\r\nConfigures the ADC_CTRL and filters then enters deep sleep. Checks that generated stimulus within the\r\nfilters' configured ranges provides a wakeup signal and the system reboots. After reboot checks the\r\nwakeup reason and the triggered values in the ADC_CTRL.\r\n\r\nSigned-off-by: Dave Willi",
+      "patch": "@@ -28,3 +28,4 @@\n `include \"chip_sw_ast_clk_outputs_vseq.sv\"\n `include \"chip_sw_sensor_ctrl_status_intr_vseq.sv\"\n `include \"chip_sw_pwrmgr_deep_sleep_all_wake_ups_vseq.sv\"\n+`include \"chip_sw_adc_ctrl_sleep_debug_cable_wakeup_vseq.sv\"",
+      "before_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n\n`include \"chip_callback_vseq.sv\"\n`include \"chip_base_vseq.sv\"\n`include \"chip_stub_cpu_base_vseq.sv\"\n`include \"chip_common_vseq.sv\"\n`include \"chip_jtag_csr_rw_vseq.sv\"\n`include \"chip_jtag_mem_vseq.sv\"\n// This needs to be listed prior to all sequences that derive from it.\n`include \"chip_sw_base_vseq.sv\"\n`include \"chip_sw_full_aon_reset_vseq.sv\"\n`include \"chip_sw_main_power_glitch_vseq.sv\"\n`include \"chip_sw_uart_tx_rx_vseq.sv\"\n`include \"chip_sw_uart_rand_baudrate_vseq.sv\"\n`include \"chip_sw_gpio_smoke_vseq.sv\"\n`include \"chip_sw_gpio_vseq.sv\"\n`include \"chip_sw_flash_ctrl_lc_rw_en_vseq.sv\"\n`include \"chip_sw_flash_rma_unlocked_vseq.sv\"\n`include \"chip_sw_lc_ctrl_transition_vseq.sv\"\n`include \"chip_sw_spi_tx_rx_vseq.sv\"\n`include \"chip_sw_rom_ctrl_integrity_check_vseq.sv\"\n`include \"chip_sw_sram_ctrl_execution_main_vseq.sv\"\n`include \"chip_sw_sram_ctrl_scrambled_access_vseq.sv\"\n`include \"chip_sw_pwm_pulses_vseq.sv\"\n`include \"chip_sw_keymgr_key_derivation_vseq.sv\"\n`include \"chip_sw_ast_clk_outputs_vseq.sv\"\n`include \"chip_sw_sensor_ctrl_status_intr_vseq.sv\"\n`include \"chip_sw_pwrmgr_deep_sleep_all_wake_ups_vseq.sv\"\n",
+      "after_code": "// Copyright lowRISC contributors.\n// Licensed under the Apache License, Version 2.0, see LICENSE for details.\n// SPDX-License-Identifier: Apache-2.0\n\n`include \"chip_callback_vseq.sv\"\n`include \"chip_base_vseq.sv\"\n`include \"chip_stub_cpu_base_vseq.sv\"\n`include \"chip_common_vseq.sv\"\n`include \"chip_jtag_csr_rw_vseq.sv\"\n`include \"chip_jtag_mem_vseq.sv\"\n// This needs to be listed prior to all sequences that derive from it.\n`include \"chip_sw_base_vseq.sv\"\n`include \"chip_sw_full_aon_reset_vseq.sv\"\n`include \"chip_sw_main_power_glitch_vseq.sv\"\n`include \"chip_sw_uart_tx_rx_vseq.sv\"\n`include \"chip_sw_uart_rand_baudrate_vseq.sv\"\n`include \"chip_sw_gpio_smoke_vseq.sv\"\n`include \"chip_sw_gpio_vseq.sv\"\n`include \"chip_sw_flash_ctrl_lc_rw_en_vseq.sv\"\n`include \"chip_sw_flash_rma_unlocked_vseq.sv\"\n`include \"chip_sw_lc_ctrl_transition_vseq.sv\"\n`include \"chip_sw_spi_tx_rx_vseq.sv\"\n`include \"chip_sw_rom_ctrl_integrity_check_vseq.sv\"\n`include \"chip_sw_sram_ctrl_execution_main_vseq.sv\"\n`include \"chip_sw_sram_ctrl_scrambled_access_vseq.sv\"\n`include \"chip_sw_pwm_pulses_vseq.sv\"\n`include \"chip_sw_keymgr_key_derivation_vseq.sv\"\n`include \"chip_sw_ast_clk_outputs_vseq.sv\"\n`include \"chip_sw_sensor_ctrl_status_intr_vseq.sv\"\n`include \"chip_sw_pwrmgr_deep_sleep_all_wake_ups_vseq.sv\"\n`include \"chip_sw_adc_ctrl_sleep_debug_cable_wakeup_vseq.sv\"\n",
+      "language": "systemverilog",
+      "additions": 1,
+      "deletions": 0,
+      "validation": "trivial_diff"
+    }
+  ]
+}

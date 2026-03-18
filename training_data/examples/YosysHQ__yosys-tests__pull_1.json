@@ -1,0 +1,27 @@
+{
+  "repo": "YosysHQ/yosys-tests",
+  "before_ref": "3efc101f8729e3a433bf2c1ec3c407616aefc41f",
+  "after_ref": "3adc2f8db75aca0aa19fe556332f13c4f88a6cbd",
+  "bug_category": "sensitivity_list",
+  "query": "fix always block\" language:verilog",
+  "commit_message": "First tests for pilot project First tests for pilot project This tests are for the next task list:\r\n\r\nFor a pilot project there are couple of tasks.\r\n1. FSM with unreachable state\r\nOn http://scratch.clifford.at/coverage_html/passes/fsm/fsm_opt.cc.gcov.html at line 56 it can be\r\nseen that code never reach this part. Idea is to generate Verilog code that will contain states\r\nthat could not be reached.\r\n2. Optimization of FSM when signal connected to input/input and output\r\nOn same code part starti",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "YosysHQ/yosys-tests",
+      "filename": "simple/Makefile",
+      "before_ref": "3efc101f8729e3a433bf2c1ec3c407616aefc41f",
+      "after_ref": "3adc2f8db75aca0aa19fe556332f13c4f88a6cbd",
+      "bug_category": "sensitivity_list",
+      "query": "fix always block\" language:verilog",
+      "commit_message": "First tests for pilot project First tests for pilot project This tests are for the next task list:\r\n\r\nFor a pilot project there are couple of tasks.\r\n1. FSM with unreachable state\r\nOn http://scratch.clifford.at/coverage_html/passes/fsm/fsm_opt.cc.gcov.html at line 56 it can be\r\nseen that code never reach this part. Idea is to generate Verilog code that will contain states\r\nthat could not be reached.\r\n2. Optimization of FSM when signal connected to input/input and output\r\nOn same code part starti",
+      "patch": "@@ -19,4 +19,35 @@ endef\n \n $(eval $(call template,alu,gates luts))\n \n+# DFF with constant drivers\n+$(eval $(call template,dff_d0, dff))\n+$(eval $(call template,dffr, dff))\n+$(eval $(call template,dffc, dff))\n+$(eval $(call template,dffcp, dff))\n+$(eval $(call template,dffsr, dff))\n+\n+# Tri-state buffers general use\n+$(eval $(call template,tristate, tristate))\n+$(eval $(call template,tristate_case, tristate))\n+$(eval $(call template,tristate_if, tristate))\n+$(eval $(call template,tristate_proc_asmt, tristate))\n+\n+# Tri-state buffers with constant\n+$(eval $(call template,tristate_const_0, tristate))\n+$(eval $(call template,tristate_const_1, tristate))\n+$(eval $(call template,tristate_const_data, tristate))\n+\n+# Demoting I/O port\n+$(eval $(call template,inout_port, tristate))\n+$(eval $(call template,inout_port_demote, tristate))\n+\n+# MACC cells\n+$(eval $(call template,macc, macc))\n+\n+#FSM with unreachable state\n+$(eval $(call template,fsm_unreach, fsm))\n+# Optimization of FSM when signal connected to input/input and output\n+$(eval $(call template,fsm, fsm))\n+$(eval $(call template,fsm_opt, fsm))\n+\n .PHONY: all clean",
+      "before_code": "all: work\n\ttouch .stamp\n\nclean::\n\trm -f .stamp\n\ndefine template\n$(foreach design,$(1),\n$(foreach script,verify falsify $(2),\nwork:: $(design)/work_$(script)/.stamp\n\n$(design)/work_$(script)/.stamp:\n\tbash run.sh $(design) $(script)\n\nclean::\n\trm -rf $(design)/work_$(script)\n))\nendef\n\n$(eval $(call template,alu,gates luts))\n\n.PHONY: all clean\n",
+      "after_code": "all: work\n\ttouch .stamp\n\nclean::\n\trm -f .stamp\n\ndefine template\n$(foreach design,$(1),\n$(foreach script,verify falsify $(2),\nwork:: $(design)/work_$(script)/.stamp\n\n$(design)/work_$(script)/.stamp:\n\tbash run.sh $(design) $(script)\n\nclean::\n\trm -rf $(design)/work_$(script)\n))\nendef\n\n$(eval $(call template,alu,gates luts))\n\n# DFF with constant drivers\n$(eval $(call template,dff_d0, dff))\n$(eval $(call template,dffr, dff))\n$(eval $(call template,dffc, dff))\n$(eval $(call template,dffcp, dff))\n$(eval $(call template,dffsr, dff))\n\n# Tri-state buffers general use\n$(eval $(call template,tristate, tristate))\n$(eval $(call template,tristate_case, tristate))\n$(eval $(call template,tristate_if, tristate))\n$(eval $(call template,tristate_proc_asmt, tristate))\n\n# Tri-state buffers with constant\n$(eval $(call template,tristate_const_0, tristate))\n$(eval $(call template,tristate_const_1, tristate))\n$(eval $(call template,tristate_const_data, tristate))\n\n# Demoting I/O port\n$(eval $(call template,inout_port, tristate))\n$(eval $(call template,inout_port_demote, tristate))\n\n# MACC cells\n$(eval $(call template,macc, macc))\n\n#FSM with unreachable state\n$(eval $(call template,fsm_unreach, fsm))\n# Optimization of FSM when signal connected to input/input and output\n$(eval $(call template,fsm, fsm))\n$(eval $(call template,fsm_opt, fsm))\n\n.PHONY: all clean\n",
+      "language": "other",
+      "additions": 31,
+      "deletions": 0,
+      "validation": "clean"
+    }
+  ]
+}

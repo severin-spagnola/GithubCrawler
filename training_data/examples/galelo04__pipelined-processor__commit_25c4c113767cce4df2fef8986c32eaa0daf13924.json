@@ -1,0 +1,27 @@
+{
+  "repo": "galelo04/pipelined-processor",
+  "before_ref": "35df388533cbe60d1c50761caaea4866cca8436e",
+  "after_ref": "25c4c113767cce4df2fef8986c32eaa0daf13924",
+  "bug_category": "port_mismatch",
+  "query": "fix testbench",
+  "commit_message": "feat: add fetch stage (#8)\r\n\r\n* feat: add alu code\r\n\r\n* test: add testbench for alu\r\n\r\n* chore: edit the makefile to accept parameters for src file\r\n\r\n* test: add do file for compiling one file and its testbe",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "galelo04/pipelined-processor",
+      "filename": "src/stages/fetch.vhd",
+      "before_ref": "35df388533cbe60d1c50761caaea4866cca8436e",
+      "after_ref": "25c4c113767cce4df2fef8986c32eaa0daf13924",
+      "bug_category": "port_mismatch",
+      "query": "fix testbench",
+      "commit_message": "feat: add fetch stage (#8)\r\n\r\n* feat: add alu code\r\n\r\n* test: add testbench for alu\r\n\r\n* chore: edit the makefile to accept parameters for src file\r\n\r\n* test: add do file for compiling one file and its testbe",
+      "patch": "@@ -0,0 +1,70 @@\n+library ieee;\n+  use ieee.std_logic_1164.all;\n+  use ieee.numeric_std.all;\n+  use work.cpu_defs_pkg.all;\n+\n+entity fetch_stage is\n+  port (\n+    clk : in    std_logic;\n+    rst : in    std_logic;\n+\n+    -- signals inputs\n+    stall                   : in    std_logic;\n+    mem_to_pc_enable_in     : in    std_logic;\n+    jump_taken_from_execute : in    std_logic;\n+    jump_taken_from_decode  : in    std_logic;\n+\n+    -- data inputs\n+    jump_pc_in  : in    std_logic_vector(DATA_WIDTH - 1 downto 0); -- target pc  for jump (from decode)\n+    mem_data_in : in    std_logic_vector(DATA_WIDTH - 1 downto 0); -- pc read from memory\n+\n+    -- data outputs\n+    pc_out_plus_1 : out   std_logic_vector(DATA_WIDTH - 1 downto 0); -- propagate\n+    pc_out        : out   std_logic_vector(DATA_WIDTH - 1 downto 0)  -- access the next fetch from mem\n+  );\n+end entity fetch_stage;\n+\n+architecture fetch_stage_arch of fetch_stage is\n+\n+  -- Internal signals\n+  signal jump_take   : std_logic;\n+  signal pc_reg      : std_logic_vector(DATA_WIDTH - 1 downto 0) := (others => '0');\n+  signal pc_plus_1_s : std_logic_vector(DATA_WIDTH - 1 downto 0);\n+  signal pc_next     : std_logic_vector(DATA_WIDTH - 1 downto 0);\n+\n+begin\n+\n+  -- Compute pc + 1\n+  pc_plus_1_s <= std_logic_vector(unsigned(pc_reg) + 1);\n+\n+  jump_take   <= jump_taken_from_execute or jump_taken_from_decode;\n+\n+  u_prio : entity work.priority_pc_mux\n+    port map (\n+      rst              => rst,\n+      mem_to_pc_enable => mem_to_pc_enable_in,\n+      stall            => stall,\n+      jump_take        => jump_take,\n+      mem_pc           => mem_data_in,\n+      jump_pc          => jump_pc_in,\n+      current_pc       => pc_reg,\n+      pc_plus_1        => pc_plus_1_s,\n+      pc_next          => pc_next\n+    );\n+\n+  -- PC register process\n+  process (clk, rst) is\n+  begin\n+\n+    if (rst = '1') then\n+      pc_reg <= (others => '0'); -- async reset to zero\n+    elsif rising_edge(clk) then\n+      pc_reg <= pc_next;\n+    end if;\n+\n+  end process;\n+\n+  pc_out        <= pc_reg;\n+  pc_out_plus_1 <= pc_plus_1_s;\n+\n+end architecture fetch_stage_arch;",
+      "before_code": null,
+      "after_code": "library ieee;\n  use ieee.std_logic_1164.all;\n  use ieee.numeric_std.all;\n  use work.cpu_defs_pkg.all;\n\nentity fetch_stage is\n  port (\n    clk : in    std_logic;\n    rst : in    std_logic;\n\n    -- signals inputs\n    stall                   : in    std_logic;\n    mem_to_pc_enable_in     : in    std_logic;\n    jump_taken_from_execute : in    std_logic;\n    jump_taken_from_decode  : in    std_logic;\n\n    -- data inputs\n    jump_pc_in  : in    std_logic_vector(DATA_WIDTH - 1 downto 0); -- target pc  for jump (from decode)\n    mem_data_in : in    std_logic_vector(DATA_WIDTH - 1 downto 0); -- pc read from memory\n\n    -- data outputs\n    pc_out_plus_1 : out   std_logic_vector(DATA_WIDTH - 1 downto 0); -- propagate\n    pc_out        : out   std_logic_vector(DATA_WIDTH - 1 downto 0)  -- access the next fetch from mem\n  );\nend entity fetch_stage;\n\narchitecture fetch_stage_arch of fetch_stage is\n\n  -- Internal signals\n  signal jump_take   : std_logic;\n  signal pc_reg      : std_logic_vector(DATA_WIDTH - 1 downto 0) := (others => '0');\n  signal pc_plus_1_s : std_logic_vector(DATA_WIDTH - 1 downto 0);\n  signal pc_next     : std_logic_vector(DATA_WIDTH - 1 downto 0);\n\nbegin\n\n  -- Compute pc + 1\n  pc_plus_1_s <= std_logic_vector(unsigned(pc_reg) + 1);\n\n  jump_take   <= jump_taken_from_execute or jump_taken_from_decode;\n\n  u_prio : entity work.priority_pc_mux\n    port map (\n      rst              => rst,\n      mem_to_pc_enable => mem_to_pc_enable_in,\n      stall            => stall,\n      jump_take        => jump_take,\n      mem_pc           => mem_data_in,\n      jump_pc          => jump_pc_in,\n      current_pc       => pc_reg,\n      pc_plus_1        => pc_plus_1_s,\n      pc_next          => pc_next\n    );\n\n  -- PC register process\n  process (clk, rst) is\n  begin\n\n    if (rst = '1') then\n      pc_reg <= (others => '0'); -- async reset to zero\n    elsif rising_edge(clk) then\n      pc_reg <= pc_next;\n    end if;\n\n  end process;\n\n  pc_out        <= pc_reg;\n  pc_out_plus_1 <= pc_plus_1_s;\n\nend architecture fetch_stage_arch;\n",
+      "language": "vhdl",
+      "additions": 70,
+      "deletions": 0,
+      "validation": "partial"
+    }
+  ]
+}

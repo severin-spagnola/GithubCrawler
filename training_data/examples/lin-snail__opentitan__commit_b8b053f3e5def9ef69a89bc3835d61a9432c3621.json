@@ -1,0 +1,27 @@
+{
+  "repo": "lin-snail/opentitan",
+  "before_ref": "8888540036f453a40d23e345064e1af5eb644210",
+  "after_ref": "b8b053f3e5def9ef69a89bc3835d61a9432c3621",
+  "bug_category": "other",
+  "query": "simulation synthesis mismatch",
+  "commit_message": "Require Vivado 2020.2\n\nSwitch to Vivado 2020.2 as minimum requirement. This version fixes a\ncritical synthesis mismatch bug, as discussed in more detail at\nhttps://forums.xilinx.com/t5/Synthesis/Simul",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "lin-snail/opentitan",
+      "filename": "tool_requirements.py",
+      "before_ref": "8888540036f453a40d23e345064e1af5eb644210",
+      "after_ref": "b8b053f3e5def9ef69a89bc3835d61a9432c3621",
+      "bug_category": "other",
+      "query": "simulation synthesis mismatch",
+      "commit_message": "Require Vivado 2020.2\n\nSwitch to Vivado 2020.2 as minimum requirement. This version fixes a\ncritical synthesis mismatch bug, as discussed in more detail at\nhttps://forums.xilinx.com/t5/Synthesis/Simul",
+      "patch": "@@ -42,7 +42,7 @@\n         'as_needed': True\n     },\n     'vivado': {\n-        'min_version': '2020.1',\n+        'min_version': '2020.2',\n         'as_needed': True\n     },\n }",
+      "before_code": "# Copyright lowRISC contributors.\n# Licensed under the Apache License, Version 2.0, see LICENSE for details.\n# SPDX-License-Identifier: Apache-2.0\n\n# Version requirements for various tools. Checked by tooling (e.g. fusesoc),\n# and inserted into the documentation.\n#\n# Entries are keyed by tool name. The value is either a string giving the\n# minimum version number or is a dictionary. If a dictionary, the following\n# keys are recognised:\n#\n#    min_version: Required string. Minimum version number.\n#\n#    as_needed:   Optional bool. Defaults to False. If set, this tool is not\n#                 automatically required. If it is asked for, the rest of the\n#                 entry gives the required version.\n#\n__TOOL_REQUIREMENTS__ = {\n    'edalize': '0.2.0',\n    'ninja': {\n        'min_version': '1.8.2',\n        'as_needed': True\n    },\n    'verilator': {\n        'min_version': '4.104',\n        'as_needed': True\n    },\n    'hugo_extended': {\n        'min_version': '0.82.0',\n        'as_needed': True\n    },\n    'verible': {\n        'min_version': 'v0.0-1213-g9e5c085',\n        'as_needed': True\n    },\n    'vcs': {\n        'min_version': '2020.12-SP2',\n        'as_needed': True\n    },\n    'rust': {\n        'min_version': '1.52.1',\n        'as_needed': True\n    },\n    'vivado': {\n        'min_version': '2020.1',\n        'as_needed': True\n    },\n}\n",
+      "after_code": "# Copyright lowRISC contributors.\n# Licensed under the Apache License, Version 2.0, see LICENSE for details.\n# SPDX-License-Identifier: Apache-2.0\n\n# Version requirements for various tools. Checked by tooling (e.g. fusesoc),\n# and inserted into the documentation.\n#\n# Entries are keyed by tool name. The value is either a string giving the\n# minimum version number or is a dictionary. If a dictionary, the following\n# keys are recognised:\n#\n#    min_version: Required string. Minimum version number.\n#\n#    as_needed:   Optional bool. Defaults to False. If set, this tool is not\n#                 automatically required. If it is asked for, the rest of the\n#                 entry gives the required version.\n#\n__TOOL_REQUIREMENTS__ = {\n    'edalize': '0.2.0',\n    'ninja': {\n        'min_version': '1.8.2',\n        'as_needed': True\n    },\n    'verilator': {\n        'min_version': '4.104',\n        'as_needed': True\n    },\n    'hugo_extended': {\n        'min_version': '0.82.0',\n        'as_needed': True\n    },\n    'verible': {\n        'min_version': 'v0.0-1213-g9e5c085',\n        'as_needed': True\n    },\n    'vcs': {\n        'min_version': '2020.12-SP2',\n        'as_needed': True\n    },\n    'rust': {\n        'min_version': '1.52.1',\n        'as_needed': True\n    },\n    'vivado': {\n        'min_version': '2020.2',\n        'as_needed': True\n    },\n}\n",
+      "language": "python",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

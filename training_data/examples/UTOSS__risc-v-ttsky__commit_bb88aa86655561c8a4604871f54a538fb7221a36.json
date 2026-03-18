@@ -1,0 +1,59 @@
+{
+  "repo": "UTOSS/risc-v-ttsky",
+  "before_ref": "c0df8830cac566fec21df02c2c58e44cb51a9622",
+  "after_ref": "bb88aa86655561c8a4604871f54a538fb7221a36",
+  "bug_category": "other",
+  "query": "fix testbench",
+  "commit_message": "fix barebones testbench",
+  "file_count": 3,
+  "examples": [
+    {
+      "repo": "UTOSS/risc-v-ttsky",
+      "filename": "test/Makefile",
+      "before_ref": "c0df8830cac566fec21df02c2c58e44cb51a9622",
+      "after_ref": "bb88aa86655561c8a4604871f54a538fb7221a36",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "fix barebones testbench",
+      "patch": "@@ -6,7 +6,8 @@ SIM ?= icarus\n FST ?= -fst # Use more efficient FST format\n TOPLEVEL_LANG ?= verilog\n SRC_DIR = $(PWD)/../src\n-PROJECT_SOURCES = tt_um_utoss_riscv.sv\n+PROJECT_SOURCES = tt_um_utoss_riscv.sv MA.sv utoss-risc-v/src/ALU_ALUdecoder/ALU.v utoss-risc-v/src/ALU_ALUdecoder/ALUdecoder.sv utoss-risc-v/src/ControlFSM.sv utoss-risc-v/src/fetch.sv utoss-risc-v/src/Instruction_Decode/Instruction_Decode.sv utoss-risc-v/src/Instruction_Decode/MemoryLoader.sv utoss-risc-v/src/Instruction_Decode/RegisterFile.v utoss-risc-v/src/params.svh utoss-risc-v/src/types.svh utoss-risc-v/src/utils.svh utoss-risc-v/src/utoss_riscv.sv\n+COMPILE_ARGS += -DUTOSS_RISCV_HARDENING\n \n ifneq ($(GATES),yes)\n \n@@ -32,10 +33,10 @@ VERILOG_SOURCES += $(PWD)/gate_level_netlist.v\n endif\n \n # Allow sharing configuration between design and testbench via `include`:\n-COMPILE_ARGS \t\t+= -I$(SRC_DIR)\n+COMPILE_ARGS \t\t+= -I$(SRC_DIR) -I$(SRC_DIR)/utoss-risc-v\n \n # Include the testbench sources:\n-VERILOG_SOURCES += $(PWD)/tb.v\n+VERILOG_SOURCES += $(PWD)/tb.sv\n TOPLEVEL = tb\n \n # List test modules to run, separated by commas and without the .py suffix:",
+      "before_code": "# Makefile\n# See https://docs.cocotb.org/en/stable/quickstart.html for more info\n\n# defaults\nSIM ?= icarus\nFST ?= -fst # Use more efficient FST format\nTOPLEVEL_LANG ?= verilog\nSRC_DIR = $(PWD)/../src\nPROJECT_SOURCES = tt_um_utoss_riscv.sv\n\nifneq ($(GATES),yes)\n\n# RTL simulation:\nSIM_BUILD\t\t\t\t= sim_build/rtl\nVERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(PROJECT_SOURCES))\n\nelse\n\n# Gate level simulation:\nSIM_BUILD\t\t\t\t= sim_build/gl\nCOMPILE_ARGS    += -DGL_TEST\nCOMPILE_ARGS    += -DFUNCTIONAL\nCOMPILE_ARGS    += -DUSE_POWER_PINS\nCOMPILE_ARGS    += -DSIM\nCOMPILE_ARGS    += -DUNIT_DELAY=\\#1\nVERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v\nVERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v\n\n# this gets copied in by the GDS action workflow\nVERILOG_SOURCES += $(PWD)/gate_level_netlist.v\n\nendif\n\n# Allow sharing configuration between design and testbench via `include`:\nCOMPILE_ARGS \t\t+= -I$(SRC_DIR)\n\n# Include the testbench sources:\nVERILOG_SOURCES += $(PWD)/tb.v\nTOPLEVEL = tb\n\n# List test modules to run, separated by commas and without the .py suffix:\nCOCOTB_TEST_MODULES = test\n\n# include cocotb's make rules to take care of the simulator setup\ninclude $(shell cocotb-config --makefiles)/Makefile.sim\n",
+      "after_code": "# Makefile\n# See https://docs.cocotb.org/en/stable/quickstart.html for more info\n\n# defaults\nSIM ?= icarus\nFST ?= -fst # Use more efficient FST format\nTOPLEVEL_LANG ?= verilog\nSRC_DIR = $(PWD)/../src\nPROJECT_SOURCES = tt_um_utoss_riscv.sv MA.sv utoss-risc-v/src/ALU_ALUdecoder/ALU.v utoss-risc-v/src/ALU_ALUdecoder/ALUdecoder.sv utoss-risc-v/src/ControlFSM.sv utoss-risc-v/src/fetch.sv utoss-risc-v/src/Instruction_Decode/Instruction_Decode.sv utoss-risc-v/src/Instruction_Decode/MemoryLoader.sv utoss-risc-v/src/Instruction_Decode/RegisterFile.v utoss-risc-v/src/params.svh utoss-risc-v/src/types.svh utoss-risc-v/src/utils.svh utoss-risc-v/src/utoss_riscv.sv\nCOMPILE_ARGS += -DUTOSS_RISCV_HARDENING\n\nifneq ($(GATES),yes)\n\n# RTL simulation:\nSIM_BUILD\t\t\t\t= sim_build/rtl\nVERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(PROJECT_SOURCES))\n\nelse\n\n# Gate level simulation:\nSIM_BUILD\t\t\t\t= sim_build/gl\nCOMPILE_ARGS    += -DGL_TEST\nCOMPILE_ARGS    += -DFUNCTIONAL\nCOMPILE_ARGS    += -DUSE_POWER_PINS\nCOMPILE_ARGS    += -DSIM\nCOMPILE_ARGS    += -DUNIT_DELAY=\\#1\nVERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v\nVERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v\n\n# this gets copied in by the GDS action workflow\nVERILOG_SOURCES += $(PWD)/gate_level_netlist.v\n\nendif\n\n# Allow sharing configuration between design and testbench via `include`:\nCOMPILE_ARGS \t\t+= -I$(SRC_DIR) -I$(SRC_DIR)/utoss-risc-v\n\n# Include the testbench sources:\nVERILOG_SOURCES += $(PWD)/tb.sv\nTOPLEVEL = tb\n\n# List test modules to run, separated by commas and without the .py suffix:\nCOCOTB_TEST_MODULES = test\n\n# include cocotb's make rules to take care of the simulator setup\ninclude $(shell cocotb-config --makefiles)/Makefile.sim\n",
+      "language": "other",
+      "additions": 4,
+      "deletions": 3,
+      "validation": "clean"
+    },
+    {
+      "repo": "UTOSS/risc-v-ttsky",
+      "filename": "test/tb.sv",
+      "before_ref": "c0df8830cac566fec21df02c2c58e44cb51a9622",
+      "after_ref": "bb88aa86655561c8a4604871f54a538fb7221a36",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "fix barebones testbench",
+      "patch": "@@ -28,7 +28,7 @@ module tb ();\n `endif\n \n   // Replace tt_um_example with your module name:\n-  tt_um_example user_project (\n+  tt_um_utoss_riscv dut (\n \n       // Include power ports for the Gate Level test:\n `ifdef GL_TEST",
+      "before_code": "`default_nettype none\n`timescale 1ns / 1ps\n\n/* This testbench just instantiates the module and makes some convenient wires\n   that can be driven / tested by the cocotb test.py.\n*/\nmodule tb ();\n\n  // Dump the signals to a FST file. You can view it with gtkwave or surfer.\n  initial begin\n    $dumpfile(\"tb.fst\");\n    $dumpvars(0, tb);\n    #1;\n  end\n\n  // Wire up the inputs and outputs:\n  reg clk;\n  reg rst_n;\n  reg ena;\n  reg [7:0] ui_in;\n  reg [7:0] uio_in;\n  wire [7:0] uo_out;\n  wire [7:0] uio_out;\n  wire [7:0] uio_oe;\n`ifdef GL_TEST\n  wire VPWR = 1'b1;\n  wire VGND = 1'b0;\n`endif\n\n  // Replace tt_um_example with your module name:\n  tt_um_example user_project (\n\n      // Include power ports for the Gate Level test:\n`ifdef GL_TEST\n      .VPWR(VPWR),\n      .VGND(VGND),\n`endif\n\n      .ui_in  (ui_in),    // Dedicated inputs\n      .uo_out (uo_out),   // Dedicated outputs\n      .uio_in (uio_in),   // IOs: Input path\n      .uio_out(uio_out),  // IOs: Output path\n      .uio_oe (uio_oe),   // IOs: Enable path (active high: 0=input, 1=output)\n      .ena    (ena),      // enable - goes high when design is selected\n      .clk    (clk),      // clock\n      .rst_n  (rst_n)     // not reset\n  );\n\nendmodule\n",
+      "after_code": "`default_nettype none\n`timescale 1ns / 1ps\n\n/* This testbench just instantiates the module and makes some convenient wires\n   that can be driven / tested by the cocotb test.py.\n*/\nmodule tb ();\n\n  // Dump the signals to a FST file. You can view it with gtkwave or surfer.\n  initial begin\n    $dumpfile(\"tb.fst\");\n    $dumpvars(0, tb);\n    #1;\n  end\n\n  // Wire up the inputs and outputs:\n  reg clk;\n  reg rst_n;\n  reg ena;\n  reg [7:0] ui_in;\n  reg [7:0] uio_in;\n  wire [7:0] uo_out;\n  wire [7:0] uio_out;\n  wire [7:0] uio_oe;\n`ifdef GL_TEST\n  wire VPWR = 1'b1;\n  wire VGND = 1'b0;\n`endif\n\n  // Replace tt_um_example with your module name:\n  tt_um_utoss_riscv dut (\n\n      // Include power ports for the Gate Level test:\n`ifdef GL_TEST\n      .VPWR(VPWR),\n      .VGND(VGND),\n`endif\n\n      .ui_in  (ui_in),    // Dedicated inputs\n      .uo_out (uo_out),   // Dedicated outputs\n      .uio_in (uio_in),   // IOs: Input path\n      .uio_out(uio_out),  // IOs: Output path\n      .uio_oe (uio_oe),   // IOs: Enable path (active high: 0=input, 1=output)\n      .ena    (ena),      // enable - goes high when design is selected\n      .clk    (clk),      // clock\n      .rst_n  (rst_n)     // not reset\n  );\n\nendmodule\n",
+      "language": "systemverilog",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    },
+    {
+      "repo": "UTOSS/risc-v-ttsky",
+      "filename": "test/test.py",
+      "before_ref": "c0df8830cac566fec21df02c2c58e44cb51a9622",
+      "after_ref": "bb88aa86655561c8a4604871f54a538fb7221a36",
+      "bug_category": "other",
+      "query": "fix testbench",
+      "commit_message": "fix barebones testbench",
+      "patch": "@@ -25,16 +25,12 @@ async def test_project(dut):\n \n     dut._log.info(\"Test project behavior\")\n \n-    # Set the input values you want to test\n-    dut.ui_in.value = 20\n-    dut.uio_in.value = 30\n-\n     # Wait for one clock cycle to see the output values\n-    await ClockCycles(dut.clk, 1)\n+    await ClockCycles(dut.clk, 100)\n \n     # The following assersion is just an example of how to check the output values.\n     # Change it to match the actual expected output of your module:\n-    assert dut.uo_out.value == 50\n+    assert dut.uo_out.value != 0\n \n     # Keep testing the module by changing the input values, waiting for\n     # one or more clock cycles, and asserting the expected output values.",
+      "before_code": "# SPDX-FileCopyrightText: © 2024 Tiny Tapeout\n# SPDX-License-Identifier: Apache-2.0\n\nimport cocotb\nfrom cocotb.clock import Clock\nfrom cocotb.triggers import ClockCycles\n\n\n@cocotb.test()\nasync def test_project(dut):\n    dut._log.info(\"Start\")\n\n    # Set the clock period to 10 us (100 KHz)\n    clock = Clock(dut.clk, 10, unit=\"us\")\n    cocotb.start_soon(clock.start())\n\n    # Reset\n    dut._log.info(\"Reset\")\n    dut.ena.value = 1\n    dut.ui_in.value = 0\n    dut.uio_in.value = 0\n    dut.rst_n.value = 0\n    await ClockCycles(dut.clk, 10)\n    dut.rst_n.value = 1\n\n    dut._log.info(\"Test project behavior\")\n\n    # Set the input values you want to test\n    dut.ui_in.value = 20\n    dut.uio_in.value = 30\n\n    # Wait for one clock cycle to see the output values\n    await ClockCycles(dut.clk, 1)\n\n    # The following assersion is just an example of how to check the output values.\n    # Change it to match the actual expected output of your module:\n    assert dut.uo_out.value == 50\n\n    # Keep testing the module by changing the input values, waiting for\n    # one or more clock cycles, and asserting the expected output values.\n",
+      "after_code": "# SPDX-FileCopyrightText: © 2024 Tiny Tapeout\n# SPDX-License-Identifier: Apache-2.0\n\nimport cocotb\nfrom cocotb.clock import Clock\nfrom cocotb.triggers import ClockCycles\n\n\n@cocotb.test()\nasync def test_project(dut):\n    dut._log.info(\"Start\")\n\n    # Set the clock period to 10 us (100 KHz)\n    clock = Clock(dut.clk, 10, unit=\"us\")\n    cocotb.start_soon(clock.start())\n\n    # Reset\n    dut._log.info(\"Reset\")\n    dut.ena.value = 1\n    dut.ui_in.value = 0\n    dut.uio_in.value = 0\n    dut.rst_n.value = 0\n    await ClockCycles(dut.clk, 10)\n    dut.rst_n.value = 1\n\n    dut._log.info(\"Test project behavior\")\n\n    # Wait for one clock cycle to see the output values\n    await ClockCycles(dut.clk, 100)\n\n    # The following assersion is just an example of how to check the output values.\n    # Change it to match the actual expected output of your module:\n    assert dut.uo_out.value != 0\n\n    # Keep testing the module by changing the input values, waiting for\n    # one or more clock cycles, and asserting the expected output values.\n",
+      "language": "python",
+      "additions": 2,
+      "deletions": 6,
+      "validation": "clean"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "repo": "VUnit/vunit",
+  "before_ref": "c832ce9e0649a3d392d3d4a24b059325eb1a1a93",
+  "after_ref": "deaf3616f0369c381177789d35ae0b81a6ac969c",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:VHDL",
+  "commit_message": "Fix pylint test Fix pylint test Warning, refractor and convention messages are\nmasked out from the return code.\n",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "VUnit/vunit",
+      "filename": "vunit/test/lint/test_pylint.py",
+      "before_ref": "c832ce9e0649a3d392d3d4a24b059325eb1a1a93",
+      "after_ref": "deaf3616f0369c381177789d35ae0b81a6ac969c",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:VHDL",
+      "commit_message": "Fix pylint test Fix pylint test Warning, refractor and convention messages are\nmasked out from the return code.\n",
+      "patch": "@@ -10,7 +10,7 @@\n \n \n import unittest\n-from subprocess import check_call\n+from subprocess import call\n from vunit import ROOT\n from os.path import join, dirname\n import sys\n@@ -22,6 +22,7 @@ class TestPylint(unittest.TestCase):\n     \"\"\"\n     @staticmethod\n     def test_pylint():\n-        check_call([sys.executable, \"-m\", \"pylint\",\n+        ret = call([sys.executable, \"-m\", \"pylint\",\n                     \"--rcfile=\" + join(dirname(__file__), \"pylintrc\"),\n                     join(ROOT, \"vunit\")])\n+        assert (ret & ~(4 | 8 | 16)) == 0",
+      "before_code": "# This Source Code Form is subject to the terms of the Mozilla Public\n# License, v. 2.0. If a copy of the MPL was not distributed with this file,\n# You can obtain one at http://mozilla.org/MPL/2.0/.\n#\n# Copyright (c) 2015, Lars Asplund lars.anders.asplund@gmail.com\n\n\"\"\"\nPylint check\n\"\"\"\n\n\nimport unittest\nfrom subprocess import check_call\nfrom vunit import ROOT\nfrom os.path import join, dirname\nimport sys\n\n\nclass TestPylint(unittest.TestCase):\n    \"\"\"\n    Check that there are no pylint errors or warnings\n    \"\"\"\n    @staticmethod\n    def test_pylint():\n        check_call([sys.executable, \"-m\", \"pylint\",\n                    \"--rcfile=\" + join(dirname(__file__), \"pylintrc\"),\n                    join(ROOT, \"vunit\")])\n",
+      "after_code": "# This Source Code Form is subject to the terms of the Mozilla Public\n# License, v. 2.0. If a copy of the MPL was not distributed with this file,\n# You can obtain one at http://mozilla.org/MPL/2.0/.\n#\n# Copyright (c) 2015, Lars Asplund lars.anders.asplund@gmail.com\n\n\"\"\"\nPylint check\n\"\"\"\n\n\nimport unittest\nfrom subprocess import call\nfrom vunit import ROOT\nfrom os.path import join, dirname\nimport sys\n\n\nclass TestPylint(unittest.TestCase):\n    \"\"\"\n    Check that there are no pylint errors or warnings\n    \"\"\"\n    @staticmethod\n    def test_pylint():\n        ret = call([sys.executable, \"-m\", \"pylint\",\n                    \"--rcfile=\" + join(dirname(__file__), \"pylintrc\"),\n                    join(ROOT, \"vunit\")])\n        assert (ret & ~(4 | 8 | 16)) == 0\n",
+      "language": "python",
+      "additions": 3,
+      "deletions": 2,
+      "validation": "clean"
+    }
+  ]
+}

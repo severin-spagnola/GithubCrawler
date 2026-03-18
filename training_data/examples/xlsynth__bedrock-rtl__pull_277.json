@@ -1,0 +1,27 @@
+{
+  "repo": "xlsynth/bedrock-rtl",
+  "before_ref": "682c6e4d2b38f69fe448173fbb61b6030be26312",
+  "after_ref": "7e24c1f26abf824f9670430f6d2a52d4f170a1f4",
+  "bug_category": "port_mismatch",
+  "query": "signal width mismatch language:SystemVerilog",
+  "commit_message": "amba: add axi4 to axi4-lite bridge amba: add axi4 to axi4-lite bridge None",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "xlsynth/bedrock-rtl",
+      "filename": "amba/rtl/br_amba_pkg.sv",
+      "before_ref": "682c6e4d2b38f69fe448173fbb61b6030be26312",
+      "after_ref": "7e24c1f26abf824f9670430f6d2a52d4f170a1f4",
+      "bug_category": "port_mismatch",
+      "query": "signal width mismatch language:SystemVerilog",
+      "commit_message": "amba: add axi4 to axi4-lite bridge amba: add axi4 to axi4-lite bridge None",
+      "patch": "@@ -27,9 +27,20 @@ package br_amba;\n     AxiRespDecerr = 2'b11   // Decode error\n   } axi_resp_t;\n \n+  // AXI Burst types\n+  typedef enum logic [1:0] {\n+    AxiBurstFixed    = 2'b00,  // Fixed burst\n+    AxiBurstIncr     = 2'b01,  // Incrementing burst\n+    AxiBurstWrap     = 2'b10,  // Wrapping burst\n+    AxiBurstReserved = 2'b11   // Reserved\n+  } axi_burst_type_t;\n+\n   // AXI parameters\n   localparam int unsigned AxiProtWidth = 3;\n   localparam int unsigned AxiRespWidth = 2;\n+  localparam int unsigned AxiBurstLenWidth = 8;\n+  localparam int unsigned AxiBurstSizeWidth = 3;\n+  localparam int unsigned AxiBurstTypeWidth = 2;\n \n   // APB parameters\n   localparam int unsigned ApbProtWidth = 3;",
+      "before_code": "// Copyright 2024 The Bedrock-RTL Authors\n//\n// Licensed under the Apache License, Version 2.0 (the \"License\");\n// you may not use this file except in compliance with the License.\n// You may obtain a copy of the License at\n//\n//     http://www.apache.org/licenses/LICENSE-2.0\n//\n// Unless required by applicable law or agreed to in writing, software\n// distributed under the License is distributed on an \"AS IS\" BASIS,\n// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n// See the License for the specific language governing permissions and\n// limitations under the License.\n\n// Bedrock-RTL AMBA Package\n//\n// Contains some AMBA-related definitions and helper functions.\n\n// ri lint_check_waive FILE_NAME\npackage br_amba;\n\n  // AXI response types\n  typedef enum logic [1:0] {\n    AxiRespOkay   = 2'b00,  // Normal access\n    AxiRespExOkay = 2'b01,  // Exclusive access okay\n    AxiRespSlverr = 2'b10,  // Slave error\n    AxiRespDecerr = 2'b11   // Decode error\n  } axi_resp_t;\n\n  // AXI parameters\n  localparam int unsigned AxiProtWidth = 3;\n  localparam int unsigned AxiRespWidth = 2;\n\n  // APB parameters\n  localparam int unsigned ApbProtWidth = 3;\n\n  // ATB parameters\n  localparam int unsigned AtbIdWidth = 7;\n\nendpackage : br_amba\n",
+      "after_code": "// Copyright 2024 The Bedrock-RTL Authors\n//\n// Licensed under the Apache License, Version 2.0 (the \"License\");\n// you may not use this file except in compliance with the License.\n// You may obtain a copy of the License at\n//\n//     http://www.apache.org/licenses/LICENSE-2.0\n//\n// Unless required by applicable law or agreed to in writing, software\n// distributed under the License is distributed on an \"AS IS\" BASIS,\n// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n// See the License for the specific language governing permissions and\n// limitations under the License.\n\n// Bedrock-RTL AMBA Package\n//\n// Contains some AMBA-related definitions and helper functions.\n\n// ri lint_check_waive FILE_NAME\npackage br_amba;\n\n  // AXI response types\n  typedef enum logic [1:0] {\n    AxiRespOkay   = 2'b00,  // Normal access\n    AxiRespExOkay = 2'b01,  // Exclusive access okay\n    AxiRespSlverr = 2'b10,  // Slave error\n    AxiRespDecerr = 2'b11   // Decode error\n  } axi_resp_t;\n\n  // AXI Burst types\n  typedef enum logic [1:0] {\n    AxiBurstFixed    = 2'b00,  // Fixed burst\n    AxiBurstIncr     = 2'b01,  // Incrementing burst\n    AxiBurstWrap     = 2'b10,  // Wrapping burst\n    AxiBurstReserved = 2'b11   // Reserved\n  } axi_burst_type_t;\n\n  // AXI parameters\n  localparam int unsigned AxiProtWidth = 3;\n  localparam int unsigned AxiRespWidth = 2;\n  localparam int unsigned AxiBurstLenWidth = 8;\n  localparam int unsigned AxiBurstSizeWidth = 3;\n  localparam int unsigned AxiBurstTypeWidth = 2;\n\n  // APB parameters\n  localparam int unsigned ApbProtWidth = 3;\n\n  // ATB parameters\n  localparam int unsigned AtbIdWidth = 7;\n\nendpackage : br_amba\n",
+      "language": "systemverilog",
+      "additions": 11,
+      "deletions": 0,
+      "validation": "clean"
+    }
+  ]
+}

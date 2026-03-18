@@ -1,0 +1,27 @@
+{
+  "repo": "SKravitsky/ECEC412",
+  "before_ref": "2a634ffeeac9cff222be2a68cc11ace20d789331",
+  "after_ref": "cc06c081cab293937434d6b0acf6e0a0ed356e60",
+  "bug_category": "sensitivity_list",
+  "query": "incomplete case\" language:vhdl",
+  "commit_message": "Project3 Project3 Currently a work in progress",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "SKravitsky/ECEC412",
+      "filename": "MEMWBRegister.vhd",
+      "before_ref": "2a634ffeeac9cff222be2a68cc11ace20d789331",
+      "after_ref": "cc06c081cab293937434d6b0acf6e0a0ed356e60",
+      "bug_category": "sensitivity_list",
+      "query": "incomplete case\" language:vhdl",
+      "commit_message": "Project3 Project3 Currently a work in progress",
+      "patch": "@@ -3,31 +3,33 @@ use ieee.std_logic_1164.all;\n \r\n entity MEMWBRegister is\r\n   port(\r\n-    memreaddata_in, wrregaddress_in, aluresult_in: std_logic_vector(31 downto 0);\r\n-    regwr_in, memtoreg_in,clk: in std_logic;\r\n-    memreaddata_out, wrregaddress_out, aluresult_out: out std_logic_vector(31 downto 0);\r\n-    regwr_out, memtoreg_out: out std_logic\r\n+    clk, MemtoRegIn, RegWriteIn: in std_logic;\r\n+    WriteRegisterIn: in std_logic_vector(4 downto 0);\r\n+    ReadDataIn, ALUResultIn: in std_logic_vector(31 downto 0);\r\n+    MemtoRegOut, RegWriteOut: out std_logic;\r\n+    WriteRegisterOut: out std_logic_vector(4 downto 0);\r\n+    ReadDataOut, ALUResultOut: out std_logic_vector(31 downto 0)\r\n   );\r\n end MEMWBRegister;\r\n \r\n architecture Structural of MEMWBRegister is\r\n-signal memreaddata, wrregaddress, aluresult: std_logic_vector(31 downto 0);\r\n-signal regwr, memtoreg: std_logic;\r\n+  signal MemtoReg, RegWrite: std_logic := '0';\r\n+  signal WriteRegister: std_logic_vector(4 downto 0) := \"00000\";\r\n+  signal ReadData, ALUResult: std_logic_vector(31 downto 0) := X\"00000000\";\r\n begin\r\n+  MemtoRegOut <= MemtoReg;\r\n+  RegWriteOut <= RegWrite;\r\n+  WriteRegisterOut <= WriteRegister;\r\n+  ReadDataOut <= ReadData;\r\n+  ALUResultOut <= ALUResult;\r\n   process(clk)\r\n   begin\r\n     if rising_edge(clk) then\r\n-      memreaddata_out <= memreaddata;\r\n-      wrregaddress_out <= wrregaddress;\r\n-      aluresult_out <= aluresult;\r\n-      regwr_out <= regwr;\r\n-      memtoreg_out <= memtoreg;\r\n-    else\r\n-      memreaddata <= memreaddata_in;\r\n-      wrregaddress <= wrregaddress_in;\r\n-      aluresult <= aluresult_in;\r\n-      regwr <= regwr_in;\r\n-      memtoreg <= memtoreg_in;\r\n+      MemtoReg <= MemtoRegIn;\r\n+      RegWrite <= RegWriteIn;\r\n+      WriteRegister <= WriteRegisterIn;\r\n+      ReadData <= ReadDataIn;\r\n+      ALUResult <= ALUResultIn;\r\n     end if;\r\n   end process;\r\n-end Structural;\n\\ No newline at end of file\n+end Structural;\r",
+      "before_code": "library ieee;\r\nuse ieee.std_logic_1164.all;\r\n\r\nentity MEMWBRegister is\r\n  port(\r\n    memreaddata_in, wrregaddress_in, aluresult_in: std_logic_vector(31 downto 0);\r\n    regwr_in, memtoreg_in,clk: in std_logic;\r\n    memreaddata_out, wrregaddress_out, aluresult_out: out std_logic_vector(31 downto 0);\r\n    regwr_out, memtoreg_out: out std_logic\r\n  );\r\nend MEMWBRegister;\r\n\r\narchitecture Structural of MEMWBRegister is\r\nsignal memreaddata, wrregaddress, aluresult: std_logic_vector(31 downto 0);\r\nsignal regwr, memtoreg: std_logic;\r\nbegin\r\n  process(clk)\r\n  begin\r\n    if rising_edge(clk) then\r\n      memreaddata_out <= memreaddata;\r\n      wrregaddress_out <= wrregaddress;\r\n      aluresult_out <= aluresult;\r\n      regwr_out <= regwr;\r\n      memtoreg_out <= memtoreg;\r\n    else\r\n      memreaddata <= memreaddata_in;\r\n      wrregaddress <= wrregaddress_in;\r\n      aluresult <= aluresult_in;\r\n      regwr <= regwr_in;\r\n      memtoreg <= memtoreg_in;\r\n    end if;\r\n  end process;\r\nend Structural;",
+      "after_code": "library ieee;\r\nuse ieee.std_logic_1164.all;\r\n\r\nentity MEMWBRegister is\r\n  port(\r\n    clk, MemtoRegIn, RegWriteIn: in std_logic;\r\n    WriteRegisterIn: in std_logic_vector(4 downto 0);\r\n    ReadDataIn, ALUResultIn: in std_logic_vector(31 downto 0);\r\n    MemtoRegOut, RegWriteOut: out std_logic;\r\n    WriteRegisterOut: out std_logic_vector(4 downto 0);\r\n    ReadDataOut, ALUResultOut: out std_logic_vector(31 downto 0)\r\n  );\r\nend MEMWBRegister;\r\n\r\narchitecture Structural of MEMWBRegister is\r\n  signal MemtoReg, RegWrite: std_logic := '0';\r\n  signal WriteRegister: std_logic_vector(4 downto 0) := \"00000\";\r\n  signal ReadData, ALUResult: std_logic_vector(31 downto 0) := X\"00000000\";\r\nbegin\r\n  MemtoRegOut <= MemtoReg;\r\n  RegWriteOut <= RegWrite;\r\n  WriteRegisterOut <= WriteRegister;\r\n  ReadDataOut <= ReadData;\r\n  ALUResultOut <= ALUResult;\r\n  process(clk)\r\n  begin\r\n    if rising_edge(clk) then\r\n      MemtoReg <= MemtoRegIn;\r\n      RegWrite <= RegWriteIn;\r\n      WriteRegister <= WriteRegisterIn;\r\n      ReadData <= ReadDataIn;\r\n      ALUResult <= ALUResultIn;\r\n    end if;\r\n  end process;\r\nend Structural;\r\n",
+      "language": "vhdl",
+      "additions": 20,
+      "deletions": 18,
+      "validation": "clean"
+    }
+  ]
+}

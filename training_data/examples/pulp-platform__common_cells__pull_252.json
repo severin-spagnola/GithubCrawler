@@ -1,0 +1,27 @@
+{
+  "repo": "pulp-platform/common_cells",
+  "before_ref": "f36828f3fd76fa6c79f80cb495829cf967bcf20c",
+  "after_ref": "1e31a07f20089d4ba5bb4499410fd0a3e98263ba",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:SystemVerilog",
+  "commit_message": "Fix serial_deglitch.sv Fix serial_deglitch.sv if we want to count zeros, then we should check if count_q != 0. Checking count_q!=SIZE will lead to stuck in 1 for q_o",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "pulp-platform/common_cells",
+      "filename": "src/serial_deglitch.sv",
+      "before_ref": "f36828f3fd76fa6c79f80cb495829cf967bcf20c",
+      "after_ref": "1e31a07f20089d4ba5bb4499410fd0a3e98263ba",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:SystemVerilog",
+      "commit_message": "Fix serial_deglitch.sv Fix serial_deglitch.sv if we want to count zeros, then we should check if count_q != 0. Checking count_q!=SIZE will lead to stuck in 1 for q_o",
+      "patch": "@@ -32,7 +32,7 @@ module serial_deglitch #(\n             if (en_i) begin\n                 if (d_i == 1'b1 && count_q != SIZE[SIZE-1:0]) begin\n                     count_q <= count_q + 1;\n-                end else if (d_i == 1'b0 && count_q != SIZE[SIZE-1:0]) begin\n+                end else if (d_i == 1'b0 && count_q != 0) begin\n                     count_q <= count_q - 1;\n                 end\n             end",
+      "before_code": "// Copyright 2018 ETH Zurich and University of Bologna.\n// Copyright and related rights are licensed under the Solderpad Hardware\n// License, Version 0.51 (the \"License\"); you may not use this file except in\n// compliance with the License. You may obtain a copy of the License at\n// http://solderpad.org/licenses/SHL-0.51. Unless required by applicable law\n// or agreed to in writing, software, hardware and materials distributed under\n// this License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n// CONDITIONS OF ANY KIND, either express or implied. See the License for the\n// specific language governing permissions and limitations under the License.\n\n// Author: Florian Zaruba\n// Description: Deglitches a serial line by taking multiple samples until\n//              asserting the output high/low.\n\nmodule serial_deglitch #(\n    parameter int unsigned SIZE = 4\n)(\n    input  logic clk_i,    // clock\n    input  logic rst_ni,   // asynchronous reset active low\n    input  logic en_i,     // enable\n    input  logic d_i,      // serial data in\n    output logic q_o       // filtered data out\n);\n    logic [SIZE-1:0] count_q;\n    logic q;\n\n    always_ff @(posedge clk_i or negedge rst_ni) begin\n        if (~rst_ni) begin\n            count_q <= '0;\n            q       <= 1'b0;\n        end else begin\n            if (en_i) begin\n                if (d_i == 1'b1 && count_q != SIZE[SIZE-1:0]) begin\n                    count_q <= count_q + 1;\n                end else if (d_i == 1'b0 && count_q != SIZE[SIZE-1:0]) begin\n                    count_q <= count_q - 1;\n                end\n            end\n        end\n    end\n\n    // output process\n    always_comb begin\n        if (count_q == SIZE[SIZE-1:0]) begin\n            q_o = 1'b1;\n        end else if (count_q == 0) begin\n            q_o = 1'b0;\n        end\n    end\nendmodule\n",
+      "after_code": "// Copyright 2018 ETH Zurich and University of Bologna.\n// Copyright and related rights are licensed under the Solderpad Hardware\n// License, Version 0.51 (the \"License\"); you may not use this file except in\n// compliance with the License. You may obtain a copy of the License at\n// http://solderpad.org/licenses/SHL-0.51. Unless required by applicable law\n// or agreed to in writing, software, hardware and materials distributed under\n// this License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n// CONDITIONS OF ANY KIND, either express or implied. See the License for the\n// specific language governing permissions and limitations under the License.\n\n// Author: Florian Zaruba\n// Description: Deglitches a serial line by taking multiple samples until\n//              asserting the output high/low.\n\nmodule serial_deglitch #(\n    parameter int unsigned SIZE = 4\n)(\n    input  logic clk_i,    // clock\n    input  logic rst_ni,   // asynchronous reset active low\n    input  logic en_i,     // enable\n    input  logic d_i,      // serial data in\n    output logic q_o       // filtered data out\n);\n    logic [SIZE-1:0] count_q;\n    logic q;\n\n    always_ff @(posedge clk_i or negedge rst_ni) begin\n        if (~rst_ni) begin\n            count_q <= '0;\n            q       <= 1'b0;\n        end else begin\n            if (en_i) begin\n                if (d_i == 1'b1 && count_q != SIZE[SIZE-1:0]) begin\n                    count_q <= count_q + 1;\n                end else if (d_i == 1'b0 && count_q != 0) begin\n                    count_q <= count_q - 1;\n                end\n            end\n        end\n    end\n\n    // output process\n    always_comb begin\n        if (count_q == SIZE[SIZE-1:0]) begin\n            q_o = 1'b1;\n        end else if (count_q == 0) begin\n            q_o = 1'b0;\n        end\n    end\nendmodule\n",
+      "language": "systemverilog",
+      "additions": 1,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}

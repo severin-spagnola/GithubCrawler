@@ -1,0 +1,43 @@
+{
+  "repo": "ADSD-SoC-FPGA/Code",
+  "before_ref": "61c7c3e605d5c5f623cff87bdd8eafc6b76d5d0f",
+  "after_ref": "01d04f8df801fc4540e307d3058cffe7ac076910",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:VHDL",
+  "commit_message": "Use `systemd-modules-load` in place of custom driver-loading unit Use `systemd-modules-load` in place of custom driver-loading unit **NOTE:** Merge only after #13!\n\nThis is here now, in case we want to merge it at some point!\r\n\r\nSetup is pretty trivial — the only really new thing here is the need for a `make modules_install` invocation. I've added a Makefile target for that, and it's documented in the associated README as well.\r\n\r\nIf there's anything else that should go along with this (especial",
+  "file_count": 2,
+  "examples": [
+    {
+      "repo": "ADSD-SoC-FPGA/Code",
+      "filename": "examples/passthrough/linux/ad1939/Makefile",
+      "before_ref": "61c7c3e605d5c5f623cff87bdd8eafc6b76d5d0f",
+      "after_ref": "01d04f8df801fc4540e307d3058cffe7ac076910",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:VHDL",
+      "commit_message": "Use `systemd-modules-load` in place of custom driver-loading unit Use `systemd-modules-load` in place of custom driver-loading unit **NOTE:** Merge only after #13!\n\nThis is here now, in case we want to merge it at some point!\r\n\r\nSetup is pretty trivial — the only really new thing here is the need for a `make modules_install` invocation. I've added a Makefile target for that, and it's documented in the associated README as well.\r\n\r\nIf there's anything else that should go along with this (especial",
+      "patch": "@@ -1,9 +1,19 @@\n+# Set default options\n KDIR ?= ../linux-socfpga\n-default:\n-\t$(MAKE) -C $(KDIR) ARCH=arm M=$(CURDIR) CROSS_COMPILE=arm-linux-gnueabihf-\n+ROOTFS ?= /srv/nfs/de10nano/ubuntu-rootfs\n+\n+# Compose our full \"make\" command, with relevant options\n+MAKECMD = $(MAKE) -C $(KDIR) M=$(CURDIR) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-\n+\n+# This is the default if no target is specified\n+modules:\n+\t$(MAKECMD) modules\n+\n+modules_install:\n+\t$(MAKECMD) INSTALL_MOD_PATH=$(ROOTFS) modules_install\n \n clean:\n-\t$(MAKE) -C $(KDIR) ARCH=arm M=$(CURDIR) clean\n+\t$(MAKECMD) clean\n \n help:\n-\t$(MAKE) -C $(KDIR) ARCH=arm M=$(CURDIR) help\n+\t$(MAKECMD) help",
+      "before_code": "KDIR ?= ../linux-socfpga\ndefault:\n\t$(MAKE) -C $(KDIR) ARCH=arm M=$(CURDIR) CROSS_COMPILE=arm-linux-gnueabihf-\n\nclean:\n\t$(MAKE) -C $(KDIR) ARCH=arm M=$(CURDIR) clean\n\nhelp:\n\t$(MAKE) -C $(KDIR) ARCH=arm M=$(CURDIR) help\n",
+      "after_code": "# Set default options\nKDIR ?= ../linux-socfpga\nROOTFS ?= /srv/nfs/de10nano/ubuntu-rootfs\n\n# Compose our full \"make\" command, with relevant options\nMAKECMD = $(MAKE) -C $(KDIR) M=$(CURDIR) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-\n\n# This is the default if no target is specified\nmodules:\n\t$(MAKECMD) modules\n\nmodules_install:\n\t$(MAKECMD) INSTALL_MOD_PATH=$(ROOTFS) modules_install\n\nclean:\n\t$(MAKECMD) clean\n\nhelp:\n\t$(MAKECMD) help\n",
+      "language": "other",
+      "additions": 14,
+      "deletions": 4,
+      "validation": "clean"
+    },
+    {
+      "repo": "ADSD-SoC-FPGA/Code",
+      "filename": "examples/passthrough/linux/deviceTree/socfpga_cyclone5_de10nano_passthrough.dts",
+      "before_ref": "61c7c3e605d5c5f623cff87bdd8eafc6b76d5d0f",
+      "after_ref": "01d04f8df801fc4540e307d3058cffe7ac076910",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:VHDL",
+      "commit_message": "Use `systemd-modules-load` in place of custom driver-loading unit Use `systemd-modules-load` in place of custom driver-loading unit **NOTE:** Merge only after #13!\n\nThis is here now, in case we want to merge it at some point!\r\n\r\nSetup is pretty trivial — the only really new thing here is the need for a `make modules_install` invocation. I've added a Makefile target for that, and it's documented in the associated README as well.\r\n\r\nIf there's anything else that should go along with this (especial",
+      "patch": "@@ -3,9 +3,16 @@\n \n /{\n     model = \"Audio Logic Audio Mini\";\n+};\n+\n+&i2c0{\n+    status = \"okay\";\n+    clock-frequency = <100000>;\n \n-    tpa613a2 {\n-        compatible = \"dev,al-tpa613a2\";\n+    tpa6130a2@60 {\n+        compatible = \"dev,al-tpa6130a2\";\n+        // I2C address (in 7-bit form)\n+        reg = <0x60>;\n     };    \n };\n ",
+      "before_code": "// SPDX-License-Identifier: GPL-2.0+\n#include \"socfpga_cyclone5_de10_nano.dtsi\"\n\n/{\n    model = \"Audio Logic Audio Mini\";\n\n    tpa613a2 {\n        compatible = \"dev,al-tpa613a2\";\n    };    \n};\n\n&spi0{\n    status = \"okay\";\n\n    ad1939@0 {\n        compatible = \"dev,al-ad1939\";\n        spi-max-frequency = <500000>;\n\n        // chip-select 0\n        reg = <0>;\n\n        // set spi mode to 3\n        spi-cpol;\n        spi-cpha;\n    };\n\n};\n",
+      "after_code": "// SPDX-License-Identifier: GPL-2.0+\n#include \"socfpga_cyclone5_de10_nano.dtsi\"\n\n/{\n    model = \"Audio Logic Audio Mini\";\n};\n\n&i2c0{\n    status = \"okay\";\n    clock-frequency = <100000>;\n\n    tpa6130a2@60 {\n        compatible = \"dev,al-tpa6130a2\";\n        // I2C address (in 7-bit form)\n        reg = <0x60>;\n    };    \n};\n\n&spi0{\n    status = \"okay\";\n\n    ad1939@0 {\n        compatible = \"dev,al-ad1939\";\n        spi-max-frequency = <500000>;\n\n        // chip-select 0\n        reg = <0>;\n\n        // set spi mode to 3\n        spi-cpol;\n        spi-cpha;\n    };\n\n};\n",
+      "language": "devicetree",
+      "additions": 9,
+      "deletions": 2,
+      "validation": "clean"
+    }
+  ]
+}

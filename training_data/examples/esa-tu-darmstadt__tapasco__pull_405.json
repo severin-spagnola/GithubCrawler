@@ -1,0 +1,27 @@
+{
+  "repo": "esa-tu-darmstadt/tapasco",
+  "before_ref": "e07f978cadb1cc2b5446da714383181951ab0488",
+  "after_ref": "65b29b00fe69d43cb42f4122edc64784850d56cc",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:Verilog",
+  "commit_message": "Add support for KR260 Add support for KR260 Initial support for the Kria KR260 (K26 SoM + carrier board).\r\n\r\nThis also adds:\r\n- Support for Vivado 2025.1 and `vitis-run` (replacement for `vitis_hls`)\r\n- Support for linux-xlnx 2024.2 and 2025.1 in `toolflow/boot`\r\n- The ability to specify carrier board connections in a platform JSON\r\n- squashfs configs to allow users to install the Xilinx snap package on their boards\r\n- Debug output in FSBL\r\n\r\nFixes:\r\n- Missing `dma-coherent` tag on the tapasco d",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "esa-tu-darmstadt/tapasco",
+      "filename": "toolflow/boot/misc/tapasco_zynqmp.dtsi",
+      "before_ref": "e07f978cadb1cc2b5446da714383181951ab0488",
+      "after_ref": "65b29b00fe69d43cb42f4122edc64784850d56cc",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:Verilog",
+      "commit_message": "Add support for KR260 Add support for KR260 Initial support for the Kria KR260 (K26 SoM + carrier board).\r\n\r\nThis also adds:\r\n- Support for Vivado 2025.1 and `vitis-run` (replacement for `vitis_hls`)\r\n- Support for linux-xlnx 2024.2 and 2025.1 in `toolflow/boot`\r\n- The ability to specify carrier board connections in a platform JSON\r\n- squashfs configs to allow users to install the Xilinx snap package on their boards\r\n- Debug output in FSBL\r\n\r\nFixes:\r\n- Missing `dma-coherent` tag on the tapasco d",
+      "patch": "@@ -1,22 +1,9 @@\n / {\n-\treserved-memory {\n-\t\t#address-cells = <2>;\n-\t\t#size-cells = <2>;\n-\t\tranges;\n-\n-\t\treserved: buffer@0 {\n-\t\t\tcompatible = \"shared-dma-pool\";\n-\t\t\treusable;\n-\t\t\treg = <0x0 0x60000000 0x0 0x20000000>;\n-\t\t\tlinux,cma-default;\n-\t\t};\n-\t};\n-\n \ttapasco {\n \t\tcompatible = \"tapasco\";\n \t\tinterrupt-parent = <&gic>;\n \t\tinterrupts = <0x0 0x59 0x4 0x0 0x5a 0x4 0x0 0x5b 0x4 0x0 0x5c 0x4 0x0 0x5d 0x4 0x0 0x5e 0x4 0x0 0x5f 0x4 0x0 0x60 0x4 0x0 0x68 0x4 0x0 0x69 0x4 0x0 0x6a 0x4 0x0 0x6b 0x4 0x0 0x6c 0x4 0x0 0x6d 0x4 0x0 0x6e 0x4 0x0 0x6f 0x4>;\n-\t\tiommus = \n+\t\tiommus =\n \t\t\t<&smmu 0x200>,\n \t\t\t<&smmu 0x201>,\n \t\t\t<&smmu 0x202>,\n@@ -40,7 +27,7 @@\n \t\t\t<&smmu 0x214>,\n \t\t\t<&smmu 0x215>,\n \t\t\t<&smmu 0x216>,\n-\t\t\t<&smmu 0x217>, \n+\t\t\t<&smmu 0x217>,\n \t\t\t<&smmu 0x218>,\n \t\t\t<&smmu 0x219>,\n \t\t\t<&smmu 0x21a>,\n@@ -49,6 +36,7 @@\n \t\t\t<&smmu 0x21d>,\n \t\t\t<&smmu 0x21e>,\n \t\t\t<&smmu 0x21f>;\n+\t\tdma-coherent;\n \t};\n };\n ",
+      "before_code": "/ {\n\treserved-memory {\n\t\t#address-cells = <2>;\n\t\t#size-cells = <2>;\n\t\tranges;\n\n\t\treserved: buffer@0 {\n\t\t\tcompatible = \"shared-dma-pool\";\n\t\t\treusable;\n\t\t\treg = <0x0 0x60000000 0x0 0x20000000>;\n\t\t\tlinux,cma-default;\n\t\t};\n\t};\n\n\ttapasco {\n\t\tcompatible = \"tapasco\";\n\t\tinterrupt-parent = <&gic>;\n\t\tinterrupts = <0x0 0x59 0x4 0x0 0x5a 0x4 0x0 0x5b 0x4 0x0 0x5c 0x4 0x0 0x5d 0x4 0x0 0x5e 0x4 0x0 0x5f 0x4 0x0 0x60 0x4 0x0 0x68 0x4 0x0 0x69 0x4 0x0 0x6a 0x4 0x0 0x6b 0x4 0x0 0x6c 0x4 0x0 0x6d 0x4 0x0 0x6e 0x4 0x0 0x6f 0x4>;\n\t\tiommus = \n\t\t\t<&smmu 0x200>,\n\t\t\t<&smmu 0x201>,\n\t\t\t<&smmu 0x202>,\n\t\t\t<&smmu 0x203>,\n\t\t\t<&smmu 0x204>,\n\t\t\t<&smmu 0x205>,\n\t\t\t<&smmu 0x206>,\n\t\t\t<&smmu 0x207>,\n\t\t\t<&smmu 0x208>,\n\t\t\t<&smmu 0x209>,\n\t\t\t<&smmu 0x20a>,\n\t\t\t<&smmu 0x20b>,\n\t\t\t<&smmu 0x20c>,\n\t\t\t<&smmu 0x20d>,\n\t\t\t<&smmu 0x20e>,\n\t\t\t<&smmu 0x20f>,\n\t\t\t<&smmu 0x210>,\n\t\t\t<&smmu 0x211>,\n\t\t\t<&smmu 0x212>,\n\t\t\t<&smmu 0x213>,\n\t\t\t<&smmu 0x214>,\n\t\t\t<&smmu 0x215>,\n\t\t\t<&smmu 0x216>,\n\t\t\t<&smmu 0x217>, \n\t\t\t<&smmu 0x218>,\n\t\t\t<&smmu 0x219>,\n\t\t\t<&smmu 0x21a>,\n\t\t\t<&smmu 0x21b>,\n\t\t\t<&smmu 0x21c>,\n\t\t\t<&smmu 0x21d>,\n\t\t\t<&smmu 0x21e>,\n\t\t\t<&smmu 0x21f>;\n\t};\n};\n\n&smmu {\n\tstatus = \"okay\";\n};\n",
+      "after_code": "/ {\n\ttapasco {\n\t\tcompatible = \"tapasco\";\n\t\tinterrupt-parent = <&gic>;\n\t\tinterrupts = <0x0 0x59 0x4 0x0 0x5a 0x4 0x0 0x5b 0x4 0x0 0x5c 0x4 0x0 0x5d 0x4 0x0 0x5e 0x4 0x0 0x5f 0x4 0x0 0x60 0x4 0x0 0x68 0x4 0x0 0x69 0x4 0x0 0x6a 0x4 0x0 0x6b 0x4 0x0 0x6c 0x4 0x0 0x6d 0x4 0x0 0x6e 0x4 0x0 0x6f 0x4>;\n\t\tiommus =\n\t\t\t<&smmu 0x200>,\n\t\t\t<&smmu 0x201>,\n\t\t\t<&smmu 0x202>,\n\t\t\t<&smmu 0x203>,\n\t\t\t<&smmu 0x204>,\n\t\t\t<&smmu 0x205>,\n\t\t\t<&smmu 0x206>,\n\t\t\t<&smmu 0x207>,\n\t\t\t<&smmu 0x208>,\n\t\t\t<&smmu 0x209>,\n\t\t\t<&smmu 0x20a>,\n\t\t\t<&smmu 0x20b>,\n\t\t\t<&smmu 0x20c>,\n\t\t\t<&smmu 0x20d>,\n\t\t\t<&smmu 0x20e>,\n\t\t\t<&smmu 0x20f>,\n\t\t\t<&smmu 0x210>,\n\t\t\t<&smmu 0x211>,\n\t\t\t<&smmu 0x212>,\n\t\t\t<&smmu 0x213>,\n\t\t\t<&smmu 0x214>,\n\t\t\t<&smmu 0x215>,\n\t\t\t<&smmu 0x216>,\n\t\t\t<&smmu 0x217>,\n\t\t\t<&smmu 0x218>,\n\t\t\t<&smmu 0x219>,\n\t\t\t<&smmu 0x21a>,\n\t\t\t<&smmu 0x21b>,\n\t\t\t<&smmu 0x21c>,\n\t\t\t<&smmu 0x21d>,\n\t\t\t<&smmu 0x21e>,\n\t\t\t<&smmu 0x21f>;\n\t\tdma-coherent;\n\t};\n};\n\n&smmu {\n\tstatus = \"okay\";\n};\n",
+      "language": "devicetree",
+      "additions": 3,
+      "deletions": 15,
+      "validation": "clean"
+    }
+  ]
+}

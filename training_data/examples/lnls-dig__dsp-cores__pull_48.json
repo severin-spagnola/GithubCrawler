@@ -1,0 +1,27 @@
+{
+  "repo": "lnls-dig/dsp-cores",
+  "before_ref": "a34db4a45a651709c13318b90736806115ddf790",
+  "after_ref": "cfc6916758561963e08bd3f1ede31f0015e26e3a",
+  "bug_category": "synthesis_error",
+  "query": "fix module language:VHDL",
+  "commit_message": "CIC Decimation core re-written in VHDL CIC Decimation core re-written in VHDL None",
+  "file_count": 1,
+  "examples": [
+    {
+      "repo": "lnls-dig/dsp-cores",
+      "filename": "hdl/modules/cic/Manifest.py",
+      "before_ref": "a34db4a45a651709c13318b90736806115ddf790",
+      "after_ref": "cfc6916758561963e08bd3f1ede31f0015e26e3a",
+      "bug_category": "synthesis_error",
+      "query": "fix module language:VHDL",
+      "commit_message": "CIC Decimation core re-written in VHDL CIC Decimation core re-written in VHDL None",
+      "patch": "@@ -1 +1,6 @@\n-files = [  \"cic_dyn.vhd\", \"cic_decim.v\", \"log2.v\", \"decimation_strober.vhd\", \"cic_dual.vhd\"  ]\n+files = [  \"cic_dyn.vhd\", \"log2.v\", \"decimation_strober.vhd\", \"cic_dual.vhd\"  ]\n+\n+if use_cic_decim_vhdl:\n+    files.append(\"cic_decim.vhd\")\n+else:\n+    files.append(\"cic_decim.v\")",
+      "before_code": "files = [  \"cic_dyn.vhd\", \"cic_decim.v\", \"log2.v\", \"decimation_strober.vhd\", \"cic_dual.vhd\"  ]\n",
+      "after_code": "files = [  \"cic_dyn.vhd\", \"log2.v\", \"decimation_strober.vhd\", \"cic_dual.vhd\"  ]\n\nif use_cic_decim_vhdl:\n    files.append(\"cic_decim.vhd\")\nelse:\n    files.append(\"cic_decim.v\")\n",
+      "language": "python",
+      "additions": 6,
+      "deletions": 1,
+      "validation": "clean"
+    }
+  ]
+}
