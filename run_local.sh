@@ -51,4 +51,4 @@ PYEOF
 
 echo "[run_local.sh] Launching crawler with $(echo "$QUERIES_JSON" | python3 -c 'import sys,json; print(len(json.load(sys.stdin)))') queries → $OUTPUT_TMP"
 
-python3 "$SCRIPT_DIR/crawler.py" "$QUERIES_JSON" "$OUTPUT_TMP"
+python3 "$SCRIPT_DIR/crawler.py" full "$QUERIES_JSON" "$OUTPUT_TMP"
