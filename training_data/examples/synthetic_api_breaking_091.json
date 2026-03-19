@@ -1,0 +1,11 @@
+{
+  "before_code": "/* gpio.h */\n#ifndef GPIO_H\n#define GPIO_H\n\n#include <stdint.h>\n\ntypedef void (*gpio_irq_cb_t)(uint8_t pin);\n\nvoid gpio_set_dir(uint8_t pin, uint8_t output);\nvoid gpio_write(uint8_t pin, uint8_t val);\nuint8_t gpio_read(uint8_t pin);\nvoid gpio_attach_irq(uint8_t pin, gpio_irq_cb_t cb, uint8_t edge);\nvoid gpio_detach_irq(uint8_t pin);\n\n#endif",
+  "after_code": "/* gpio.h */\n#ifndef GPIO_H\n#define GPIO_H\n\n#include <stdint.h>\n\ntypedef void (*gpio_irq_cb_t)(uint8_t pin, uint8_t edge, void *user_data);\n\nvoid gpio_set_dir(uint8_t pin, uint8_t output);\nvoid gpio_write(uint8_t pin, uint8_t val);\nuint8_t gpio_read(uint8_t pin);\nvoid gpio_attach_irq(uint8_t pin, gpio_irq_cb_t cb, uint8_t edge, void *user_data);\nvoid gpio_detach_irq(uint8_t pin);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,12 +4,12 @@\n \n #include <stdint.h>\n \n-typedef void (*gpio_irq_cb_t)(uint8_t pin);\n+typedef void (*gpio_irq_cb_t)(uint8_t pin, uint8_t edge, void *user_data);\n \n void gpio_set_dir(uint8_t pin, uint8_t output);\n void gpio_write(uint8_t pin, uint8_t val);\n uint8_t gpio_read(uint8_t pin);\n-void gpio_attach_irq(uint8_t pin, gpio_irq_cb_t cb, uint8_t edge);\n+void gpio_attach_irq(uint8_t pin, gpio_irq_cb_t cb, uint8_t edge, void *user_data);\n void gpio_detach_irq(uint8_t pin);\n \n #endif",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The gpio_irq_cb_t callback signature changed to include edge and user_data parameters, and gpio_attach_irq gained a user_data argument, breaking all existing callback registrations.",
+  "patch_hash": "35f30a6c31e8d1fef7434092a42b3316fb1fac040ad42c5fcb5553088d5b72dc"
+}

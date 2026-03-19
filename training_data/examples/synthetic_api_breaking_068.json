@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\n#define WDT_MODE_RESET    0x01u\n#define WDT_MODE_INTERRUPT 0x02u\n\nvoid wdt_init(uint32_t timeout_ms, uint8_t mode);\nvoid wdt_feed(void);\nvoid wdt_disable(void);\n\n#endif",
+  "after_code": "#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\n#define WDT_MODE_RESET     0x01u\n#define WDT_MODE_INTERRUPT 0x02u\n\nvoid wdt_init(uint32_t timeout_ms, uint8_t mode, void (*warn_cb)(void));\nvoid wdt_feed(void);\nvoid wdt_disable(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,10 +3,10 @@\n \n #include <stdint.h>\n \n-#define WDT_MODE_RESET    0x01u\n+#define WDT_MODE_RESET     0x01u\n #define WDT_MODE_INTERRUPT 0x02u\n \n-void wdt_init(uint32_t timeout_ms, uint8_t mode);\n+void wdt_init(uint32_t timeout_ms, uint8_t mode, void (*warn_cb)(void));\n void wdt_feed(void);\n void wdt_disable(void);\n \n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "wdt_init gained a mandatory warn_cb parameter, breaking all call sites that previously supplied only two arguments.",
+  "patch_hash": "247a2aa8c723ae21dd43c546b52711f5eea599cda468291f9dccd9098560b5a1"
+}

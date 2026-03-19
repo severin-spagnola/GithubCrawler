@@ -2,7 +2,7 @@
   "repo": "bespoke-silicon-group/basejump_stl",
   "before_ref": "9549455072fb849381da7e0a3157a54d18ef2654",
   "after_ref": "451969c6f0125c36c8fa98370b5fccca15308903",
-  "bug_category": "reset_logic",
+  "bug_category": "clock_domain",
   "query": "fix rtl language:Verilog",
   "commit_message": "VCS 2020 Variable initialization related fix VCS 2020 Variable initialization related fix There is an open discussion [here](https://github.com/bespoke-silicon-group/bsg_replicant/issues/638) about the simulation error using VCS 2020, and this PR attempts to fix that issue by initializing the clock generator output to 1. This should work with the async reset generator (triggered by the negative edge of input clock) to correctly assert the reset signal from simulation zero.",
   "file_count": 1,
@@ -12,7 +12,7 @@
       "filename": "bsg_test/bsg_nonsynth_clock_gen.v",
       "before_ref": "9549455072fb849381da7e0a3157a54d18ef2654",
       "after_ref": "451969c6f0125c36c8fa98370b5fccca15308903",
-      "bug_category": "reset_logic",
+      "bug_category": "clock_domain",
       "query": "fix rtl language:Verilog",
       "commit_message": "VCS 2020 Variable initialization related fix VCS 2020 Variable initialization related fix There is an open discussion [here](https://github.com/bespoke-silicon-group/bsg_replicant/issues/638) about the simulation error using VCS 2020, and this PR attempts to fix that issue by initializing the clock generator output to 1. This should work with the async reset generator (triggered by the negative edge of input clock) to correctly assert the reset signal from simulation zero.",
       "patch": "@@ -13,6 +13,7 @@ module bsg_nonsynth_clock_gen\n     $display(\"%m with cycle_time_p \",cycle_time_p);\n     assert(cycle_time_p >= 2)\n        else $error(\"cannot simulate cycle time less than 2\");\n+    o = 1;\n   end\n   \n   always #(cycle_time_p/2.0) begin",
@@ -23,5 +23,6 @@
       "deletions": 0,
       "validation": "trivial_diff"
     }
-  ]
+  ],
+  "patch_hash": "54828f1b1fefa0bddda887a6a8fbb656e74dda9cd1f0a6398155a46eb92dfd72"
 }

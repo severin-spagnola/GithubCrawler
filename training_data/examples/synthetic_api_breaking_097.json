@@ -1,0 +1,11 @@
+{
+  "before_code": "/* adc_hal.h */\n#ifndef ADC_HAL_H\n#define ADC_HAL_H\n\n#include <stdint.h>\n\ntypedef void (*adc_done_cb_t)(uint8_t ch, uint16_t raw);\n\nvoid adc_init(void);\nvoid adc_start(uint8_t channel, adc_done_cb_t cb);\nuint16_t adc_read_blocking(uint8_t channel);\nvoid adc_deinit(void);\n\n#endif",
+  "after_code": "/* adc_hal.h */\n#ifndef ADC_HAL_H\n#define ADC_HAL_H\n\n#include <stdint.h>\n\ntypedef void (*adc_done_cb_t)(uint8_t ch, uint16_t raw);\n\nvoid adc_init(void);\nvoid adc_start(uint8_t channel, adc_done_cb_t cb);\nint32_t adc_read_blocking(uint8_t channel);\nvoid adc_deinit(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -8,7 +8,7 @@\n \n void adc_init(void);\n void adc_start(uint8_t channel, adc_done_cb_t cb);\n-uint16_t adc_read_blocking(uint8_t channel);\n+int32_t adc_read_blocking(uint8_t channel);\n void adc_deinit(void);\n \n #endif",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The return type of adc_read_blocking changed from uint16_t to int32_t, breaking callers that store the result in uint16_t variables or compare it as an unsigned value.",
+  "patch_hash": "3406d4aa238324d686ee6bdb0f8f0bd02005d34468c7eadafd38151fe3573403"
+}

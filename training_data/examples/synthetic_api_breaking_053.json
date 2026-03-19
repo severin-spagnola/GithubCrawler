@@ -1,0 +1,11 @@
+{
+  "before_code": "/*\n * SPI driver public API\n */\n#include <stdint.h>\n\ntypedef void (*spi_callback_t)(uint8_t port, uint8_t *buf, uint16_t len);\n\nint  spi_open(uint8_t port, uint32_t freq_hz);\nvoid spi_set_callback(uint8_t port, spi_callback_t cb);\nint  spi_transfer(uint8_t port, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_close(uint8_t port);\n",
+  "after_code": "/*\n * SPI driver public API\n */\n#include <stdint.h>\n\ntypedef void (*spi_callback_t)(uint8_t port, uint8_t *buf, uint16_t len, int status);\n\nint  spi_open(uint8_t port, uint32_t freq_hz);\nvoid spi_set_callback(uint8_t port, spi_callback_t cb);\nint  spi_transfer(uint8_t port, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_close(uint8_t port);\n",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,7 +3,7 @@\n  */\n #include <stdint.h>\n \n-typedef void (*spi_callback_t)(uint8_t port, uint8_t *buf, uint16_t len);\n+typedef void (*spi_callback_t)(uint8_t port, uint8_t *buf, uint16_t len, int status);\n \n int  spi_open(uint8_t port, uint32_t freq_hz);\n void spi_set_callback(uint8_t port, spi_callback_t cb);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The `spi_callback_t` typedef gained an additional `int status` parameter, breaking all existing callback implementations registered by callers.",
+  "patch_hash": "aab520de179378795f15002eefcc393804d94d8352c68aa410debc3072fcfdfd"
+}

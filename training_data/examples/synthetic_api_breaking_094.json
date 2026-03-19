@@ -1,0 +1,11 @@
+{
+  "before_code": "/* flash_drv.h */\n#ifndef FLASH_DRV_H\n#define FLASH_DRV_H\n\n#include <stdint.h>\n\nint flash_erase_sector(uint32_t addr);\nint flash_write(uint32_t addr, const uint8_t *data, uint32_t len);\nint flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\nint flash_verify(uint32_t addr, const uint8_t *data, uint32_t len);\nvoid flash_lock(void);\nvoid flash_unlock(void);\n\n#endif",
+  "after_code": "/* flash_drv.h */\n#ifndef FLASH_DRV_H\n#define FLASH_DRV_H\n\n#include <stdint.h>\n\nint flash_erase_sector(uint32_t addr);\nint flash_write(uint32_t addr, const uint8_t *data, uint32_t len);\nint flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\nvoid flash_lock(void);\nvoid flash_unlock(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -7,7 +7,6 @@\n int flash_erase_sector(uint32_t addr);\n int flash_write(uint32_t addr, const uint8_t *data, uint32_t len);\n int flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\n-int flash_verify(uint32_t addr, const uint8_t *data, uint32_t len);\n void flash_lock(void);\n void flash_unlock(void);\n \n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The flash_verify function was removed from the public API, causing link errors in any code that calls it.",
+  "patch_hash": "7fae47b289b7bce5754dfc112b63c0a8d9e44c45db019592e5cad5fabee74040"
+}

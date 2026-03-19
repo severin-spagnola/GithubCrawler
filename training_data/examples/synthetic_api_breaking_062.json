@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef ADC_DRV_H\n#define ADC_DRV_H\n\n#include <stdint.h>\n\n#define ADC_ERR_NONE       0\n#define ADC_ERR_BUSY      -1\n#define ADC_ERR_OVERFLOW  -2\n#define ADC_ERR_TIMEOUT   -3\n\nint adc_sample(uint8_t channel, uint16_t *out);\nint adc_start_continuous(uint8_t channel, uint16_t interval_ms);\nvoid adc_stop(void);\n\n#endif",
+  "after_code": "#ifndef ADC_DRV_H\n#define ADC_DRV_H\n\n#include <stdint.h>\n\n#define ADC_ERR_NONE       0\n#define ADC_ERR_BUSY      -2\n#define ADC_ERR_OVERFLOW  -3\n#define ADC_ERR_TIMEOUT   -4\n\nint adc_sample(uint8_t channel, uint16_t *out);\nint adc_start_continuous(uint8_t channel, uint16_t interval_ms);\nvoid adc_stop(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,9 +4,9 @@\n #include <stdint.h>\n \n #define ADC_ERR_NONE       0\n-#define ADC_ERR_BUSY      -1\n-#define ADC_ERR_OVERFLOW  -2\n-#define ADC_ERR_TIMEOUT   -3\n+#define ADC_ERR_BUSY      -2\n+#define ADC_ERR_OVERFLOW  -3\n+#define ADC_ERR_TIMEOUT   -4\n \n int adc_sample(uint8_t channel, uint16_t *out);\n int adc_start_continuous(uint8_t channel, uint16_t interval_ms);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "All non-zero ADC error code macros were renumbered, breaking callers that compare return values against the old numeric constants.",
+  "patch_hash": "ffbd03dca55d61ddbf697edc65608a0647a416879aee8d8c427d4f9423ac4e34"
+}

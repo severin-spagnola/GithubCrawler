@@ -1,0 +1,10 @@
+{
+  "before_code": "/* Watchdog timer HAL */\n#ifndef WDT_HAL_H\n#define WDT_HAL_H\n\n#include <stdint.h>\n\n/* Initialize watchdog with timeout in milliseconds.\n * Returns 0 on success, negative error code on failure. */\nint wdt_init(uint32_t timeout_ms);\n\n/* Pet/kick the watchdog to prevent reset */\nvoid wdt_kick(void);\n\n/* Disable the watchdog (if permitted by hardware) */\nvoid wdt_disable(void);\n\n/* Get remaining time before reset in ms */\nuint32_t wdt_remaining_ms(void);\n\n#endif",
+  "after_code": "/* Watchdog timer HAL */\n#ifndef WDT_HAL_H\n#define WDT_HAL_H\n\n#include <stdint.h>\n\n/* Initialize watchdog with timeout in milliseconds.\n * Returns 0 on success, negative error code on failure. */\nint wdt_init(uint32_t timeout_ms);\n\n/* Pet/kick the watchdog to prevent reset */\nvoid wdt_kick(void);\n\n/* wdt_disable() REMOVED — hardware no longer supports it */\n\n/* Get remaining time before reset in ms.\n * RETURN TYPE CHANGED: now returns int32_t (-1 on error) */\nint32_t wdt_remaining_ms(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -11,10 +11,10 @@\n /* Pet/kick the watchdog to prevent reset */\n void wdt_kick(void);\n \n-/* Disable the watchdog (if permitted by hardware) */\n-void wdt_disable(void);\n+/* wdt_disable() REMOVED — hardware no longer supports it */\n \n-/* Get remaining time before reset in ms */\n-uint32_t wdt_remaining_ms(void);\n+/* Get remaining time before reset in ms.\n+ * RETURN TYPE CHANGED: now returns int32_t (-1 on error) */\n+int32_t wdt_remaining_ms(void);\n \n #endif",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "41f619fe9f13276a37ebf5e531f5ba661815d130b4fd387c273c8d8d3d7073b7"
+}

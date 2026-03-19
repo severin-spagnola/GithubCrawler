@@ -2,7 +2,7 @@
   "repo": "siliconcompiler/zerosoc",
   "before_ref": "22aa66663dc1d6a4de395a137bb0a8f19a8db5f7",
   "after_ref": "855497e3aa6287bd46aac996d48d2f17d3cfbdc9",
-  "bug_category": "build_regression",
+  "bug_category": "synthesis_error",
   "query": "fix module language:SystemVerilog",
   "commit_message": "fix build fix build \n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added pad-ring configuration control ports to support expanded hardware functionality options.\n\n* **Chores**\n  * Updated Python package dependencies to latest compatible versions for improved stability and support.\n\n<sub>✏️ Tip: You can customize this high-level summary in your review settings.</sub>\n\n<!-- end of auto-generated comment: release notes ",
   "file_count": 1,
@@ -12,7 +12,7 @@
       "filename": "hw/asic_top.v",
       "before_ref": "22aa66663dc1d6a4de395a137bb0a8f19a8db5f7",
       "after_ref": "855497e3aa6287bd46aac996d48d2f17d3cfbdc9",
-      "bug_category": "build_regression",
+      "bug_category": "synthesis_error",
       "query": "fix module language:SystemVerilog",
       "commit_message": "fix build fix build \n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added pad-ring configuration control ports to support expanded hardware functionality options.\n\n* **Chores**\n  * Updated Python package dependencies to latest compatible versions for improved stability and support.\n\n<sub>✏️ Tip: You can customize this high-level summary in your review settings.</sub>\n\n<!-- end of auto-generated comment: release notes ",
       "patch": "@@ -135,24 +135,36 @@ module asic_top (\n                 .no_oe          (~no_oen),\n                 .no_pe          ('b0),\n                 .no_ps          ('b0),\n+                .no_schmitt     ('b0),\n+                .no_fast        ('b0),\n+                .no_ds          ('b0),\n                 .no_cfg         (no_tech_cfg),\n                 .ea_a           (ea_dout),\n                 .ea_ie          (ea_ie),\n                 .ea_oe          (~ea_oen),\n                 .ea_pe          ('b0),\n                 .ea_ps          ('b0),\n+                .ea_schmitt     ('b0),\n+                .ea_fast        ('b0),\n+                .ea_ds          ('b0),\n                 .ea_cfg         (ea_tech_cfg),\n                 .so_a           (so_dout),\n                 .so_ie          (so_ie),\n                 .so_oe          (~so_oen),\n                 .so_pe          ('b0),\n                 .so_ps          ('b0),\n+                .so_schmitt     ('b0),\n+                .so_fast        ('b0),\n+                .so_ds          ('b0),\n                 .so_cfg         (so_tech_cfg),\n                 .we_a           (we_dout),\n                 .we_ie          (we_ie),\n                 .we_oe          (~we_oen),\n                 .we_pe          ('b0),\n                 .we_ps          ('b0),\n+                .we_schmitt     ('b0),\n+                .we_fast        ('b0),\n+                .we_ds          ('b0),\n                 .we_cfg         (we_tech_cfg));\n \n endmodule",
@@ -23,5 +23,6 @@
       "deletions": 0,
       "validation": "clean"
     }
-  ]
+  ],
+  "patch_hash": "0e99a175f390bfb97314ce4248e2396034377f762f9667df6e9b4d3f0b2516ef"
 }

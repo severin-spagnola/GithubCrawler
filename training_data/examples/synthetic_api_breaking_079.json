@@ -1,0 +1,11 @@
+{
+  "before_code": "/* watchdog.h - Watchdog timer API */\n#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\nvoid wdt_init(uint32_t timeout_ms);\nvoid wdt_feed(void);\nvoid wdt_enable(void);\nvoid wdt_disable(void);\nuint32_t wdt_get_remaining_ms(void);\n\n#endif /* WATCHDOG_H */",
+  "after_code": "/* watchdog.h - Watchdog timer API */\n#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\nvoid wdt_init(uint32_t timeout_ms);\nvoid wdt_kick(void);   /* renamed from wdt_feed */\nvoid wdt_enable(void);\nvoid wdt_disable(void);\nuint32_t wdt_get_remaining_ms(void);\n\n#endif /* WATCHDOG_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -5,7 +5,7 @@\n #include <stdint.h>\n \n void wdt_init(uint32_t timeout_ms);\n-void wdt_feed(void);\n+void wdt_kick(void);   /* renamed from wdt_feed */\n void wdt_enable(void);\n void wdt_disable(void);\n uint32_t wdt_get_remaining_ms(void);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Renamed the exported function wdt_feed to wdt_kick, breaking any caller that invokes wdt_feed to service the watchdog timer.",
+  "patch_hash": "4a7e7ec318019984f8a3ec9acc984a9c42c0659e05e5fbaa8a2aa5121c01fa79"
+}

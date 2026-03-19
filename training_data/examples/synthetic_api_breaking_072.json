@@ -1,0 +1,11 @@
+{
+  "before_code": "/* gpio.h - GPIO abstraction layer */\n#ifndef GPIO_H\n#define GPIO_H\n\n#include <stdint.h>\n\ntypedef void (*gpio_irq_cb_t)(uint8_t pin);\n\nvoid gpio_set_direction(uint8_t pin, uint8_t dir);\nvoid gpio_write(uint8_t pin, uint8_t val);\nuint8_t gpio_read(uint8_t pin);\nvoid gpio_register_irq(uint8_t pin, gpio_irq_cb_t cb);\nvoid gpio_enable_irq(uint8_t pin);\nvoid gpio_disable_irq(uint8_t pin);\n\n#endif /* GPIO_H */",
+  "after_code": "/* gpio.h - GPIO abstraction layer */\n#ifndef GPIO_H\n#define GPIO_H\n\n#include <stdint.h>\n\ntypedef void (*gpio_irq_cb_t)(uint8_t pin, uint8_t edge);\n\nvoid gpio_set_direction(uint8_t pin, uint8_t dir);\nvoid gpio_write(uint8_t pin, uint8_t val);\nuint8_t gpio_read(uint8_t pin);\nvoid gpio_register_irq(uint8_t pin, gpio_irq_cb_t cb);\nvoid gpio_enable_irq(uint8_t pin);\nvoid gpio_disable_irq(uint8_t pin);\n\n#endif /* GPIO_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,7 +4,7 @@\n \n #include <stdint.h>\n \n-typedef void (*gpio_irq_cb_t)(uint8_t pin);\n+typedef void (*gpio_irq_cb_t)(uint8_t pin, uint8_t edge);\n \n void gpio_set_direction(uint8_t pin, uint8_t dir);\n void gpio_write(uint8_t pin, uint8_t val);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Added an edge parameter to the gpio_irq_cb_t callback typedef, breaking all existing callback implementations and registrations that only accept a single pin argument.",
+  "patch_hash": "a174def3e5e6734d8de37486a832b8a16dc38653a7482889c45d80a32078e5b2"
+}

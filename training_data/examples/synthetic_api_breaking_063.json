@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef GPIO_API_H\n#define GPIO_API_H\n\n#include <stdint.h>\n\ntypedef enum {\n    GPIO_DIR_INPUT  = 0,\n    GPIO_DIR_OUTPUT = 1\n} gpio_dir_t;\n\ntypedef enum {\n    GPIO_PULL_NONE = 0,\n    GPIO_PULL_UP   = 1,\n    GPIO_PULL_DOWN = 2\n} gpio_pull_t;\n\nvoid gpio_set_dir(uint8_t pin, gpio_dir_t dir);\nvoid gpio_set_pull(uint8_t pin, gpio_pull_t pull);\nvoid gpio_write(uint8_t pin, uint8_t val);\nuint8_t gpio_read(uint8_t pin);\n\n#endif",
+  "after_code": "#ifndef GPIO_API_H\n#define GPIO_API_H\n\n#include <stdint.h>\n\ntypedef enum {\n    GPIO_DIR_INPUT  = 0,\n    GPIO_DIR_OUTPUT = 1\n} gpio_dir_t;\n\ntypedef enum {\n    GPIO_PULL_NONE      = 0,\n    GPIO_PULL_UP        = 1,\n    GPIO_PULL_DOWN      = 2,\n    GPIO_PULL_BUS_KEEP  = 3\n} gpio_pull_t;\n\nvoid gpio_set_dir(uint8_t pin, gpio_dir_t dir);\nvoid gpio_set_pull(uint8_t pin, gpio_pull_t pull);\nvoid gpio_write(uint8_t pin, uint8_t val);\nuint8_t gpio_read(uint8_t pin);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -9,9 +9,10 @@\n } gpio_dir_t;\n \n typedef enum {\n-    GPIO_PULL_NONE = 0,\n-    GPIO_PULL_UP   = 1,\n-    GPIO_PULL_DOWN = 2\n+    GPIO_PULL_NONE      = 0,\n+    GPIO_PULL_UP        = 1,\n+    GPIO_PULL_DOWN      = 2,\n+    GPIO_PULL_BUS_KEEP  = 3\n } gpio_pull_t;\n \n void gpio_set_dir(uint8_t pin, gpio_dir_t dir);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "A new enumerator GPIO_PULL_BUS_KEEP was inserted into gpio_pull_t; while additive in source, it shifts assumptions in switch statements that relied on the enum covering exactly three values.",
+  "patch_hash": "0a9f2ee80cb8630ee28c1c65f42c71b05e5bf53beb49629d398608ea4c3ae65d"
+}

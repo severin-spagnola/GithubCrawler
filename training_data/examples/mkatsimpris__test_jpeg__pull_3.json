@@ -2,7 +2,7 @@
   "repo": "mkatsimpris/test_jpeg",
   "before_ref": "e7e26781122237b102eeec2a4580ee11557698b3",
   "after_ref": "e7c9362dbb7ef780cf169de6e5cd8db375bfbb7c",
-  "bug_category": "latch_inferred",
+  "bug_category": "sensitivity_list",
   "query": "incomplete case\" language:verilog",
   "commit_message": "Rgb2ycbcr Rgb2ycbcr @cfelton, @jck, @josyb, @dargor0, @nkkav\n",
   "file_count": 2,
@@ -12,7 +12,7 @@
       "filename": "setup.py",
       "before_ref": "e7e26781122237b102eeec2a4580ee11557698b3",
       "after_ref": "e7c9362dbb7ef780cf169de6e5cd8db375bfbb7c",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "incomplete case\" language:verilog",
       "commit_message": "Rgb2ycbcr Rgb2ycbcr @cfelton, @jck, @josyb, @dargor0, @nkkav\n",
       "patch": "@@ -5,9 +5,9 @@\n setup(\n     name='JPEG Encoder',\n     version='0.1dev',\n-    author='Merkourios Katsimpris',\n+    author='Merkourios Katsimpris', 'Christopher Felton', 'Vikram Raigur'\n     author_email='merkourioskatsimpris@gmail.com',\n-    url='https://github.com/mkatsimpris/test_jpeg',\n+    url='https://github.com/cfelton/test_jpeg',\n     packages=['jpegenc'],\n     description='JPEG Encoder',\n     install_requires = ['myhdl >= 1.0.dev'],",
@@ -28,7 +28,7 @@
       "filename": "test/support/__init__.py",
       "before_ref": "e7e26781122237b102eeec2a4580ee11557698b3",
       "after_ref": "e7c9362dbb7ef780cf169de6e5cd8db375bfbb7c",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "incomplete case\" language:verilog",
       "commit_message": "Rgb2ycbcr Rgb2ycbcr @cfelton, @jck, @josyb, @dargor0, @nkkav\n",
       "patch": "@@ -4,3 +4,5 @@\n from .jpeg_prep_cosim import prep_cosim\n from .jpeg_v1_intf import JPEGEncV1\n from .jpeg_v2_intf import JPEGEncV2\n+\n+from .jpegenc_v1_top import convert as convertv1",
@@ -39,5 +39,6 @@
       "deletions": 0,
       "validation": "clean"
     }
-  ]
+  ],
+  "patch_hash": "8f80ad4ef4e9bb5f48fa2b4ca6d08e793cccaed15141b9faac9192c4fe05786f"
 }

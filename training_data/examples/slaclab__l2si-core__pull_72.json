@@ -2,7 +2,7 @@
   "repo": "slaclab/l2si-core",
   "before_ref": "4419c18232e6b02b06c70e459f0dc128eb1ac646",
   "after_ref": "27f38b566e986cedefd13c5dea456ad41555e3e2",
-  "bug_category": "latch_inferred",
+  "bug_category": "sensitivity_list",
   "query": "latch inferred\" language:vhdl",
   "commit_message": "Misc bug fixes Misc bug fixes Description\r\n- [Fix inferred latch](https://github.com/slaclab/l2si-core/commit/faf9be42d6b901ee414414466840f9f0f90be977)\r\n- [bug fixes for Remove AnalysisTag references](https://github.com/slaclab/l2si-core/pull/72/commits/27f38b566e986cedefd13c5dea456ad41555e3e2)",
   "file_count": 3,
@@ -12,7 +12,7 @@
       "filename": "base/rtl/TriggerEventBuffer.vhd",
       "before_ref": "4419c18232e6b02b06c70e459f0dc128eb1ac646",
       "after_ref": "27f38b566e986cedefd13c5dea456ad41555e3e2",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "latch inferred\" language:vhdl",
       "commit_message": "Misc bug fixes Misc bug fixes Description\r\n- [Fix inferred latch](https://github.com/slaclab/l2si-core/commit/faf9be42d6b901ee414414466840f9f0f90be977)\r\n- [bug fixes for Remove AnalysisTag references](https://github.com/slaclab/l2si-core/pull/72/commits/27f38b566e986cedefd13c5dea456ad41555e3e2)",
       "patch": "@@ -414,6 +414,9 @@ begin\n \n          delayedTriggerDataSlv   <= xpmTriggerDataSlv;\n          delayedTriggerDataValid <= xpmTriggerDataValid;\n+      else\n+         delayedTriggerDataSlv <= (others => '0');\n+         delayedTriggerDataValid <= '0';\n       end if;  -- LCLS-II XPM logic\n \n       -- Latch FIFO overflow if seen",
@@ -28,7 +28,7 @@
       "filename": "xpm/rtl/XpmMini.vhd",
       "before_ref": "4419c18232e6b02b06c70e459f0dc128eb1ac646",
       "after_ref": "27f38b566e986cedefd13c5dea456ad41555e3e2",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "latch inferred\" language:vhdl",
       "commit_message": "Misc bug fixes Misc bug fixes Description\r\n- [Fix inferred latch](https://github.com/slaclab/l2si-core/commit/faf9be42d6b901ee414414466840f9f0f90be977)\r\n- [bug fixes for Remove AnalysisTag references](https://github.com/slaclab/l2si-core/pull/72/commits/27f38b566e986cedefd13c5dea456ad41555e3e2)",
       "patch": "@@ -212,7 +212,7 @@ begin\n    partitionConfig.master   <= '1';\n    partitionConfig.l0Select <= config.partition.l0Select;\n    partitionConfig.l1Select <= XPM_L1_SELECT_CONFIG_INIT_C;\n-   partitionConfig.analysis <= XPM_ANALYSIS_CONFIG_INIT_C;\n+--   partitionConfig.analysis <= XPM_ANALYSIS_CONFIG_INIT_C; Remove AnalysisTag references and unused XpmLinkClocks in e26d1183f2bb3537e1f910a55174edf29d8edaef\n    partitionConfig.l0Tag    <= XPM_L0_TAG_CONFIG_INIT_C;\n    partitionConfig.pipeline <= config.partition.pipeline;\n    partitionConfig.inhibit  <= XPM_PART_INH_CONFIG_INIT_C;",
@@ -44,7 +44,7 @@
       "filename": "xpm/rtl/XpmPkg.vhd",
       "before_ref": "4419c18232e6b02b06c70e459f0dc128eb1ac646",
       "after_ref": "27f38b566e986cedefd13c5dea456ad41555e3e2",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "latch inferred\" language:vhdl",
       "commit_message": "Misc bug fixes Misc bug fixes Description\r\n- [Fix inferred latch](https://github.com/slaclab/l2si-core/commit/faf9be42d6b901ee414414466840f9f0f90be977)\r\n- [bug fixes for Remove AnalysisTag references](https://github.com/slaclab/l2si-core/pull/72/commits/27f38b566e986cedefd13c5dea456ad41555e3e2)",
       "patch": "@@ -351,7 +351,7 @@ package XpmPkg is\n       master   : sl;\n       l0Select : XpmL0SelectConfigType;\n       l1Select : XpmL1SelectConfigType;\n-      analysis : XpmAnalysisConfigType;\n+--      analysis : XpmAnalysisConfigType; Remove AnalysisTag references and unused XpmLinkClocks in e26d1183f2bb3537e1f910a55174edf29d8edaef\n       l0Tag    : XpmL0TagConfigType;\n       pipeline : XpmPipelineConfigType;\n       inhibit  : XpmPartInhConfigType;\n@@ -361,7 +361,7 @@ package XpmPkg is\n       master   => '0',\n       l0Select => XPM_L0_SELECT_CONFIG_INIT_C,\n       l1Select => XPM_L1_SELECT_CONFIG_INIT_C,\n-      analysis => XPM_ANALYSIS_CONFIG_INIT_C,\n+--      analysis => XPM_ANALYSIS_CONFIG_INIT_C, Remove AnalysisTag references and unused XpmLinkClocks in e26d1183f2bb3537e1f910a55174edf29d8edaef\n       l0Tag    => XPM_L0_TAG_CONFIG_INIT_C,\n       pipeline => XPM_PIPELINE_CONFIG_INIT_C,\n       inhibit  => XPM_PART_INH_CONFIG_INIT_C,",
@@ -55,5 +55,6 @@
       "deletions": 2,
       "validation": "clean"
     }
-  ]
+  ],
+  "patch_hash": "fcafb4347c49da157801e86b5c135915b725e78c933ce4a4e6b5526fb7561a5a"
 }

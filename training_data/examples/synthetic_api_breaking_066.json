@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef I2C_DRV_H\n#define I2C_DRV_H\n\n#include <stdint.h>\n#include <stddef.h>\n\nint i2c_init(uint8_t bus, uint32_t clock_hz);\nint i2c_write(uint8_t bus, uint8_t addr, const uint8_t *data, size_t len);\nint i2c_read(uint8_t bus, uint8_t addr, uint8_t *buf, size_t len);\nvoid i2c_deinit(uint8_t bus);\n\n#endif",
+  "after_code": "#ifndef I2C_DRV_H\n#define I2C_DRV_H\n\n#include <stdint.h>\n#include <stddef.h>\n\nint i2c_init(uint8_t bus, uint32_t clock_hz);\nint i2c_write(uint8_t bus, uint16_t addr, const uint8_t *data, size_t len);\nint i2c_read(uint8_t bus, uint16_t addr, uint8_t *buf, size_t len);\nvoid i2c_deinit(uint8_t bus);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -5,8 +5,8 @@\n #include <stddef.h>\n \n int i2c_init(uint8_t bus, uint32_t clock_hz);\n-int i2c_write(uint8_t bus, uint8_t addr, const uint8_t *data, size_t len);\n-int i2c_read(uint8_t bus, uint8_t addr, uint8_t *buf, size_t len);\n+int i2c_write(uint8_t bus, uint16_t addr, const uint8_t *data, size_t len);\n+int i2c_read(uint8_t bus, uint16_t addr, uint8_t *buf, size_t len);\n void i2c_deinit(uint8_t bus);\n \n #endif",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The I2C device address parameter was widened from uint8_t to uint16_t in both i2c_write and i2c_read, changing the calling convention and breaking existing callers.",
+  "patch_hash": "24050f2bf81a3ce4388791b4429f7dbc209bb8fd8e408e4c700f092ad41609c2"
+}

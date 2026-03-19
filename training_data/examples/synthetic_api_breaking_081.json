@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef SPI_H\n#define SPI_H\n\n#include <stdint.h>\n\ntypedef void (*spi_callback_t)(uint8_t *buf, uint16_t len);\n\nint spi_init(uint8_t bus, uint32_t freq_hz);\nint spi_transfer(uint8_t bus, uint8_t *tx, uint8_t *rx, uint16_t len);\nint spi_transfer_async(uint8_t bus, uint8_t *tx, uint8_t *rx,\n                       uint16_t len, spi_callback_t cb);\nvoid spi_deinit(uint8_t bus);\n\n#endif",
+  "after_code": "#ifndef SPI_H\n#define SPI_H\n\n#include <stdint.h>\n\ntypedef void (*spi_callback_t)(uint8_t bus, uint8_t *buf, uint16_t len, int status);\n\nint spi_init(uint8_t bus, uint32_t freq_hz);\nint spi_transfer(uint8_t bus, uint8_t *tx, uint8_t *rx, uint16_t len);\nint spi_transfer_async(uint8_t bus, uint8_t *tx, uint8_t *rx,\n                       uint16_t len, spi_callback_t cb);\nvoid spi_deinit(uint8_t bus);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,7 +3,7 @@\n \n #include <stdint.h>\n \n-typedef void (*spi_callback_t)(uint8_t *buf, uint16_t len);\n+typedef void (*spi_callback_t)(uint8_t bus, uint8_t *buf, uint16_t len, int status);\n \n int spi_init(uint8_t bus, uint32_t freq_hz);\n int spi_transfer(uint8_t bus, uint8_t *tx, uint8_t *rx, uint16_t len);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The spi_callback_t signature was changed to include a bus identifier and status parameter, breaking all existing callback implementations registered by callers.",
+  "patch_hash": "637be5496c9885fa523fd374d78bf1ddee3c09817cf71e5b81b8cdf47659af03"
+}

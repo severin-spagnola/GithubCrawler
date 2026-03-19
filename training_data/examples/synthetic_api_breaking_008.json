@@ -1,0 +1,10 @@
+{
+  "before_code": "/* watchdog.h - Hardware Watchdog Timer Interface */\n#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\ntypedef enum {\n    WDT_TIMEOUT_256MS  = 0,\n    WDT_TIMEOUT_512MS  = 1,\n    WDT_TIMEOUT_1S     = 2,\n    WDT_TIMEOUT_2S     = 3,\n    WDT_TIMEOUT_4S     = 4,\n    WDT_TIMEOUT_8S     = 5\n} wdt_timeout_t;\n\nvoid wdt_enable(wdt_timeout_t timeout);\nvoid wdt_disable(void);\nvoid wdt_feed(void);\nuint8_t wdt_caused_reset(void);\n\n#endif /* WATCHDOG_H */",
+  "after_code": "/* watchdog.h - Hardware Watchdog Timer Interface */\n#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\n/* BREAKING: Enum values remapped to match new hardware register layout */\ntypedef enum {\n    WDT_TIMEOUT_256MS  = 3,\n    WDT_TIMEOUT_512MS  = 4,\n    WDT_TIMEOUT_1S     = 5,\n    WDT_TIMEOUT_2S     = 6,\n    WDT_TIMEOUT_4S     = 7,\n    WDT_TIMEOUT_8S     = 8\n} wdt_timeout_t;\n\nvoid wdt_enable(wdt_timeout_t timeout);\nvoid wdt_disable(void);\nvoid wdt_feed(void);\nuint8_t wdt_caused_reset(void);\n\n#endif /* WATCHDOG_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,13 +4,14 @@\n \n #include <stdint.h>\n \n+/* BREAKING: Enum values remapped to match new hardware register layout */\n typedef enum {\n-    WDT_TIMEOUT_256MS  = 0,\n-    WDT_TIMEOUT_512MS  = 1,\n-    WDT_TIMEOUT_1S     = 2,\n-    WDT_TIMEOUT_2S     = 3,\n-    WDT_TIMEOUT_4S     = 4,\n-    WDT_TIMEOUT_8S     = 5\n+    WDT_TIMEOUT_256MS  = 3,\n+    WDT_TIMEOUT_512MS  = 4,\n+    WDT_TIMEOUT_1S     = 5,\n+    WDT_TIMEOUT_2S     = 6,\n+    WDT_TIMEOUT_4S     = 7,\n+    WDT_TIMEOUT_8S     = 8\n } wdt_timeout_t;\n \n void wdt_enable(wdt_timeout_t timeout);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "71d34f0d8cdd014985209624810d3056a25e24f562db08eb1517c24898dec6f2"
+}

@@ -1,0 +1,11 @@
+{
+  "before_code": "/* can.h - CAN bus driver */\n#ifndef CAN_H\n#define CAN_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint32_t id;\n    uint8_t  dlc;\n    uint8_t  data[8];\n} can_frame_t;\n\ntypedef void (*can_rx_cb_t)(const can_frame_t *frame);\n\nint  can_init(uint32_t bitrate, can_rx_cb_t rx_cb);\nint  can_send(const can_frame_t *frame, uint32_t timeout_ms);\nvoid can_deinit(void);\n\n#endif /* CAN_H */",
+  "after_code": "/* can.h - CAN bus driver */\n#ifndef CAN_H\n#define CAN_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint32_t id;\n    uint8_t  ide;   /* extended ID flag */\n    uint8_t  dlc;\n    uint8_t  data[8];\n} can_frame_t;\n\ntypedef void (*can_rx_cb_t)(const can_frame_t *frame);\n\nint  can_init(uint32_t bitrate, can_rx_cb_t rx_cb);\nint  can_send(const can_frame_t *frame, uint32_t timeout_ms);\nvoid can_deinit(void);\n\n#endif /* CAN_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -6,6 +6,7 @@\n \n typedef struct {\n     uint32_t id;\n+    uint8_t  ide;   /* extended ID flag */\n     uint8_t  dlc;\n     uint8_t  data[8];\n } can_frame_t;\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Inserted a new ide field into can_frame_t between id and dlc, shifting the layout of all subsequent struct members and breaking any code that accesses dlc or data by offset or uses positional struct initializers.",
+  "patch_hash": "35cfe6d90c1f63d590441833e06e250c81be6f03ebc6ac34704d1cbcb0c86f4f"
+}

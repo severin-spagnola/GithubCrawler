@@ -1,0 +1,10 @@
+{
+  "before_code": "/* Flash Memory Driver - flash_drv.h */\n#ifndef FLASH_DRV_H\n#define FLASH_DRV_H\n\n#include <stdint.h>\n\n#define FLASH_OK          0\n#define FLASH_ERR_ADDR   -1\n#define FLASH_ERR_WRITE  -2\n#define FLASH_ERR_ERASE  -3\n\nint flash_init(void);\nint flash_erase_sector(uint32_t sector_addr);\nint flash_write(uint32_t addr, const uint8_t *data, uint32_t len);\nint flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\nvoid flash_lock(void);\nvoid flash_unlock(void);\nuint32_t flash_get_sector_size(void);\n\n#endif /* FLASH_DRV_H */",
+  "after_code": "/* Flash Memory Driver - flash_drv.h */\n#ifndef FLASH_DRV_H\n#define FLASH_DRV_H\n\n#include <stdint.h>\n\n#define FLASH_OK          0\n#define FLASH_ERR_ADDR   -1\n#define FLASH_ERR_WRITE  -2\n#define FLASH_ERR_ERASE  -3\n\nint flash_init(void);\nint flash_erase_sector(uint32_t sector_addr);\nint flash_write(uint32_t addr, const uint8_t *data, uint32_t len);\nint flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\nvoid flash_lock(void);\nvoid flash_unlock(void);\n/* BREAKING: flash_get_sector_size removed; replaced by a per-address query.\n   All callers of flash_get_sector_size() will fail to link. */\nuint32_t flash_get_sector_size_at(uint32_t addr);\n\n#endif /* FLASH_DRV_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -15,6 +15,8 @@\n int flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\n void flash_lock(void);\n void flash_unlock(void);\n-uint32_t flash_get_sector_size(void);\n+/* BREAKING: flash_get_sector_size removed; replaced by a per-address query.\n+   All callers of flash_get_sector_size() will fail to link. */\n+uint32_t flash_get_sector_size_at(uint32_t addr);\n \n #endif /* FLASH_DRV_H */",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "f5412fa09591bccaf952613fbad42bd0861e4c50128a9d01fa6e68833c8053a1"
+}

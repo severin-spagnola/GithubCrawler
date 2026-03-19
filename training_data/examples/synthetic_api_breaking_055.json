@@ -1,0 +1,11 @@
+{
+  "before_code": "/* adc_drv.h - ADC driver interface */\n#ifndef ADC_DRV_H\n#define ADC_DRV_H\n\n#include <stdint.h>\n\nint  adc_init(uint8_t channel, uint8_t resolution);\nint  adc_read(uint8_t channel, uint16_t *out);\nvoid adc_deinit(uint8_t channel);\nint  adc_set_vref(uint8_t channel, uint16_t mv);\nint  adc_calibrate(uint8_t channel);\n\n#endif /* ADC_DRV_H */",
+  "after_code": "/* adc_drv.h - ADC driver interface */\n#ifndef ADC_DRV_H\n#define ADC_DRV_H\n\n#include <stdint.h>\n\nint  adc_init(uint8_t channel, uint8_t resolution);\nint  adc_read(uint8_t channel, uint16_t *out);\nvoid adc_deinit(uint8_t channel);\nint  adc_set_vref(uint8_t channel, uint16_t mv);\n\n#endif /* ADC_DRV_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -8,6 +8,5 @@\n int  adc_read(uint8_t channel, uint16_t *out);\n void adc_deinit(uint8_t channel);\n int  adc_set_vref(uint8_t channel, uint16_t mv);\n-int  adc_calibrate(uint8_t channel);\n \n #endif /* ADC_DRV_H */",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The exported function `adc_calibrate` was removed from the header, breaking any caller that invokes it.",
+  "patch_hash": "f6524cd4d419c5ae8a94541629c4a5947376d3a81758c6fc4d02a66736d852c3"
+}

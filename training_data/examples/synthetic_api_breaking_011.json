@@ -1,0 +1,10 @@
+{
+  "before_code": "/* SPI Driver HAL - spi_hal.h */\n#ifndef SPI_HAL_H\n#define SPI_HAL_H\n\n#include <stdint.h>\n\ntypedef enum {\n    SPI_MODE_0 = 0,\n    SPI_MODE_1 = 1,\n    SPI_MODE_2 = 2,\n    SPI_MODE_3 = 3\n} spi_mode_t;\n\ntypedef struct {\n    uint32_t clock_hz;\n    spi_mode_t mode;\n    uint8_t bit_order;    /* 0 = MSB first, 1 = LSB first */\n    uint8_t cs_pin;\n    uint8_t word_size;    /* bits per word: 8 or 16 */\n} spi_config_t;\n\nint spi_init(uint8_t bus_id, const spi_config_t *config);\nint spi_transfer(uint8_t bus_id, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_deinit(uint8_t bus_id);\n\n#endif /* SPI_HAL_H */",
+  "after_code": "/* SPI Driver HAL - spi_hal.h */\n#ifndef SPI_HAL_H\n#define SPI_HAL_H\n\n#include <stdint.h>\n\ntypedef enum {\n    SPI_MODE_0 = 0,\n    SPI_MODE_1 = 1,\n    SPI_MODE_2 = 2,\n    SPI_MODE_3 = 3\n} spi_mode_t;\n\ntypedef struct {\n    uint32_t clock_hz;\n    spi_mode_t mode;\n    uint8_t bit_order;    /* 0 = MSB first, 1 = LSB first */\n    uint8_t cs_pin;\n    uint8_t word_size;    /* bits per word: 8 or 16 */\n} spi_config_t;\n\nint spi_init(uint8_t bus_id, const spi_config_t *config);\n/* BREAKING: len parameter changed from uint16_t to uint32_t,\n   and a timeout_ms parameter was added */\nint spi_transfer(uint8_t bus_id, const uint8_t *tx, uint8_t *rx,\n                 uint32_t len, uint32_t timeout_ms);\nvoid spi_deinit(uint8_t bus_id);\n\n#endif /* SPI_HAL_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -20,7 +20,10 @@\n } spi_config_t;\n \n int spi_init(uint8_t bus_id, const spi_config_t *config);\n-int spi_transfer(uint8_t bus_id, const uint8_t *tx, uint8_t *rx, uint16_t len);\n+/* BREAKING: len parameter changed from uint16_t to uint32_t,\n+   and a timeout_ms parameter was added */\n+int spi_transfer(uint8_t bus_id, const uint8_t *tx, uint8_t *rx,\n+                 uint32_t len, uint32_t timeout_ms);\n void spi_deinit(uint8_t bus_id);\n \n #endif /* SPI_HAL_H */",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "c4cdfda56a685042e2add2f0cbce4f330640345b2e70704fc9f3b82cbe0cb2e6"
+}

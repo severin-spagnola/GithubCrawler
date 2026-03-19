@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef TIMER_H\n#define TIMER_H\n\n#include <stdint.h>\n\n#define TIMER_MAX_PERIOD   0xFFFF\n#define TIMER_MIN_PRESCALE 1\n#define TIMER_FLAG_REPEAT  (1u << 0)\n#define TIMER_FLAG_PWM     (1u << 1)\n\nint  timer_start(uint8_t id, uint16_t period_ms, uint32_t flags);\nint  timer_stop(uint8_t id);\nint  timer_set_period(uint8_t id, uint16_t period_ms);\nuint32_t timer_get_ticks(uint8_t id);\n\n#endif",
+  "after_code": "#ifndef TIMER_H\n#define TIMER_H\n\n#include <stdint.h>\n\n#define TIMER_MAX_PERIOD   0xFFFFFFFF\n#define TIMER_MIN_PRESCALE 1\n#define TIMER_FLAG_REPEAT  (1u << 0)\n#define TIMER_FLAG_PWM     (1u << 1)\n\nint  timer_start(uint8_t id, uint32_t period_ms, uint32_t flags);\nint  timer_stop(uint8_t id);\nint  timer_set_period(uint8_t id, uint32_t period_ms);\nuint32_t timer_get_ticks(uint8_t id);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,14 +3,14 @@\n \n #include <stdint.h>\n \n-#define TIMER_MAX_PERIOD   0xFFFF\n+#define TIMER_MAX_PERIOD   0xFFFFFFFF\n #define TIMER_MIN_PRESCALE 1\n #define TIMER_FLAG_REPEAT  (1u << 0)\n #define TIMER_FLAG_PWM     (1u << 1)\n \n-int  timer_start(uint8_t id, uint16_t period_ms, uint32_t flags);\n+int  timer_start(uint8_t id, uint32_t period_ms, uint32_t flags);\n int  timer_stop(uint8_t id);\n-int  timer_set_period(uint8_t id, uint16_t period_ms);\n+int  timer_set_period(uint8_t id, uint32_t period_ms);\n uint32_t timer_get_ticks(uint8_t id);\n \n #endif",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The period_ms parameter type in timer_start and timer_set_period was widened from uint16_t to uint32_t, breaking callers on architectures where argument promotion differs and causing ABI mismatches.",
+  "patch_hash": "bbb6c2d5934ae93db3dba46383c4d550810c5e1ea4169b82c3a3b0ddf633287a"
+}

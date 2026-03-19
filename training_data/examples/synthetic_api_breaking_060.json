@@ -1,0 +1,11 @@
+{
+  "before_code": "/* event_bus.h */\n#ifndef EVENT_BUS_H\n#define EVENT_BUS_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint16_t event_id;\n    uint32_t timestamp;\n    uint8_t  payload[16];\n} event_t;\n\ntypedef void (*event_handler_t)(const event_t *evt);\n\nint  event_subscribe(uint16_t event_id, event_handler_t handler);\nint  event_publish(const event_t *evt);\nvoid event_unsubscribe(uint16_t event_id, event_handler_t handler);\n\n#endif",
+  "after_code": "/* event_bus.h */\n#ifndef EVENT_BUS_H\n#define EVENT_BUS_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint16_t event_id;\n    uint32_t timestamp;\n    uint8_t  payload[16];\n} event_t;\n\ntypedef void (*event_handler_t)(const event_t *evt, void *user_data);\n\nint  event_subscribe(uint16_t event_id, event_handler_t handler, void *user_data);\nint  event_publish(const event_t *evt);\nvoid event_unsubscribe(uint16_t event_id, event_handler_t handler);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -10,9 +10,9 @@\n     uint8_t  payload[16];\n } event_t;\n \n-typedef void (*event_handler_t)(const event_t *evt);\n+typedef void (*event_handler_t)(const event_t *evt, void *user_data);\n \n-int  event_subscribe(uint16_t event_id, event_handler_t handler);\n+int  event_subscribe(uint16_t event_id, event_handler_t handler, void *user_data);\n int  event_publish(const event_t *evt);\n void event_unsubscribe(uint16_t event_id, event_handler_t handler);\n \n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The `event_handler_t` callback signature and `event_subscribe` gained a `void *user_data` parameter, breaking all existing callback implementations and subscription call sites.",
+  "patch_hash": "f0510af5079ef1438f42c54550c5018b13507d6e07a8f675badc02e5a7fc4c58"
+}

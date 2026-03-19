@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef GPIO_H\n#define GPIO_H\n\n#include <stdint.h>\n\ntypedef enum {\n    GPIO_DIR_INPUT  = 0,\n    GPIO_DIR_OUTPUT = 1\n} gpio_dir_t;\n\ntypedef enum {\n    GPIO_ERR_NONE    = 0,\n    GPIO_ERR_INVALID = 1,\n    GPIO_ERR_BUSY    = 2,\n    GPIO_ERR_TIMEOUT = 3\n} gpio_err_t;\n\ngpio_err_t gpio_set_dir(uint8_t pin, gpio_dir_t dir);\ngpio_err_t gpio_write(uint8_t pin, uint8_t value);\ngpio_err_t gpio_read(uint8_t pin, uint8_t *value);\n\n#endif",
+  "after_code": "#ifndef GPIO_H\n#define GPIO_H\n\n#include <stdint.h>\n\ntypedef enum {\n    GPIO_DIR_INPUT  = 0,\n    GPIO_DIR_OUTPUT = 1\n} gpio_dir_t;\n\ntypedef enum {\n    GPIO_ERR_NONE    = 0,\n    GPIO_ERR_INVALID = 2,\n    GPIO_ERR_BUSY    = 4,\n    GPIO_ERR_TIMEOUT = 8\n} gpio_err_t;\n\ngpio_err_t gpio_set_dir(uint8_t pin, gpio_dir_t dir);\ngpio_err_t gpio_write(uint8_t pin, uint8_t value);\ngpio_err_t gpio_read(uint8_t pin, uint8_t *value);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -10,9 +10,9 @@\n \n typedef enum {\n     GPIO_ERR_NONE    = 0,\n-    GPIO_ERR_INVALID = 1,\n-    GPIO_ERR_BUSY    = 2,\n-    GPIO_ERR_TIMEOUT = 3\n+    GPIO_ERR_INVALID = 2,\n+    GPIO_ERR_BUSY    = 4,\n+    GPIO_ERR_TIMEOUT = 8\n } gpio_err_t;\n \n gpio_err_t gpio_set_dir(uint8_t pin, gpio_dir_t dir);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Error code enum values were changed from sequential integers to powers of two, breaking all callers that compare error codes with the old numeric values.",
+  "patch_hash": "d98acba84f975beb901cd25407cb465afbca298dc05f5bd3e164403370152871"
+}

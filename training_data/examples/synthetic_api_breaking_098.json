@@ -1,0 +1,11 @@
+{
+  "before_code": "/* pwm_driver.h */\n#ifndef PWM_DRIVER_H\n#define PWM_DRIVER_H\n\n#include <stdint.h>\n\nvoid pwm_init(uint8_t channel, uint32_t freq_hz);\nvoid pwm_set_duty(uint8_t channel, uint8_t duty_pct);\nvoid pwm_enable(uint8_t channel);\nvoid pwm_disable(uint8_t channel);\nvoid pwm_deinit(uint8_t channel);\n\n#endif",
+  "after_code": "/* pwm_driver.h */\n#ifndef PWM_DRIVER_H\n#define PWM_DRIVER_H\n\n#include <stdint.h>\n\nvoid pwm_init(uint8_t channel, uint32_t freq_hz);\nvoid pwm_set_duty(uint8_t channel, uint16_t duty_tenths_pct);\nvoid pwm_enable(uint8_t channel);\nvoid pwm_disable(uint8_t channel);\nvoid pwm_deinit(uint8_t channel);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -5,7 +5,7 @@\n #include <stdint.h>\n \n void pwm_init(uint8_t channel, uint32_t freq_hz);\n-void pwm_set_duty(uint8_t channel, uint8_t duty_pct);\n+void pwm_set_duty(uint8_t channel, uint16_t duty_tenths_pct);\n void pwm_enable(uint8_t channel);\n void pwm_disable(uint8_t channel);\n void pwm_deinit(uint8_t channel);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The pwm_set_duty parameter changed from uint8_t duty_pct (0-100) to uint16_t duty_tenths_pct (0-1000), silently corrupting duty cycle values in all existing callers that pass 0-100 percentage values.",
+  "patch_hash": "e95838b09714409860499ed2958635aa91f3c30c2c7ff17e97a57a432d55d54a"
+}

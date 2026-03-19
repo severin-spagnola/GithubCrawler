@@ -1,0 +1,10 @@
+{
+  "before_code": "/* RTOS Mutex API - rtos_mutex.h */\n#ifndef RTOS_MUTEX_H\n#define RTOS_MUTEX_H\n\n#include <stdint.h>\n\n#define RTOS_WAIT_FOREVER   0xFFFFFFFFU\n#define RTOS_NO_WAIT        0x00000000U\n\ntypedef void* Mutex_t;\n\nMutex_t RTOS_MutexCreate(void);\nvoid    RTOS_MutexDelete(Mutex_t mutex);\nint     RTOS_MutexLock(Mutex_t mutex, uint32_t timeout_ms);\nvoid    RTOS_MutexUnlock(Mutex_t mutex);\n\n/* Returns 1 if locked, 0 if free */\nint     RTOS_MutexIsLocked(Mutex_t mutex);\n\n#endif /* RTOS_MUTEX_H */",
+  "after_code": "/* RTOS Mutex API - rtos_mutex.h (BREAKING: MutexCreate now requires name and type) */\n#ifndef RTOS_MUTEX_H\n#define RTOS_MUTEX_H\n\n#include <stdint.h>\n\n#define RTOS_WAIT_FOREVER   0xFFFFFFFFU\n#define RTOS_NO_WAIT        0x00000000U\n\ntypedef void* Mutex_t;\n\ntypedef enum {\n    RTOS_MUTEX_NORMAL    = 0,\n    RTOS_MUTEX_RECURSIVE = 1\n} RTOS_MutexType_t;\n\n/* BREAKING: added name and type parameters */\nMutex_t RTOS_MutexCreate(const char *name, RTOS_MutexType_t type);\nvoid    RTOS_MutexDelete(Mutex_t mutex);\nint     RTOS_MutexLock(Mutex_t mutex, uint32_t timeout_ms);\nvoid    RTOS_MutexUnlock(Mutex_t mutex);\n\n/* Returns 1 if locked, 0 if free */\nint     RTOS_MutexIsLocked(Mutex_t mutex);\n\n#endif /* RTOS_MUTEX_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -1,4 +1,4 @@\n-/* RTOS Mutex API - rtos_mutex.h */\n+/* RTOS Mutex API - rtos_mutex.h (BREAKING: MutexCreate now requires name and type) */\n #ifndef RTOS_MUTEX_H\n #define RTOS_MUTEX_H\n \n@@ -9,7 +9,13 @@\n \n typedef void* Mutex_t;\n \n-Mutex_t RTOS_MutexCreate(void);\n+typedef enum {\n+    RTOS_MUTEX_NORMAL    = 0,\n+    RTOS_MUTEX_RECURSIVE = 1\n+} RTOS_MutexType_t;\n+\n+/* BREAKING: added name and type parameters */\n+Mutex_t RTOS_MutexCreate(const char *name, RTOS_MutexType_t type);\n void    RTOS_MutexDelete(Mutex_t mutex);\n int     RTOS_MutexLock(Mutex_t mutex, uint32_t timeout_ms);\n void    RTOS_MutexUnlock(Mutex_t mutex);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "4eb5ff45c3009d0439347f2402fcf869ec33968bb11917201008a3090c836118"
+}

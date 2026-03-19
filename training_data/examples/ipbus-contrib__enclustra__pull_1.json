@@ -39,5 +39,6 @@
       "deletions": 0,
       "validation": "trivial_diff"
     }
-  ]
+  ],
+  "patch_hash": "0758025ff8eaa4dfb5a6959e763d567bc76963e3c5cb7cc8e4d03887ff702b73"
 }

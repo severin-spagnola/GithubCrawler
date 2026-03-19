@@ -1,0 +1,11 @@
+{
+  "before_code": "/* watchdog.h */\n#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\n#define WDT_TIMEOUT_1S    0\n#define WDT_TIMEOUT_2S    1\n#define WDT_TIMEOUT_4S    2\n#define WDT_TIMEOUT_8S    3\n\nvoid wdt_init(uint8_t timeout_sel);\nvoid wdt_kick(void);\nvoid wdt_disable(void);\n\n#endif",
+  "after_code": "/* watchdog.h */\n#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\n#define WDT_TIMEOUT_500MS 0\n#define WDT_TIMEOUT_1S    1\n#define WDT_TIMEOUT_2S    2\n#define WDT_TIMEOUT_4S    3\n#define WDT_TIMEOUT_8S    4\n\nvoid wdt_init(uint8_t timeout_sel);\nvoid wdt_kick(void);\nvoid wdt_disable(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,10 +4,11 @@\n \n #include <stdint.h>\n \n-#define WDT_TIMEOUT_1S    0\n-#define WDT_TIMEOUT_2S    1\n-#define WDT_TIMEOUT_4S    2\n-#define WDT_TIMEOUT_8S    3\n+#define WDT_TIMEOUT_500MS 0\n+#define WDT_TIMEOUT_1S    1\n+#define WDT_TIMEOUT_2S    2\n+#define WDT_TIMEOUT_4S    3\n+#define WDT_TIMEOUT_8S    4\n \n void wdt_init(uint8_t timeout_sel);\n void wdt_kick(void);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "A new WDT_TIMEOUT_500MS macro was prepended at value 0, shifting all existing timeout selector values by one so callers using named macros get wrong timeouts silently.",
+  "patch_hash": "2b0342fa1854976eb2e65769833d854e83fd419eb46291bcfc430ae8930153fe"
+}

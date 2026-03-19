@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef FLASH_DRV_H\n#define FLASH_DRV_H\n\n#include <stdint.h>\n#include <stddef.h>\n\nint flash_erase_sector(uint32_t addr);\nint flash_write(uint32_t addr, const uint8_t *data, size_t len);\nint flash_read(uint32_t addr, uint8_t *buf, size_t len);\nint flash_verify(uint32_t addr, const uint8_t *data, size_t len);\nvoid flash_lock(void);\nvoid flash_unlock(void);\n\n#endif",
+  "after_code": "#ifndef FLASH_DRV_H\n#define FLASH_DRV_H\n\n#include <stdint.h>\n#include <stddef.h>\n\nint flash_erase_sector(uint32_t addr);\nint flash_write(uint32_t addr, const uint8_t *data, size_t len);\nint flash_read(uint32_t addr, uint8_t *buf, size_t len);\nvoid flash_lock(void);\nvoid flash_unlock(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -7,7 +7,6 @@\n int flash_erase_sector(uint32_t addr);\n int flash_write(uint32_t addr, const uint8_t *data, size_t len);\n int flash_read(uint32_t addr, uint8_t *buf, size_t len);\n-int flash_verify(uint32_t addr, const uint8_t *data, size_t len);\n void flash_lock(void);\n void flash_unlock(void);\n \n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The exported function flash_verify() was removed from the header, breaking callers that depend on it for post-write integrity checks.",
+  "patch_hash": "4cc4a5fa5f56c506f6a55f5e222d171bf260b55a0abc026454faccb18e67bd31"
+}

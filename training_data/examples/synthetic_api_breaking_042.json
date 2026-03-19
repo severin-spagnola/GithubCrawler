@@ -1,0 +1,10 @@
+{
+  "before_code": "/* watchdog.h - Watchdog Timer Driver */\n#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n#include <stdbool.h>\n\n#define WDT_MIN_TIMEOUT_MS   1U\n#define WDT_MAX_TIMEOUT_MS   32000U\n#define WDT_DEFAULT_TIMEOUT  5000U\n#define WDT_FEED_MAGIC       0xAAAA5555U\n\ntypedef void (*wdt_warning_cb_t)(uint32_t remaining_ms);\n\nvoid     wdt_init(uint32_t timeout_ms);\nvoid     wdt_feed(void);\nvoid     wdt_set_warning_callback(wdt_warning_cb_t cb, uint32_t warn_ms);\nbool     wdt_is_enabled(void);\nuint32_t wdt_get_remaining_ms(void);\nvoid     wdt_disable(void);\n\n#endif /* WATCHDOG_H */",
+  "after_code": "/* watchdog.h - Watchdog Timer Driver */\n#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n#include <stdbool.h>\n\n#define WDT_MIN_TIMEOUT_MS   1U\n#define WDT_MAX_TIMEOUT_MS   32000U\n#define WDT_DEFAULT_TIMEOUT  5000U\n#define WDT_FEED_MAGIC       0xAAAA5555U\n\ntypedef void (*wdt_warning_cb_t)(uint32_t remaining_ms);\n\n/* BREAKING: wdt_feed now requires magic token to prevent accidental feeds */\nvoid     wdt_init(uint32_t timeout_ms);\nvoid     wdt_feed(uint32_t magic_token);\nvoid     wdt_set_warning_callback(wdt_warning_cb_t cb, uint32_t warn_ms);\nbool     wdt_is_enabled(void);\nuint32_t wdt_get_remaining_ms(void);\nvoid     wdt_disable(void);\n\n#endif /* WATCHDOG_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -12,8 +12,9 @@\n \n typedef void (*wdt_warning_cb_t)(uint32_t remaining_ms);\n \n+/* BREAKING: wdt_feed now requires magic token to prevent accidental feeds */\n void     wdt_init(uint32_t timeout_ms);\n-void     wdt_feed(void);\n+void     wdt_feed(uint32_t magic_token);\n void     wdt_set_warning_callback(wdt_warning_cb_t cb, uint32_t warn_ms);\n bool     wdt_is_enabled(void);\n uint32_t wdt_get_remaining_ms(void);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "d1dcc68b3ba63d50b768a08f937eae298fe13109fc9ca54b3e845e59929e122c"
+}

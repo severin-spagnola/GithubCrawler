@@ -2,7 +2,7 @@
   "repo": "The-OpenROAD-Project/OpenROAD-flow-scripts",
   "before_ref": "51c604c1ef6d05bcab3cfa77cb5e4017716b16d2",
   "after_ref": "4afee6cf172e615a0906773a139cf85c58acf9d9",
-  "bug_category": "latch_inferred",
+  "bug_category": "sensitivity_list",
   "query": "incomplete case\" language:verilog",
   "commit_message": "Fix /usr/bin/time output formatting Fix /usr/bin/time output formatting There is a format mismatch in terms of spaces and the order of words, which this PR fixes.\r\n\r\nExample output:\r\n\r\nold:\r\n```\r\n...\r\n[INFO] No orphan cells\r\n[INFO] Writing out GDS/OAS 'results/nangate45/gcd/base/6_1_merged.gds'\r\n0:01.21elapsed 94%CPU 320996memKB\r\ncp results/nangate45/gcd/base/6_1_merged.gds results/nangate45/gcd/base/6_final.gds\r\n```\r\n\r\nnew:\r\n```\r\n...\r\n[INFO] No orphan cells\r\n[INFO] Writing out GDS/OAS 'results/",
   "file_count": 2,
@@ -12,7 +12,7 @@
       "filename": "flow/Makefile",
       "before_ref": "51c604c1ef6d05bcab3cfa77cb5e4017716b16d2",
       "after_ref": "4afee6cf172e615a0906773a139cf85c58acf9d9",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "incomplete case\" language:verilog",
       "commit_message": "Fix /usr/bin/time output formatting Fix /usr/bin/time output formatting There is a format mismatch in terms of spaces and the order of words, which this PR fixes.\r\n\r\nExample output:\r\n\r\nold:\r\n```\r\n...\r\n[INFO] No orphan cells\r\n[INFO] Writing out GDS/OAS 'results/nangate45/gcd/base/6_1_merged.gds'\r\n0:01.21elapsed 94%CPU 320996memKB\r\ncp results/nangate45/gcd/base/6_1_merged.gds results/nangate45/gcd/base/6_final.gds\r\n```\r\n\r\nnew:\r\n```\r\n...\r\n[INFO] No orphan cells\r\n[INFO] Writing out GDS/OAS 'results/",
       "patch": "@@ -209,7 +209,7 @@ endif\n \n #-------------------------------------------------------------------------------\n # setup all commands used within this flow\n-TIME_CMD = /usr/bin/time -f \"%Eelapsed %PCPU %MmemKB\"\n+TIME_CMD = /usr/bin/time -f \"Elapsed time: %E[h:]min:sec. Average CPU: %P. Peak memory: %MKB.\"\n TIME_TEST = $(shell $(TIME_CMD) echo foo 2>/dev/null)\n ifeq (, $(strip $(TIME_TEST)))\n   TIME_CMD = /usr/bin/time",
@@ -28,7 +28,7 @@
       "filename": "flow/util/genMetrics.py",
       "before_ref": "51c604c1ef6d05bcab3cfa77cb5e4017716b16d2",
       "after_ref": "4afee6cf172e615a0906773a139cf85c58acf9d9",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "incomplete case\" language:verilog",
       "commit_message": "Fix /usr/bin/time output formatting Fix /usr/bin/time output formatting There is a format mismatch in terms of spaces and the order of words, which this PR fixes.\r\n\r\nExample output:\r\n\r\nold:\r\n```\r\n...\r\n[INFO] No orphan cells\r\n[INFO] Writing out GDS/OAS 'results/nangate45/gcd/base/6_1_merged.gds'\r\n0:01.21elapsed 94%CPU 320996memKB\r\ncp results/nangate45/gcd/base/6_1_merged.gds results/nangate45/gcd/base/6_final.gds\r\n```\r\n\r\nnew:\r\n```\r\n...\r\n[INFO] No orphan cells\r\n[INFO] Writing out GDS/OAS 'results/",
       "patch": "@@ -124,17 +124,18 @@ def extractTagFromFile(jsonTag, jsonFile, pattern, file, count=False,\n \n \n def extractGnuTime(prefix, jsonFile, file):\n+    \n     extractTagFromFile(prefix + '__runtime__total',\n                        jsonFile,\n-                       '^(\\S+)elapsed \\S+CPU \\S+memKB',\n+                       '^Elapsed time: (\\S+)\\[h:\\]min:sec. Average CPU: \\S+. Peak memory: \\S+KB.',\n                        file)\n     extractTagFromFile(prefix + '__cpu__total',\n                        jsonFile,\n-                       '^\\S+elapsed (\\S+)CPU \\S+memKB',\n+                       '^Elapsed time: \\S+\\[h:\\]min:sec. Average CPU: (\\S+). Peak memory: \\S+KB.',\n                        file)\n     extractTagFromFile(prefix + '__mem__peak',\n                        jsonFile,\n-                       '^\\S+elapsed \\S+CPU (\\S+)memKB',\n+                       '^Elapsed time: \\S+\\[h:\\]min:sec. Average CPU: \\S+. Peak memory: (\\S+)KB.',\n                        file)\n \n ",
@@ -39,5 +39,6 @@
       "deletions": 3,
       "validation": "clean"
     }
-  ]
+  ],
+  "patch_hash": "f14915755d4a62a5502d0ac2dd6feee5ae7bdb10ca95edd146c99a93f4d121a3"
 }

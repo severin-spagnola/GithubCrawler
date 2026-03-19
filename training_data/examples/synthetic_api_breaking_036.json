@@ -1,0 +1,10 @@
+{
+  "before_code": "/* PWM Driver API - pwm_drv.h */\n#ifndef PWM_DRV_H\n#define PWM_DRV_H\n\n#include <stdint.h>\n\n/* Duty cycle expressed as 0-10000 (0.00% to 100.00%) */\n#define PWM_DUTY_MAX    10000U\n\ntypedef enum {\n    PWM_CH0 = 0,\n    PWM_CH1 = 1,\n    PWM_CH2 = 2,\n    PWM_CH3 = 3\n} PWM_Channel_t;\n\nint  PWM_Init(PWM_Channel_t ch, uint32_t freq_hz);\nvoid PWM_SetDuty(PWM_Channel_t ch, uint16_t duty);\nuint16_t PWM_GetDuty(PWM_Channel_t ch);\nvoid PWM_Start(PWM_Channel_t ch);\nvoid PWM_Stop(PWM_Channel_t ch);\nvoid PWM_Deinit(PWM_Channel_t ch);\n\n#endif /* PWM_DRV_H */",
+  "after_code": "/* PWM Driver API - pwm_drv.h (BREAKING: duty scale changed from 10000 to 65535) */\n#ifndef PWM_DRV_H\n#define PWM_DRV_H\n\n#include <stdint.h>\n\n/* BREAKING: Duty cycle now expressed as 0-65535 (full 16-bit range) */\n#define PWM_DUTY_MAX    65535U\n\ntypedef enum {\n    PWM_CH0 = 0,\n    PWM_CH1 = 1,\n    PWM_CH2 = 2,\n    PWM_CH3 = 3\n} PWM_Channel_t;\n\nint  PWM_Init(PWM_Channel_t ch, uint32_t freq_hz);\nvoid PWM_SetDuty(PWM_Channel_t ch, uint16_t duty);\nuint16_t PWM_GetDuty(PWM_Channel_t ch);\nvoid PWM_Start(PWM_Channel_t ch);\nvoid PWM_Stop(PWM_Channel_t ch);\nvoid PWM_Deinit(PWM_Channel_t ch);\n\n#endif /* PWM_DRV_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -1,11 +1,11 @@\n-/* PWM Driver API - pwm_drv.h */\n+/* PWM Driver API - pwm_drv.h (BREAKING: duty scale changed from 10000 to 65535) */\n #ifndef PWM_DRV_H\n #define PWM_DRV_H\n \n #include <stdint.h>\n \n-/* Duty cycle expressed as 0-10000 (0.00% to 100.00%) */\n-#define PWM_DUTY_MAX    10000U\n+/* BREAKING: Duty cycle now expressed as 0-65535 (full 16-bit range) */\n+#define PWM_DUTY_MAX    65535U\n \n typedef enum {\n     PWM_CH0 = 0,\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "c6cb23e293e4356b04a64724e15c3b6c73bf7adec64beeba7c298f4191e5503b"
+}

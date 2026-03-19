@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef NET_SOCKET_H\n#define NET_SOCKET_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint32_t ip_addr;\n    uint16_t port;\n    uint8_t  protocol;\n} net_endpoint_t;\n\ntypedef void (*net_recv_cb_t)(int sock, const uint8_t *data, uint16_t len);\n\nint  net_open(const net_endpoint_t *ep);\nvoid net_close(int sock);\nint  net_send(int sock, const uint8_t *data, uint16_t len);\nvoid net_set_recv_cb(int sock, net_recv_cb_t cb);\n\n#endif",
+  "after_code": "#ifndef NET_SOCKET_H\n#define NET_SOCKET_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint8_t  ip_addr[16];\n    uint16_t port;\n    uint8_t  protocol;\n    uint8_t  addr_family;\n} net_endpoint_t;\n\ntypedef void (*net_recv_cb_t)(int sock, const uint8_t *data, uint16_t len);\n\nint  net_open(const net_endpoint_t *ep);\nvoid net_close(int sock);\nint  net_send(int sock, const uint8_t *data, uint16_t len);\nvoid net_set_recv_cb(int sock, net_recv_cb_t cb);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,9 +4,10 @@\n #include <stdint.h>\n \n typedef struct {\n-    uint32_t ip_addr;\n+    uint8_t  ip_addr[16];\n     uint16_t port;\n     uint8_t  protocol;\n+    uint8_t  addr_family;\n } net_endpoint_t;\n \n typedef void (*net_recv_cb_t)(int sock, const uint8_t *data, uint16_t len);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The net_endpoint_t struct had its ip_addr field changed from a uint32_t scalar to a uint8_t[16] array and gained an addr_family field, breaking all callers that initialize or access the struct.",
+  "patch_hash": "e4d0e8c310f26c6a71f57233094b11710ecdf9838465eac4dfe891752ac4e4de"
+}

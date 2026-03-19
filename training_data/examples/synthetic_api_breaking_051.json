@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef UART_DRV_H\n#define UART_DRV_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint32_t baud_rate;\n    uint8_t  data_bits;\n    uint8_t  stop_bits;\n    uint8_t  parity;\n} uart_config_t;\n\nint uart_init(uint8_t port, const uart_config_t *cfg);\nint uart_send(uint8_t port, const uint8_t *data, uint16_t len);\nint uart_recv(uint8_t port, uint8_t *buf, uint16_t len);\nvoid uart_close(uint8_t port);\n\n#endif /* UART_DRV_H */",
+  "after_code": "#ifndef UART_DRV_H\n#define UART_DRV_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint32_t baud_rate;\n    uint8_t  data_bits;\n    uint8_t  stop_bits;\n    uint8_t  parity;\n    uint8_t  flow_control;\n} uart_config_t;\n\nint uart_init(uint8_t port, const uart_config_t *cfg);\nint uart_send(uint8_t port, const uint8_t *data, uint16_t len);\nint uart_recv(uint8_t port, uint8_t *buf, uint16_t len);\nvoid uart_close(uint8_t port);\n\n#endif /* UART_DRV_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -8,6 +8,7 @@\n     uint8_t  data_bits;\n     uint8_t  stop_bits;\n     uint8_t  parity;\n+    uint8_t  flow_control;\n } uart_config_t;\n \n int uart_init(uint8_t port, const uart_config_t *cfg);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "A new field `flow_control` was added to `uart_config_t`, breaking binary compatibility for all callers that statically initialize or size the struct.",
+  "patch_hash": "31c8f931a63faecf044756258a57015577088998ddf8723d6c4f5b39f477893f"
+}

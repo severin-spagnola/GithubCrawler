@@ -1,0 +1,11 @@
+{
+  "before_code": "/* i2c_master.h */\n#ifndef I2C_MASTER_H\n#define I2C_MASTER_H\n\n#include <stdint.h>\n\nint i2c_init(uint8_t bus, uint32_t clk_hz);\nint i2c_write(uint8_t bus, uint8_t addr, const uint8_t *data, uint8_t len);\nint i2c_read(uint8_t bus, uint8_t addr, uint8_t *data, uint8_t len);\nint i2c_write_read(uint8_t bus, uint8_t addr,\n                   const uint8_t *wr, uint8_t wr_len,\n                   uint8_t *rd, uint8_t rd_len);\nvoid i2c_deinit(uint8_t bus);\n\n#endif",
+  "after_code": "/* i2c_master.h */\n#ifndef I2C_MASTER_H\n#define I2C_MASTER_H\n\n#include <stdint.h>\n\nint i2c_init(uint8_t bus, uint32_t clk_hz);\nint i2c_write(uint8_t bus, uint16_t addr, const uint8_t *data, uint16_t len);\nint i2c_read(uint8_t bus, uint16_t addr, uint8_t *data, uint16_t len);\nint i2c_write_read(uint8_t bus, uint16_t addr,\n                   const uint8_t *wr, uint16_t wr_len,\n                   uint8_t *rd, uint16_t rd_len);\nvoid i2c_deinit(uint8_t bus);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -5,11 +5,11 @@\n #include <stdint.h>\n \n int i2c_init(uint8_t bus, uint32_t clk_hz);\n-int i2c_write(uint8_t bus, uint8_t addr, const uint8_t *data, uint8_t len);\n-int i2c_read(uint8_t bus, uint8_t addr, uint8_t *data, uint8_t len);\n-int i2c_write_read(uint8_t bus, uint8_t addr,\n-                   const uint8_t *wr, uint8_t wr_len,\n-                   uint8_t *rd, uint8_t rd_len);\n+int i2c_write(uint8_t bus, uint16_t addr, const uint8_t *data, uint16_t len);\n+int i2c_read(uint8_t bus, uint16_t addr, uint8_t *data, uint16_t len);\n+int i2c_write_read(uint8_t bus, uint16_t addr,\n+                   const uint8_t *wr, uint16_t wr_len,\n+                   uint8_t *rd, uint16_t rd_len);\n void i2c_deinit(uint8_t bus);\n \n #endif",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The I2C address parameter type changed from uint8_t to uint16_t and the length parameters from uint8_t to uint16_t, breaking ABI compatibility with all existing callers on platforms where parameter passing differs by size.",
+  "patch_hash": "1facaa94376e3edcf4c8f526eccc5dac246e87490e17caeea8d1a8fab06d3b58"
+}

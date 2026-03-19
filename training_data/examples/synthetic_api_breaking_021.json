@@ -1,0 +1,10 @@
+{
+  "before_code": "/* SPI HAL driver interface */\n#ifndef SPI_HAL_H\n#define SPI_HAL_H\n\n#include <stdint.h>\n\ntypedef enum {\n    SPI_MODE_0 = 0,\n    SPI_MODE_1 = 1,\n    SPI_MODE_2 = 2,\n    SPI_MODE_3 = 3\n} spi_mode_t;\n\ntypedef struct {\n    uint32_t    clock_hz;\n    spi_mode_t  mode;\n    uint8_t     bits_per_word;\n    uint8_t     cs_pin;\n} spi_config_t;\n\nint  spi_init(uint8_t bus_id, const spi_config_t *cfg);\nint  spi_transfer(uint8_t bus_id, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_deinit(uint8_t bus_id);\n\n#endif",
+  "after_code": "/* SPI HAL driver interface */\n#ifndef SPI_HAL_H\n#define SPI_HAL_H\n\n#include <stdint.h>\n\ntypedef enum {\n    SPI_MODE_0 = 0,\n    SPI_MODE_1 = 1,\n    SPI_MODE_2 = 2,\n    SPI_MODE_3 = 3\n} spi_mode_t;\n\ntypedef struct {\n    uint32_t    clock_hz;\n    spi_mode_t  mode;\n    uint8_t     bits_per_word;\n    uint8_t     cs_pin;\n    uint8_t     lsb_first;      /* NEW: bit order selection */\n    uint8_t     cs_active_high; /* NEW: chip select polarity */\n} spi_config_t;\n\nint  spi_init(uint8_t bus_id, const spi_config_t *cfg);\nint  spi_transfer(uint8_t bus_id, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_deinit(uint8_t bus_id);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -16,6 +16,8 @@\n     spi_mode_t  mode;\n     uint8_t     bits_per_word;\n     uint8_t     cs_pin;\n+    uint8_t     lsb_first;      /* NEW: bit order selection */\n+    uint8_t     cs_active_high; /* NEW: chip select polarity */\n } spi_config_t;\n \n int  spi_init(uint8_t bus_id, const spi_config_t *cfg);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "b2be2efbc78ff80d27e899a83082278ca1d1ea72091d3a40598c549fff29e537"
+}

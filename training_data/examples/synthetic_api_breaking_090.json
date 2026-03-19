@@ -1,0 +1,11 @@
+{
+  "before_code": "/* spi_hal.h */\n#ifndef SPI_HAL_H\n#define SPI_HAL_H\n\n#include <stdint.h>\n\ntypedef enum {\n    SPI_MODE_0 = 0,\n    SPI_MODE_1 = 1,\n    SPI_MODE_2 = 2,\n    SPI_MODE_3 = 3\n} spi_mode_t;\n\nint  spi_open(uint8_t bus, spi_mode_t mode, uint32_t freq_hz);\nint  spi_transfer(uint8_t bus, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_close(uint8_t bus);\n\n#endif",
+  "after_code": "/* spi_hal.h */\n#ifndef SPI_HAL_H\n#define SPI_HAL_H\n\n#include <stdint.h>\n\ntypedef enum {\n    SPI_MODE_INVALID = 0,\n    SPI_MODE_0 = 1,\n    SPI_MODE_1 = 2,\n    SPI_MODE_2 = 3,\n    SPI_MODE_3 = 4\n} spi_mode_t;\n\nint  spi_open(uint8_t bus, spi_mode_t mode, uint32_t freq_hz);\nint  spi_transfer(uint8_t bus, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_close(uint8_t bus);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -5,10 +5,11 @@\n #include <stdint.h>\n \n typedef enum {\n-    SPI_MODE_0 = 0,\n-    SPI_MODE_1 = 1,\n-    SPI_MODE_2 = 2,\n-    SPI_MODE_3 = 3\n+    SPI_MODE_INVALID = 0,\n+    SPI_MODE_0 = 1,\n+    SPI_MODE_1 = 2,\n+    SPI_MODE_2 = 3,\n+    SPI_MODE_3 = 4\n } spi_mode_t;\n \n int  spi_open(uint8_t bus, spi_mode_t mode, uint32_t freq_hz);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "A new SPI_MODE_INVALID sentinel was inserted at value 0, shifting all existing enum values by one and silently corrupting any code that passes hardcoded or stored mode values.",
+  "patch_hash": "983dd3f2596272d85ab0d58e6d88e0785f08bb1dc3308e77e3a1bc2465022e3c"
+}

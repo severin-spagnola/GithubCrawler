@@ -1,0 +1,11 @@
+{
+  "before_code": "/* uart.h - UART driver API */\n#ifndef UART_H\n#define UART_H\n\n#include <stdint.h>\n\ntypedef enum {\n    UART_OK       = 0,\n    UART_ERR_BUSY = 1,\n    UART_ERR_TIMEOUT = 2,\n    UART_ERR_PARITY  = 3\n} uart_status_t;\n\nint uart_init(uint32_t baud, uint8_t data_bits, uint8_t stop_bits);\nint uart_send(const uint8_t *buf, uint16_t len);\nint uart_recv(uint8_t *buf, uint16_t len);\nvoid uart_flush(void);\n\n#endif /* UART_H */",
+  "after_code": "/* uart.h - UART driver API */\n#ifndef UART_H\n#define UART_H\n\n#include <stdint.h>\n\ntypedef enum {\n    UART_OK       = 0,\n    UART_ERR_TIMEOUT = 1,\n    UART_ERR_BUSY = 2,\n    UART_ERR_PARITY  = 3\n} uart_status_t;\n\nint uart_init(uint32_t baud, uint8_t data_bits, uint8_t stop_bits);\nint uart_send(const uint8_t *buf, uint16_t len);\nint uart_recv(uint8_t *buf, uint16_t len);\nvoid uart_flush(void);\n\n#endif /* UART_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -6,8 +6,8 @@\n \n typedef enum {\n     UART_OK       = 0,\n-    UART_ERR_BUSY = 1,\n-    UART_ERR_TIMEOUT = 2,\n+    UART_ERR_TIMEOUT = 1,\n+    UART_ERR_BUSY = 2,\n     UART_ERR_PARITY  = 3\n } uart_status_t;\n \n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Swapped the numeric values of UART_ERR_BUSY and UART_ERR_TIMEOUT in the uart_status_t enum, breaking any caller that compares against these specific integer values.",
+  "patch_hash": "05f5f89d7e9709ea1a8460397fd0508385089903c0bab17de91ff0dfa697ee6e"
+}

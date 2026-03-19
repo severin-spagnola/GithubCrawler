@@ -1,0 +1,11 @@
+{
+  "before_code": "/* uart_driver.h */\n#ifndef UART_DRIVER_H\n#define UART_DRIVER_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint32_t baud_rate;\n    uint8_t  data_bits;\n    uint8_t  stop_bits;\n    uint8_t  parity;\n} uart_config_t;\n\nint uart_init(uint8_t port, const uart_config_t *cfg);\nvoid uart_write(uint8_t port, const uint8_t *data, uint16_t len);\nint uart_read(uint8_t port, uint8_t *buf, uint16_t len);\nvoid uart_deinit(uint8_t port);\n\n#endif",
+  "after_code": "/* uart_driver.h */\n#ifndef UART_DRIVER_H\n#define UART_DRIVER_H\n\n#include <stdint.h>\n\ntypedef struct {\n    uint32_t baud_rate;\n    uint8_t  data_bits;\n    uint8_t  stop_bits;\n    uint8_t  parity;\n    uint8_t  flow_control;\n    uint32_t timeout_ms;\n} uart_config_t;\n\nint uart_init(uint8_t port, const uart_config_t *cfg);\nvoid uart_write(uint8_t port, const uint8_t *data, uint16_t len);\nint uart_read(uint8_t port, uint8_t *buf, uint16_t len);\nvoid uart_deinit(uint8_t port);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -9,6 +9,8 @@\n     uint8_t  data_bits;\n     uint8_t  stop_bits;\n     uint8_t  parity;\n+    uint8_t  flow_control;\n+    uint32_t timeout_ms;\n } uart_config_t;\n \n int uart_init(uint8_t port, const uart_config_t *cfg);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Two new fields (flow_control and timeout_ms) were added to uart_config_t struct, breaking binary compatibility and any static initializers that omit these fields.",
+  "patch_hash": "4844ad1264c62c21649299ee3de23005ef1c271b1f4a2e56c63295dad6064aaf"
+}

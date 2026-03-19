@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef TIMER_HAL_H\n#define TIMER_HAL_H\n\n#include <stdint.h>\n\ntypedef uint16_t timer_handle_t;\n\ntimer_handle_t timer_create(uint32_t period_us, void (*cb)(void));\nvoid timer_start(timer_handle_t handle);\nvoid timer_stop(timer_handle_t handle);\nvoid timer_destroy(timer_handle_t handle);\n\n#endif",
+  "after_code": "#ifndef TIMER_HAL_H\n#define TIMER_HAL_H\n\n#include <stdint.h>\n\ntypedef uint32_t timer_handle_t;\n\ntimer_handle_t timer_create(uint32_t period_us, void (*cb)(void));\nvoid timer_start(timer_handle_t handle);\nvoid timer_stop(timer_handle_t handle);\nvoid timer_destroy(timer_handle_t handle);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,7 +3,7 @@\n \n #include <stdint.h>\n \n-typedef uint16_t timer_handle_t;\n+typedef uint32_t timer_handle_t;\n \n timer_handle_t timer_create(uint32_t period_us, void (*cb)(void));\n void timer_start(timer_handle_t handle);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The typedef for timer_handle_t was changed from uint16_t to uint32_t, breaking ABI compatibility for callers that store or pass handle values as 16-bit quantities.",
+  "patch_hash": "30ea46d47262fd54a83e7293d1ef848f4c33cf588e477a77b2c884de7a18ba5b"
+}

@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef PWM_API_H\n#define PWM_API_H\n\n#include <stdint.h>\n\n/* Duty cycle in percent 0-100 */\nint pwm_init(uint8_t channel, uint32_t freq_hz);\nint pwm_set_duty(uint8_t channel, uint8_t duty_pct);\nvoid pwm_enable(uint8_t channel);\nvoid pwm_disable(uint8_t channel);\n\n#endif",
+  "after_code": "#ifndef PWM_API_H\n#define PWM_API_H\n\n#include <stdint.h>\n\n/* Duty cycle in per-mille 0-1000 */\nint pwm_init(uint8_t channel, uint32_t freq_hz);\nint pwm_set_duty(uint8_t channel, uint16_t duty_permille);\nvoid pwm_enable(uint8_t channel);\nvoid pwm_disable(uint8_t channel);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,9 +3,9 @@\n \n #include <stdint.h>\n \n-/* Duty cycle in percent 0-100 */\n+/* Duty cycle in per-mille 0-1000 */\n int pwm_init(uint8_t channel, uint32_t freq_hz);\n-int pwm_set_duty(uint8_t channel, uint8_t duty_pct);\n+int pwm_set_duty(uint8_t channel, uint16_t duty_permille);\n void pwm_enable(uint8_t channel);\n void pwm_disable(uint8_t channel);\n \n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "pwm_set_duty's duty parameter type changed from uint8_t (0-100%) to uint16_t (0-1000\u2030) and its semantics changed, silently corrupting duty cycles for all existing callers.",
+  "patch_hash": "5e68006d7c25b53dc3882485f57f074ebafee1a0d509ca7a14bc270dd503f526"
+}

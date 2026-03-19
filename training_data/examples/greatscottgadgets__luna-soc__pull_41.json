@@ -2,7 +2,7 @@
   "repo": "greatscottgadgets/luna-soc",
   "before_ref": "dd639ba86868d3e27f2949e7c79e7e27b86eea77",
   "after_ref": "bc9deb11601849314cdf1db64df2000910126ee9",
-  "bug_category": "latch_inferred",
+  "bug_category": "sensitivity_list",
   "query": "incomplete case\" language:verilog",
   "commit_message": "eptri: latch ep_in token.endpoint until transfer has completed eptri: latch ep_in token.endpoint until transfer has completed In #40 we discover a reproducible test case that results in the following failure mode:\r\n\r\nOn the host side, we issue the following USB Request Blocks:\r\n\r\n```c\r\nwhile true {\r\n  // send a vendor out request with 32 bytes of data to device on ep0\r\n  USBDEVFS_URB_TYPE_CONTROL, USB_DIR_OUT, [32 bytes of data]\r\n  \r\n  // make a bulk in request for data from device on ep1\r\n  USB",
   "file_count": 1,
@@ -12,7 +12,7 @@
       "filename": "luna_soc/gateware/csr/usb2/interfaces/eptri.py",
       "before_ref": "dd639ba86868d3e27f2949e7c79e7e27b86eea77",
       "after_ref": "bc9deb11601849314cdf1db64df2000910126ee9",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "incomplete case\" language:verilog",
       "commit_message": "eptri: latch ep_in token.endpoint until transfer has completed eptri: latch ep_in token.endpoint until transfer has completed In #40 we discover a reproducible test case that results in the following failure mode:\r\n\r\nOn the host side, we issue the following USB Request Blocks:\r\n\r\n```c\r\nwhile true {\r\n  // send a vendor out request with 32 bytes of data to device on ep0\r\n  USBDEVFS_URB_TYPE_CONTROL, USB_DIR_OUT, [32 bytes of data]\r\n  \r\n  // make a bulk in request for data from device on ep1\r\n  USB",
       "patch": "@@ -297,6 +297,10 @@ def elaborate(self, platform):\n         with m.Elif(decrement & ~increment):\n             m.d.usb += bytes_in_fifo.eq(bytes_in_fifo - 1)\n \n+        # Latch token endpoint until all data is written out from the FIFO.\n+        latched_endpoint = Signal(4)\n+        with m.If(token.new_token & token.is_in & (~fifo.r_rdy)):\n+            m.d.usb += latched_endpoint.eq(token.endpoint)\n \n         #\n         # Register updates.\n@@ -354,19 +358,19 @@ def elaborate(self, platform):\n         # Data toggle control.\n         #\n \n-        endpoint_matches = (token.endpoint == self.epno.r_data)\n+        endpoint_matches = (latched_endpoint == self.epno.r_data)\n         packet_complete  = self.interface.handshakes_in.ack & token.is_in & endpoint_matches\n \n         # Always drive the DATA pid we're transmitting with our current data pid.\n-        m.d.comb += self.interface.tx_pid_toggle.eq(endpoint_data_pid[token.endpoint])\n+        m.d.comb += self.interface.tx_pid_toggle.eq(endpoint_data_pid[latched_endpoint])\n \n         # If our controller is overriding the data PID, accept the override.\n         with m.If(self.pid.w_stb):\n             m.d.usb += endpoint_data_pid[self.epno.r_data].eq(self.pid.w_data)\n \n         # Otherwise, toggle our expected DATA PID once we receive a complete packet.\n         with m.Elif(packet_complete):\n-            m.d.usb += endpoint_data_pid[token.endpoint].eq(~endpoint_data_pid[token.endpoint])\n+            m.d.usb += endpoint_data_pid[latched_endpoint].eq(~endpoint_data_pid[latched_endpoint])\n \n \n         #\n@@ -375,7 +379,7 @@ def elaborate(self, platform):\n \n         # Logic shorthand.\n         new_in_token     = (token.is_in & token.ready_for_response)\n-        stalled          = endpoint_stalled[token.endpoint]\n+        stalled          = endpoint_stalled[latched_endpoint]\n \n         with m.FSM(domain='usb') as f:\n \n@@ -402,7 +406,7 @@ def elaborate(self, platform):\n                 # This means we have data to send, but are just waiting for an IN token.\n                 with m.If(self.epno.w_stb & ~stalled):\n                     # we can also clear our NAK status now\n-                    m.d.usb += endpoint_nakked[token.endpoint].eq(0)\n+                    m.d.usb += endpoint_nakked[latched_endpoint].eq(0)\n                     m.next = \"PRIMED\"\n \n                 # Always return to IDLE on reset.\n@@ -652,7 +656,8 @@ def elaborate(self, platform):\n             with m.If(token.endpoint == 0):\n                 m.d.usb += endpoint_primed[token.endpoint].eq(0)\n \n-        # Mark our FIFO as ready iff it is enabled and primed on receipt of a new token.\n+        # On receipt of a new token, mark our FIFO as ready iff the peripheral is enabled\n+        # and the destination endpoint for the token is primed.\n         with m.If(token.new_token):\n             m.d.usb += fifo_ready.eq(self.enable.r_data & endpoint_primed[token.endpoint])\n ",
@@ -23,5 +23,6 @@
       "deletions": 6,
       "validation": "clean"
     }
-  ]
+  ],
+  "patch_hash": "8d4965fa908ef3a56e985d325e90c9c225c73cd8881bf2060a4e8fb6d68b771b"
 }

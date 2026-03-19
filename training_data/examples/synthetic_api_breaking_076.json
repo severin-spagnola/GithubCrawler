@@ -1,0 +1,11 @@
+{
+  "before_code": "/* flash.h - Internal flash memory driver */\n#ifndef FLASH_H\n#define FLASH_H\n\n#include <stdint.h>\n\ntypedef uint32_t flash_addr_t;\n\nint flash_erase_page(flash_addr_t addr);\nint flash_write(flash_addr_t addr, const uint8_t *data, uint32_t len);\nint flash_read(flash_addr_t addr, uint8_t *data, uint32_t len);\nint flash_verify(flash_addr_t addr, const uint8_t *data, uint32_t len);\n\n#endif /* FLASH_H */",
+  "after_code": "/* flash.h - Internal flash memory driver */\n#ifndef FLASH_H\n#define FLASH_H\n\n#include <stdint.h>\n\ntypedef uint64_t flash_addr_t;\n\nint flash_erase_page(flash_addr_t addr);\nint flash_write(flash_addr_t addr, const uint8_t *data, uint32_t len);\nint flash_read(flash_addr_t addr, uint8_t *data, uint32_t len);\nint flash_verify(flash_addr_t addr, const uint8_t *data, uint32_t len);\n\n#endif /* FLASH_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,7 +4,7 @@\n \n #include <stdint.h>\n \n-typedef uint32_t flash_addr_t;\n+typedef uint64_t flash_addr_t;\n \n int flash_erase_page(flash_addr_t addr);\n int flash_write(flash_addr_t addr, const uint8_t *data, uint32_t len);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Changed the flash_addr_t typedef from uint32_t to uint64_t, breaking any caller that passes a uint32_t literal or variable directly to flash API functions or stores a flash address in a uint32_t.",
+  "patch_hash": "d8cb96732d478d826b4af859ac059609ac2bfc297313c045c0e29ffa7e2a6d77"
+}

@@ -1,0 +1,10 @@
+{
+  "before_code": "/* ADC driver with callback-based interface */\n#ifndef ADC_DRV_H\n#define ADC_DRV_H\n\n#include <stdint.h>\n\n/* Callback: channel, raw ADC value */\ntypedef void (*adc_callback_t)(uint8_t channel, uint16_t raw_value);\n\ntypedef struct {\n    uint8_t        channel_mask;\n    uint32_t       sample_rate_hz;\n    adc_callback_t on_sample;\n} adc_config_t;\n\nint  adc_open(const adc_config_t *cfg);\nvoid adc_start(void);\nvoid adc_stop(void);\nvoid adc_close(void);\n\n#endif",
+  "after_code": "/* ADC driver with callback-based interface */\n#ifndef ADC_DRV_H\n#define ADC_DRV_H\n\n#include <stdint.h>\n\n/* Callback signature changed: added user context pointer and timestamp */\ntypedef void (*adc_callback_t)(uint8_t channel, uint16_t raw_value,\n                               uint32_t timestamp_us, void *user_ctx);\n\ntypedef struct {\n    uint8_t        channel_mask;\n    uint32_t       sample_rate_hz;\n    adc_callback_t on_sample;\n    void          *user_ctx;  /* NEW: passed back in callback */\n} adc_config_t;\n\nint  adc_open(const adc_config_t *cfg);\nvoid adc_start(void);\nvoid adc_stop(void);\nvoid adc_close(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,13 +4,15 @@\n \n #include <stdint.h>\n \n-/* Callback: channel, raw ADC value */\n-typedef void (*adc_callback_t)(uint8_t channel, uint16_t raw_value);\n+/* Callback signature changed: added user context pointer and timestamp */\n+typedef void (*adc_callback_t)(uint8_t channel, uint16_t raw_value,\n+                               uint32_t timestamp_us, void *user_ctx);\n \n typedef struct {\n     uint8_t        channel_mask;\n     uint32_t       sample_rate_hz;\n     adc_callback_t on_sample;\n+    void          *user_ctx;  /* NEW: passed back in callback */\n } adc_config_t;\n \n int  adc_open(const adc_config_t *cfg);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "a14f9f2129a92e408f07a0e903dfa8c08cbb1322c16b503fec9638555081c57b"
+}

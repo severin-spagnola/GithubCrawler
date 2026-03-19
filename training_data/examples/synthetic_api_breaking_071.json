@@ -1,0 +1,11 @@
+{
+  "before_code": "/* spi.h - SPI peripheral driver */\n#ifndef SPI_H\n#define SPI_H\n\n#include <stdint.h>\n#include <stdbool.h>\n\ntypedef struct {\n    uint32_t clock_hz;\n    uint8_t  mode;\n    uint8_t  bits_per_word;\n    bool     lsb_first;\n} spi_config_t;\n\nint spi_open(uint8_t bus, const spi_config_t *cfg);\nint spi_transfer(uint8_t bus, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_close(uint8_t bus);\n\n#endif /* SPI_H */",
+  "after_code": "/* spi.h - SPI peripheral driver */\n#ifndef SPI_H\n#define SPI_H\n\n#include <stdint.h>\n#include <stdbool.h>\n\ntypedef struct {\n    uint32_t clock_hz;\n    uint8_t  mode;\n    uint8_t  bits_per_word;\n    bool     lsb_first;\n    uint8_t  cs_polarity;  /* NEW: chip-select polarity, 0=active-low */\n} spi_config_t;\n\nint spi_open(uint8_t bus, const spi_config_t *cfg);\nint spi_transfer(uint8_t bus, const uint8_t *tx, uint8_t *rx, uint16_t len);\nvoid spi_close(uint8_t bus);\n\n#endif /* SPI_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -10,6 +10,7 @@\n     uint8_t  mode;\n     uint8_t  bits_per_word;\n     bool     lsb_first;\n+    uint8_t  cs_polarity;  /* NEW: chip-select polarity, 0=active-low */\n } spi_config_t;\n \n int spi_open(uint8_t bus, const spi_config_t *cfg);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Added a new cs_polarity field to spi_config_t, changing the struct layout and size, which breaks any caller that initializes the struct with a designated or positional initializer without including the new field.",
+  "patch_hash": "49d93f0c14eb7eab150dabadc422792dc3df8ae9edb8381c0bc01a4a5c74064c"
+}

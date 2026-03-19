@@ -1,20 +1,15 @@
 {
   "total_repos": 999,
-  "total_examples": 8473,
+  "total_examples": 1099,
   "clean_examples": 8132,
   "clean_pct": 96.0,
   "category_counts": {
-    "synthesis_error": 414,
-    "sensitivity_list": 112,
-    "port_mismatch": 198,
-    "clock_domain": 44,
-    "api_breaking": 7,
-    "build_regression": 1,
-    "merge_conflict": 1,
-    "reset_logic": 3,
-    "linker_error": 2,
-    "latch_inferred": 14,
-    "other": 203
+    "api_breaking": 105,
+    "synthesis_error": 456,
+    "port_mismatch": 219,
+    "other": 150,
+    "sensitivity_list": 127,
+    "clock_domain": 42
   },
   "language_counts": {
     "c": 562,
@@ -6029,5 +6024,19 @@
       "file_count": 2,
       "query": "incomplete case\" language:verilog"
     }
-  ]
+  ],
+  "total_files": 1051,
+  "step3_applied": true,
+  "step3_changes": {
+    "dedup_dropped": 64,
+    "linker_error_dropped": 2,
+    "reclassified": {
+      "latch_inferred": 14,
+      "reset_logic": 3,
+      "merge_conflict": 1,
+      "build_regression": 1
+    },
+    "synthetics_added": 50
+  },
+  "consolidation_applied": true
 }

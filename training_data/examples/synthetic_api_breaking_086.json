@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef PWM_H\n#define PWM_H\n\n#include <stdint.h>\n\ntypedef enum {\n    PWM_ALIGN_EDGE   = 0,\n    PWM_ALIGN_CENTER = 1\n} pwm_align_t;\n\nint pwm_init(uint8_t ch, uint32_t freq_hz, pwm_align_t align);\nint pwm_set_duty(uint8_t ch, uint8_t duty_pct);\nint pwm_enable(uint8_t ch);\nint pwm_disable(uint8_t ch);\n\n#endif",
+  "after_code": "#ifndef PWM_H\n#define PWM_H\n\n#include <stdint.h>\n\ntypedef enum {\n    PWM_ALIGN_EDGE   = 0,\n    PWM_ALIGN_CENTER = 1\n} pwm_align_t;\n\nint pwm_init(uint8_t ch, uint32_t freq_hz, pwm_align_t align);\nint pwm_set_duty(uint8_t ch, uint16_t duty_per_mille);\nint pwm_enable(uint8_t ch);\nint pwm_disable(uint8_t ch);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -9,7 +9,7 @@\n } pwm_align_t;\n \n int pwm_init(uint8_t ch, uint32_t freq_hz, pwm_align_t align);\n-int pwm_set_duty(uint8_t ch, uint8_t duty_pct);\n+int pwm_set_duty(uint8_t ch, uint16_t duty_per_mille);\n int pwm_enable(uint8_t ch);\n int pwm_disable(uint8_t ch);\n \n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The pwm_set_duty function signature changed its duty parameter from uint8_t percentage to uint16_t per-mille value, breaking all callers that pass 0-100 values.",
+  "patch_hash": "1b33523f53bee2aa256aac60963a9d431ba4e25fa24eab46c1f660a704816907"
+}

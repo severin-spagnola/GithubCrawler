@@ -1,0 +1,10 @@
+{
+  "before_code": "/* rtos_mutex.h - RTOS Mutex API */\n#ifndef RTOS_MUTEX_H\n#define RTOS_MUTEX_H\n\n#include <stdint.h>\n#include <stdbool.h>\n\ntypedef void* mutex_handle_t;\n\n#define MUTEX_WAIT_FOREVER   0xFFFFFFFFU\n#define MUTEX_NO_WAIT        0U\n\ntypedef enum {\n    MUTEX_OK          = 0,\n    MUTEX_ERR_TIMEOUT = 1,\n    MUTEX_ERR_INVALID = 2,\n    MUTEX_ERR_OWNER   = 3\n} mutex_status_t;\n\nmutex_handle_t mutex_create(void);\nmutex_status_t mutex_lock(mutex_handle_t handle, uint32_t timeout_ms);\nmutex_status_t mutex_unlock(mutex_handle_t handle);\nvoid           mutex_delete(mutex_handle_t handle);\nbool           mutex_is_locked(mutex_handle_t handle);\n\n#endif /* RTOS_MUTEX_H */",
+  "after_code": "/* rtos_mutex.h - RTOS Mutex API */\n#ifndef RTOS_MUTEX_H\n#define RTOS_MUTEX_H\n\n#include <stdint.h>\n#include <stdbool.h>\n\ntypedef void* mutex_handle_t;\n\n#define MUTEX_WAIT_FOREVER   0xFFFFFFFFU\n#define MUTEX_NO_WAIT        0U\n\n/* BREAKING: enum values reordered - MUTEX_ERR_TIMEOUT and MUTEX_ERR_INVALID swapped */\ntypedef enum {\n    MUTEX_OK          = 0,\n    MUTEX_ERR_INVALID = 1,\n    MUTEX_ERR_TIMEOUT = 2,\n    MUTEX_ERR_OWNER   = 3\n} mutex_status_t;\n\nmutex_handle_t mutex_create(void);\nmutex_status_t mutex_lock(mutex_handle_t handle, uint32_t timeout_ms);\nmutex_status_t mutex_unlock(mutex_handle_t handle);\nvoid           mutex_delete(mutex_handle_t handle);\nbool           mutex_is_locked(mutex_handle_t handle);\n\n#endif /* RTOS_MUTEX_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -10,10 +10,11 @@\n #define MUTEX_WAIT_FOREVER   0xFFFFFFFFU\n #define MUTEX_NO_WAIT        0U\n \n+/* BREAKING: enum values reordered - MUTEX_ERR_TIMEOUT and MUTEX_ERR_INVALID swapped */\n typedef enum {\n     MUTEX_OK          = 0,\n-    MUTEX_ERR_TIMEOUT = 1,\n-    MUTEX_ERR_INVALID = 2,\n+    MUTEX_ERR_INVALID = 1,\n+    MUTEX_ERR_TIMEOUT = 2,\n     MUTEX_ERR_OWNER   = 3\n } mutex_status_t;\n \n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "patch_hash": "43ff51f3fd7f051e61ea1845ab9d7b3a32627d77a89895dd92689c54e0888b25"
+}

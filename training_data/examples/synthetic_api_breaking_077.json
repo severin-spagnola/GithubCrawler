@@ -1,0 +1,11 @@
+{
+  "before_code": "/* pwm.h - PWM output driver */\n#ifndef PWM_H\n#define PWM_H\n\n#include <stdint.h>\n\nint  pwm_init(uint8_t channel, uint32_t freq_hz);\nvoid pwm_set_duty(uint8_t channel, uint8_t duty_percent);\nvoid pwm_enable(uint8_t channel);\nvoid pwm_disable(uint8_t channel);\nvoid pwm_deinit(uint8_t channel);\n\n#endif /* PWM_H */",
+  "after_code": "/* pwm.h - PWM output driver */\n#ifndef PWM_H\n#define PWM_H\n\n#include <stdint.h>\n\nint  pwm_init(uint8_t channel, uint32_t freq_hz, uint8_t resolution_bits);\nvoid pwm_set_duty(uint8_t channel, uint8_t duty_percent);\nvoid pwm_enable(uint8_t channel);\nvoid pwm_disable(uint8_t channel);\nvoid pwm_deinit(uint8_t channel);\n\n#endif /* PWM_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,7 +4,7 @@\n \n #include <stdint.h>\n \n-int  pwm_init(uint8_t channel, uint32_t freq_hz);\n+int  pwm_init(uint8_t channel, uint32_t freq_hz, uint8_t resolution_bits);\n void pwm_set_duty(uint8_t channel, uint8_t duty_percent);\n void pwm_enable(uint8_t channel);\n void pwm_disable(uint8_t channel);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Added a mandatory resolution_bits parameter to pwm_init, breaking all existing call sites that only pass channel and freq_hz.",
+  "patch_hash": "523ffc9a660e9b75722c6fcbba430dc18598a0b9f71d939b3200bd5efaecd686"
+}

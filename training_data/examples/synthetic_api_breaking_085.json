@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef FLASH_H\n#define FLASH_H\n\n#include <stdint.h>\n\n#define FLASH_PAGE_SIZE   256\n#define FLASH_SECTOR_SIZE 4096\n#define FLASH_OK          0\n#define FLASH_ERR_ADDR   -1\n#define FLASH_ERR_ERASE  -2\n#define FLASH_ERR_WRITE  -3\n\nint flash_erase_sector(uint32_t addr);\nint flash_write_page(uint32_t addr, const uint8_t *data);\nint flash_read(uint32_t addr, uint8_t *data, uint32_t len);\nint flash_verify(uint32_t addr, const uint8_t *data, uint32_t len);\n\n#endif",
+  "after_code": "#ifndef FLASH_H\n#define FLASH_H\n\n#include <stdint.h>\n\n#define FLASH_PAGE_SIZE   512\n#define FLASH_SECTOR_SIZE 4096\n#define FLASH_OK          0\n#define FLASH_ERR_ADDR   -1\n#define FLASH_ERR_ERASE  -2\n#define FLASH_ERR_WRITE  -3\n\nint flash_erase_sector(uint32_t addr);\nint flash_write_page(uint32_t addr, const uint8_t *data);\nint flash_read(uint32_t addr, uint8_t *data, uint32_t len);\nint flash_verify(uint32_t addr, const uint8_t *data, uint32_t len);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,7 +3,7 @@\n \n #include <stdint.h>\n \n-#define FLASH_PAGE_SIZE   256\n+#define FLASH_PAGE_SIZE   512\n #define FLASH_SECTOR_SIZE 4096\n #define FLASH_OK          0\n #define FLASH_ERR_ADDR   -1\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The FLASH_PAGE_SIZE macro was changed from 256 to 512, breaking all callers that use it to allocate page-sized buffers or compute write addresses.",
+  "patch_hash": "c0780679b9a8d2602784ef3e74f6d13b1d5152e10b6c57038b85c1a240ffd106"
+}

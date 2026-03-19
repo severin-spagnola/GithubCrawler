@@ -1,0 +1,11 @@
+{
+  "before_code": "/* timer_api.h */\n#ifndef TIMER_API_H\n#define TIMER_API_H\n\n#include <stdint.h>\n\ntypedef uint16_t timer_handle_t;\n\ntimer_handle_t timer_create(uint32_t period_ms, uint8_t repeat);\nvoid timer_start(timer_handle_t handle);\nvoid timer_stop(timer_handle_t handle);\nvoid timer_delete(timer_handle_t handle);\n\n#endif",
+  "after_code": "/* timer_api.h */\n#ifndef TIMER_API_H\n#define TIMER_API_H\n\n#include <stdint.h>\n\ntypedef void * timer_handle_t;\n\ntimer_handle_t timer_create(uint32_t period_ms, uint8_t repeat);\nvoid timer_start(timer_handle_t handle);\nvoid timer_stop(timer_handle_t handle);\nvoid timer_delete(timer_handle_t handle);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,7 +4,7 @@\n \n #include <stdint.h>\n \n-typedef uint16_t timer_handle_t;\n+typedef void * timer_handle_t;\n \n timer_handle_t timer_create(uint32_t period_ms, uint8_t repeat);\n void timer_start(timer_handle_t handle);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The timer_handle_t typedef changed from uint16_t to void*, altering its size and representation and breaking any code that stores, compares, or serializes handles as integers.",
+  "patch_hash": "2bef4642df607b25850f08133ed89bb001ecbbaaeb87fb63081eac482844196b"
+}

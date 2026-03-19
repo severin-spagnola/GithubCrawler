@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef ADC_H\n#define ADC_H\n\n#include <stdint.h>\n\ntypedef uint16_t adc_sample_t;\n\ntypedef struct {\n    uint8_t      channel;\n    uint8_t      resolution;\n    adc_sample_t *buffer;\n    uint16_t     buf_len;\n} adc_cfg_t;\n\nint adc_open(uint8_t id, const adc_cfg_t *cfg);\nint adc_sample(uint8_t id, adc_sample_t *out);\nint adc_close(uint8_t id);\n\n#endif",
+  "after_code": "#ifndef ADC_H\n#define ADC_H\n\n#include <stdint.h>\n\ntypedef uint32_t adc_sample_t;\n\ntypedef struct {\n    uint8_t      channel;\n    uint8_t      resolution;\n    adc_sample_t *buffer;\n    uint16_t     buf_len;\n} adc_cfg_t;\n\nint adc_open(uint8_t id, const adc_cfg_t *cfg);\nint adc_sample(uint8_t id, adc_sample_t *out);\nint adc_close(uint8_t id);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,7 +3,7 @@\n \n #include <stdint.h>\n \n-typedef uint16_t adc_sample_t;\n+typedef uint32_t adc_sample_t;\n \n typedef struct {\n     uint8_t      channel;\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The typedef adc_sample_t was changed from uint16_t to uint32_t, breaking binary compatibility for all code that allocates, stores, or transmits ADC samples based on the old size.",
+  "patch_hash": "2a882fa3f4759139f349d152aaedd4b044e61fb0026b5eb7698a95006041f02b"
+}

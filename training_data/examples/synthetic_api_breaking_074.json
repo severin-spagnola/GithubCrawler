@@ -1,0 +1,11 @@
+{
+  "before_code": "/* timer.h - Hardware timer driver */\n#ifndef TIMER_H\n#define TIMER_H\n\n#include <stdint.h>\n\ntypedef void (*timer_callback_t)(void);\n\nint  timer_init(uint8_t id, uint32_t period_us, timer_callback_t cb);\nvoid timer_start(uint8_t id);\nvoid timer_stop(uint8_t id);\nvoid timer_reset(uint8_t id);\nuint32_t timer_get_count(uint8_t id);\n\n#endif /* TIMER_H */",
+  "after_code": "/* timer.h - Hardware timer driver */\n#ifndef TIMER_H\n#define TIMER_H\n\n#include <stdint.h>\n\ntypedef void (*timer_callback_t)(void);\n\nint  timer_init(uint8_t id, uint32_t period_us, timer_callback_t cb);\nvoid timer_start(uint8_t id);\nvoid timer_stop(uint8_t id);\nvoid timer_reset(uint8_t id);\nuint64_t timer_get_count(uint8_t id);\n\n#endif /* TIMER_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -10,6 +10,6 @@\n void timer_start(uint8_t id);\n void timer_stop(uint8_t id);\n void timer_reset(uint8_t id);\n-uint32_t timer_get_count(uint8_t id);\n+uint64_t timer_get_count(uint8_t id);\n \n #endif /* TIMER_H */",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Changed the return type of timer_get_count from uint32_t to uint64_t, breaking callers that assign the result to a uint32_t variable or use it in contexts expecting a 32-bit value.",
+  "patch_hash": "bbdeaa195be83df47a721389e2da06059b903ffe2586160ef6fcb7e9e5ab64c5"
+}

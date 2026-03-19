@@ -1,0 +1,11 @@
+{
+  "before_code": "/* flash_api.h - Internal flash read/write interface */\n#ifndef FLASH_API_H\n#define FLASH_API_H\n\n#include <stdint.h>\n\n#define FLASH_PAGE_SIZE   256U\n#define FLASH_SECTOR_SIZE 4096U\n\nint flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\nint flash_write(uint32_t addr, const uint8_t *data, uint32_t len);\nint flash_erase_sector(uint32_t sector_addr);\nint flash_erase_chip(void);\n\n#endif",
+  "after_code": "/* flash_api.h - Internal flash read/write interface */\n#ifndef FLASH_API_H\n#define FLASH_API_H\n\n#include <stdint.h>\n\n#define FLASH_PAGE_SIZE   512U\n#define FLASH_SECTOR_SIZE 4096U\n\nint flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\nint flash_write(uint32_t addr, const uint8_t *data, uint32_t len);\nint flash_erase_sector(uint32_t sector_addr);\nint flash_erase_chip(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,7 +4,7 @@\n \n #include <stdint.h>\n \n-#define FLASH_PAGE_SIZE   256U\n+#define FLASH_PAGE_SIZE   512U\n #define FLASH_SECTOR_SIZE 4096U\n \n int flash_read(uint32_t addr, uint8_t *buf, uint32_t len);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The `FLASH_PAGE_SIZE` macro was changed from 256 to 512, breaking callers that use this constant to size buffers or loop over pages.",
+  "patch_hash": "1cc9fa8aad43818a9b8c4e49ecb47e844ee690c545c72c49bbdb9ed685b5085f"
+}

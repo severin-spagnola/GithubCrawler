@@ -2,7 +2,7 @@
   "repo": "The-OpenROAD-Project/OpenROAD",
   "before_ref": "515b7a52eb0afb47c543daf77445dab3cb423f8f",
   "after_ref": "cb5c79d5c5c82af53cd44120da04d88f2648e0b7",
-  "bug_category": "latch_inferred",
+  "bug_category": "sensitivity_list",
   "query": "incomplete case\" language:verilog",
   "commit_message": "odb: factor out utilities for use in testing, start unit testing Ath__parser odb: factor out utilities for use in testing, start unit testing Ath__parser Signed-off-by: Christopher D. Leary <cdleary@gmail.com>",
   "file_count": 2,
@@ -12,7 +12,7 @@
       "filename": "src/odb/CMakeLists.txt",
       "before_ref": "515b7a52eb0afb47c543daf77445dab3cb423f8f",
       "after_ref": "cb5c79d5c5c82af53cd44120da04d88f2648e0b7",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "incomplete case\" language:verilog",
       "commit_message": "odb: factor out utilities for use in testing, start unit testing Ath__parser odb: factor out utilities for use in testing, start unit testing Ath__parser Signed-off-by: Christopher D. Leary <cdleary@gmail.com>",
       "patch": "@@ -70,3 +70,16 @@ if (DOXYGEN_FOUND)\n \n   doxygen_add_docs(docs include)\n endif()\n+\n+############################################################\n+# Unit testing\n+############################################################\n+enable_testing()\n+\n+add_executable(parseTest\n+  ${PROJECT_SOURCE_DIR}/test/parseTest.cpp\n+)\n+\n+target_link_libraries(parseTest\n+  odb\n+)",
@@ -28,7 +28,7 @@
       "filename": "src/utl/CMakeLists.txt",
       "before_ref": "515b7a52eb0afb47c543daf77445dab3cb423f8f",
       "after_ref": "cb5c79d5c5c82af53cd44120da04d88f2648e0b7",
-      "bug_category": "latch_inferred",
+      "bug_category": "sensitivity_list",
       "query": "incomplete case\" language:verilog",
       "commit_message": "odb: factor out utilities for use in testing, start unit testing Ath__parser odb: factor out utilities for use in testing, start unit testing Ath__parser Signed-off-by: Christopher D. Leary <cdleary@gmail.com>",
       "patch": "@@ -35,6 +35,8 @@\n \n include(\"openroad\")\n \n+find_package(Boost)\n+\n swig_lib(NAME      utl\n          NAMESPACE utl\n          I_FILE    src/Logger.i\n@@ -69,15 +71,37 @@ target_sources(utl\n     src/LoggerCommon.cpp\n     src/MakeLogger.cpp\n     src/Metrics.cpp\n+    src/CFileUtils.cpp\n+    src/ScopedTemporaryFile.cpp\n )\n   \n target_include_directories(utl\n   PUBLIC\n     include\n     src\n+    ${Boost_INCLUDE_DIRS}\n )\n \n target_link_libraries(utl\n   PUBLIC\n     spdlog::spdlog\n )\n+\n+############################################################\n+# Unit testing\n+############################################################\n+enable_testing()\n+\n+add_executable(CFileUtilsTest\n+  ${PROJECT_SOURCE_DIR}/src/utl/test/CFileUtilsTest.cpp\n+)\n+\n+target_include_directories(CFileUtilsTest\n+  PRIVATE\n+  ${PROJECT_SOURCE_DIR}/src\n+  ${OPENROAD_HOME}/include\n+)\n+\n+target_link_libraries(CFileUtilsTest\n+  utl\n+)",
@@ -39,5 +39,6 @@
       "deletions": 0,
       "validation": "clean"
     }
-  ]
+  ],
+  "patch_hash": "6609e531642008e094743f6fe4d69947b6fdfcba4b86093ad7a9fa2801c24090"
 }

@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\nvoid wdt_init(uint32_t timeout_ms);\nvoid wdt_feed(void);\nvoid wdt_stop(void);\nuint32_t wdt_get_remaining_ms(void);\n\n#endif",
+  "after_code": "#ifndef WATCHDOG_H\n#define WATCHDOG_H\n\n#include <stdint.h>\n\nint  wdt_init(uint32_t timeout_ms);\nvoid wdt_feed(void);\nint  wdt_stop(void);\nuint32_t wdt_get_remaining_ms(void);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -3,9 +3,9 @@\n \n #include <stdint.h>\n \n-void wdt_init(uint32_t timeout_ms);\n+int  wdt_init(uint32_t timeout_ms);\n void wdt_feed(void);\n-void wdt_stop(void);\n+int  wdt_stop(void);\n uint32_t wdt_get_remaining_ms(void);\n \n #endif",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The return type of wdt_init and wdt_stop was changed from void to int, breaking callers that do not capture a return value on architectures with strict calling conventions.",
+  "patch_hash": "459a38e00596d97555d71b793001dbccdfe3111164a559a01631e730280eea19"
+}

@@ -1,0 +1,11 @@
+{
+  "before_code": "/* adc.h - ADC driver interface */\n#ifndef ADC_H\n#define ADC_H\n\n#include <stdint.h>\n\nvoid adc_init(void);\nuint16_t adc_read(uint8_t channel);\nvoid adc_set_reference(uint8_t ref);\nvoid adc_set_resolution(uint8_t bits);\nvoid adc_start_conversion(uint8_t channel);\nbool adc_is_ready(void);\n\n#endif /* ADC_H */",
+  "after_code": "/* adc.h - ADC driver interface */\n#ifndef ADC_H\n#define ADC_H\n\n#include <stdint.h>\n\nvoid adc_init(void);\nuint16_t adc_read(uint8_t channel);\nvoid adc_set_reference(uint8_t ref);\nvoid adc_set_resolution(uint8_t bits);\nvoid adc_start_conversion(uint8_t channel);\n/* adc_is_ready removed: use adc_poll() instead */\nint  adc_poll(uint16_t *result);\n\n#endif /* ADC_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -9,6 +9,7 @@\n void adc_set_reference(uint8_t ref);\n void adc_set_resolution(uint8_t bits);\n void adc_start_conversion(uint8_t channel);\n-bool adc_is_ready(void);\n+/* adc_is_ready removed: use adc_poll() instead */\n+int  adc_poll(uint16_t *result);\n \n #endif /* ADC_H */",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Removed the exported adc_is_ready function and replaced it with adc_poll, breaking any caller that calls adc_is_ready to check conversion status.",
+  "patch_hash": "b48b7b7d192708cf3e03dff1a62c23e0e95cb938bd68f8e43ccb95fef9aa1ec6"
+}

@@ -1,0 +1,11 @@
+{
+  "before_code": "#include <stdint.h>\n\ntypedef uint16_t sensor_val_t;\n\ntypedef struct {\n    uint8_t      id;\n    sensor_val_t raw;\n    sensor_val_t filtered;\n} sensor_data_t;\n\nint sensor_read(uint8_t id, sensor_data_t *out);\nint sensor_init(uint8_t id);\nvoid sensor_reset(uint8_t id);\n",
+  "after_code": "#include <stdint.h>\n\ntypedef uint32_t sensor_val_t;\n\ntypedef struct {\n    uint8_t      id;\n    sensor_val_t raw;\n    sensor_val_t filtered;\n} sensor_data_t;\n\nint sensor_read(uint8_t id, sensor_data_t *out);\nint sensor_init(uint8_t id);\nvoid sensor_reset(uint8_t id);\n",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -1,6 +1,6 @@\n #include <stdint.h>\n \n-typedef uint16_t sensor_val_t;\n+typedef uint32_t sensor_val_t;\n \n typedef struct {\n     uint8_t      id;\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "The `sensor_val_t` typedef was changed from `uint16_t` to `uint32_t`, altering the size and layout of `sensor_data_t` and breaking binary compatibility with callers.",
+  "patch_hash": "a9267b3cdc4ddca29d622fcf740a14cbd8f701af3deb4f9bbb572cc8a45c908f"
+}

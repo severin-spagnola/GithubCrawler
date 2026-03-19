@@ -1,0 +1,11 @@
+{
+  "before_code": "/* i2c.h - I2C bus driver */\n#ifndef I2C_H\n#define I2C_H\n\n#include <stdint.h>\n\n#define I2C_FLAG_NOSTOP   0x01\n#define I2C_FLAG_NOSTART  0x02\n#define I2C_FLAG_10BIT    0x04\n\nint i2c_init(uint8_t bus, uint32_t freq);\nint i2c_write(uint8_t bus, uint16_t addr, const uint8_t *data, uint16_t len, uint8_t flags);\nint i2c_read(uint8_t bus, uint16_t addr, uint8_t *data, uint16_t len, uint8_t flags);\nvoid i2c_deinit(uint8_t bus);\n\n#endif /* I2C_H */",
+  "after_code": "/* i2c.h - I2C bus driver */\n#ifndef I2C_H\n#define I2C_H\n\n#include <stdint.h>\n\n#define I2C_FLAG_NOSTOP   0x01\n#define I2C_FLAG_NOSTART  0x02\n#define I2C_FLAG_10BIT    0x08\n\nint i2c_init(uint8_t bus, uint32_t freq);\nint i2c_write(uint8_t bus, uint16_t addr, const uint8_t *data, uint16_t len, uint8_t flags);\nint i2c_read(uint8_t bus, uint16_t addr, uint8_t *data, uint16_t len, uint8_t flags);\nvoid i2c_deinit(uint8_t bus);\n\n#endif /* I2C_H */",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -6,7 +6,7 @@\n \n #define I2C_FLAG_NOSTOP   0x01\n #define I2C_FLAG_NOSTART  0x02\n-#define I2C_FLAG_10BIT    0x04\n+#define I2C_FLAG_10BIT    0x08\n \n int i2c_init(uint8_t bus, uint32_t freq);\n int i2c_write(uint8_t bus, uint16_t addr, const uint8_t *data, uint16_t len, uint8_t flags);\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "Changed the value of the I2C_FLAG_10BIT macro from 0x04 to 0x08, breaking any caller that uses this flag in bitfield operations or stores it numerically.",
+  "patch_hash": "394d423fa8a62a44d8bdeb4047217e54abf8b499638f9ee352193f96eaba7549"
+}

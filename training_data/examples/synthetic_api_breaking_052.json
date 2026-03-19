@@ -1,0 +1,11 @@
+{
+  "before_code": "#ifndef GPIO_API_H\n#define GPIO_API_H\n\n#include <stdint.h>\n\ntypedef enum {\n    GPIO_DIR_INPUT  = 0,\n    GPIO_DIR_OUTPUT = 1\n} gpio_dir_t;\n\ntypedef enum {\n    GPIO_PULL_NONE = 0,\n    GPIO_PULL_UP   = 1,\n    GPIO_PULL_DOWN = 2\n} gpio_pull_t;\n\nint gpio_configure(uint8_t pin, gpio_dir_t dir, gpio_pull_t pull);\nint gpio_write(uint8_t pin, uint8_t value);\nint gpio_read(uint8_t pin);\n\n#endif",
+  "after_code": "#ifndef GPIO_API_H\n#define GPIO_API_H\n\n#include <stdint.h>\n\ntypedef enum {\n    GPIO_DIR_INPUT     = 0,\n    GPIO_DIR_OUTPUT    = 1,\n    GPIO_DIR_OPEN_DRAIN = 2\n} gpio_dir_t;\n\ntypedef enum {\n    GPIO_PULL_NONE = 0,\n    GPIO_PULL_UP   = 1,\n    GPIO_PULL_DOWN = 2\n} gpio_pull_t;\n\nint gpio_configure(uint8_t pin, gpio_dir_t dir, gpio_pull_t pull);\nint gpio_write(uint8_t pin, uint8_t value);\nint gpio_read(uint8_t pin);\n\n#endif",
+  "patch": "--- a/firmware.c\n+++ b/firmware.c\n@@ -4,8 +4,9 @@\n #include <stdint.h>\n \n typedef enum {\n-    GPIO_DIR_INPUT  = 0,\n-    GPIO_DIR_OUTPUT = 1\n+    GPIO_DIR_INPUT     = 0,\n+    GPIO_DIR_OUTPUT    = 1,\n+    GPIO_DIR_OPEN_DRAIN = 2\n } gpio_dir_t;\n \n typedef enum {\n",
+  "bug_category": "api_breaking",
+  "language": "c",
+  "before_ref": "synthetic",
+  "synthetic": true,
+  "description": "A new `GPIO_DIR_OPEN_DRAIN` enumerator was inserted into `gpio_dir_t`, which shifts enum values for switch-case handlers that relied on numeric equality.",
+  "patch_hash": "00cdb54bcbd21ebd0059f38127efcce62d86d37874a03479cb34b23cfd53d0b4"
+}
