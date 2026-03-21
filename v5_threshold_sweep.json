@@ -1,0 +1,168 @@
+{
+  "baseline": {
+    "pm_f1": 0.278,
+    "synthesis_error_f1": 0.818,
+    "sensitivity_list_f1": 0.458
+  },
+  "best_threshold": 0.4,
+  "best_pm_f1": 0.2928,
+  "best_pm_precision": 0.275,
+  "best_pm_recall": 0.313,
+  "synthesis_error_f1_at_best": 0.8062,
+  "sensitivity_list_f1_at_best": 0.456,
+  "threshold_reaches_050": false,
+  "sweep": [
+    {
+      "threshold": 0.05,
+      "pm_precision": 0.1204,
+      "pm_recall": 0.6098,
+      "pm_f1": 0.2011,
+      "synthesis_error_f1": 0.1735,
+      "sensitivity_list_f1": 0.4846
+    },
+    {
+      "threshold": 0.1,
+      "pm_precision": 0.1116,
+      "pm_recall": 0.5244,
+      "pm_f1": 0.184,
+      "synthesis_error_f1": 0.2316,
+      "sensitivity_list_f1": 0.4818
+    },
+    {
+      "threshold": 0.15,
+      "pm_precision": 0.1223,
+      "pm_recall": 0.4634,
+      "pm_f1": 0.1935,
+      "synthesis_error_f1": 0.4327,
+      "sensitivity_list_f1": 0.4681
+    },
+    {
+      "threshold": 0.2,
+      "pm_precision": 0.1922,
+      "pm_recall": 0.4187,
+      "pm_f1": 0.2634,
+      "synthesis_error_f1": 0.7061,
+      "sensitivity_list_f1": 0.4589
+    },
+    {
+      "threshold": 0.25,
+      "pm_precision": 0.192,
+      "pm_recall": 0.3699,
+      "pm_f1": 0.2528,
+      "synthesis_error_f1": 0.7264,
+      "sensitivity_list_f1": 0.4579
+    },
+    {
+      "threshold": 0.3,
+      "pm_precision": 0.2263,
+      "pm_recall": 0.3496,
+      "pm_f1": 0.2748,
+      "synthesis_error_f1": 0.7648,
+      "sensitivity_list_f1": 0.462
+    },
+    {
+      "threshold": 0.35,
+      "pm_precision": 0.2448,
+      "pm_recall": 0.3333,
+      "pm_f1": 0.2823,
+      "synthesis_error_f1": 0.7837,
+      "sensitivity_list_f1": 0.459
+    },
+    {
+      "threshold": 0.4,
+      "pm_precision": 0.275,
+      "pm_recall": 0.313,
+      "pm_f1": 0.2928,
+      "synthesis_error_f1": 0.8062,
+      "sensitivity_list_f1": 0.456
+    },
+    {
+      "threshold": 0.45,
+      "pm_precision": 0.2706,
+      "pm_recall": 0.2805,
+      "pm_f1": 0.2754,
+      "synthesis_error_f1": 0.809,
+      "sensitivity_list_f1": 0.4545
+    },
+    {
+      "threshold": 0.5,
+      "pm_precision": 0.2939,
+      "pm_recall": 0.2724,
+      "pm_f1": 0.2827,
+      "synthesis_error_f1": 0.8191,
+      "sensitivity_list_f1": 0.4545
+    },
+    {
+      "threshold": 0.55,
+      "pm_precision": 0.3177,
+      "pm_recall": 0.248,
+      "pm_f1": 0.2785,
+      "synthesis_error_f1": 0.8299,
+      "sensitivity_list_f1": 0.4516
+    },
+    {
+      "threshold": 0.6,
+      "pm_precision": 0.3155,
+      "pm_recall": 0.2154,
+      "pm_f1": 0.256,
+      "synthesis_error_f1": 0.8322,
+      "sensitivity_list_f1": 0.4487
+    },
+    {
+      "threshold": 0.65,
+      "pm_precision": 0.3212,
+      "pm_recall": 0.1789,
+      "pm_f1": 0.2298,
+      "synthesis_error_f1": 0.8391,
+      "sensitivity_list_f1": 0.4473
+    },
+    {
+      "threshold": 0.7,
+      "pm_precision": 0.3504,
+      "pm_recall": 0.1667,
+      "pm_f1": 0.2259,
+      "synthesis_error_f1": 0.8452,
+      "sensitivity_list_f1": 0.4473
+    },
+    {
+      "threshold": 0.75,
+      "pm_precision": 0.3396,
+      "pm_recall": 0.1463,
+      "pm_f1": 0.2045,
+      "synthesis_error_f1": 0.8455,
+      "sensitivity_list_f1": 0.4473
+    },
+    {
+      "threshold": 0.8,
+      "pm_precision": 0.3736,
+      "pm_recall": 0.1382,
+      "pm_f1": 0.2018,
+      "synthesis_error_f1": 0.8492,
+      "sensitivity_list_f1": 0.4473
+    },
+    {
+      "threshold": 0.85,
+      "pm_precision": 0.4189,
+      "pm_recall": 0.126,
+      "pm_f1": 0.1938,
+      "synthesis_error_f1": 0.854,
+      "sensitivity_list_f1": 0.443
+    },
+    {
+      "threshold": 0.9,
+      "pm_precision": 0.4603,
+      "pm_recall": 0.1179,
+      "pm_f1": 0.1877,
+      "synthesis_error_f1": 0.8561,
+      "sensitivity_list_f1": 0.4479
+    },
+    {
+      "threshold": 0.95,
+      "pm_precision": 0.8,
+      "pm_recall": 0.0976,
+      "pm_f1": 0.1739,
+      "synthesis_error_f1": 0.8675,
+      "sensitivity_list_f1": 0.4424
+    }
+  ]
+}
