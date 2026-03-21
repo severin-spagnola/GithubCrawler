@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,14 +1,14 @@\n module Counter32bit (\n   input clk,\n   input reset,\n   input enable,\n   output [31:0] count\n );\n   reg [31:0] count_val;\n   assign count = count_val;\n   always @(posedge clk) begin\n     if (reset) count_val <= 32'b0;\n     else if (enable) count_val <= count_val + 1;\n   end\n endmodule\n \n module top (\n   input clk, rst, en\n-  Counter32bit cnt (.clk(clk), .reset(rst), .en(en), .count(counter_out));\n+  Counter32bit cnt (.clk(clk), .reset(rst), .enable(en), .count(counter_out));\n endmodule",
+  "before_code": "module Counter32bit (\n  input clk,\n  input reset,\n  input enable,\n  output [31:0] count\n);\n  reg [31:0] count_val;\n  assign count = count_val;\n  always @(posedge clk) begin\n    if (reset) count_val <= 32'b0;\n    else if (enable) count_val <= count_val + 1;\n  end\nendmodule\n\nmodule top (\n  input clk, rst, en\n);\n  wire [31:0] counter_out;\n  Counter32bit cnt (.clk(clk), .reset(rst), .en(en), .count(counter_out));\nendmodule",
+  "after_code": "module Counter32bit (\n  input clk,\n  input reset,\n  input enable,\n  output [31:0] count\n);\n  reg [31:0] count_val;\n  assign count = count_val;\n  always @(posedge clk) begin\n    if (reset) count_val <= 32'b0;\n    else if (enable) count_val <= count_val + 1;\n  end\nendmodule\n\nmodule top (\n  input clk, rst, en\n);\n  wire [31:0] counter_out;\n  Comparator32bit cnt (.clk(clk), .reset(rst), .enable(en), .count(counter_out));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

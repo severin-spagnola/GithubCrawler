@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.v\n+++ b/shifter.v\n@@ -10,7 +10,7 @@ module top_shift;\n   wire [31:0] data_in, data_out;\n   wire [4:0] shift_amount;\n   \n-  barrel_shifter shift_unit (.data_in(data_in), .shift_dist(shift_amount), .shifted_data(data_out));\n+  barrel_shifter shift_unit (.data_in(data_in[15:0]), .shift_dist(shift_amount), .shifted_data(data_out[31:16]));\n \n endmodule",
+  "before_code": "module barrel_shifter (\n  input [15:0] data_in,\n  input [4:0] shift_dist,\n  output [15:0] shifted_data\n);\n  assign shifted_data = data_in << shift_dist;\nendmodule\n\nmodule top_shift;\n  wire [31:0] data_in, data_out;\n  wire [4:0] shift_amount;\n  \n  barrel_shifter shift_unit (.data_in(data_in), .shift_dist(shift_amount), .shifted_data(data_out));\n\nendmodule",
+  "after_code": "module barrel_shifter (\n  input [15:0] data_in,\n  input [4:0] shift_dist,\n  output [15:0] shifted_data\n);\n  assign shifted_data = data_in << shift_dist;\nendmodule\n\nmodule top_shift;\n  wire [31:0] data_in, data_out;\n  wire [4:0] shift_amount;\n  \n  barrel_shifter shift_unit (.data_in(data_in[15:0]), .shift_dist(shift_amount), .shifted_data(data_out[31:16]));\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

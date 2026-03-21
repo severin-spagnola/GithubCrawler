@@ -1,0 +1,9 @@
+{
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true,
+  "patch": "--- a/comparator_64bit.v\n+++ b/comparator_64bit.v\n@@ -1,14 +1,14 @@\n module comparator_64bit(\n   input [63:0] value_p,\n   input [63:0] value_q,\n   input enable,\n   output reg equal_flag,\n   output reg greater_flag\n );\n \n-  always @(value_p) begin\n+  always @(value_p or value_q or enable) begin\n     if (!enable) begin\n       equal_flag = 1'b0;\n       greater_flag = 1'b0;\n     end else begin\n       equal_flag = (value_p == value_q);\n       greater_flag = (value_p > value_q);\n     end\n   end\n endmodule",
+  "before_code": "module comparator_64bit(\n  input [63:0] value_p,\n  input [63:0] value_q,\n  input enable,\n  output reg equal_flag,\n  output reg greater_flag\n);\n\n  always @(value_p) begin\n    if (!enable) begin\n      equal_flag = 1'b0;\n      greater_flag = 1'b0;\n    end else begin\n      equal_flag = (value_p == value_q);\n      greater_flag = (value_p > value_q);\n    end\n  end\nendmodule",
+  "after_code": "module comparator_64bit(\n  input [63:0] value_p,\n  input [63:0] value_q,\n  input enable,\n  output reg equal_flag,\n  output reg greater_flag\n);\n\n  always @(value_p or value_q or enable) begin\n    if (!enable) begin\n      equal_flag = 1'b0;\n      greater_flag = 1'b0;\n    end else begin\n      equal_flag = (value_p == value_q);\n      greater_flag = (value_p > value_q);\n    end\n  end\nendmodule"
+}

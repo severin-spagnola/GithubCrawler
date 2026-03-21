@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,6 +1,7 @@\n module counter_16bit (\n   input clk,\n   input rst,\n+  input enable,\n   output [15:0] count\n );\n   reg [15:0] cnt;\n@@ -18,7 +19,7 @@\n module top_counter (\n   input clk, reset,\n   output [15:0] counter_out\n );\n   \n-  counter_16bit cnt_inst (.clk(clk), .rst(reset), .count(counter_out));\n+  counter_16bit cnt_inst (.clk(clk), .rst(reset), .enable(1'b1), .count(counter_out));\n \n endmodule",
+  "before_code": "module counter_16bit (\n  input clk,\n  input rst,\n  input enable,\n  output [15:0] count\n);\n  reg [15:0] cnt;\n  \n  always @(posedge clk) begin\n    if (rst)\n      cnt <= 0;\n    else if (enable)\n      cnt <= cnt + 1;\n  end\n  \n  assign count = cnt;\nendmodule\n\nmodule top_counter (\n  input clk, reset,\n  output [15:0] counter_out\n);\n  \n  counter_16bit cnt_inst (.clk(clk), .rst(reset), .count(counter_out));\n  \nendmodule",
+  "after_code": "module counter_16bit (\n  input clk,\n  input rst,\n  input enable,\n  output [15:0] count\n);\n  reg [15:0] cnt;\n  \n  always @(posedge clk) begin\n    if (rst)\n      cnt <= 0;\n    else if (enable)\n      cnt <= cnt + 1;\n  end\n  \n  assign count = cnt;\nendmodule\n\nmodule top_counter (\n  input clk, reset,\n  output [15:0] counter_out\n);\n  \n  counter_16bit cnt_inst (.clk(clk), .rst(reset), .enable(1'b1), .count(counter_out));\n  \nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

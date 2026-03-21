@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,13 +1,13 @@\n module comparator(\n   input [63:0] value_x,\n   input [63:0] value_y,\n   output reg equal_flag,\n   output reg greater_flag\n );\n \n-  always @(value_x)\n+  always @(value_x or value_y)\n   begin\n     equal_flag = (value_x == value_y);\n     greater_flag = (value_x > value_y);\n   end\n \n endmodule",
+  "before_code": "module comparator(\n  input [63:0] value_x,\n  input [63:0] value_y,\n  output reg equal_flag,\n  output reg greater_flag\n);\n\n  always @(value_x)\n  begin\n    equal_flag = (value_x == value_y);\n    greater_flag = (value_x > value_y);\n  end\n\nendmodule",
+  "after_code": "module comparator(\n  input [63:0] value_x,\n  input [63:0] value_y,\n  output reg equal_flag,\n  output reg greater_flag\n);\n\n  always @(value_x or value_y)\n  begin\n    equal_flag = (value_x == value_y);\n    greater_flag = (value_x > value_y);\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

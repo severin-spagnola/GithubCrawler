@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.v\n+++ b/multiplexer.v\n@@ -1,6 +1,6 @@\n module mux_8to1 (\n   input [7:0] data_in,\n   input [2:0] sel,\n-  output out\n+  output [7:0] out\n );\n   assign out = data_in[sel];\n endmodule\n@@ -10,7 +10,7 @@\n module mux_wrapper (\n   input [7:0] din,\n   input [2:0] select,\n-  output reg [3:0] dout\n+  output reg [7:0] dout\n );\n   \n   mux_8to1 mux_inst (.data_in(din), .sel(select), .out(dout));\n",
+  "before_code": "module mux_8to1 (\n  input [7:0] data_in,\n  input [2:0] sel,\n  output out\n);\n  assign out = data_in[sel];\nendmodule\n\nmodule mux_wrapper (\n  input [7:0] din,\n  input [2:0] select,\n  output reg [3:0] dout\n);\n  \n  mux_8to1 mux_inst (.data_in(din), .sel(select), .out(dout));\n  \nendmodule",
+  "after_code": "module mux_8to1 (\n  input [7:0] data_in,\n  input [2:0] sel,\n  output [7:0] out\n);\n  assign out = data_in[sel];\nendmodule\n\nmodule mux_wrapper (\n  input [7:0] din,\n  input [2:0] select,\n  output reg [7:0] dout\n);\n  \n  mux_8to1 mux_inst (.data_in(din), .sel(select), .out(dout));\n  \nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

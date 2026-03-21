@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shift_register.sv\n+++ b/shift_register.sv\n@@ -8,11 +8,11 @@ module shift_register_32bit(\n module controller;\n   logic [31:0] data_in, data_out;\n   logic clk, enable;\n   \n   shift_register_32bit shifter (\n-    .output_data(data_in),\n+    .input_data(data_in),\n     .clk(clk),\n     .enable(enable),\n-    .input_data(data_out)\n+    .output_data(data_out)\n   );\n endmodule",
+  "before_code": "module shift_register_32bit(\n  input [31:0] input_data,\n  input clk,\n  input enable,\n  output [31:0] output_data\n);\n  always @(posedge clk) begin\n    if (enable)\n      output_data <= input_data;\n  end\nendmodule\n\nmodule controller;\n  logic [31:0] data_in, data_out;\n  logic clk, enable;\n  \n  shift_register_32bit shifter (\n    .output_data(data_in),\n    .clk(clk),\n    .enable(enable),\n    .input_data(data_out)\n  );\nendmodule",
+  "after_code": "module shift_register_32bit(\n  input [31:0] input_data,\n  input clk,\n  input enable,\n  output [31:0] output_data\n);\n  always @(posedge clk) begin\n    if (enable)\n      output_data <= input_data;\n  end\nendmodule\n\nmodule controller;\n  logic [31:0] data_in, data_out;\n  logic clk, enable;\n  \n  shift_register_32bit shifter (\n    .input_data(data_in),\n    .clk(clk),\n    .enable(enable),\n    .output_data(data_out)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder_16bit.v\n+++ b/adder_16bit.v\n@@ -5,7 +5,7 @@\n   output [16:0] sum\n );\n \n-  always @(a or b) begin\n+  always @(a or b or cin) begin\n     sum = a + b + cin;\n   end\n \n",
+  "before_code": "module adder_16bit (\n  input [15:0] a,\n  input [15:0] b,\n  input cin,\n  output [16:0] sum\n);\n\n  always @(a or b) begin\n    sum = a + b + cin;\n  end\n\nendmodule",
+  "after_code": "module adder_16bit (\n  input [15:0] a,\n  input [15:0] b,\n  input cin,\n  output [16:0] sum\n);\n\n  always @(a or b or cin) begin\n    sum = a + b + cin;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

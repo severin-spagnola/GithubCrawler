@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,14 +1,14 @@\n module magnitude_comparator_64bit(\n   input [63:0] value_p,\n   input [63:0] value_q,\n   input [63:0] threshold_t,\n   output reg result_flag\n );\n \n-  always @(value_p, threshold_t) begin\n+  always @(value_p or value_q or threshold_t) begin\n     if (value_p > threshold_t)\n       result_flag = 1'b1;\n     else if (value_q < threshold_t)\n       result_flag = 1'b0;\n     else\n       result_flag = 1'b1;\n   end\n \n endmodule",
+  "before_code": "module magnitude_comparator_64bit(\n  input [63:0] value_p,\n  input [63:0] value_q,\n  input [63:0] threshold_t,\n  output reg result_flag\n);\n\n  always @(value_p, threshold_t) begin\n    if (value_p > threshold_t)\n      result_flag = 1'b1;\n    else if (value_q < threshold_t)\n      result_flag = 1'b0;\n    else\n      result_flag = 1'b1;\n  end\n\nendmodule",
+  "after_code": "module magnitude_comparator_64bit(\n  input [63:0] value_p,\n  input [63:0] value_q,\n  input [63:0] threshold_t,\n  output reg result_flag\n);\n\n  always @(value_p or value_q or threshold_t) begin\n    if (value_p > threshold_t)\n      result_flag = 1'b1;\n    else if (value_q < threshold_t)\n      result_flag = 1'b0;\n    else\n      result_flag = 1'b1;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

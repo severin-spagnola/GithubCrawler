@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.sv\n+++ b/priority_encoder.sv\n@@ -1,8 +1,8 @@\n module priority_encoder (\n     input [7:0] request,\n     input enable,\n     output logic [2:0] priority_out\n );\n-    always @(request) begin\n+    always_comb begin\n         if (request[7]) priority_out = 3'b111;\n         else if (request[6]) priority_out = 3'b110;\n         else if (request[5]) priority_out = 3'b101;\n         else if (request[4]) priority_out = 3'b100;\n         else if (request[3]) priority_out = 3'b011;\n         else if (request[2]) priority_out = 3'b010;\n         else if (request[1]) priority_out = 3'b001;\n         else priority_out = 3'b000;\n     end\n endmodule",
+  "before_code": "module priority_encoder (\n    input [7:0] request,\n    input enable,\n    output logic [2:0] priority_out\n);\n    always @(request) begin\n        if (request[7]) priority_out = 3'b111;\n        else if (request[6]) priority_out = 3'b110;\n        else if (request[5]) priority_out = 3'b101;\n        else if (request[4]) priority_out = 3'b100;\n        else if (request[3]) priority_out = 3'b011;\n        else if (request[2]) priority_out = 3'b010;\n        else if (request[1]) priority_out = 3'b001;\n        else priority_out = 3'b000;\n    end\nendmodule",
+  "after_code": "module priority_encoder (\n    input [7:0] request,\n    input enable,\n    output logic [2:0] priority_out\n);\n    always_comb begin\n        if (request[7]) priority_out = 3'b111;\n        else if (request[6]) priority_out = 3'b110;\n        else if (request[5]) priority_out = 3'b101;\n        else if (request[4]) priority_out = 3'b100;\n        else if (request[3]) priority_out = 3'b011;\n        else if (request[2]) priority_out = 3'b010;\n        else if (request[1]) priority_out = 3'b001;\n        else priority_out = 3'b000;\n    end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/alu_wrapper.sv\n+++ b/alu_wrapper.sv\n@@ -1,5 +1,5 @@\n module alu_core (\n-  input [15:0] operand_a,\n+  input [31:0] operand_a,\n   input [31:0] operand_b,\n   input [3:0] opcode,\n   output [31:0] result\n@@ -10,7 +10,7 @@\n module alu_top (\n   input [31:0] op_a,\n   input [31:0] op_b,\n   input [3:0] op_code,\n   output [31:0] alu_result\n );\n   alu_core alu_inst (\n-    .operand_a(op_a[15:0]),\n+    .operand_a(op_a),\n     .operand_b(op_b),\n     .opcode(op_code),\n     .result(alu_result)\n   );\n endmodule",
+  "before_code": "module alu_core (\n  input [15:0] operand_a,\n  input [31:0] operand_b,\n  input [3:0] opcode,\n  output [31:0] result\n);\n  // ALU implementation\nendmodule\n\nmodule alu_top (\n  input [31:0] op_a,\n  input [31:0] op_b,\n  input [3:0] op_code,\n  output [31:0] alu_result\n);\n  alu_core alu_inst (\n    .operand_a(op_a[15:0]),\n    .operand_b(op_b),\n    .opcode(op_code),\n    .result(alu_result)\n  );\nendmodule",
+  "after_code": "module alu_core (\n  input [31:0] operand_a,\n  input [31:0] operand_b,\n  input [3:0] opcode,\n  output [31:0] result\n);\n  // ALU implementation\nendmodule\n\nmodule alu_top (\n  input [31:0] op_a,\n  input [31:0] op_b,\n  input [3:0] op_code,\n  output [31:0] alu_result\n);\n  alu_core alu_inst (\n    .operand_a(op_a),\n    .operand_b(op_b),\n    .opcode(op_code),\n    .result(alu_result)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

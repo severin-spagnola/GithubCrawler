@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.v\n+++ b/shifter.v\n@@ -1,16 +1,16 @@\n module barrel_shifter(\n-  output wire [15:0] data_in,\n+  input wire [15:0] data_in,\n   input wire [3:0] shift_amount,\n-  input wire [15:0] data_out\n+  output wire [15:0] data_out\n );\n   assign data_out = data_in << shift_amount;\n endmodule\n \n module design;\n   wire [15:0] input_data, output_data;\n   wire [3:0] shift_val;\n   \n-  barrel_shifter shifter1 (\n-    .data_in(output_data),\n+  barrel_shifter shifter1 (\n+    .data_in(input_data),\n     .shift_amount(shift_val),\n-    .data_out(input_data)\n+    .data_out(output_data)\n   );\n endmodule",
+  "before_code": "module barrel_shifter(\n  output wire [15:0] data_in,\n  input wire [3:0] shift_amount,\n  input wire [15:0] data_out\n);\n  assign data_out = data_in << shift_amount;\nendmodule\n\nmodule design;\n  wire [15:0] input_data, output_data;\n  wire [3:0] shift_val;\n  \n  barrel_shifter shifter1 (\n    .data_in(output_data),\n    .shift_amount(shift_val),\n    .data_out(input_data)\n  );\nendmodule",
+  "after_code": "module barrel_shifter(\n  input wire [15:0] data_in,\n  input wire [3:0] shift_amount,\n  output wire [15:0] data_out\n);\n  assign data_out = data_in << shift_amount;\nendmodule\n\nmodule design;\n  wire [15:0] input_data, output_data;\n  wire [3:0] shift_val;\n  \n  barrel_shifter shifter1 (\n    .data_in(input_data),\n    .shift_amount(shift_val),\n    .data_out(output_data)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

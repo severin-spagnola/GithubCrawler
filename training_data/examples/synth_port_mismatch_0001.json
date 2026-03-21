@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux_design.sv\n+++ b/mux_design.sv\n@@ -11,7 +11,7 @@ module mux_design (\n   mux_8to1 mux_inst (\n     .sel(select[2:0]),\n     .data_in(input_bus),\n-    .mux_output(output_data)\n+    .mux_output(output_data),\n+    .enable(enable_signal)\n   );\n \n",
+  "before_code": "module mux_8to1 (\n  input [2:0] sel,\n  input [7:0] data_in,\n  input enable,\n  output [7:0] mux_output\n);\n  assign mux_output = enable ? data_in[sel] : 1'bz;\nendmodule\n\nmodule mux_design (\n  input [2:0] select,\n  input [7:0] input_bus,\n  input enable_signal,\n  output mux_out\n);\n  mux_8to1 mux_inst (\n    .sel(select[2:0]),\n    .data_in(input_bus),\n    .mux_output(output_data)\n  );\nendmodule",
+  "after_code": "module mux_8to1 (\n  input [2:0] sel,\n  input [7:0] data_in,\n  input enable,\n  output [7:0] mux_output\n);\n  assign mux_output = enable ? data_in[sel] : 1'bz;\nendmodule\n\nmodule mux_design (\n  input [2:0] select,\n  input [7:0] input_bus,\n  input enable_signal,\n  output mux_out\n);\n  mux_8to1 mux_inst (\n    .sel(select[2:0]),\n    .data_in(input_bus),\n    .mux_output(output_data),\n    .enable(enable_signal)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

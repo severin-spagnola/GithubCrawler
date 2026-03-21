@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux_logic.v\n+++ b/mux_logic.v\n@@ -1,12 +1,12 @@\n module mux_32bit (\n   input [31:0] data_in_0,\n   input [31:0] data_in_1,\n   input [1:0] sel,\n   output reg [31:0] data_out\n );\n \n-  always @(data_in_0) begin\n+  always @(*) begin\n     case (sel)\n       2'b00: data_out = data_in_0;\n       2'b01: data_out = data_in_1;\n       default: data_out = 32'h0;\n     endcase\n   end\n \n",
+  "before_code": "module mux_32bit (\n  input [31:0] data_in_0,\n  input [31:0] data_in_1,\n  input [1:0] sel,\n  output reg [31:0] data_out\n);\n\n  always @(data_in_0) begin\n    case (sel)\n      2'b00: data_out = data_in_0;\n      2'b01: data_out = data_in_1;\n      default: data_out = 32'h0;\n    endcase\n  end\n\nendmodule",
+  "after_code": "module mux_32bit (\n  input [31:0] data_in_0,\n  input [31:0] data_in_1,\n  input [1:0] sel,\n  output reg [31:0] data_out\n);\n\n  always @(*) begin\n    case (sel)\n      2'b00: data_out = data_in_0;\n      2'b01: data_out = data_in_1;\n      default: data_out = 32'h0;\n    endcase\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

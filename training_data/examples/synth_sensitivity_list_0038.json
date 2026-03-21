@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -8,7 +8,7 @@\n   output reg [3:0] priority\n );\n \n-  always @(req[0] or req[1] or req[2]) begin\n+  always @(*) begin\n     if (req[3])\n       priority = 4'd3;\n     else if (req[2])\n",
+  "before_code": "module priority_encoder(\n  input [3:0] req,\n  output reg [3:0] priority\n);\n\n  always @(req[0] or req[1] or req[2]) begin\n    if (req[3])\n      priority = 4'd3;\n    else if (req[2])\n      priority = 4'd2;\n    else if (req[1])\n      priority = 4'd1;\n    else if (req[0])\n      priority = 4'd0;\n    else\n      priority = 4'd15;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder(\n  input [3:0] req,\n  output reg [3:0] priority\n);\n\n  always @(*) begin\n    if (req[3])\n      priority = 4'd3;\n    else if (req[2])\n      priority = 4'd2;\n    else if (req[1])\n      priority = 4'd1;\n    else if (req[0])\n      priority = 4'd0;\n    else\n      priority = 4'd15;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true,
+  "patch": "--- a/multiplexer_8bit.v\n+++ b/multiplexer_8bit.v\n@@ -1,10 +1,10 @@\n module multiplexer_8bit(\n   input [7:0] data_a,\n   input [7:0] data_b,\n   input sel,\n   output [7:0] result\n );\n \n-  always @(data_a) begin\n+  always @(data_a or data_b or sel) begin\n     if (sel)\n       result <= data_b;\n     else\n       result <= data_a;\n   end\n endmodule",
+  "before_code": "module multiplexer_8bit(\n  input [7:0] data_a,\n  input [7:0] data_b,\n  input sel,\n  output [7:0] result\n);\n\n  always @(data_a) begin\n    if (sel)\n      result <= data_b;\n    else\n      result <= data_a;\n  end\nendmodule",
+  "after_code": "module multiplexer_8bit(\n  input [7:0] data_a,\n  input [7:0] data_b,\n  input sel,\n  output [7:0] result\n);\n\n  always @(data_a or data_b or sel) begin\n    if (sel)\n      result <= data_b;\n    else\n      result <= data_a;\n  end\nendmodule"
+}

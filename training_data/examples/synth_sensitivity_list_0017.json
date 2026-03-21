@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -8,7 +8,7 @@\n   output [31:0] encoded_result\n );\n \n-  always @(input_vector or priority_select)\n+  always @(*)\n   begin\n     if (priority_select)\n       encoded_result = {input_vector[30:0], 1'b0};\n",
+  "before_code": "module priority_encoder_32bit(\n  input [31:0] input_vector,\n  input priority_select,\n  input invert_flag,\n  input enable_encode,\n  output [31:0] encoded_result\n);\n\n  always @(input_vector or priority_select)\n  begin\n    if (priority_select)\n      encoded_result = {input_vector[30:0], 1'b0};\n    else if (invert_flag)\n      encoded_result = ~input_vector;\n    else if (enable_encode)\n      encoded_result = input_vector;\n    else\n      encoded_result = 32'b0;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder_32bit(\n  input [31:0] input_vector,\n  input priority_select,\n  input invert_flag,\n  input enable_encode,\n  output [31:0] encoded_result\n);\n\n  always @(*)\n  begin\n    if (priority_select)\n      encoded_result = {input_vector[30:0], 1'b0};\n    else if (invert_flag)\n      encoded_result = ~input_vector;\n    else if (enable_encode)\n      encoded_result = input_vector;\n    else\n      encoded_result = 32'b0;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux.sv\n+++ b/mux.sv\n@@ -1,6 +1,6 @@\n module mux_4to1(\n   input [3:0] data_in,\n   input [1:0] select,\n-  output reg out\n+  output reg data_out\n );\n   always @(*) begin\n     case(select)\n@@ -16,7 +16,7 @@ module top_mux(\n   input [3:0] d,\n   input [1:0] sel,\n   output reg q\n );\n-  mux_4to1 m1(.data_in(d), .select(sel), .out(q));\n+  mux_4to1 m1(.data_in(d), .select(sel), .data_out(q));\n endmodule",
+  "before_code": "module mux_4to1(\n  input [3:0] data_in,\n  input [1:0] select,\n  output reg out\n);\n  always @(*) begin\n    case(select)\n      2'b00: out = data_in[0];\n      2'b01: out = data_in[1];\n      2'b10: out = data_in[2];\n      2'b11: out = data_in[3];\n    endcase\n  end\nendmodule\n\nmodule top_mux(\n  input [3:0] d,\n  input [1:0] sel,\n  output reg q\n);\n  mux_4to1 m1(.data_in(d), .select(sel), .out(q));\nendmodule",
+  "after_code": "module mux_4to1(\n  input [3:0] data_in,\n  input [1:0] select,\n  output reg data_out\n);\n  always @(*) begin\n    case(select)\n      2'b00: data_out = data_in[0];\n      2'b01: data_out = data_in[1];\n      2'b10: data_out = data_in[2];\n      2'b11: data_out = data_in[3];\n    endcase\n  end\nendmodule\n\nmodule top_mux(\n  input [3:0] d,\n  input [1:0] sel,\n  output reg q\n);\n  mux_4to1 m1(.data_in(d), .select(sel), .data_out(q));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,14 +1,14 @@\n module comparator_16bit(\n   input [15:0] a,\n   input [15:0] b,\n   output eq,\n   output lt\n );\n   assign eq = (a == b);\n   assign lt = (a < b);\n endmodule\n \n module top_level;\n   wire [15:0] val1, val2;\n   wire equal, less_than;\n-  comparator_16bit cmp(.a(val1), .b(val2), .eq(equal));\n+  comparator_16bit cmp(.a(val1), .b(val2), .eq(equal), .lt(less_than));\n endmodule",
+  "before_code": "module comparator_16bit(\n  input [15:0] a,\n  input [15:0] b,\n  output eq,\n  output lt\n);\n  assign eq = (a == b);\n  assign lt = (a < b);\nendmodule\n\nmodule top_level;\n  wire [15:0] val1, val2;\n  wire equal, less_than;\n  comparator_16bit cmp(.a(val1), .b(val2), .eq(equal));\nendmodule",
+  "after_code": "module comparator_16bit(\n  input [15:0] a,\n  input [15:0] b,\n  output eq,\n  output lt\n);\n  assign eq = (a == b);\n  assign lt = (a < b);\nendmodule\n\nmodule top_level;\n  wire [15:0] val1, val2;\n  wire equal, less_than;\n  comparator_16bit cmp(.a(val1), .b(val2), .eq(equal), .lt(less_than));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

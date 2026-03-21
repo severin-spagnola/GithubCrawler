@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux.sv\n+++ b/mux.sv\n@@ -1,15 +1,15 @@\n module mux_4to1 (\n   input [7:0] in0,\n   input [7:0] in1,\n   input [7:0] in2,\n   input [7:0] in3,\n   input [1:0] select,\n   output [7:0] out\n );\n   assign out = (select == 2'b00) ? in0 : (select == 2'b01) ? in1 : (select == 2'b10) ? in2 : in3;\n endmodule\n \n module top;\n   wire [7:0] a, b, c, d;\n   wire [1:0] sel;\n   wire [7:0] result;\n-  mux_4to1 mux_inst (.in0(a), .in1(b), .in2(c), .select(sel), .out(result));\n+  mux_4to1 mux_inst (.in0(a), .in1(b), .in2(c), .in3(d), .select(sel), .out(result));\n endmodule",
+  "before_code": "module mux_4to1 (\n  input [7:0] in0,\n  input [7:0] in1,\n  input [7:0] in2,\n  input [7:0] in3,\n  input [1:0] select,\n  output [7:0] out\n);\n  assign out = (select == 2'b00) ? in0 : (select == 2'b01) ? in1 : (select == 2'b10) ? in2 : in3;\nendmodule\n\nmodule top;\n  wire [7:0] a, b, c, d;\n  wire [1:0] sel;\n  wire [7:0] result;\n  mux_4to1 mux_inst (.in0(a), .in1(b), .in2(c), .select(sel), .out(result));\nendmodule",
+  "after_code": "module mux_4to1 (\n  input [7:0] in0,\n  input [7:0] in1,\n  input [7:0] in2,\n  input [7:0] in3,\n  input [1:0] select,\n  output [7:0] out\n);\n  assign out = (select == 2'b00) ? in0 : (select == 2'b01) ? in1 : (select == 2'b10) ? in2 : in3;\nendmodule\n\nmodule top;\n  wire [7:0] a, b, c, d;\n  wire [1:0] sel;\n  wire [7:0] result;\n  mux_4to1 mux_inst (.in0(a), .in1(b), .in2(c), .in3(d), .select(sel), .out(result));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

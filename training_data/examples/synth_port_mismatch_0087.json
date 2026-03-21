@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier.v\n+++ b/multiplier.v\n@@ -6,7 +6,8 @@ module mul_8bit (\n );\n   assign product = a * b;\n endmodule\n \n module wrapper (\n   input [7:0] x, y,\n   output [15:0] z\n );\n   mul_8bit multiplier (\n     .a(x),\n     .b(y),\n+    .product(z)\n   );\n endmodule",
+  "before_code": "module mul_8bit (\n  input [7:0] a, b,\n  output [15:0] product\n);\n  assign product = a * b;\nendmodule\n\nmodule wrapper (\n  input [7:0] x, y,\n  output [15:0] z\n);\n  mul_8bit multiplier (\n    .a(x),\n    .b(y)\n  );\nendmodule",
+  "after_code": "module mul_8bit (\n  input [7:0] a, b,\n  output [15:0] product\n);\n  assign product = a * b;\nendmodule\n\nmodule wrapper (\n  input [7:0] x, y,\n  output [15:0] z\n);\n  mul_8bit multiplier (\n    .a(x),\n    .b(y),\n    .product(z)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

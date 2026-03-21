@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/decoder.sv\n+++ b/decoder.sv\n@@ -1,14 +1,14 @@\n module decoder_32bit (\n   input [31:0] code,\n   input enable,\n   output [31:0] decoded\n );\n   assign decoded = enable ? (32'b1 << code) : 32'b0;\n endmodule\n \n module top;\n   wire [31:0] input_code;\n   wire control;\n   wire [31:0] output_data;\n-  decoder_32bit dec1 (.code(input_code), .decoded(output_data));\n+  decoder_32bit dec1 (.code(input_code), .enable(control), .decoded(output_data));\n endmodule",
+  "before_code": "module decoder_32bit (\n  input [31:0] code,\n  input enable,\n  output [31:0] decoded\n);\n  assign decoded = enable ? (32'b1 << code) : 32'b0;\nendmodule\n\nmodule top;\n  wire [31:0] input_code;\n  wire control;\n  wire [31:0] output_data;\n  decoder_32bit dec1 (.code(input_code), .decoded(output_data));\nendmodule",
+  "after_code": "module decoder_32bit (\n  input [31:0] code,\n  input enable,\n  output [31:0] decoded\n);\n  assign decoded = enable ? (32'b1 << code) : 32'b0;\nendmodule\n\nmodule top;\n  wire [31:0] input_code;\n  wire control;\n  wire [31:0] output_data;\n  decoder_32bit dec1 (.code(input_code), .enable(control), .decoded(output_data));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

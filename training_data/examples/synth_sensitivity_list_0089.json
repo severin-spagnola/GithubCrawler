@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -8,7 +8,7 @@\n   output reg valid\n );\n \n-  always @(req_lines) begin\n+  always @(*) begin\n     valid = 1'b0;\n     priority_out = 3'b000;\n     if (req_lines[7])",
+  "before_code": "module priority_encoder(\n  input [7:0] req_lines,\n  output reg [2:0] priority_out,\n  output reg valid\n);\n\n  always @(req_lines) begin\n    valid = 1'b0;\n    priority_out = 3'b000;\n    if (req_lines[7])\n      priority_out = 3'b111;\n    else if (req_lines[6])\n      priority_out = 3'b110;\n    else if (req_lines[5])\n      priority_out = 3'b101;\n    else if (req_lines[4])\n      priority_out = 3'b100;\n    else if (req_lines[3])\n      priority_out = 3'b011;\n    else if (req_lines[2])\n      priority_out = 3'b010;\n    else if (req_lines[1])\n      priority_out = 3'b001;\n    else if (req_lines[0])\n      priority_out = 3'b000;\n    else\n      valid = 1'b1;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder(\n  input [7:0] req_lines,\n  output reg [2:0] priority_out,\n  output reg valid\n);\n\n  always @(*) begin\n    valid = 1'b0;\n    priority_out = 3'b000;\n    if (req_lines[7])\n      priority_out = 3'b111;\n    else if (req_lines[6])\n      priority_out = 3'b110;\n    else if (req_lines[5])\n      priority_out = 3'b101;\n    else if (req_lines[4])\n      priority_out = 3'b100;\n    else if (req_lines[3])\n      priority_out = 3'b011;\n    else if (req_lines[2])\n      priority_out = 3'b010;\n    else if (req_lines[1])\n      priority_out = 3'b001;\n    else if (req_lines[0])\n      priority_out = 3'b000;\n    else\n      valid = 1'b1;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

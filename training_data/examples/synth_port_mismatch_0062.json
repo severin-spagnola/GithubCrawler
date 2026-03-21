@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,15 +1,15 @@\n module counter_4bit(\n   input clk,\n   input reset,\n   input enable,\n   output [3:0] count\n );\n   reg [3:0] counter;\n   always @(posedge clk) begin\n     if (reset) counter <= 4'b0;\n     else if (enable) counter <= counter + 1;\n   end\n   assign count = counter;\n endmodule\n \n module system;\n   wire clk_sig, rst_sig, en_sig;\n   wire [3:0] cnt_out;\n-  counter_4bit cnt (.clk(clk_sig), .reset(rst_sig));\n+  counter_4bit cnt (.clk(clk_sig), .reset(rst_sig), .enable(en_sig), .count(cnt_out));\n endmodule",
+  "before_code": "module counter_4bit(\n  input clk,\n  input reset,\n  input enable,\n  output [3:0] count\n);\n  reg [3:0] counter;\n  always @(posedge clk) begin\n    if (reset) counter <= 4'b0;\n    else if (enable) counter <= counter + 1;\n  end\n  assign count = counter;\nendmodule\n\nmodule system;\n  wire clk_sig, rst_sig, en_sig;\n  wire [3:0] cnt_out;\n  counter_4bit cnt (.clk(clk_sig), .reset(rst_sig));\nendmodule",
+  "after_code": "module counter_4bit(\n  input clk,\n  input reset,\n  input enable,\n  output [3:0] count\n);\n  reg [3:0] counter;\n  always @(posedge clk) begin\n    if (reset) counter <= 4'b0;\n    else if (enable) counter <= counter + 1;\n  end\n  assign count = counter;\nendmodule\n\nmodule system;\n  wire clk_sig, rst_sig, en_sig;\n  wire [3:0] cnt_out;\n  counter_4bit cnt (.clk(clk_sig), .reset(rst_sig), .enable(en_sig), .count(cnt_out));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

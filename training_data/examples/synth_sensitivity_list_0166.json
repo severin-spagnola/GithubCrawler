@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -7,7 +7,7 @@\n   output reg [3:0] priority\n );\n \n-  always @(data_in)\n+  always @(*)\n   begin\n     priority = 4'b0;\n     if (data_in[15]) priority = 4'hF;\n",
+  "before_code": "module priority_encoder_16bit (\n  input [15:0] data_in,\n  input enable,\n  output reg [3:0] priority\n);\n\n  always @(data_in)\n  begin\n    priority = 4'b0;\n    if (data_in[15]) priority = 4'hF;\n    else if (data_in[14]) priority = 4'hE;\n    else if (data_in[13]) priority = 4'hD;\n    else if (data_in[12]) priority = 4'hC;\n    else if (data_in[11]) priority = 4'hB;\n    else if (data_in[10]) priority = 4'hA;\n    else if (data_in[9]) priority = 4'h9;\n    else if (data_in[8]) priority = 4'h8;\n    else priority = 4'h0;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder_16bit (\n  input [15:0] data_in,\n  input enable,\n  output reg [3:0] priority\n);\n\n  always @(*)\n  begin\n    priority = 4'b0;\n    if (data_in[15]) priority = 4'hF;\n    else if (data_in[14]) priority = 4'hE;\n    else if (data_in[13]) priority = 4'hD;\n    else if (data_in[12]) priority = 4'hC;\n    else if (data_in[11]) priority = 4'hB;\n    else if (data_in[10]) priority = 4'hA;\n    else if (data_in[9]) priority = 4'h9;\n    else if (data_in[8]) priority = 4'h8;\n    else priority = 4'h0;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/synchronizer.v\n+++ b/synchronizer.v\n@@ -1,12 +1,12 @@\n module dff_synchronizer_32bit(\n   input clk,\n   input rst_n,\n   input [31:0] data_in,\n   output reg [31:0] data_out\n );\n \n-  always @(posedge clk) begin\n+  always @(posedge clk or negedge rst_n) begin\n     if (~rst_n)\n       data_out <= 32'b0;\n     else\n       data_out <= data_in;\n   end\n \n endmodule",
+  "before_code": "module dff_synchronizer_32bit(\n  input clk,\n  input rst_n,\n  input [31:0] data_in,\n  output reg [31:0] data_out\n);\n\n  always @(posedge clk) begin\n    if (~rst_n)\n      data_out <= 32'b0;\n    else\n      data_out <= data_in;\n  end\n\nendmodule",
+  "after_code": "module dff_synchronizer_32bit(\n  input clk,\n  input rst_n,\n  input [31:0] data_in,\n  output reg [31:0] data_out\n);\n\n  always @(posedge clk or negedge rst_n) begin\n    if (~rst_n)\n      data_out <= 32'b0;\n    else\n      data_out <= data_in;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

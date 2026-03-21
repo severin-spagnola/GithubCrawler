@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -8,6 +8,6 @@ endmodule\n \n module top_cmp;\n   reg [31:0] data_a, data_b;\n   wire eq_flag;\n-  comparator cmp_inst (.din_a(data_a[15:0]), .din_b(data_b[15:0]), .equal(eq_flag));\n+  comparator cmp_inst (.din_a(data_a), .din_b(data_b), .equal(eq_flag));\n endmodule",
+  "before_code": "module comparator (\n  input [31:0] din_a,\n  input [31:0] din_b,\n  output equal\n);\n  assign equal = (din_a == din_b);\nendmodule\n\nmodule top_cmp;\n  reg [31:0] data_a, data_b;\n  wire eq_flag;\n  comparator cmp_inst (.din_a(data_a[15:0]), .din_b(data_b[15:0]), .equal(eq_flag));\nendmodule",
+  "after_code": "module comparator (\n  input [31:0] din_a,\n  input [31:0] din_b,\n  output equal\n);\n  assign equal = (din_a == din_b);\nendmodule\n\nmodule top_cmp;\n  reg [31:0] data_a, data_b;\n  wire eq_flag;\n  comparator cmp_inst (.din_a(data_a), .din_b(data_b), .equal(eq_flag));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

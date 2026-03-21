@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.sv\n+++ b/shifter.sv\n@@ -1,14 +1,14 @@\n module BarrelShifter8bit (\n   input [7:0] data_in,\n   input [2:0] shift_amount,\n   input shift_left,\n   output [7:0] data_out\n );\n   always @(*) begin\n     if (shift_left)\n       data_out = data_in << shift_amount;\n     else\n       data_out = data_in >> shift_amount;\n   end\n endmodule\n \n module testbench;\n-  wire [7:0] result;\n-  BarrelShifter8bit shifter (.data_in(8'hAA), .shift_amount(3'b010), .data_out(result));\n+  wire [7:0] result;\n+  BarrelShifter8bit shifter (.data_in(8'hAA), .shift_amount(3'b010), .shift_left(1'b1), .data_out(result));\n endmodule",
+  "before_code": "module BarrelShifter8bit (\n  input [7:0] data_in,\n  input [2:0] shift_amount,\n  input shift_left,\n  output [7:0] data_out\n);\n  always @(*) begin\n    if (shift_left)\n      data_out = data_in << shift_amount;\n    else\n      data_out = data_in >> shift_amount;\n  end\nendmodule\n\nmodule testbench;\n  wire [7:0] result;\n  BarrelShifter8bit shifter (.data_in(8'hAA), .shift_amount(3'b010), .data_out(result));\nendmodule",
+  "after_code": "module BarrelShifter8bit (\n  input [7:0] data_in,\n  input [2:0] shift_amount,\n  input shift_left,\n  output [7:0] data_out\n);\n  always @(*) begin\n    if (shift_left)\n      data_out = data_in << shift_amount;\n    else\n      data_out = data_in >> shift_amount;\n  end\nendmodule\n\nmodule testbench;\n  wire [7:0] result;\n  BarrelShifter8bit shifter (.data_in(8'hAA), .shift_amount(3'b010), .shift_left(1'b1), .data_out(result));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

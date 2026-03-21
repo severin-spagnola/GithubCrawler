@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.v\n+++ b/shifter.v\n@@ -4,7 +4,7 @@ module barrel_shifter (\n   input [7:0] shift_amount,\n   output [31:0] data_out\n );\n-  assign data_out = data_in << shift_amount[2:0];\n+  assign data_out = (data_in << shift_amount[2:0]);\n endmodule\n \n module processor (\n@@ -13,8 +13,8 @@ module processor (\n   output [31:0] result\n );\n   barrel_shifter shifter_unit (\n     .data_in(input_value[31:0]),\n-    .shift_bits(shift_control[7:0]),\n+    .shift_amount(shift_control[7:0]),\n     .data_out(result)\n   );\n endmodule",
+  "before_code": "module barrel_shifter (\n  input [31:0] data_in,\n  input [7:0] shift_amount,\n  output [31:0] data_out\n);\n  assign data_out = data_in << shift_amount[2:0];\nendmodule\n\nmodule processor (\n  input [31:0] input_value,\n  input [7:0] shift_control,\n  output [31:0] result\n);\n  barrel_shifter shifter_unit (\n    .data_in(input_value[31:0]),\n    .shift_bits(shift_control[7:0]),\n    .data_out(result)\n  );\nendmodule",
+  "after_code": "module barrel_shifter (\n  input [31:0] data_in,\n  input [7:0] shift_amount,\n  output [31:0] data_out\n);\n  assign data_out = data_in << shift_amount[2:0];\nendmodule\n\nmodule processor (\n  input [31:0] input_value,\n  input [7:0] shift_control,\n  output [31:0] result\n);\n  barrel_shifter shifter_unit (\n    .data_in(input_value[31:0]),\n    .shift_amount(shift_control[7:0]),\n    .data_out(result)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

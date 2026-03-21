@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder.v\n+++ b/adder.v\n@@ -1,5 +1,5 @@\n module adder_8bit(\n-  input [7:0] a, b,\n-  output [8:0] sum\n+  input [7:0] a, b,\n+  output [7:0] sum\n );\n   assign sum = a + b;\n",
+  "before_code": "module adder_8bit(\n  input [7:0] a, b,\n  output [8:0] sum\n);\n  assign sum = a + b;\nendmodule\n\nmodule top(\n  input [7:0] x, y,\n  output [7:0] result\n);\n  wire [7:0] temp;\n  adder_8bit u1(.a(x), .b(y), .sum(temp));\n  assign result = temp;\nendmodule",
+  "after_code": "module adder_8bit(\n  input [7:0] a, b,\n  output [7:0] sum\n);\n  assign sum = a + b;\nendmodule\n\nmodule top(\n  input [7:0] x, y,\n  output [7:0] result\n);\n  wire [7:0] temp;\n  adder_8bit u1(.a(x), .b(y), .sum(temp));\n  assign result = temp;\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

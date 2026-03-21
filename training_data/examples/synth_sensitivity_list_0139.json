@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/parity_checker.vhd\n+++ b/parity_checker.vhd\n@@ -8,7 +8,7 @@\n   signal parity_out : std_logic;\n \n-  process(data_vector) is\n+  process(data_vector, enable) is\n   begin\n     if enable = '1' then\n       parity_out <= data_vector(0) xor data_vector(1) xor data_vector(2) xor data_vector(3) xor\n",
+  "before_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity parity_checker is\n  port (\n    data_vector : in std_logic_vector(7 downto 0);\n    enable : in std_logic;\n    parity_out : out std_logic\n  );\nend entity parity_checker;\n\narchitecture rtl of parity_checker is\n  signal parity_out : std_logic;\nbegin\n\n  process(data_vector) is\n  begin\n    if enable = '1' then\n      parity_out <= data_vector(0) xor data_vector(1) xor data_vector(2) xor data_vector(3) xor\n                    data_vector(4) xor data_vector(5) xor data_vector(6) xor data_vector(7);\n    else\n      parity_out <= '0';\n    end if;\n  end process;\n\nend architecture rtl;",
+  "after_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity parity_checker is\n  port (\n    data_vector : in std_logic_vector(7 downto 0);\n    enable : in std_logic;\n    parity_out : out std_logic\n  );\nend entity parity_checker;\n\narchitecture rtl of parity_checker is\n  signal parity_out : std_logic;\nbegin\n\n  process(data_vector, enable) is\n  begin\n    if enable = '1' then\n      parity_out <= data_vector(0) xor data_vector(1) xor data_vector(2) xor data_vector(3) xor\n                    data_vector(4) xor data_vector(5) xor data_vector(6) xor data_vector(7);\n    else\n      parity_out <= '0';\n    end if;\n  end process;\n\nend architecture rtl;",
+  "language": "vhdl",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

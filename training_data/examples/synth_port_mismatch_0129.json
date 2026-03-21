@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,5 +1,5 @@\n module compare_4(\n   input [3:0] a, b,\n-  output eq, gt, lt, extra_port\n+  output eq, gt, lt\n );\n   assign eq = (a == b);\n   assign gt = (a > b);\n@@ -11,5 +11,5 @@ module top_cmp(\n   input [3:0] x, y,\n   output eq_out, gt_out, lt_out\n );\n-  compare_4 cmp(.a(x), .b(y), .eq(eq_out), .gt(gt_out), .lt(lt_out), .extra_port());\n+  compare_4 cmp(.a(x), .b(y), .eq(eq_out), .gt(gt_out), .lt(lt_out));\n endmodule",
+  "before_code": "module compare_4(\n  input [3:0] a, b,\n  output eq, gt, lt, extra_port\n);\n  assign eq = (a == b);\n  assign gt = (a > b);\n  assign lt = (a < b);\nendmodule\n\nmodule top_cmp(\n  input [3:0] x, y,\n  output eq_out, gt_out, lt_out\n);\n  compare_4 cmp(.a(x), .b(y), .eq(eq_out), .gt(gt_out), .lt(lt_out), .extra_port());\nendmodule",
+  "after_code": "module compare_4(\n  input [3:0] a, b,\n  output eq, gt, lt\n);\n  assign eq = (a == b);\n  assign gt = (a > b);\n  assign lt = (a < b);\nendmodule\n\nmodule top_cmp(\n  input [3:0] x, y,\n  output eq_out, gt_out, lt_out\n);\n  compare_4 cmp(.a(x), .b(y), .eq(eq_out), .gt(gt_out), .lt(lt_out));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "systemverilog",
+  "before_code": "module multiplexer_8bit (\n  input [7:0] data_a,\n  input [7:0] data_b,\n  input select,\n  output [7:0] mux_out\n);\n  assign mux_out = select ? data_b : data_a;\nendmodule\n\nmodule processor (\n  input [7:0] val1,\n  input [7:0] val2,\n  input sel,\n  output [7:0] output_data\n);\n  multiplexer_8bit mux (\n    .data_in_a(val1),\n    .data_in_b(val2),\n    .sel(sel),\n    .mux_out(output_data)\n  );\nendmodule",
+  "after_code": "module multiplexer_8bit (\n  input [7:0] data_a,\n  input [7:0] data_b,\n  input select,\n  output [7:0] mux_out\n);\n  assign mux_out = select ? data_b : data_a;\nendmodule\n\nmodule processor (\n  input [7:0] val1,\n  input [7:0] val2,\n  input sel,\n  output [7:0] output_data\n);\n  multiplexer_8bit mux (\n    .data_a(val1),\n    .data_b(val2),\n    .select(sel),\n    .mux_out(output_data)\n  );\nendmodule",
+  "patch": "--- a/multiplexer_8bit.sv\n+++ b/multiplexer_8bit.sv\n@@ -11,10 +11,10 @@ module processor (\n );\n   multiplexer_8bit mux (\n-    .data_in_a(val1),\n-    .data_in_b(val2),\n-    .sel(sel),\n+    .data_a(val1),\n+    .data_b(val2),\n+    .select(sel),\n     .mux_out(output_data)\n   );\n endmodule"
+}

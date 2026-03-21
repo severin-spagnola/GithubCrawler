@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -8,7 +8,7 @@ module timer_unit(\n   wire [31:0] count_val;\n   wire overflow_flag;\n   \n-  counter_32bit cnt(.clk(clock), .rst(reset), .enable(en), .count_output(count_val));\n+  counter_32bit cnt(.clk(clock), .rst(reset), .enable(en), .count_output(count_val), .overflow(overflow_flag));\n   \n   assign counter_out = count_val;\n   assign timer_overflow = overflow_flag;\nendmodule",
+  "before_code": "module counter_32bit(\n  input clk, rst, enable,\n  output [31:0] count_output,\n  output overflow\n);\n  reg [31:0] counter;\n  \n  always @(posedge clk) begin\n    if (rst) counter <= 32'b0;\n    else if (enable) counter <= counter + 1;\n  end\n  \n  assign count_output = counter;\n  assign overflow = (counter == 32'hFFFFFFFF);\nendmodule\n\nmodule timer_unit(\n  input clock, reset, en,\n  output [31:0] counter_out,\n  output timer_overflow\n);\n  wire [31:0] count_val;\n  wire overflow_flag;\n  \n  counter_32bit cnt(.clk(clock), .rst(reset), .enable(en), .count_output(count_val));\n  \n  assign counter_out = count_val;\n  assign timer_overflow = overflow_flag;\nendmodule",
+  "after_code": "module counter_32bit(\n  input clk, rst, enable,\n  output [31:0] count_output,\n  output overflow\n);\n  reg [31:0] counter;\n  \n  always @(posedge clk) begin\n    if (rst) counter <= 32'b0;\n    else if (enable) counter <= counter + 1;\n  end\n  \n  assign count_output = counter;\n  assign overflow = (counter == 32'hFFFFFFFF);\nendmodule\n\nmodule timer_unit(\n  input clock, reset, en,\n  output [31:0] counter_out,\n  output timer_overflow\n);\n  wire [31:0] count_val;\n  wire overflow_flag;\n  \n  counter_32bit cnt(.clk(clock), .rst(reset), .enable(en), .count_output(count_val), .overflow(overflow_flag));\n  \n  assign counter_out = count_val;\n  assign timer_overflow = overflow_flag;\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

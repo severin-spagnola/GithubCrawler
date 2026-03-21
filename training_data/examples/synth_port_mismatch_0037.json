@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,13 +1,15 @@\n module magnitude_cmp (\n   input [15:0] val_x,\n   input [15:0] val_y,\n+  input enable,\n   output greater,\n   output equal,\n   output lesser\n );\n   // comparator logic\n endmodule\n \n module cmp_wrapper (\n   input [15:0] x_val,\n   input [15:0] y_val,\n   input en,\n@@ -15,6 +17,7 @@\n );\n   magnitude_cmp cmp_inst (\n     .val_x(x_val),\n     .val_y(y_val),\n+    .enable(en),\n     .greater(gt),\n     .equal(eq),\n     .lesser(lt)\n   );\n endmodule",
+  "before_code": "module magnitude_cmp (\n  input [15:0] val_x,\n  input [15:0] val_y,\n  input enable,\n  output greater,\n  output equal,\n  output lesser\n);\n  // comparator logic\nendmodule\n\nmodule cmp_wrapper (\n  input [15:0] x_val,\n  input [15:0] y_val,\n  input en,\n  output gt, eq, lt\n);\n  magnitude_cmp cmp_inst (\n    .val_x(x_val),\n    .val_y(y_val),\n    .greater(gt),\n    .equal(eq),\n    .lesser(lt)\n  );\nendmodule",
+  "after_code": "module magnitude_cmp (\n  input [15:0] val_x,\n  input [15:0] val_y,\n  input enable,\n  output greater,\n  output equal,\n  output lesser\n);\n  // comparator logic\nendmodule\n\nmodule cmp_wrapper (\n  input [15:0] x_val,\n  input [15:0] y_val,\n  input en,\n  output gt, eq, lt\n);\n  magnitude_cmp cmp_inst (\n    .val_x(x_val),\n    .val_y(y_val),\n    .enable(en),\n    .greater(gt),\n    .equal(eq),\n    .lesser(lt)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

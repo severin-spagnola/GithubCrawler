@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.sv\n+++ b/comparator.sv\n@@ -12,10 +12,10 @@ module comparator_wrapper (\n   output equal_flag\n );\n   comparator cmp_inst (\n-    .data_a(input_a[7:0]),\n+    .data_a(input_a[7:0]),\n     .data_b(input_b[7:0]),\n-    .is_greater(equal_flag),\n-    .is_equal(greater_flag)\n+    .is_greater(greater_flag),\n+    .is_equal(equal_flag)\n   );\n \n",
+  "before_code": "module comparator (\n  input [7:0] data_a,\n  input [7:0] data_b,\n  output is_greater,\n  output is_equal\n);\n  assign is_greater = (data_a > data_b);\n  assign is_equal = (data_a == data_b);\nendmodule\n\nmodule comparator_wrapper (\n  input [7:0] input_a,\n  input [7:0] input_b,\n  output greater_flag,\n  output equal_flag\n);\n  comparator cmp_inst (\n    .data_a(input_a[7:0]),\n    .data_b(input_b[7:0]),\n    .is_greater(equal_flag),\n    .is_equal(greater_flag)\n  );\nendmodule",
+  "after_code": "module comparator (\n  input [7:0] data_a,\n  input [7:0] data_b,\n  output is_greater,\n  output is_equal\n);\n  assign is_greater = (data_a > data_b);\n  assign is_equal = (data_a == data_b);\nendmodule\n\nmodule comparator_wrapper (\n  input [7:0] input_a,\n  input [7:0] input_b,\n  output greater_flag,\n  output equal_flag\n);\n  comparator cmp_inst (\n    .data_a(input_a[7:0]),\n    .data_b(input_b[7:0]),\n    .is_greater(greater_flag),\n    .is_equal(equal_flag)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -8,11 +8,12 @@ module comparator_16bit(\n module testbench;\n   reg [15:0] val1, val2;\n   wire equal, less, greater;\n   \n   comparator_16bit cmp (\n     .data1(val1),\n     .data2(val2),\n     .eq_flag(equal),\n     .lt_flag(less)\n   );\n endmodule",
+  "before_code": "module comparator_16bit(\n  input [15:0] data1,\n  input [15:0] data2,\n  output eq_flag,\n  output lt_flag,\n  output gt_flag\n);\n  assign eq_flag = (data1 == data2);\n  assign lt_flag = (data1 < data2);\n  assign gt_flag = (data1 > data2);\nendmodule\n\nmodule testbench;\n  reg [15:0] val1, val2;\n  wire equal, less, greater;\n  \n  comparator_16bit cmp (\n    .data1(val1),\n    .data2(val2),\n    .eq_flag(equal),\n    .lt_flag(less)\n  );\nendmodule",
+  "after_code": "module comparator_16bit(\n  input [15:0] data1,\n  input [15:0] data2,\n  output eq_flag,\n  output lt_flag,\n  output gt_flag\n);\n  assign eq_flag = (data1 == data2);\n  assign lt_flag = (data1 < data2);\n  assign gt_flag = (data1 > data2);\nendmodule\n\nmodule testbench;\n  reg [15:0] val1, val2;\n  wire equal, less, greater;\n  \n  comparator_16bit cmp (\n    .data1(val1),\n    .data2(val2),\n    .eq_flag(equal),\n    .lt_flag(less),\n    .gt_flag(greater)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

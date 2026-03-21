@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "systemverilog",
+  "before_code": "module comparator_32bit (\n  input [31:0] data_x,\n  input [31:0] data_y,\n  output eq_flag\n);\n  assign eq_flag = (data_x == data_y);\nendmodule\n\nmodule control_unit (\n  input [31:0] addr_a,\n  input [31:0] addr_b,\n  output match\n);\n  wire [31:0] extended_a = {16'b0, addr_a[15:0]};\n  comparator_32bit cmp (\n    .data_x(extended_a),\n    .data_y(addr_b[31:0]),\n    .eq_flag(match),\n    .extra_port(1'b0)\n  );\nendmodule",
+  "after_code": "module comparator_32bit (\n  input [31:0] data_x,\n  input [31:0] data_y,\n  output eq_flag\n);\n  assign eq_flag = (data_x == data_y);\nendmodule\n\nmodule control_unit (\n  input [31:0] addr_a,\n  input [31:0] addr_b,\n  output match\n);\n  wire [31:0] extended_a = {16'b0, addr_a[15:0]};\n  comparator_32bit cmp (\n    .data_x(extended_a),\n    .data_y(addr_b[31:0]),\n    .eq_flag(match)\n  );\nendmodule",
+  "patch": "--- a/comparator_32bit.sv\n+++ b/comparator_32bit.sv\n@@ -12,10 +12,9 @@ module control_unit (\n   wire [31:0] extended_a = {16'b0, addr_a[15:0]};\n   comparator_32bit cmp (\n     .data_x(extended_a),\n     .data_y(addr_b[31:0]),\n-    .eq_flag(match),\n-    .extra_port(1'b0)\n+    .eq_flag(match)\n   );\n endmodule"
+}

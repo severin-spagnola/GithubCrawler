@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.vhd\n+++ b/priority_encoder.vhd\n@@ -1,7 +1,7 @@\n library ieee;\n use ieee.std_logic_1164.all;\n \n architecture rtl of priority_encoder is\n begin\n-  process(request_0)\n+  process(request_0, request_1, request_2, request_3, request_mask)\n   begin\n     grant <= \"0000\";\n     if (request_mask = '1') then",
+  "before_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity priority_encoder is\n  port (\n    request_0, request_1, request_2, request_3 : in std_logic;\n    request_mask : in std_logic;\n    grant : out std_logic_vector(3 downto 0)\n  );\nend priority_encoder;\n\narchitecture rtl of priority_encoder is\nbegin\n  process(request_0)\n  begin\n    grant <= \"0000\";\n    if (request_mask = '1') then\n      if (request_3 = '1') then\n        grant <= \"1000\";\n      elsif (request_2 = '1') then\n        grant <= \"0100\";\n      elsif (request_1 = '1') then\n        grant <= \"0010\";\n      elsif (request_0 = '1') then\n        grant <= \"0001\";\n      end if;\n    end if;\n  end process;\nend rtl;",
+  "after_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity priority_encoder is\n  port (\n    request_0, request_1, request_2, request_3 : in std_logic;\n    request_mask : in std_logic;\n    grant : out std_logic_vector(3 downto 0)\n  );\nend priority_encoder;\n\narchitecture rtl of priority_encoder is\nbegin\n  process(request_0, request_1, request_2, request_3, request_mask)\n  begin\n    grant <= \"0000\";\n    if (request_mask = '1') then\n      if (request_3 = '1') then\n        grant <= \"1000\";\n      elsif (request_2 = '1') then\n        grant <= \"0100\";\n      elsif (request_1 = '1') then\n        grant <= \"0010\";\n      elsif (request_0 = '1') then\n        grant <= \"0001\";\n      end if;\n    end if;\n  end process;\nend rtl;",
+  "language": "vhdl",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

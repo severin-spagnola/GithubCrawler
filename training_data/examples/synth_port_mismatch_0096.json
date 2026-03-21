@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder.sv\n+++ b/adder.sv\n@@ -8,7 +8,7 @@ endmodule\n \n module test_adder;\n   logic [15:0] x, y;\n   logic [16:0] sum;\n-  adder4 add_inst (.a(x[3:0]), .b(y[3:0]), .cout(sum));\n+  adder4 add_inst (.a(x[3:0]), .b(y[3:0]), .s(sum[3:0]), .cout(sum[4]));\n endmodule",
+  "before_code": "module adder4 (\n  input [3:0] a,\n  input [3:0] b,\n  output [3:0] s,\n  output cout\n);\n  assign {cout, s} = a + b;\nendmodule\n\nmodule test_adder;\n  logic [15:0] x, y;\n  logic [16:0] sum;\n  adder4 add_inst (.a(x[3:0]), .b(y[3:0]), .cout(sum));\nendmodule",
+  "after_code": "module adder4 (\n  input [3:0] a,\n  input [3:0] b,\n  output [3:0] s,\n  output cout\n);\n  assign {cout, s} = a + b;\nendmodule\n\nmodule test_adder;\n  logic [15:0] x, y;\n  logic [16:0] sum;\n  adder4 add_inst (.a(x[3:0]), .b(y[3:0]), .s(sum[3:0]), .cout(sum[4]));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

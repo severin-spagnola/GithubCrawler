@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.sv\n+++ b/comparator.sv\n@@ -1,9 +1,9 @@\n module magnitude_compare(\n   input [7:0] a,\n   input [7:0] b,\n-  output reg a_gt_b,\n-  output reg a_eq_b,\n-  output reg a_lt_b,\n-  input valid\n+  output reg a_gt_b,\n+  output reg a_eq_b,\n+  output reg a_lt_b,\n+  input valid,\n+  output ready\n );\n   always @(*) begin\n     if (valid) begin",
+  "before_code": "module magnitude_compare(\n  input [7:0] a,\n  input [7:0] b,\n  output reg a_gt_b,\n  output reg a_eq_b,\n  output reg a_lt_b,\n  input valid\n);\n  always @(*) begin\n    if (valid) begin\n      a_gt_b = (a > b);\n      a_eq_b = (a == b);\n      a_lt_b = (a < b);\n    end\n  end\nendmodule\n\nmodule system();\n  reg [7:0] val_a, val_b;\n  reg input_valid;\n  wire gt, eq, lt, ready_sig;\n  \n  magnitude_compare cmp(\n    .a(val_a),\n    .b(val_b),\n    .a_gt_b(gt),\n    .a_eq_b(eq),\n    .a_lt_b(lt),\n    .valid(input_valid),\n    .ready(ready_sig)\n  );\nendmodule",
+  "after_code": "module magnitude_compare(\n  input [7:0] a,\n  input [7:0] b,\n  output reg a_gt_b,\n  output reg a_eq_b,\n  output reg a_lt_b,\n  input valid,\n  output ready\n);\n  always @(*) begin\n    if (valid) begin\n      a_gt_b = (a > b);\n      a_eq_b = (a == b);\n      a_lt_b = (a < b);\n    end\n  end\n  assign ready = valid;\nendmodule\n\nmodule system();\n  reg [7:0] val_a, val_b;\n  reg input_valid;\n  wire gt, eq, lt, ready_sig;\n  \n  magnitude_compare cmp(\n    .a(val_a),\n    .b(val_b),\n    .a_gt_b(gt),\n    .a_eq_b(eq),\n    .a_lt_b(lt),\n    .valid(input_valid),\n    .ready(ready_sig)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

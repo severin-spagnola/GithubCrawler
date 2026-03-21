@@ -1,0 +1,53 @@
+{
+  "version": 5,
+  "n_train_files": 1159,
+  "n_test_files": 290,
+  "n_train_examples": 5301,
+  "n_test_examples": 1665,
+  "stage2_classes": [
+    "port_mismatch",
+    "sensitivity_list",
+    "synthesis_error"
+  ],
+  "hdl_api_breaking_in_test": 8,
+  "oos_accuracy": 0.6799,
+  "classification_report": {
+    "api_breaking": {
+      "precision": 0.16030534351145037,
+      "recall": 0.7241379310344828,
+      "f1-score": 0.2625,
+      "support": 29.0
+    },
+    "port_mismatch": {
+      "precision": 0.2838983050847458,
+      "recall": 0.27235772357723576,
+      "f1-score": 0.27800829875518673,
+      "support": 246.0
+    },
+    "sensitivity_list": {
+      "precision": 0.43209876543209874,
+      "recall": 0.4861111111111111,
+      "f1-score": 0.45751633986928103,
+      "support": 144.0
+    },
+    "synthesis_error": {
+      "precision": 0.8573943661971831,
+      "recall": 0.7817014446227929,
+      "f1-score": 0.8178001679261125,
+      "support": 1246.0
+    },
+    "accuracy": 0.6798798798798799,
+    "macro avg": {
+      "precision": 0.43342419505636953,
+      "recall": 0.5660770525864056,
+      "f1-score": 0.45395620163764505,
+      "support": 1665.0
+    },
+    "weighted avg": {
+      "precision": 0.7237378021120672,
+      "recall": 0.6798798798798799,
+      "f1-score": 0.6972155577602935,
+      "support": 1665.0
+    }
+  }
+}

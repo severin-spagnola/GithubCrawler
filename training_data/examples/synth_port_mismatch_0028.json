@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/decoder.sv\n+++ b/decoder.sv\n@@ -8,9 +8,10 @@ module decoder_wrapper (\n );\n   decoder_3to8 dec_inst (\n     .sel(address),\n+    .enable(enable_in),\n     .out_0(output_line)\n   );\n endmodule",
+  "before_code": "module decoder_3to8 (\n  input [2:0] sel,\n  input enable,\n  output [7:0] out_0\n);\n  assign out_0 = enable ? (8'b1 << sel) : 8'b0;\nendmodule\n\nmodule decoder_wrapper (\n  input [2:0] address,\n  input enable_in,\n  output [7:0] output_line\n);\n  decoder_3to8 dec_inst (\n    .sel(address),\n    .out_0(output_line)\n  );\nendmodule",
+  "after_code": "module decoder_3to8 (\n  input [2:0] sel,\n  input enable,\n  output [7:0] out_0\n);\n  assign out_0 = enable ? (8'b1 << sel) : 8'b0;\nendmodule\n\nmodule decoder_wrapper (\n  input [2:0] address,\n  input enable_in,\n  output [7:0] output_line\n);\n  decoder_3to8 dec_inst (\n    .sel(address),\n    .enable(enable_in),\n    .out_0(output_line)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

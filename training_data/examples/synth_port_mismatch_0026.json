@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier.sv\n+++ b/multiplier.sv\n@@ -10,8 +10,8 @@ module multiplier_top (\n );\n   multiplier_16bit mult_inst (\n-    .multiplicand(in_a),\n-    .multiplier(in_b),\n+    .data_a(in_a),\n+    .data_b(in_b),\n     .product(out_result)\n   );\n endmodule",
+  "before_code": "module multiplier_16bit (\n  input [15:0] data_a,\n  input [15:0] data_b,\n  output [31:0] product\n);\n  assign product = data_a * data_b;\nendmodule\n\nmodule multiplier_top (\n  input [15:0] in_a,\n  input [15:0] in_b,\n  output [31:0] out_result\n);\n  multiplier_16bit mult_inst (\n    .multiplicand(in_a),\n    .multiplier(in_b),\n    .product(out_result)\n  );\nendmodule",
+  "after_code": "module multiplier_16bit (\n  input [15:0] data_a,\n  input [15:0] data_b,\n  output [31:0] product\n);\n  assign product = data_a * data_b;\nendmodule\n\nmodule multiplier_top (\n  input [15:0] in_a,\n  input [15:0] in_b,\n  output [31:0] out_result\n);\n  multiplier_16bit mult_inst (\n    .data_a(in_a),\n    .data_b(in_b),\n    .product(out_result)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

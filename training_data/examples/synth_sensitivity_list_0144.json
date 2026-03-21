@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.vhd\n+++ b/priority_encoder.vhd\n@@ -1,15 +1,15 @@\n library ieee;\n use ieee.std_logic_1164.all;\n \n entity priority_encoder is\n   port (\n     req0, req1, req2, req3 : in std_logic;\n     priority : out std_logic_vector(1 downto 0)\n   );\n end priority_encoder;\n \n architecture rtl of priority_encoder is\n begin\n-  process(req0)\n+  process(req0, req1, req2, req3)\n   begin\n     if req3 = '1' then\n       priority <= \"11\";\n     elsif req2 = '1' then\n       priority <= \"10\";\n     elsif req1 = '1' then\n       priority <= \"01\";\n     else\n       priority <= \"00\";\n     end if;\n   end process;\n \n end rtl;",
+  "before_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity priority_encoder is\n  port (\n    req0, req1, req2, req3 : in std_logic;\n    priority : out std_logic_vector(1 downto 0)\n  );\nend priority_encoder;\n\narchitecture rtl of priority_encoder is\nbegin\n  process(req0)\n  begin\n    if req3 = '1' then\n      priority <= \"11\";\n    elsif req2 = '1' then\n      priority <= \"10\";\n    elsif req1 = '1' then\n      priority <= \"01\";\n    else\n      priority <= \"00\";\n    end if;\n  end process;\n\nend rtl;",
+  "after_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity priority_encoder is\n  port (\n    req0, req1, req2, req3 : in std_logic;\n    priority : out std_logic_vector(1 downto 0)\n  );\nend priority_encoder;\n\narchitecture rtl of priority_encoder is\nbegin\n  process(req0, req1, req2, req3)\n  begin\n    if req3 = '1' then\n      priority <= \"11\";\n    elsif req2 = '1' then\n      priority <= \"10\";\n    elsif req1 = '1' then\n      priority <= \"01\";\n    else\n      priority <= \"00\";\n    end if;\n  end process;\n\nend rtl;",
+  "language": "vhdl",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

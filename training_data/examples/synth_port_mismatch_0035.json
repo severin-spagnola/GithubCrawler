@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/fifo_controller.v\n+++ b/fifo_controller.v\n@@ -1,17 +1,17 @@\n module fifo_write_unit (\n   input clk,\n   input rst,\n-  input [7:0] data_in,\n+  input [7:0] din,\n   input wr_en,\n   output full\n );\n   // implementation\n endmodule\n \n module fifo_system (\n   input clk,\n   input rst,\n   input [7:0] data_bus,\n   input write_enable,\n   output is_full\n );\n   fifo_write_unit fifo_inst (\n     .clk(clk),\n     .rst(rst),\n-    .data_in(data_bus),\n+    .din(data_bus),\n     .wr_en(write_enable),\n     .full(is_full)\n   );\n endmodule",
+  "before_code": "module fifo_write_unit (\n  input clk,\n  input rst,\n  input [7:0] din,\n  input wr_en,\n  output full\n);\n  // implementation\nendmodule\n\nmodule fifo_system (\n  input clk,\n  input rst,\n  input [7:0] data_bus,\n  input write_enable,\n  output is_full\n);\n  fifo_write_unit fifo_inst (\n    .clk(clk),\n    .rst(rst),\n    .data_in(data_bus),\n    .wr_en(write_enable),\n    .full(is_full)\n  );\nendmodule",
+  "after_code": "module fifo_write_unit (\n  input clk,\n  input rst,\n  input [7:0] din,\n  input wr_en,\n  output full\n);\n  // implementation\nendmodule\n\nmodule fifo_system (\n  input clk,\n  input rst,\n  input [7:0] data_bus,\n  input write_enable,\n  output is_full\n);\n  fifo_write_unit fifo_inst (\n    .clk(clk),\n    .rst(rst),\n    .din(data_bus),\n    .wr_en(write_enable),\n    .full(is_full)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

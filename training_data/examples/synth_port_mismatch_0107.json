@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "verilog",
+  "before_code": "module comparator_16bit (\n  input [15:0] a,\n  input [15:0] b,\n  output equal,\n  output greater\n);\n  assign equal = (a == b);\n  assign greater = (a > b);\nendmodule\n\nmodule control_unit (\n  input [15:0] val1,\n  input [15:0] val2,\n  output cmp_eq,\n  output cmp_gt\n);\n  comparator_16bit cmp_inst (\n    .a(val1),\n    .b(val2),\n    .equal(cmp_eq)\n    // BUG: missing '.greater(cmp_gt)' port connection\n  );\nendmodule",
+  "after_code": "module comparator_16bit (\n  input [15:0] a,\n  input [15:0] b,\n  output equal,\n  output greater\n);\n  assign equal = (a == b);\n  assign greater = (a > b);\nendmodule\n\nmodule control_unit (\n  input [15:0] val1,\n  input [15:0] val2,\n  output cmp_eq,\n  output cmp_gt\n);\n  comparator_16bit cmp_inst (\n    .a(val1),\n    .b(val2),\n    .equal(cmp_eq),\n    .greater(cmp_gt)  // FIXED: added missing '.greater(cmp_gt)' connection\n  );\nendmodule",
+  "patch": "--- a/control_unit.v\n+++ b/control_unit.v\n@@ -12,7 +12,8 @@ module control_unit (\n   comparator_16bit cmp_inst (\n     .a(val1),\n     .b(val2),\n-    .equal(cmp_eq)\n-    // BUG: missing '.greater(cmp_gt)' port connection\n+    .equal(cmp_eq),\n+    .greater(cmp_gt)  // FIXED: added missing '.greater(cmp_gt)' connection\n   );\n endmodule"
+}

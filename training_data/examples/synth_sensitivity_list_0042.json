@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/barrel_shifter.sv\n+++ b/barrel_shifter.sv\n@@ -10,7 +10,7 @@ module barrel_shifter(\n   output logic [31:0] result\n );\n \n-  always @(data_in or shift_amount)\n+  always_comb\n     case(shift_amount)\n       5'd0:  result = data_in;\n       5'd1:  result = {1'b0, data_in[31:1]};",
+  "before_code": "module barrel_shifter(\n  input [31:0] data_in,\n  input [4:0] shift_amount,\n  output logic [31:0] result\n);\n\n  always @(data_in or shift_amount)\n    case(shift_amount)\n      5'd0:  result = data_in;\n      5'd1:  result = {1'b0, data_in[31:1]};\n      5'd2:  result = {2'b0, data_in[31:2]};\n      5'd3:  result = {3'b0, data_in[31:3]};\n      default: result = 32'h0;\n    endcase\n\nendmodule",
+  "after_code": "module barrel_shifter(\n  input [31:0] data_in,\n  input [4:0] shift_amount,\n  output logic [31:0] result\n);\n\n  always_comb\n    case(shift_amount)\n      5'd0:  result = data_in;\n      5'd1:  result = {1'b0, data_in[31:1]};\n      5'd2:  result = {2'b0, data_in[31:2]};\n      5'd3:  result = {3'b0, data_in[31:3]};\n      default: result = 32'h0;\n    endcase\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

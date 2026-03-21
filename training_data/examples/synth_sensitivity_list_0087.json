@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator_32bit.v\n+++ b/comparator_32bit.v\n@@ -6,8 +6,8 @@\n   output reg lt\n );\n \n-  always @(bus_a or bus_b) begin\n-    eq = (bus_a == bus_b);\n-    gt = (bus_a > bus_b);\n-    lt = (bus_a < bus_b);\n+  always @(*) begin\n+    eq <= (bus_a == bus_b);\n+    gt <= (bus_a > bus_b);\n+    lt <= (bus_a < bus_b);",
+  "before_code": "module comparator_32bit(\n  input [31:0] bus_a,\n  input [31:0] bus_b,\n  output reg eq,\n  output reg gt,\n  output reg lt\n);\n\n  always @(bus_a or bus_b) begin\n    eq = (bus_a == bus_b);\n    gt = (bus_a > bus_b);\n    lt = (bus_a < bus_b);\n  end\n\nendmodule",
+  "after_code": "module comparator_32bit(\n  input [31:0] bus_a,\n  input [31:0] bus_b,\n  output reg eq,\n  output reg gt,\n  output reg lt\n);\n\n  always @(*) begin\n    eq = (bus_a == bus_b);\n    gt = (bus_a > bus_b);\n    lt = (bus_a < bus_b);\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

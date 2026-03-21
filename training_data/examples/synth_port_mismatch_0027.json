@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -10,7 +10,7 @@ module comparator_wrapper (\n );\n   comparator_8bit cmp_inst (\n     .value_x(x),\n-    .y(y),\n+    .value_y(y),\n     .greater_than(gt),\n     .equal(eq),\n     .less_than(lt)\n",
+  "before_code": "module comparator_8bit (\n  input [7:0] value_x,\n  input [7:0] value_y,\n  output gt,\n  output eq,\n  output lt\n);\n  assign gt = (value_x > value_y);\n  assign eq = (value_x == value_y);\n  assign lt = (value_x < value_y);\nendmodule\n\nmodule comparator_wrapper (\n  input [7:0] x,\n  input [7:0] y,\n  output gt,\n  output eq,\n  output lt\n);\n  comparator_8bit cmp_inst (\n    .value_x(x),\n    .y(y),\n    .greater_than(gt),\n    .equal(eq),\n    .less_than(lt)\n  );\nendmodule",
+  "after_code": "module comparator_8bit (\n  input [7:0] value_x,\n  input [7:0] value_y,\n  output gt,\n  output eq,\n  output lt\n);\n  assign gt = (value_x > value_y);\n  assign eq = (value_x == value_y);\n  assign lt = (value_x < value_y);\nendmodule\n\nmodule comparator_wrapper (\n  input [7:0] x,\n  input [7:0] y,\n  output gt,\n  output eq,\n  output lt\n);\n  comparator_8bit cmp_inst (\n    .value_x(x),\n    .value_y(y),\n    .greater_than(gt),\n    .equal(eq),\n    .less_than(lt)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

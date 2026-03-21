@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,15 +1,15 @@\n module comp_8bit(\n   input [7:0] a,\n   input [7:0] b,\n   output eq,\n   output lt,\n   output gt\n );\n   assign eq = (a == b);\n   assign lt = (a < b);\n   assign gt = (a > b);\n endmodule\n \n module testbench;\n   reg [7:0] val1, val2;\n-  wire equal, less, greater;\n-  comp_8bit cmp (.a(val1), .b(val2[3:0]), .eq(equal), .lt(less), .gt(greater));\n+  wire equal, less, greater;\n+  comp_8bit cmp (.a(val1), .b(val2), .eq(equal), .lt(less), .gt(greater));\n endmodule",
+  "before_code": "module comp_8bit(\n  input [7:0] a,\n  input [7:0] b,\n  output eq,\n  output lt,\n  output gt\n);\n  assign eq = (a == b);\n  assign lt = (a < b);\n  assign gt = (a > b);\nendmodule\n\nmodule testbench;\n  reg [7:0] val1, val2;\n  wire equal, less, greater;\n  comp_8bit cmp (.a(val1), .b(val2[3:0]), .eq(equal), .lt(less), .gt(greater));\nendmodule",
+  "after_code": "module comp_8bit(\n  input [7:0] a,\n  input [7:0] b,\n  output eq,\n  output lt,\n  output gt\n);\n  assign eq = (a == b);\n  assign lt = (a < b);\n  assign gt = (a > b);\nendmodule\n\nmodule testbench;\n  reg [7:0] val1, val2;\n  wire equal, less, greater;\n  comp_8bit cmp (.a(val1), .b(val2), .eq(equal), .lt(less), .gt(greater));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

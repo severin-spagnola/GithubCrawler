@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "systemverilog",
+  "before_code": "module decoder_4to16 (\n  input [3:0] address,\n  output [15:0] decoded  // Should be output, not input\n);\n  always_comb begin\n    decoded = 16'b0;\n    decoded[address] = 1'b1;\n  end\nendmodule\n\nmodule memory_controller (\n  input [3:0] addr,\n  input [15:0] write_enable\n);\n  decoder_4to16 dec_inst (\n    .address(addr),\n    .decoded(write_enable)  // BUG: direction mismatch - decoder outputs, controller expects input\n  );\nendmodule",
+  "after_code": "module decoder_4to16 (\n  input [3:0] address,\n  output [15:0] decoded\n);\n  always_comb begin\n    decoded = 16'b0;\n    decoded[address] = 1'b1;\n  end\nendmodule\n\nmodule memory_controller (\n  input [3:0] addr,\n  output [15:0] write_enable  // FIXED: changed from input to output\n);\n  decoder_4to16 dec_inst (\n    .address(addr),\n    .decoded(write_enable)\n  );\nendmodule",
+  "patch": "--- a/memory_controller.sv\n+++ b/memory_controller.sv\n@@ -12,9 +12,9 @@ endmodule\n module memory_controller (\n   input [3:0] addr,\n-  input [15:0] write_enable\n+  output [15:0] write_enable  // FIXED: changed from input to output\n );\n   decoder_4to16 dec_inst (\n     .address(addr),\n-    .decoded(write_enable)  // BUG: direction mismatch - decoder outputs, controller expects input\n+    .decoded(write_enable)\n   );\n endmodule"
+}

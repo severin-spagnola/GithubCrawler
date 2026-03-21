@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,9 +1,9 @@\n module magnitude_comparator(\n   input [63:0] val_x, val_y,\n   input enable,\n   output reg equal, greater, less\n );\n-  always @(val_x) begin\n+  always @(val_x or val_y or enable) begin\n     if (!enable) begin\n       equal <= 1'b0;\n       greater <= 1'b0;",
+  "before_code": "module magnitude_comparator(\n  input [63:0] val_x, val_y,\n  input enable,\n  output reg equal, greater, less\n);\n  always @(val_x) begin\n    if (!enable) begin\n      equal <= 1'b0;\n      greater <= 1'b0;\n      less <= 1'b0;\n    end else begin\n      if (val_x == val_y)\n        equal <= 1'b1;\n      else if (val_x > val_y)\n        greater <= 1'b1;\n      else\n        less <= 1'b1;\n    end\n  end\nendmodule",
+  "after_code": "module magnitude_comparator(\n  input [63:0] val_x, val_y,\n  input enable,\n  output reg equal, greater, less\n);\n  always @(val_x or val_y or enable) begin\n    if (!enable) begin\n      equal <= 1'b0;\n      greater <= 1'b0;\n      less <= 1'b0;\n    end else begin\n      if (val_x == val_y)\n        equal <= 1'b1;\n      else if (val_x > val_y)\n        greater <= 1'b1;\n      else\n        less <= 1'b1;\n    end\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

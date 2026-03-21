@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux.v\n+++ b/mux.v\n@@ -1,9 +1,9 @@\n module mux_64bit(\n   input [63:0] in0, in1, in2, in3,\n   input [1:0] sel,\n   output reg [63:0] out\n );\n \n-  always @(sel) begin\n+  always @(in0 or in1 or in2 or in3 or sel) begin\n     case (sel)\n       2'b00: out = in0;\n       2'b01: out = in1;\n",
+  "before_code": "module mux_64bit(\n  input [63:0] in0, in1, in2, in3,\n  input [1:0] sel,\n  output reg [63:0] out\n);\n\n  always @(sel) begin\n    case (sel)\n      2'b00: out = in0;\n      2'b01: out = in1;\n      2'b10: out = in2;\n      2'b11: out = in3;\n    endcase\n  end\n\nendmodule",
+  "after_code": "module mux_64bit(\n  input [63:0] in0, in1, in2, in3,\n  input [1:0] sel,\n  output reg [63:0] out\n);\n\n  always @(in0 or in1 or in2 or in3 or sel) begin\n    case (sel)\n      2'b00: out = in0;\n      2'b01: out = in1;\n      2'b10: out = in2;\n      2'b11: out = in3;\n    endcase\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

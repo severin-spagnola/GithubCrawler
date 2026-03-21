@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.sv\n+++ b/comparator.sv\n@@ -1,5 +1,5 @@ module comp_16bit (\n   input [15:0] bus_a, bus_b,\n-  input equal_flag,\n+  output equal_flag,\n   output [1:0] result\n );\n   assign equal_flag = (bus_a == bus_b);\n@@ -9,7 +9,7 @@ module comp_16bit (\n module top_level (\n   input [15:0] sig1, sig2,\n   output match\n );\n   comp_16bit cmp_inst (\n     .bus_a(sig1),\n     .bus_b(sig2),",
+  "before_code": "module comp_16bit (\n  input [15:0] bus_a, bus_b,\n  input equal_flag,\n  output [1:0] result\n);\n  assign equal_flag = (bus_a == bus_b);\n  assign result = {1'b0, equal_flag};\nendmodule\n\nmodule top_level (\n  input [15:0] sig1, sig2,\n  output match\n);\n  comp_16bit cmp_inst (\n    .bus_a(sig1),\n    .bus_b(sig2),\n    .equal_flag(match)\n  );\nendmodule",
+  "after_code": "module comp_16bit (\n  input [15:0] bus_a, bus_b,\n  output equal_flag,\n  output [1:0] result\n);\n  assign equal_flag = (bus_a == bus_b);\n  assign result = {1'b0, equal_flag};\nendmodule\n\nmodule top_level (\n  input [15:0] sig1, sig2,\n  output match\n);\n  comp_16bit cmp_inst (\n    .bus_a(sig1),\n    .bus_b(sig2),\n    .equal_flag(match)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

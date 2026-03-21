@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/alu_64bit.vhdl\n+++ b/alu_64bit.vhdl\n@@ -16,7 +16,7 @@ architecture rtl of alu_64bit is\n \n begin\n \n-  process(operand_a, opcode)\n+  process(operand_a, operand_b, opcode)\n   begin\n     case opcode is\n       when \"00\" => result <= operand_a + operand_b;",
+  "before_code": "library ieee;\nuse ieee.std_logic_1164.all;\nuse ieee.numeric_std.all;\n\nentity alu_64bit is\n  port(\n    operand_a : in std_logic_vector(63 downto 0);\n    operand_b : in std_logic_vector(63 downto 0);\n    opcode    : in std_logic_vector(1 downto 0);\n    result    : out std_logic_vector(63 downto 0)\n  );\nend entity alu_64bit;\n\narchitecture rtl of alu_64bit is\nbegin\n\n  process(operand_a, opcode)\n  begin\n    case opcode is\n      when \"00\" => result <= operand_a + operand_b;\n      when \"01\" => result <= operand_a - operand_b;\n      when \"10\" => result <= operand_a and operand_b;\n      when \"11\" => result <= operand_a or operand_b;\n      when others => result <= (others => '0');\n    end case;\n  end process;\n\nend architecture rtl;",
+  "after_code": "library ieee;\nuse ieee.std_logic_1164.all;\nuse ieee.numeric_std.all;\n\nentity alu_64bit is\n  port(\n    operand_a : in std_logic_vector(63 downto 0);\n    operand_b : in std_logic_vector(63 downto 0);\n    opcode    : in std_logic_vector(1 downto 0);\n    result    : out std_logic_vector(63 downto 0)\n  );\nend entity alu_64bit;\n\narchitecture rtl of alu_64bit is\nbegin\n\n  process(operand_a, operand_b, opcode)\n  begin\n    case opcode is\n      when \"00\" => result <= operand_a + operand_b;\n      when \"01\" => result <= operand_a - operand_b;\n      when \"10\" => result <= operand_a and operand_b;\n      when \"11\" => result <= operand_a or operand_b;\n      when others => result <= (others => '0');\n    end case;\n  end process;\n\nend architecture rtl;",
+  "language": "vhdl",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

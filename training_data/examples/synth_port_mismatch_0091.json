@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.sv\n+++ b/multiplexer.sv\n@@ -1,10 +1,10 @@\n module mux_8to1(\n   input [7:0] data_in,\n   input [2:0] select,\n   output reg out\n );\n   always @(*) begin\n     out = data_in[select];\n   end\n endmodule\n \n module processor(\n   input [7:0] input_bus,\n   input [2:0] sel,\n-  output [7:0] output_bus\n+  output output_bus\n );\n-  mux_8to1 mux(.data_in(input_bus[7:0]), .select(sel), .out(output_bus[7:0]));\n+  mux_8to1 mux(.data_in(input_bus[7:0]), .select(sel), .out(output_bus));\n endmodule",
+  "before_code": "module mux_8to1(\n  input [7:0] data_in,\n  input [2:0] select,\n  output reg out\n);\n  always @(*) begin\n    out = data_in[select];\n  end\nendmodule\n\nmodule processor(\n  input [7:0] input_bus,\n  input [2:0] sel,\n  output [7:0] output_bus\n);\n  mux_8to1 mux(.data_in(input_bus[7:0]), .select(sel), .out(output_bus[7:0]));\nendmodule",
+  "after_code": "module mux_8to1(\n  input [7:0] data_in,\n  input [2:0] select,\n  output reg out\n);\n  always @(*) begin\n    out = data_in[select];\n  end\nendmodule\n\nmodule processor(\n  input [7:0] input_bus,\n  input [2:0] sel,\n  output output_bus\n);\n  mux_8to1 mux(.data_in(input_bus[7:0]), .select(sel), .out(output_bus));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

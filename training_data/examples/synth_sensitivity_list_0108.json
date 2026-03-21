@@ -1,0 +1,9 @@
+{
+  "language": "systemverilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true,
+  "patch": "--- a/priority_encoder.sv\n+++ b/priority_encoder.sv\n@@ -1,14 +1,14 @@\n module priority_encoder_8bit(\n   input [7:0] req,\n   input valid_in,\n   output reg [2:0] priority,\n   output reg valid_out\n );\n \n-  always @(req) begin\n+  always @(req or valid_in) begin\n     if (req[7])\n       priority = 3'b111;\n     else if (req[6])\n       priority = 3'b110;\n     else if (req[5])\n       priority = 3'b101;\n     else if (req[4])\n       priority = 3'b100;\n@@ -18,7 +18,7 @@\n       priority = 3'b001;\n     else\n       priority = 3'b000;\n     \n-    valid_out = |req;\n+    valid_out = (|req) && valid_in;\n   end\n \n endmodule",
+  "before_code": "module priority_encoder_8bit(\n  input [7:0] req,\n  input valid_in,\n  output reg [2:0] priority,\n  output reg valid_out\n);\n\n  always @(req) begin\n    if (req[7])\n      priority = 3'b111;\n    else if (req[6])\n      priority = 3'b110;\n    else if (req[5])\n      priority = 3'b101;\n    else if (req[4])\n      priority = 3'b100;\n    else if (req[3])\n      priority = 3'b011;\n    else if (req[2])\n      priority = 3'b010;\n    else if (req[1])\n      priority = 3'b001;\n    else\n      priority = 3'b000;\n    \n    valid_out = |req;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder_8bit(\n  input [7:0] req,\n  input valid_in,\n  output reg [2:0] priority,\n  output reg valid_out\n);\n\n  always @(req or valid_in) begin\n    if (req[7])\n      priority = 3'b111;\n    else if (req[6])\n      priority = 3'b110;\n    else if (req[5])\n      priority = 3'b101;\n    else if (req[4])\n      priority = 3'b100;\n    else if (req[3])\n      priority = 3'b011;\n    else if (req[2])\n      priority = 3'b010;\n    else if (req[1])\n      priority = 3'b001;\n    else\n      priority = 3'b000;\n    \n    valid_out = (|req) && valid_in;\n  end\n\nendmodule"
+}

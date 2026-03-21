@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier_32bit.v\n+++ b/multiplier_32bit.v\n@@ -7,7 +7,7 @@\n   output [63:0] product\n );\n \n-  always @(x or y) begin\n+  always @(x or y or mode) begin\n     case(mode)\n       2'b00: product = x * y;\n       2'b01: product = (x * y) >> 4;\n",
+  "before_code": "module multiplier_32bit (\n  input [31:0] x,\n  input [31:0] y,\n  input [1:0] mode,\n  output [63:0] product\n);\n\n  always @(x or y) begin\n    case(mode)\n      2'b00: product = x * y;\n      2'b01: product = (x * y) >> 4;\n      2'b10: product = (x * y) << 2;\n      default: product = 64'b0;\n    endcase\n  end\n\nendmodule",
+  "after_code": "module multiplier_32bit (\n  input [31:0] x,\n  input [31:0] y,\n  input [1:0] mode,\n  output [63:0] product\n);\n\n  always @(x or y or mode) begin\n    case(mode)\n      2'b00: product = x * y;\n      2'b01: product = (x * y) >> 4;\n      2'b10: product = (x * y) << 2;\n      default: product = 64'b0;\n    endcase\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

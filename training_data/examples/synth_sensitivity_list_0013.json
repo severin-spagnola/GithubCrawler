@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -1,14 +1,14 @@\n module priority_enc_8bit(\n   input [7:0] request,\n   output reg [2:0] priority,\n   output reg valid\n );\n \n-  always @(request[7:4])\n+  always @(request)\n   begin\n     if (request[7])\n       priority = 3'b111;\n     else if (request[6])\n       priority = 3'b110;\n     else if (request[5])\n       priority = 3'b101;\n     else if (request[4])\n       priority = 3'b100;\n     else if (request[3])\n",
+  "before_code": "module priority_enc_8bit(\n  input [7:0] request,\n  output reg [2:0] priority,\n  output reg valid\n);\n\n  always @(request[7:4])\n  begin\n    if (request[7])\n      priority = 3'b111;\n    else if (request[6])\n      priority = 3'b110;\n    else if (request[5])\n      priority = 3'b101;\n    else if (request[4])\n      priority = 3'b100;\n    else if (request[3])\n      priority = 3'b011;\n    else if (request[2])\n      priority = 3'b010;\n    else if (request[1])\n      priority = 3'b001;\n    else\n      priority = 3'b000;\n    valid = |request;\n  end\n\nendmodule",
+  "after_code": "module priority_enc_8bit(\n  input [7:0] request,\n  output reg [2:0] priority,\n  output reg valid\n);\n\n  always @(request)\n  begin\n    if (request[7])\n      priority = 3'b111;\n    else if (request[6])\n      priority = 3'b110;\n    else if (request[5])\n      priority = 3'b101;\n    else if (request[4])\n      priority = 3'b100;\n    else if (request[3])\n      priority = 3'b011;\n    else if (request[2])\n      priority = 3'b010;\n    else if (request[1])\n      priority = 3'b001;\n    else\n      priority = 3'b000;\n    valid = |request;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

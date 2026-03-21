@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux_selector.v\n+++ b/mux_selector.v\n@@ -1,17 +1,17 @@\n module mux_selector (\n   input [31:0] data_in0,\n   input [31:0] data_in1,\n   input [31:0] data_in2,\n   input [31:0] data_in3,\n   input [1:0] select,\n   input enable,\n   output reg [31:0] data_out\n );\n \n-  always @(data_in0 or data_in1 or data_in2 or data_in3 or select) begin\n+  always @(*) begin\n     if (enable) begin\n       case (select)\n         2'b00: data_out = data_in0;\n         2'b01: data_out = data_in1;\n         2'b10: data_out = data_in2;\n         2'b11: data_out = data_in3;\n       endcase\n     end else\n       data_out = 32'b0;\n   end\n \n endmodule",
+  "before_code": "module mux_selector (\n  input [31:0] data_in0,\n  input [31:0] data_in1,\n  input [31:0] data_in2,\n  input [31:0] data_in3,\n  input [1:0] select,\n  input enable,\n  output reg [31:0] data_out\n);\n\n  always @(data_in0 or data_in1 or data_in2 or data_in3 or select) begin\n    if (enable) begin\n      case (select)\n        2'b00: data_out = data_in0;\n        2'b01: data_out = data_in1;\n        2'b10: data_out = data_in2;\n        2'b11: data_out = data_in3;\n      endcase\n    end else\n      data_out = 32'b0;\n  end\n\nendmodule",
+  "after_code": "module mux_selector (\n  input [31:0] data_in0,\n  input [31:0] data_in1,\n  input [31:0] data_in2,\n  input [31:0] data_in3,\n  input [1:0] select,\n  input enable,\n  output reg [31:0] data_out\n);\n\n  always @(*) begin\n    if (enable) begin\n      case (select)\n        2'b00: data_out = data_in0;\n        2'b01: data_out = data_in1;\n        2'b10: data_out = data_in2;\n        2'b11: data_out = data_in3;\n      endcase\n    end else\n      data_out = 32'b0;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

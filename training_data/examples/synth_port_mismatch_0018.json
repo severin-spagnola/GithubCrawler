@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.sv\n+++ b/comparator.sv\n@@ -10,10 +10,10 @@ module comparator_16bit(\n module chip(\n   input [15:0] bus_a, bus_b,\n   output eq_flag\n );\n-  comparator_16bit cmp_inst (\n-    .input_a(bus_a),\n-    .input_b(bus_b),\n-    .equal(eq_flag)\n+  comparator_16bit cmp_inst (\n+    .a(bus_a),\n+    .b(bus_b),\n+    .is_equal(eq_flag)\n   );\n endmodule",
+  "before_code": "module comparator_16bit(\n  input [15:0] a, b,\n  output is_equal\n);\n  assign is_equal = (a == b);\nendmodule\n\nmodule chip(\n  input [15:0] bus_a, bus_b,\n  output eq_flag\n);\n  comparator_16bit cmp_inst (\n    .input_a(bus_a),\n    .input_b(bus_b),\n    .equal(eq_flag)\n  );\nendmodule",
+  "after_code": "module comparator_16bit(\n  input [15:0] a, b,\n  output is_equal\n);\n  assign is_equal = (a == b);\nendmodule\n\nmodule chip(\n  input [15:0] bus_a, bus_b,\n  output eq_flag\n);\n  comparator_16bit cmp_inst (\n    .a(bus_a),\n    .b(bus_b),\n    .is_equal(eq_flag)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -1,13 +1,13 @@\n module priority_encoder_16bit(\n   input [15:0] req,\n   input enable,\n   output reg [3:0] priority\n );\n \n-  always @(req) begin\n+  always @(*) begin\n     if (req[15]) priority = 4'd15;\n     else if (req[14]) priority = 4'd14;\n     else if (req[13]) priority = 4'd13;\n     else if (req[12]) priority = 4'd12;\n     else priority = 4'd0;\n   end\n \n endmodule",
+  "before_code": "module priority_encoder_16bit(\n  input [15:0] req,\n  input enable,\n  output reg [3:0] priority\n);\n\n  always @(req) begin\n    if (req[15]) priority = 4'd15;\n    else if (req[14]) priority = 4'd14;\n    else if (req[13]) priority = 4'd13;\n    else if (req[12]) priority = 4'd12;\n    else priority = 4'd0;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder_16bit(\n  input [15:0] req,\n  input enable,\n  output reg [3:0] priority\n);\n\n  always @(*) begin\n    if (req[15]) priority = 4'd15;\n    else if (req[14]) priority = 4'd14;\n    else if (req[13]) priority = 4'd13;\n    else if (req[12]) priority = 4'd12;\n    else priority = 4'd0;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

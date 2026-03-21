@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,12 +1,12 @@\n module counter_16bit(\n   input clk,\n   input rst_n,\n   output reg [15:0] count\n );\n \n-  always @(posedge clk)\n+  always @(posedge clk or negedge rst_n)\n   begin\n     if (~rst_n)\n       count <= 16'b0;\n     else\n       count <= count + 1;\n   end\n",
+  "before_code": "module counter_16bit(\n  input clk,\n  input rst_n,\n  output reg [15:0] count\n);\n\n  always @(posedge clk)\n  begin\n    if (~rst_n)\n      count <= 16'b0;\n    else\n      count <= count + 1;\n  end\n\nendmodule",
+  "after_code": "module counter_16bit(\n  input clk,\n  input rst_n,\n  output reg [15:0] count\n);\n\n  always @(posedge clk or negedge rst_n)\n  begin\n    if (~rst_n)\n      count <= 16'b0;\n    else\n      count <= count + 1;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

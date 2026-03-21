@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/alu_32bit.v\n+++ b/alu_32bit.v\n@@ -10,7 +10,7 @@\n     output reg [31:0] result\n   );\n \n-  always @(opcode or operand_a)\n+  always @(opcode or operand_a or operand_b)\n   begin\n     case(opcode)\n       4'h0: result = operand_a + operand_b;\n",
+  "before_code": "module alu_32bit (\n  input [31:0] operand_a,\n  input [31:0] operand_b,\n  input [3:0] opcode,\n  output reg [31:0] result\n);\n\n  always @(opcode or operand_a)\n  begin\n    case(opcode)\n      4'h0: result = operand_a + operand_b;\n      4'h1: result = operand_a - operand_b;\n      4'h2: result = operand_a & operand_b;\n      4'h3: result = operand_a | operand_b;\n      4'h4: result = operand_a ^ operand_b;\n      default: result = 32'h0;\n    endcase\n  end\n\nendmodule",
+  "after_code": "module alu_32bit (\n  input [31:0] operand_a,\n  input [31:0] operand_b,\n  input [3:0] opcode,\n  output reg [31:0] result\n);\n\n  always @(opcode or operand_a or operand_b)\n  begin\n    case(opcode)\n      4'h0: result = operand_a + operand_b;\n      4'h1: result = operand_a - operand_b;\n      4'h2: result = operand_a & operand_b;\n      4'h3: result = operand_a | operand_b;\n      4'h4: result = operand_a ^ operand_b;\n      default: result = 32'h0;\n    endcase\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

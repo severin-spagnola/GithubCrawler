@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.sv\n+++ b/multiplexer.sv\n@@ -1,7 +1,7 @@\n module mux_8to1(\n   input [7:0] data_in,\n   input [2:0] select,\n-  output out_data\n+  output out_data,\n+  input enable\n );\n   assign out_data = enable ? data_in[select] : 1'bz;\n endmodule",
+  "before_code": "module mux_8to1(\n  input [7:0] data_in,\n  input [2:0] select,\n  output out_data\n);\n  assign out_data = enable ? data_in[select] : 1'bz;\nendmodule\n\nmodule testbench();\n  reg [7:0] inputs;\n  reg [2:0] sel;\n  reg en;\n  wire output_val;\n  \n  mux_8to1 mux_inst(\n    .data_in(inputs),\n    .select(sel),\n    .out_data(output_val),\n    .enable(en)\n  );\nendmodule",
+  "after_code": "module mux_8to1(\n  input [7:0] data_in,\n  input [2:0] select,\n  output out_data,\n  input enable\n);\n  assign out_data = enable ? data_in[select] : 1'bz;\nendmodule\n\nmodule testbench();\n  reg [7:0] inputs;\n  reg [2:0] sel;\n  reg en;\n  wire output_val;\n  \n  mux_8to1 mux_inst(\n    .data_in(inputs),\n    .select(sel),\n    .out_data(output_val),\n    .enable(en)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

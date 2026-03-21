@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.v\n+++ b/multiplexer.v\n@@ -1,6 +1,6 @@\n module mux_8to1(\n     input [7:0] data_lines,\n     input [2:0] select,\n-    output out\n+    output out,\n     input enable\n );\n     assign out = enable ? data_lines[select] : 1'b0;\n",
+  "before_code": "module mux_8to1(\n    input [7:0] data_lines,\n    input [2:0] select,\n    output out\n);\n    assign out = data_lines[select];\nendmodule\n\nmodule top();\n    wire [7:0] data;\n    wire [2:0] sel;\n    wire output_data;\n    \n    mux_8to1 inst(\n        .data_lines(data),\n        .select(sel),\n        .out(output_data),\n        .enable(1'b1)\n    );\nendmodule",
+  "after_code": "module mux_8to1(\n    input [7:0] data_lines,\n    input [2:0] select,\n    output out,\n    input enable\n);\n    assign out = enable ? data_lines[select] : 1'b0;\nendmodule\n\nmodule top();\n    wire [7:0] data;\n    wire [2:0] sel;\n    wire output_data;\n    \n    mux_8to1 inst(\n        .data_lines(data),\n        .select(sel),\n        .out(output_data),\n        .enable(1'b1)\n    );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

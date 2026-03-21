@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier.sv\n+++ b/multiplier.sv\n@@ -8,9 +8,9 @@ endmodule\n \n module tb_multiplier;\n   reg [7:0] x, y;\n-  wire [15:0] product;\n+  wire [15:0] prod;\n \n   multiplier_8bit mult_inst (\n     .x(x),\n     .y(y),\n-    .product(product)\n+    .prod(prod)\n   );\n endmodule",
+  "before_code": "module multiplier_8bit (\n  input [7:0] x,\n  input [7:0] y,\n  output [15:0] prod\n);\n  assign prod = x * y;\nendmodule\n\nmodule tb_multiplier;\n  reg [7:0] x, y;\n  wire [15:0] product;\n\n  multiplier_8bit mult_inst (\n    .x(x),\n    .y(y),\n    .product(product)\n  );\nendmodule",
+  "after_code": "module multiplier_8bit (\n  input [7:0] x,\n  input [7:0] y,\n  output [15:0] prod\n);\n  assign prod = x * y;\nendmodule\n\nmodule tb_multiplier;\n  reg [7:0] x, y;\n  wire [15:0] prod;\n\n  multiplier_8bit mult_inst (\n    .x(x),\n    .y(y),\n    .prod(prod)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

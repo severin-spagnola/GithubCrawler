@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.sv\n+++ b/shifter.sv\n@@ -8,7 +8,7 @@ module processor(\n   output [31:0] result\n );\n   shift_unit shifter (\n-    .data_in(operand[15:0]),\n+    .data_in(operand[31:0]),\n     .shift_amt(amount),\n     .shifted_data(result)\n   );\n",
+  "before_code": "module shift_unit(\n  input [31:0] data_in,\n  input [4:0] shift_amt,\n  output [31:0] shifted_data\n);\n  assign shifted_data = data_in << shift_amt;\nendmodule\n\nmodule processor(\n  input [31:0] operand,\n  input [4:0] amount,\n  output [31:0] result\n);\n  shift_unit shifter (\n    .data_in(operand[15:0]),\n    .shift_amt(amount),\n    .shifted_data(result)\n  );\nendmodule",
+  "after_code": "module shift_unit(\n  input [31:0] data_in,\n  input [4:0] shift_amt,\n  output [31:0] shifted_data\n);\n  assign shifted_data = data_in << shift_amt;\nendmodule\n\nmodule processor(\n  input [31:0] operand,\n  input [4:0] amount,\n  output [31:0] result\n);\n  shift_unit shifter (\n    .data_in(operand[31:0]),\n    .shift_amt(amount),\n    .shifted_data(result)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/datapath.sv\n+++ b/datapath.sv\n@@ -8,10 +8,10 @@ module memory_controller (\n   input [15:0] write_data,\n   output [15:0] read_data\n );\n-  assign read_data = write_data;\n+  assign read_data = read_data_internal;\n endmodule\n \n module system_top (\n   input [31:0] data_in,\n-  reg_file mem_ctrl (\n-    .data_write(data_in[15:0]),\n-    .data_read(output_reg)\n+  memory_controller mem_ctrl (\n+    .write_data(data_in[15:0]),\n+    .read_data(output_reg)\n   );",
+  "before_code": "module memory_controller (\n  input [15:0] write_data,\n  output [15:0] read_data\n);\n  assign read_data = write_data;\nendmodule\n\nmodule system_top (\n  input [31:0] data_in,\n  output [15:0] output_reg\n);\n  reg_file mem_ctrl (\n    .data_write(data_in[15:0]),\n    .data_read(output_reg)\n  );\nendmodule",
+  "after_code": "module memory_controller (\n  input [15:0] write_data,\n  output [15:0] read_data\n);\n  assign read_data = write_data;\nendmodule\n\nmodule system_top (\n  input [31:0] data_in,\n  output [15:0] output_reg\n);\n  memory_controller mem_ctrl (\n    .write_data(data_in[15:0]),\n    .read_data(output_reg)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

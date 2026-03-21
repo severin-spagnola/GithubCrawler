@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/alu_64bit.v\n+++ b/alu_64bit.v\n@@ -1,16 +1,16 @@\n module alu_64bit (\n   input [63:0] operand_x,\n   input [63:0] operand_y,\n   input [3:0] opcode,\n   output reg [63:0] result\n );\n-  always @(operand_x or opcode) begin\n+  always @(operand_x or operand_y or opcode) begin\n     case (opcode)\n       4'h0: result = operand_x + operand_y;\n       4'h1: result = operand_x - operand_y;\n       4'h2: result = operand_x & operand_y;\n       4'h3: result = operand_x | operand_y;\n       4'h4: result = operand_x ^ operand_y;\n       default: result = 64'b0;\n     endcase\n   end\n endmodule",
+  "before_code": "module alu_64bit (\n  input [63:0] operand_x,\n  input [63:0] operand_y,\n  input [3:0] opcode,\n  output reg [63:0] result\n);\n  always @(operand_x or opcode) begin\n    case (opcode)\n      4'h0: result = operand_x + operand_y;\n      4'h1: result = operand_x - operand_y;\n      4'h2: result = operand_x & operand_y;\n      4'h3: result = operand_x | operand_y;\n      4'h4: result = operand_x ^ operand_y;\n      default: result = 64'b0;\n    endcase\n  end\nendmodule",
+  "after_code": "module alu_64bit (\n  input [63:0] operand_x,\n  input [63:0] operand_y,\n  input [3:0] opcode,\n  output reg [63:0] result\n);\n  always @(operand_x or operand_y or opcode) begin\n    case (opcode)\n      4'h0: result = operand_x + operand_y;\n      4'h1: result = operand_x - operand_y;\n      4'h2: result = operand_x & operand_y;\n      4'h3: result = operand_x | operand_y;\n      4'h4: result = operand_x ^ operand_y;\n      default: result = 64'b0;\n    endcase\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

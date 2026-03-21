@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/decoder_unit.sv\n+++ b/decoder_unit.sv\n@@ -1,5 +1,5 @@\n module priority_decoder (\n-  output [3:0] code,\n+  input [3:0] code,\n   input [15:0] request\n );\n   // decoder implementation\n endmodule\n \n@@ -11,7 +11,7 @@\n   output [3:0] priority_output\n );\n   priority_decoder dec_inst (\n-    .code(priority_output),\n+    .code(input_code),\n     .request(request_signal)\n   );\n endmodule",
+  "before_code": "module priority_decoder (\n  output [3:0] code,\n  input [15:0] request\n);\n  // decoder implementation\nendmodule\n\nmodule decoder_wrapper (\n  input [3:0] input_code,\n  input [15:0] request_signal,\n  output [3:0] priority_output\n);\n  priority_decoder dec_inst (\n    .code(priority_output),\n    .request(request_signal)\n  );\nendmodule",
+  "after_code": "module priority_decoder (\n  input [3:0] code,\n  input [15:0] request\n);\n  // decoder implementation\nendmodule\n\nmodule decoder_wrapper (\n  input [3:0] input_code,\n  input [15:0] request_signal,\n  output [3:0] priority_output\n);\n  priority_decoder dec_inst (\n    .code(input_code),\n    .request(request_signal)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

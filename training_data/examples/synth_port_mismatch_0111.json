@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.v\n+++ b/multiplexer.v\n@@ -1,12 +1,12 @@\n module mux8 (\n   input [7:0] data_a,\n   input [7:0] data_b,\n   input select,\n   output [7:0] output_data\n );\n   assign output_data = select ? data_b : data_a;\n endmodule\n \n module top;\n   wire [7:0] bus1, bus2, result;\n   wire sel;\n-  mux8 inst (.data_a(bus1), .data_b(bus2), .sel(sel), .output_data(result));\n+  mux8 inst (.data_a(bus1), .data_b(bus2), .select(sel), .output_data(result));\n endmodule",
+  "before_code": "module mux8 (\n  input [7:0] data_a,\n  input [7:0] data_b,\n  input select,\n  output [7:0] output_data\n);\n  assign output_data = select ? data_b : data_a;\nendmodule\n\nmodule top;\n  wire [7:0] bus1, bus2, result;\n  wire sel;\n  mux8 inst (.data_a(bus1), .data_b(bus2), .sel(sel), .output_data(result));\nendmodule",
+  "after_code": "module mux8 (\n  input [7:0] data_a,\n  input [7:0] data_b,\n  input select,\n  output [7:0] output_data\n);\n  assign output_data = select ? data_b : data_a;\nendmodule\n\nmodule top;\n  wire [7:0] bus1, bus2, result;\n  wire sel;\n  mux8 inst (.data_a(bus1), .data_b(bus2), .select(sel), .output_data(result));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

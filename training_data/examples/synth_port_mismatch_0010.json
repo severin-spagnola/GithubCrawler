@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder.v\n+++ b/adder.v\n@@ -1,12 +1,12 @@\n module adder_4bit(\n-  input wire [3:0] a_in,\n-  input wire [3:0] b_in,\n+  input wire [3:0] operand_a,\n+  input wire [3:0] operand_b,\n   input wire cin,\n   output wire [4:0] sum\n );\n   assign sum = a_in + b_in + cin;\n endmodule\n \n module top;\n   wire [3:0] x, y;\n   wire c, result;\n-  adder_4bit inst (.a_in(x), .b_in(y), .cin(c), .sum(result));\n+  adder_4bit inst (.operand_a(x), .operand_b(y), .cin(c), .sum(result));\n endmodule",
+  "before_code": "module adder_4bit(\n  input wire [3:0] operand_a,\n  input wire [3:0] operand_b,\n  input wire cin,\n  output wire [4:0] sum\n);\n  assign sum = operand_a + operand_b + cin;\nendmodule\n\nmodule top;\n  wire [3:0] x, y;\n  wire c, result;\n  adder_4bit inst (.a_in(x), .b_in(y), .cin(c), .sum(result));\nendmodule",
+  "after_code": "module adder_4bit(\n  input wire [3:0] operand_a,\n  input wire [3:0] operand_b,\n  input wire cin,\n  output wire [4:0] sum\n);\n  assign sum = operand_a + operand_b + cin;\nendmodule\n\nmodule top;\n  wire [3:0] x, y;\n  wire c, result;\n  adder_4bit inst (.operand_a(x), .operand_b(y), .cin(c), .sum(result));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

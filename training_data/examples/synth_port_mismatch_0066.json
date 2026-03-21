@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.sv\n+++ b/multiplexer.sv\n@@ -8,7 +8,7 @@ module datapath(\n   wire [15:0] mux_out;\n   wire [1:0] sel_signal;\n   \n-  mux_16bit mux_inst(.in0(data_a), .in1(data_b), .in2(data_c), .in3(data_d), .select(sel_signal), .output_data(mux_out));\n+  mux_16bit mux_inst(.in0(data_a), .in1(data_b), .in2(data_c), .in3(data_d), .sel(sel_signal), .out(mux_out));\n   \n   assign result = mux_out;\nendmodule",
+  "before_code": "module mux_16bit(\n  input [15:0] in0, in1, in2, in3,\n  input [1:0] sel,\n  output [15:0] out\n);\n  assign out = (sel == 2'b00) ? in0 : (sel == 2'b01) ? in1 : (sel == 2'b10) ? in2 : in3;\nendmodule\n\nmodule datapath(\n  input [15:0] data_a, data_b, data_c, data_d,\n  output [15:0] result\n);\n  wire [15:0] mux_out;\n  wire [1:0] sel_signal;\n  \n  mux_16bit mux_inst(.in0(data_a), .in1(data_b), .in2(data_c), .in3(data_d), .select(sel_signal), .output_data(mux_out));\n  \n  assign result = mux_out;\nendmodule",
+  "after_code": "module mux_16bit(\n  input [15:0] in0, in1, in2, in3,\n  input [1:0] sel,\n  output [15:0] out\n);\n  assign out = (sel == 2'b00) ? in0 : (sel == 2'b01) ? in1 : (sel == 2'b10) ? in2 : in3;\nendmodule\n\nmodule datapath(\n  input [15:0] data_a, data_b, data_c, data_d,\n  output [15:0] result\n);\n  wire [15:0] mux_out;\n  wire [1:0] sel_signal;\n  \n  mux_16bit mux_inst(.in0(data_a), .in1(data_b), .in2(data_c), .in3(data_d), .sel(sel_signal), .out(mux_out));\n  \n  assign result = mux_out;\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

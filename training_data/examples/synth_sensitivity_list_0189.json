@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.vhdl\n+++ b/comparator.vhdl\n@@ -8,7 +8,7 @@ architecture rtl of comparator_8bit is\n begin\n \n-  process(x) is\n+  process(x, y) is\n   begin\n     if (x < y) then\n       less_than <= '1';",
+  "before_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity comparator_8bit is\n  port (\n    x, y : in std_logic_vector(7 downto 0);\n    less_than, equal, greater_than : out std_logic\n  );\nend entity;\n\narchitecture rtl of comparator_8bit is\nbegin\n\n  process(x) is\n  begin\n    if (x < y) then\n      less_than <= '1';\n      equal <= '0';\n      greater_than <= '0';\n    elsif (x = y) then\n      less_than <= '0';\n      equal <= '1';\n      greater_than <= '0';\n    else\n      less_than <= '0';\n      equal <= '0';\n      greater_than <= '1';\n    end if;\n  end process;\n\nend architecture;",
+  "after_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity comparator_8bit is\n  port (\n    x, y : in std_logic_vector(7 downto 0);\n    less_than, equal, greater_than : out std_logic\n  );\nend entity;\n\narchitecture rtl of comparator_8bit is\nbegin\n\n  process(x, y) is\n  begin\n    if (x < y) then\n      less_than <= '1';\n      equal <= '0';\n      greater_than <= '0';\n    elsif (x = y) then\n      less_than <= '0';\n      equal <= '1';\n      greater_than <= '0';\n    else\n      less_than <= '0';\n      equal <= '0';\n      greater_than <= '1';\n    end if;\n  end process;\n\nend architecture;",
+  "language": "vhdl",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

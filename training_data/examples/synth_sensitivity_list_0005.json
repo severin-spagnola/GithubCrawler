@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier.v\n+++ b/multiplier.v\n@@ -1,10 +1,10 @@\n module multiplier_8bit(\n   input [7:0] a,\n   input [7:0] b,\n   output reg [15:0] product\n );\n \n-  always @(a) begin\n+  always @(a or b) begin\n     product = a * b;\n   end\n \n endmodule",
+  "before_code": "module multiplier_8bit(\n  input [7:0] a,\n  input [7:0] b,\n  output reg [15:0] product\n);\n\n  always @(a) begin\n    product = a * b;\n  end\n\nendmodule",
+  "after_code": "module multiplier_8bit(\n  input [7:0] a,\n  input [7:0] b,\n  output reg [15:0] product\n);\n\n  always @(a or b) begin\n    product = a * b;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

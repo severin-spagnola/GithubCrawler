@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer_32bit.v\n+++ b/multiplexer_32bit.v\n@@ -1,11 +1,11 @@\n module multiplexer_32bit(\n   input [31:0] data_x,\n   input [31:0] data_y,\n   input select_line,\n   output reg [31:0] mux_out\n );\n \n-  always @(select_line)\n+  always @(select_line or data_x or data_y)\n     if (select_line)\n       mux_out = data_x;\n     else\n       mux_out = data_y;\n \n endmodule",
+  "before_code": "module multiplexer_32bit(\n  input [31:0] data_x,\n  input [31:0] data_y,\n  input select_line,\n  output reg [31:0] mux_out\n);\n\n  always @(select_line)\n    if (select_line)\n      mux_out = data_x;\n    else\n      mux_out = data_y;\n\nendmodule",
+  "after_code": "module multiplexer_32bit(\n  input [31:0] data_x,\n  input [31:0] data_y,\n  input select_line,\n  output reg [31:0] mux_out\n);\n\n  always @(select_line or data_x or data_y)\n    if (select_line)\n      mux_out = data_x;\n    else\n      mux_out = data_y;\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder_module.v\n+++ b/adder_module.v\n@@ -1,11 +1,11 @@\n module adder_module(\n   input [7:0] a,\n   input [7:0] b,\n   input [7:0] c,\n   output reg [7:0] result\n );\n \n-  always @(a)\n+  always @(a or b or c)\n   begin\n     result = a + b + c;\n   end\n \n endmodule",
+  "before_code": "module adder_module(\n  input [7:0] a,\n  input [7:0] b,\n  input [7:0] c,\n  output reg [7:0] result\n);\n\n  always @(a)\n  begin\n    result = a + b + c;\n  end\n\nendmodule",
+  "after_code": "module adder_module(\n  input [7:0] a,\n  input [7:0] b,\n  input [7:0] c,\n  output reg [7:0] result\n);\n\n  always @(a or b or c)\n  begin\n    result = a + b + c;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

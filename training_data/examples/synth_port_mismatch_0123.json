@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/decoder.sv\n+++ b/decoder.sv\n@@ -1,15 +1,15 @@\n module decoder_2to4(\n-  output logic [3:0] enable,\n   input [1:0] addr,\n+  output logic [3:0] enable,\n   input active\n );\n   always_comb begin\n     enable = '0;\n     if(active) enable[addr] = 1'b1;\n   end\n endmodule\n \n module system;\n   logic [1:0] address;\n   logic enable_in;\n   logic [3:0] output_lines;\n   decoder_2to4 dec_inst(.addr(address), .active(enable_in), .enable(output_lines));\n endmodule",
+  "before_code": "module decoder_2to4(\n  output logic [3:0] enable,\n  input [1:0] addr,\n  input active\n);\n  always_comb begin\n    enable = '0;\n    if(active) enable[addr] = 1'b1;\n  end\nendmodule\n\nmodule system;\n  logic [1:0] address;\n  logic enable_in;\n  logic [3:0] output_lines;\n  decoder_2to4 dec_inst(.addr(address), .active(enable_in), .enable(output_lines));\nendmodule",
+  "after_code": "module decoder_2to4(\n  input [1:0] addr,\n  output logic [3:0] enable,\n  input active\n);\n  always_comb begin\n    enable = '0;\n    if(active) enable[addr] = 1'b1;\n  end\nendmodule\n\nmodule system;\n  logic [1:0] address;\n  logic enable_in;\n  logic [3:0] output_lines;\n  decoder_2to4 dec_inst(.addr(address), .active(enable_in), .enable(output_lines));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

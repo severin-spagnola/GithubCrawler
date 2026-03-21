@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/arithmetic_unit.v\n+++ b/arithmetic_unit.v\n@@ -9,7 +9,7 @@\n   output [31:0] result\n );\n \n-  always @(operand_x or operand_y) begin\n+  always @(*) begin\n     case (operation)\n       3'b000: result = operand_x + operand_y;\n       3'b001: result = operand_x - operand_y;\n",
+  "before_code": "module arithmetic_unit (\n  input [31:0] operand_x,\n  input [31:0] operand_y,\n  input [2:0] operation,\n  output [31:0] result\n);\n\n  always @(operand_x or operand_y) begin\n    case (operation)\n      3'b000: result = operand_x + operand_y;\n      3'b001: result = operand_x - operand_y;\n      3'b010: result = operand_x & operand_y;\n      3'b011: result = operand_x | operand_y;\n      default: result = 32'b0;\n    endcase\n  end\nendmodule",
+  "after_code": "module arithmetic_unit (\n  input [31:0] operand_x,\n  input [31:0] operand_y,\n  input [2:0] operation,\n  output [31:0] result\n);\n\n  always @(*) begin\n    case (operation)\n      3'b000: result = operand_x + operand_y;\n      3'b001: result = operand_x - operand_y;\n      3'b010: result = operand_x & operand_y;\n      3'b011: result = operand_x | operand_y;\n      default: result = 32'b0;\n    endcase\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

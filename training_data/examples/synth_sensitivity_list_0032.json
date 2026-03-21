@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -1,10 +1,10 @@\n module priority_enc_16bit(\n   input [15:0] req,\n   output [3:0] grant,\n   output valid\n );\n-  always @(req[15] or req[14] or req[13]) begin\n+  always @(*) begin\n     if (req[15])\n       grant = 4'b1111;\n     else if (req[14])\n       grant = 4'b1110;\n     else if (req[13])\n",
+  "before_code": "module priority_enc_16bit(\n  input [15:0] req,\n  output [3:0] grant,\n  output valid\n);\n  always @(req[15] or req[14] or req[13]) begin\n    if (req[15])\n      grant = 4'b1111;\n    else if (req[14])\n      grant = 4'b1110;\n    else if (req[13])\n      grant = 4'b1101;\n    else\n      grant = 4'b0000;\n  end\n  assign valid = |req;\nendmodule",
+  "after_code": "module priority_enc_16bit(\n  input [15:0] req,\n  output [3:0] grant,\n  output valid\n);\n  always @(*) begin\n    if (req[15])\n      grant = 4'b1111;\n    else if (req[14])\n      grant = 4'b1110;\n    else if (req[13])\n      grant = 4'b1101;\n    else\n      grant = 4'b0000;\n  end\n  assign valid = |req;\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

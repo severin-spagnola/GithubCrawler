@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -9,7 +9,7 @@\n   output [3:0] priority_out\n );\n \n-  always @(request_bits or valid_mask)\n+  always @(request_bits or valid_mask or grant_enable)\n   begin\n     if (grant_enable == 1'b0)\n       priority_out = 4'h0;\n",
+  "before_code": "module priority_encoder_16bit (\n  input [15:0] request_bits,\n  input [15:0] valid_mask,\n  input grant_enable,\n  output [3:0] priority_out\n);\n\n  always @(request_bits or valid_mask)\n  begin\n    if (grant_enable == 1'b0)\n      priority_out = 4'h0;\n    else if (request_bits & valid_mask[0])\n      priority_out = 4'd0;\n    else if (request_bits & valid_mask[1])\n      priority_out = 4'd1;\n    else\n      priority_out = 4'hf;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder_16bit (\n  input [15:0] request_bits,\n  input [15:0] valid_mask,\n  input grant_enable,\n  output [3:0] priority_out\n);\n\n  always @(request_bits or valid_mask or grant_enable)\n  begin\n    if (grant_enable == 1'b0)\n      priority_out = 4'h0;\n    else if (request_bits & valid_mask[0])\n      priority_out = 4'd0;\n    else if (request_bits & valid_mask[1])\n      priority_out = 4'd1;\n    else\n      priority_out = 4'hf;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

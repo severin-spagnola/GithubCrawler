@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/decoder.sv\n+++ b/decoder.sv\n@@ -1,13 +1,13 @@\n module decoder_3to8 (\n   input [2:0] addr,\n   input enable,\n   output [7:0] out\n );\n   assign out = enable ? (8'b1 << addr) : 8'b0;\n endmodule\n \n module processor;\n   wire [2:0] address;\n   wire en_signal;\n-  decoder_3to8 inst (.addr(address), .out(decoded));\n+  decoder_3to8 inst (.addr(address), .enable(en_signal), .out(decoded));\n   wire [7:0] decoded;\n endmodule",
+  "before_code": "module decoder_3to8 (\n  input [2:0] addr,\n  input enable,\n  output [7:0] out\n);\n  assign out = enable ? (8'b1 << addr) : 8'b0;\nendmodule\n\nmodule processor;\n  wire [2:0] address;\n  wire en_signal;\n  decoder_3to8 inst (.addr(address), .out(decoded));\n  wire [7:0] decoded;\nendmodule",
+  "after_code": "module decoder_3to8 (\n  input [2:0] addr,\n  input enable,\n  output [7:0] out\n);\n  assign out = enable ? (8'b1 << addr) : 8'b0;\nendmodule\n\nmodule processor;\n  wire [2:0] address;\n  wire en_signal;\n  decoder_3to8 inst (.addr(address), .enable(en_signal), .out(decoded));\n  wire [7:0] decoded;\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

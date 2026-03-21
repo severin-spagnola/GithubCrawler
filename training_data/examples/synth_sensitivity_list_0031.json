@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter_sync.v\n+++ b/counter_sync.v\n@@ -1,7 +1,7 @@\n module sync_counter_32bit(\n   input clk,\n   input rst_n,\n   output [31:0] count\n );\n   reg [31:0] count_reg;\n-  always @(posedge clk) begin\n+  always @(posedge clk or negedge rst_n) begin\n     if (!rst_n)\n       count_reg <= 32'b0;\n     else\n",
+  "before_code": "module sync_counter_32bit(\n  input clk,\n  input rst_n,\n  output [31:0] count\n);\n  reg [31:0] count_reg;\n  always @(posedge clk) begin\n    if (!rst_n)\n      count_reg <= 32'b0;\n    else\n      count_reg <= count_reg + 1;\n  end\n  assign count = count_reg;\nendmodule",
+  "after_code": "module sync_counter_32bit(\n  input clk,\n  input rst_n,\n  output [31:0] count\n);\n  reg [31:0] count_reg;\n  always @(posedge clk or negedge rst_n) begin\n    if (!rst_n)\n      count_reg <= 32'b0;\n    else\n      count_reg <= count_reg + 1;\n  end\n  assign count = count_reg;\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

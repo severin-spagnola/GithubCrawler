@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/decoder.v\n+++ b/decoder.v\n@@ -8,8 +8,9 @@ module main_logic(\n   output [7:0] decoded\n );\n   decode_4to8 decoder (\n-    .select(sel),\n+    .addr(sel),\n     .enable(en),\n-    .output_bus(decoded)\n+    .output_bus(decoded),\n+    .parity_out()\n   );\n endmodule",
+  "before_code": "module decode_4to8(\n  input [3:0] addr,\n  input enable,\n  output [7:0] output_bus,\n  output parity_out\n);\n  assign output_bus = enable ? (8'b1 << addr) : 8'b0;\n  assign parity_out = ^output_bus;\nendmodule\n\nmodule main_logic(\n  input [3:0] sel,\n  input en,\n  output [7:0] decoded\n);\n  decode_4to8 decoder (\n    .select(sel),\n    .enable(en),\n    .output_bus(decoded)\n  );\nendmodule",
+  "after_code": "module decode_4to8(\n  input [3:0] addr,\n  input enable,\n  output [7:0] output_bus,\n  output parity_out\n);\n  assign output_bus = enable ? (8'b1 << addr) : 8'b0;\n  assign parity_out = ^output_bus;\nendmodule\n\nmodule main_logic(\n  input [3:0] sel,\n  input en,\n  output [7:0] decoded\n);\n  decode_4to8 decoder (\n    .addr(sel),\n    .enable(en),\n    .output_bus(decoded),\n    .parity_out()\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

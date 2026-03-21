@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/alu_comparator.vhdl\n+++ b/alu_comparator.vhdl\n@@ -8,7 +8,7 @@\n     output : out std_logic_vector(31 downto 0)\n   );\n end entity;\n-architecture rtl of alu_comparator is\n+architecture rtl of alu_comparator is\n begin\n-  process(input_a)\n+  process(input_a, input_b, operation_select)\n   begin\n     case operation_select is\n",
+  "before_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity alu_comparator is\n  port (\n    input_a : in std_logic_vector(31 downto 0);\n    input_b : in std_logic_vector(31 downto 0);\n    operation_select : in std_logic_vector(2 downto 0);\n    output : out std_logic_vector(31 downto 0)\n  );\nend entity;\n\narchitecture rtl of alu_comparator is\nbegin\n  process(input_a)\n  begin\n    case operation_select is\n      when \"000\" => output <= input_a and input_b;\n      when \"001\" => output <= input_a or input_b;\n      when \"010\" => output <= input_a xor input_b;\n      when others => output <= (others => '0');\n    end case;\n  end process;\nend architecture;",
+  "after_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity alu_comparator is\n  port (\n    input_a : in std_logic_vector(31 downto 0);\n    input_b : in std_logic_vector(31 downto 0);\n    operation_select : in std_logic_vector(2 downto 0);\n    output : out std_logic_vector(31 downto 0)\n  );\nend entity;\n\narchitecture rtl of alu_comparator is\nbegin\n  process(input_a, input_b, operation_select)\n  begin\n    case operation_select is\n      when \"000\" => output <= input_a and input_b;\n      when \"001\" => output <= input_a or input_b;\n      when \"010\" => output <= input_a xor input_b;\n      when others => output <= (others => '0');\n    end case;\n  end process;\nend architecture;",
+  "language": "vhdl",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

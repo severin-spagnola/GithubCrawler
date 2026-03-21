@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/memory_ctrl.sv\n+++ b/memory_ctrl.sv\n@@ -12,7 +12,7 @@ module memory_controller (\n   ram_16bit ram_inst (\n     .addr(address),\n     .data_in(write_data),\n-    .data_out(read_data),\n+    .dout(read_data),\n     .we(write_enable)\n   );\n \n endmodule",
+  "before_code": "module ram_16bit (\n  input [7:0] addr,\n  input [15:0] data_in,\n  output [15:0] dout,\n  input we\n);\n  reg [15:0] mem [255:0];\n  \n  always @(*) begin\n    if (we) mem[addr] <= data_in;\n  end\nendmodule\n\nmodule memory_controller (\n  input [7:0] address,\n  input [15:0] write_data,\n  output [15:0] read_data,\n  input write_enable\n);\n  ram_16bit ram_inst (\n    .addr(address),\n    .data_in(write_data),\n    .data_out(read_data),\n    .we(write_enable)\n  );\nendmodule",
+  "after_code": "module ram_16bit (\n  input [7:0] addr,\n  input [15:0] data_in,\n  output [15:0] dout,\n  input we\n);\n  reg [15:0] mem [255:0];\n  \n  always @(*) begin\n    if (we) mem[addr] <= data_in;\n  end\nendmodule\n\nmodule memory_controller (\n  input [7:0] address,\n  input [15:0] write_data,\n  output [15:0] read_data,\n  input write_enable\n);\n  ram_16bit ram_inst (\n    .addr(address),\n    .data_in(write_data),\n    .dout(read_data),\n    .we(write_enable)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

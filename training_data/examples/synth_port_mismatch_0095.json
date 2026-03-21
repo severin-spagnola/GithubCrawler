@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier.v\n+++ b/multiplier.v\n@@ -12,7 +12,7 @@ endmodule\n \n module top_mult;\n   wire [7:0] a, b;\n   wire [15:0] result;\n-  multiplier mult_inst (.a(a), .b(b), .product(result));\n+  multiplier mult_inst (.a(a), .b(b), .prod(result));\n endmodule",
+  "before_code": "module multiplier (\n  input [7:0] a,\n  input [7:0] b,\n  output [15:0] prod\n);\n  assign prod = a * b;\nendmodule\n\nmodule top_mult;\n  wire [7:0] a, b;\n  wire [15:0] result;\n  multiplier mult_inst (.a(a), .b(b), .product(result));\nendmodule",
+  "after_code": "module multiplier (\n  input [7:0] a,\n  input [7:0] b,\n  output [15:0] prod\n);\n  assign prod = a * b;\nendmodule\n\nmodule top_mult;\n  wire [7:0] a, b;\n  wire [15:0] result;\n  multiplier mult_inst (.a(a), .b(b), .prod(result));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

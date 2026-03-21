@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.v\n+++ b/shifter.v\n@@ -1,7 +1,7 @@\n module barrel_shifter(\n-  input [31:0] data_in,\n+  input [15:0] data_in,\n   input [3:0] shift_amount,\n   input direction,\n-  output [31:0] data_out\n+  output [15:0] data_out\n );\n   assign data_out = direction ? (data_in >> shift_amount) : (data_in << shift_amount);\n endmodule",
+  "before_code": "module barrel_shifter(\n  input [31:0] data_in,\n  input [3:0] shift_amount,\n  input direction,\n  output [31:0] data_out\n);\n  assign data_out = direction ? (data_in >> shift_amount) : (data_in << shift_amount);\nendmodule\n\nmodule processor();\n  reg [15:0] data_bus;\n  reg [3:0] shift_val;\n  reg shift_dir;\n  wire [15:0] shifted_result;\n  \n  barrel_shifter shifter(\n    .data_in(data_bus),\n    .shift_amount(shift_val),\n    .direction(shift_dir),\n    .data_out(shifted_result)\n  );\nendmodule",
+  "after_code": "module barrel_shifter(\n  input [15:0] data_in,\n  input [3:0] shift_amount,\n  input direction,\n  output [15:0] data_out\n);\n  assign data_out = direction ? (data_in >> shift_amount) : (data_in << shift_amount);\nendmodule\n\nmodule processor();\n  reg [15:0] data_bus;\n  reg [3:0] shift_val;\n  reg shift_dir;\n  wire [15:0] shifted_result;\n  \n  barrel_shifter shifter(\n    .data_in(data_bus),\n    .shift_amount(shift_val),\n    .direction(shift_dir),\n    .data_out(shifted_result)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

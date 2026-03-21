@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder.v\n+++ b/adder.v\n@@ -10,7 +10,7 @@ module top_module(\n   wire [7:0] sum_result;\n   \n   // Instantiate adder\n-  adder_8bit add_inst(.a(input_a), .b(input_b), .carry_in(cin), .sum(sum_result), .carry_out(cout));\n+  adder_8bit add_inst(.a(input_a), .b(input_b), .c_in(cin), .sum(sum_result), .c_out(cout));\n   \n   assign output_sum = sum_result;\n endmodule",
+  "before_code": "module adder_8bit(\n  input [7:0] a, b,\n  input c_in,\n  output [7:0] sum,\n  output c_out\n);\n  assign {c_out, sum} = a + b + c_in;\nendmodule\n\nmodule top_module(\n  input [7:0] input_a, input_b,\n  input cin,\n  output [7:0] output_sum,\n  output cout\n);\n  wire [7:0] sum_result;\n  \n  // Instantiate adder\n  adder_8bit add_inst(.a(input_a), .b(input_b), .carry_in(cin), .sum(sum_result), .carry_out(cout));\n  \n  assign output_sum = sum_result;\nendmodule",
+  "after_code": "module adder_8bit(\n  input [7:0] a, b,\n  input c_in,\n  output [7:0] sum,\n  output c_out\n);\n  assign {c_out, sum} = a + b + c_in;\nendmodule\n\nmodule top_module(\n  input [7:0] input_a, input_b,\n  input cin,\n  output [7:0] output_sum,\n  output cout\n);\n  wire [7:0] sum_result;\n  \n  // Instantiate adder\n  adder_8bit add_inst(.a(input_a), .b(input_b), .c_in(cin), .sum(sum_result), .c_out(cout));\n  \n  assign output_sum = sum_result;\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

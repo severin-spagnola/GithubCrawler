@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder_64bit.v\n+++ b/priority_encoder_64bit.v\n@@ -6,7 +6,7 @@\n     output reg [5:0] priority\n   );\n \n-  always @(data_in)\n+  always @(*)\n   begin\n     priority = 6'b0;\n     if (data_in[63])\n",
+  "before_code": "module priority_encoder_64bit (\n  input [63:0] data_in,\n  output reg [5:0] priority\n);\n\n  always @(data_in)\n  begin\n    priority = 6'b0;\n    if (data_in[63])\n      priority = 6'd63;\n    else if (data_in[62])\n      priority = 6'd62;\n    else if (data_in[1])\n      priority = 6'd1;\n    else if (data_in[0])\n      priority = 6'd0;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder_64bit (\n  input [63:0] data_in,\n  output reg [5:0] priority\n);\n\n  always @(*)\n  begin\n    priority = 6'b0;\n    if (data_in[63])\n      priority = 6'd63;\n    else if (data_in[62])\n      priority = 6'd62;\n    else if (data_in[1])\n      priority = 6'd1;\n    else if (data_in[0])\n      priority = 6'd0;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

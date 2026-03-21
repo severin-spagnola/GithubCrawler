@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.sv\n+++ b/shifter.sv\n@@ -1,7 +1,7 @@ module barrel_shifter(\n-  input [7:0] din,\n+  output [7:0] din,\n   input [2:0] shift_amount,\n-  output [7:0] dout\n+  input [7:0] dout\n );\n   assign dout = din >> shift_amount;\n endmodule",
+  "before_code": "module barrel_shifter(\n  input [7:0] din,\n  input [2:0] shift_amount,\n  output [7:0] dout\n);\n  assign dout = din >> shift_amount;\nendmodule\n\nmodule processor(\n  input [7:0] data_in,\n  input [2:0] shift_bits,\n  output [7:0] data_out\n);\n  // BUG: ports are swapped - din should be input, dout should be output\n  barrel_shifter shifter(.din(data_in), .shift_amount(shift_bits), .dout(data_out));\nendmodule",
+  "after_code": "module barrel_shifter(\n  output [7:0] din,\n  input [2:0] shift_amount,\n  input [7:0] dout\n);\n  assign dout = din >> shift_amount;\nendmodule\n\nmodule processor(\n  input [7:0] data_in,\n  input [2:0] shift_bits,\n  output [7:0] data_out\n);\n  // BUG: ports are swapped - din should be input, dout should be output\n  barrel_shifter shifter(.din(data_in), .shift_amount(shift_bits), .dout(data_out));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

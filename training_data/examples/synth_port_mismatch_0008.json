@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/decoder.v\n+++ b/decoder.v\n@@ -1,7 +1,7 @@\n module decoder_3to8(\n     input [2:0] address,\n     input enable,\n-    output reg [7:0] outputs\n+    output reg [7:0] decoded_out\n );\n     always @(*)\n         if (enable)\n@@ -11,10 +11,10 @@\n         else\n-            outputs = 8'b0;\n+            decoded_out = 8'b0;\n \n module top();\n     wire [2:0] addr;\n     wire en;\n     wire [7:0] out_bus;\n     decoder_3to8 inst(\n         .address(addr),\n         .enable(en),\n-        .outputs(out_bus)\n+        .decoded_out(out_bus)\n     );\n",
+  "before_code": "module decoder_3to8(\n    input [2:0] address,\n    input enable,\n    output reg [7:0] outputs\n);\n    always @(*)\n        if (enable)\n            outputs = 8'b1 << address;\n        else\n            outputs = 8'b0;\nendmodule\n\nmodule top();\n    wire [2:0] addr;\n    wire en;\n    wire [7:0] out_bus;\n    decoder_3to8 inst(\n        .address(addr),\n        .enable(en),\n        .decoded_out(out_bus)\n    );\nendmodule",
+  "after_code": "module decoder_3to8(\n    input [2:0] address,\n    input enable,\n    output reg [7:0] decoded_out\n);\n    always @(*)\n        if (enable)\n            decoded_out = 8'b1 << address;\n        else\n            decoded_out = 8'b0;\nendmodule\n\nmodule top();\n    wire [2:0] addr;\n    wire en;\n    wire [7:0] out_bus;\n    decoder_3to8 inst(\n        .address(addr),\n        .enable(en),\n        .decoded_out(out_bus)\n    );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

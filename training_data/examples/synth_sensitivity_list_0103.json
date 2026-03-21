@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -1,16 +1,16 @@\n module priority_encoder (\n   input [63:0] request,\n   input [7:0] mask,\n   output reg [7:0] priority_out\n );\n \n-  always @(request) begin\n+  always @(request or mask) begin\n     priority_out = 8'b0;\n     for (int i = 0; i < 64; i = i + 1) begin\n       if (request[i] && !mask[i % 8]) begin\n         priority_out = i[7:0];\n         break;\n       end\n     end\n   end\n \n endmodule",
+  "before_code": "module priority_encoder (\n  input [63:0] request,\n  input [7:0] mask,\n  output reg [7:0] priority_out\n);\n\n  always @(request) begin\n    priority_out = 8'b0;\n    for (int i = 0; i < 64; i = i + 1) begin\n      if (request[i] && !mask[i % 8]) begin\n        priority_out = i[7:0];\n        break;\n      end\n    end\n  end\n\nendmodule",
+  "after_code": "module priority_encoder (\n  input [63:0] request,\n  input [7:0] mask,\n  output reg [7:0] priority_out\n);\n\n  always @(request or mask) begin\n    priority_out = 8'b0;\n    for (int i = 0; i < 64; i = i + 1) begin\n      if (request[i] && !mask[i % 8]) begin\n        priority_out = i[7:0];\n        break;\n      end\n    end\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

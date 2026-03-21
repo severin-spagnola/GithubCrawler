@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux_selector.v\n+++ b/mux_selector.v\n@@ -1,12 +1,12 @@\n module mux_16bit(\n     input [15:0] data0,\n     input [15:0] data1,\n     input [15:0] data2,\n     input [15:0] data3,\n     input [1:0] sel,\n     output reg [15:0] out\n );\n \n-    always @(sel) begin\n+    always @(sel or data0 or data1 or data2 or data3) begin\n         case(sel)\n             2'b00: out = data0;\n             2'b01: out = data1;\n             2'b10: out = data2;\n             2'b11: out = data3;\n         endcase",
+  "before_code": "module mux_16bit(\n    input [15:0] data0,\n    input [15:0] data1,\n    input [15:0] data2,\n    input [15:0] data3,\n    input [1:0] sel,\n    output reg [15:0] out\n );\n \n    always @(sel) begin\n        case(sel)\n            2'b00: out = data0;\n            2'b01: out = data1;\n            2'b10: out = data2;\n            2'b11: out = data3;\n        endcase\n    end\n \nendmodule",
+  "after_code": "module mux_16bit(\n    input [15:0] data0,\n    input [15:0] data1,\n    input [15:0] data2,\n    input [15:0] data3,\n    input [1:0] sel,\n    output reg [15:0] out\n );\n \n    always @(sel or data0 or data1 or data2 or data3) begin\n        case(sel)\n            2'b00: out = data0;\n            2'b01: out = data1;\n            2'b10: out = data2;\n            2'b11: out = data3;\n        endcase\n    end\n \nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

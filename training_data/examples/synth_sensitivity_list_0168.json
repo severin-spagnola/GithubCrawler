@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/barrel_shifter.v\n+++ b/barrel_shifter.v\n@@ -8,7 +8,7 @@\n   output reg [63:0] shift_result\n );\n \n-  always @(shift_amount or shift_dir)\n+  always @(data_in or shift_amount or shift_dir)\n   begin\n     if (shift_dir == 1'b0)\n       shift_result = data_in << shift_amount;\n",
+  "before_code": "module barrel_shifter_64bit (\n  input [63:0] data_in,\n  input [5:0] shift_amount,\n  input shift_dir,\n  output reg [63:0] shift_result\n);\n\n  always @(shift_amount or shift_dir)\n  begin\n    if (shift_dir == 1'b0)\n      shift_result = data_in << shift_amount;\n    else\n      shift_result = data_in >> shift_amount;\n  end\n\nendmodule",
+  "after_code": "module barrel_shifter_64bit (\n  input [63:0] data_in,\n  input [5:0] shift_amount,\n  input shift_dir,\n  output reg [63:0] shift_result\n);\n\n  always @(data_in or shift_amount or shift_dir)\n  begin\n    if (shift_dir == 1'b0)\n      shift_result = data_in << shift_amount;\n    else\n      shift_result = data_in >> shift_amount;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

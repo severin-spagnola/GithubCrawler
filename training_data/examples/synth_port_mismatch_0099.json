@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/parity.v\n+++ b/parity.v\n@@ -8,6 +8,6 @@ endmodule\n \n module test_parity;\n   wire [7:0] data_in;\n   wire parity_out;\n-  parity_gen par_inst (.data(data_in));\n+  parity_gen par_inst (.data(data_in), .parity(parity_out));\n endmodule",
+  "before_code": "module parity_gen (\n  input [7:0] data,\n  output parity\n);\n  assign parity = ^data;\nendmodule\n\nmodule test_parity;\n  wire [7:0] data_in;\n  wire parity_out;\n  parity_gen par_inst (.data(data_in));\nendmodule",
+  "after_code": "module parity_gen (\n  input [7:0] data,\n  output parity\n);\n  assign parity = ^data;\nendmodule\n\nmodule test_parity;\n  wire [7:0] data_in;\n  wire parity_out;\n  parity_gen par_inst (.data(data_in), .parity(parity_out));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/sync_counter.v\n+++ b/sync_counter.v\n@@ -5,7 +5,7 @@\n   output reg [15:0] count\n );\n \n-  always @(posedge clk) begin\n+  always @(posedge clk or negedge reset_n) begin\n     if (!reset_n)\n       count <= 16'b0;\n     else\n",
+  "before_code": "module sync_counter (\n  input clk,\n  input reset_n,\n  output reg [15:0] count\n);\n\n  always @(posedge clk) begin\n    if (!reset_n)\n      count <= 16'b0;\n    else\n      count <= count + 1'b1;\n  end\nendmodule",
+  "after_code": "module sync_counter (\n  input clk,\n  input reset_n,\n  output reg [15:0] count\n);\n\n  always @(posedge clk or negedge reset_n) begin\n    if (!reset_n)\n      count <= 16'b0;\n    else\n      count <= count + 1'b1;\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

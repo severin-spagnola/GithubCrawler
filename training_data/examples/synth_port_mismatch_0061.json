@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.sv\n+++ b/multiplexer.sv\n@@ -1,16 +1,16 @@\n module mux_4to1(\n   input [3:0] data_in,\n   input [1:0] select,\n   output out\n );\n   assign out = data_in[select];\n endmodule\n \n module test_mux;\n   reg [3:0] input_data;\n   reg [1:0] sel;\n   wire output_bit;\n-  mux_4to1 mux_inst (.data_input(input_data), .select(sel), .out(output_bit));\n+  mux_4to1 mux_inst (.data_in(input_data), .select(sel), .out(output_bit));\n endmodule",
+  "before_code": "module mux_4to1(\n  input [3:0] data_in,\n  input [1:0] select,\n  output out\n);\n  assign out = data_in[select];\nendmodule\n\nmodule test_mux;\n  reg [3:0] input_data;\n  reg [1:0] sel;\n  wire output_bit;\n  mux_4to1 mux_inst (.data_input(input_data), .select(sel), .out(output_bit));\nendmodule",
+  "after_code": "module mux_4to1(\n  input [3:0] data_in,\n  input [1:0] select,\n  output out\n);\n  assign out = data_in[select];\nendmodule\n\nmodule test_mux;\n  reg [3:0] input_data;\n  reg [1:0] sel;\n  wire output_bit;\n  mux_4to1 mux_inst (.data_in(input_data), .select(sel), .out(output_bit));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,13 +1,13 @@\n module counter16 (\n   input clk,\n   input rst_n,\n   input enable,\n   output [15:0] count\n );\n   reg [15:0] counter;\n   always @(posedge clk or negedge rst_n)\n     if (!rst_n) counter <= 0;\n     else if (enable) counter <= counter + 1;\n   assign count = counter;\n endmodule\n \n module top;\n   wire clock, reset, en;\n   wire [15:0] cnt;\n-  counter16 inst (.clk(clock), .enable(en), .count(cnt));\n+  counter16 inst (.clk(clock), .rst_n(reset), .enable(en), .count(cnt));\n endmodule",
+  "before_code": "module counter16 (\n  input clk,\n  input rst_n,\n  input enable,\n  output [15:0] count\n);\n  reg [15:0] counter;\n  always @(posedge clk or negedge rst_n)\n    if (!rst_n) counter <= 0;\n    else if (enable) counter <= counter + 1;\n  assign count = counter;\nendmodule\n\nmodule top;\n  wire clock, reset, en;\n  wire [15:0] cnt;\n  counter16 inst (.clk(clock), .enable(en), .count(cnt));\nendmodule",
+  "after_code": "module counter16 (\n  input clk,\n  input rst_n,\n  input enable,\n  output [15:0] count\n);\n  reg [15:0] counter;\n  always @(posedge clk or negedge rst_n)\n    if (!rst_n) counter <= 0;\n    else if (enable) counter <= counter + 1;\n  assign count = counter;\nendmodule\n\nmodule top;\n  wire clock, reset, en;\n  wire [15:0] cnt;\n  counter16 inst (.clk(clock), .rst_n(reset), .enable(en), .count(cnt));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

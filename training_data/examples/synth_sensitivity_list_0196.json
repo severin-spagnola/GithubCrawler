@@ -1,0 +1,9 @@
+{
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true,
+  "patch": "--- a/counter_32bit.v\n+++ b/counter_32bit.v\n@@ -1,10 +1,10 @@\n module counter_32bit(\n   input clk,\n   input rst_n,\n   input enable,\n   output reg [31:0] count\n );\n \n-  always @(posedge clk) begin\n+  always @(posedge clk or negedge rst_n) begin\n     if(!rst_n)\n       count <= 32'b0;\n     else if(enable)",
+  "before_code": "module counter_32bit(\n  input clk,\n  input rst_n,\n  input enable,\n  output reg [31:0] count\n);\n\n  always @(posedge clk) begin\n    if(!rst_n)\n      count <= 32'b0;\n    else if(enable)\n      count <= count + 1'b1;\n  end\n\nendmodule",
+  "after_code": "module counter_32bit(\n  input clk,\n  input rst_n,\n  input enable,\n  output reg [31:0] count\n);\n\n  always @(posedge clk or negedge rst_n) begin\n    if(!rst_n)\n      count <= 32'b0;\n    else if(enable)\n      count <= count + 1'b1;\n  end\n\nendmodule"
+}

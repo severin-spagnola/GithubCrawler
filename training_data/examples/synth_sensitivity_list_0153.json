@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/parity_checker.sv\n+++ b/parity_checker.sv\n@@ -1,10 +1,10 @@\n module parity_checker_64bit(\n     input [63:0] data_in,\n     input enable,\n     output reg parity_out\n );\n \n-    always_comb begin\n+    always @(*) begin\n         if (enable)\n             parity_out = ^data_in;\n         else\n             parity_out = 1'b0;\n     end",
+  "before_code": "module parity_checker_64bit(\n    input [63:0] data_in,\n    input enable,\n    output reg parity_out\n );\n \n    always_comb begin\n        if (enable)\n            parity_out = ^data_in;\n        else\n            parity_out = 1'b0;\n    end\n \nendmodule",
+  "after_code": "module parity_checker_64bit(\n    input [63:0] data_in,\n    input enable,\n    output reg parity_out\n );\n \n    always @(*) begin\n        if (enable)\n            parity_out = ^data_in;\n        else\n            parity_out = 1'b0;\n    end\n \nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

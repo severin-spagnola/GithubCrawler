@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/decoder.sv\n+++ b/decoder.sv\n@@ -1,15 +1,15 @@\n module decoder_32bit(\n   input wire [4:0] address,\n-  output reg [31:0] decoded_out\n+  output reg [31:0] decoded_out,\n+  input wire valid_en\n );\n   always @(*) begin\n-    decoded_out = 32'b0;\n-    decoded_out[address] = 1'b1;\n+    if (valid_en) begin\n+      decoded_out = 32'b0;\n+      decoded_out[address] = 1'b1;\n+    end else\n+      decoded_out = 32'b0;\n   end\n endmodule\n \n module top_module;\n   wire [4:0] addr;\n-  wire [31:0] out;\n-  decoder_32bit dec (.address(addr), .decoded_out(out), .valid_en(1'b1));\n+  wire [31:0] out;\n+  decoder_32bit dec (.address(addr), .decoded_out(out), .valid_en(1'b1));\n endmodule",
+  "before_code": "module decoder_32bit(\n  input wire [4:0] address,\n  output reg [31:0] decoded_out\n);\n  always @(*) begin\n    decoded_out = 32'b0;\n    decoded_out[address] = 1'b1;\n  end\nendmodule\n\nmodule top_module;\n  wire [4:0] addr;\n  wire [31:0] out;\n  decoder_32bit dec (.address(addr), .decoded_out(out), .valid_en(1'b1));\nendmodule",
+  "after_code": "module decoder_32bit(\n  input wire [4:0] address,\n  output reg [31:0] decoded_out,\n  input wire valid_en\n);\n  always @(*) begin\n    if (valid_en) begin\n      decoded_out = 32'b0;\n      decoded_out[address] = 1'b1;\n    end else\n      decoded_out = 32'b0;\n  end\nendmodule\n\nmodule top_module;\n  wire [4:0] addr;\n  wire [31:0] out;\n  decoder_32bit dec (.address(addr), .decoded_out(out), .valid_en(1'b1));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

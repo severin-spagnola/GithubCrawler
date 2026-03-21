@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/fifo_controller.v\n+++ b/fifo_controller.v\n@@ -12,8 +12,9 @@ endmodule\n   fifo_ctrl fifo_inst (\n     .clk(sys_clk),\n     .reset(sys_reset),\n     .data_in(din[15:0]),\n-    .write_en(wr_enable)\n+    .write_en(wr_enable),\n+    .data_out(dout[15:0])\n   );\n endmodule",
+  "before_code": "module fifo_ctrl (\n  input clk,\n  input reset,\n  input [15:0] data_in,\n  input write_en,\n  output [15:0] data_out\n);\n  // FIFO logic\nendmodule\n\nmodule top_fifo;\n  fifo_ctrl fifo_inst (\n    .clk(sys_clk),\n    .reset(sys_reset),\n    .data_in(din[15:0]),\n    .write_en(wr_enable)\n  );\nendmodule",
+  "after_code": "module fifo_ctrl (\n  input clk,\n  input reset,\n  input [15:0] data_in,\n  input write_en,\n  output [15:0] data_out\n);\n  // FIFO logic\nendmodule\n\nmodule top_fifo;\n  fifo_ctrl fifo_inst (\n    .clk(sys_clk),\n    .reset(sys_reset),\n    .data_in(din[15:0]),\n    .write_en(wr_enable),\n    .data_out(dout[15:0])\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

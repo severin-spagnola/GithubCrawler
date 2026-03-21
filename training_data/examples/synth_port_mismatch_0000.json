@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder_top.v\n+++ b/adder_top.v\n@@ -15,7 +15,7 @@ module adder_top (\n   adder_4bit add_inst (\n     .a(input_a),\n     .b(input_b),\n-    .sum_out(result),\n+    .sum(result),\n     .carry_out(carry_flag)\n   );\n \n",
+  "before_code": "module adder_4bit (\n  input [3:0] a,\n  input [3:0] b,\n  output [4:0] sum,\n  output carry_out\n);\n  assign {carry_out, sum} = a + b;\nendmodule\n\nmodule adder_top (\n  input [3:0] input_a,\n  input [3:0] input_b,\n  output [4:0] result,\n  output carry_flag\n);\n  adder_4bit add_inst (\n    .a(input_a),\n    .b(input_b),\n    .sum_out(result),\n    .carry_out(carry_flag)\n  );\nendmodule",
+  "after_code": "module adder_4bit (\n  input [3:0] a,\n  input [3:0] b,\n  output [4:0] sum,\n  output carry_out\n);\n  assign {carry_out, sum} = a + b;\nendmodule\n\nmodule adder_top (\n  input [3:0] input_a,\n  input [3:0] input_b,\n  output [4:0] result,\n  output carry_flag\n);\n  adder_4bit add_inst (\n    .a(input_a),\n    .b(input_b),\n    .sum(result),\n    .carry_out(carry_flag)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

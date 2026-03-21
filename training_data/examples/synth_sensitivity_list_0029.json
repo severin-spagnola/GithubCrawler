@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/controller_fsm.vhd\n+++ b/controller_fsm.vhd\n@@ -12,7 +12,7 @@\n     state_next : out std_logic_vector(2 downto 0)\n   );\n   \n-  process(state_curr, reset)\n+  process(state_curr, reset, input_signal)\n   begin\n     if reset = '1' then\n       state_next <= \"000\";\n",
+  "before_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity controller_fsm is\n  port (\n    clk : in std_logic;\n    reset : in std_logic;\n    input_signal : in std_logic;\n    state_curr : in std_logic_vector(2 downto 0);\n    state_next : out std_logic_vector(2 downto 0)\n  );\nend entity;\n\narchitecture rtl of controller_fsm is\nbegin\n  process(state_curr, reset)\n  begin\n    if reset = '1' then\n      state_next <= \"000\";\n    elsif state_curr = \"001\" and input_signal = '1' then\n      state_next <= \"010\";\n    else\n      state_next <= state_curr;\n    end if;\n  end process;\nend architecture;",
+  "after_code": "library ieee;\nuse ieee.std_logic_1164.all;\n\nentity controller_fsm is\n  port (\n    clk : in std_logic;\n    reset : in std_logic;\n    input_signal : in std_logic;\n    state_curr : in std_logic_vector(2 downto 0);\n    state_next : out std_logic_vector(2 downto 0)\n  );\nend entity;\n\narchitecture rtl of controller_fsm is\nbegin\n  process(state_curr, reset, input_signal)\n  begin\n    if reset = '1' then\n      state_next <= \"000\";\n    elsif state_curr = \"001\" and input_signal = '1' then\n      state_next <= \"010\";\n    else\n      state_next <= state_curr;\n    end if;\n  end process;\nend architecture;",
+  "language": "vhdl",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

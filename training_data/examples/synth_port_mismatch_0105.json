@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "verilog",
+  "before_code": "module adder_4bit (\n  input [3:0] a,\n  input [3:0] b,\n  output [4:0] sum\n);\n  assign sum = a + b;\nendmodule\n\nmodule top_module (\n  input [3:0] x,\n  input [3:0] y,\n  output [4:0] result\n);\n  adder_4bit adder_inst (\n    .a(x),\n    .b(y),\n    .output_sum(result)  // BUG: port name is 'sum', not 'output_sum'\n  );\nendmodule",
+  "after_code": "module adder_4bit (\n  input [3:0] a,\n  input [3:0] b,\n  output [4:0] sum\n);\n  assign sum = a + b;\nendmodule\n\nmodule top_module (\n  input [3:0] x,\n  input [3:0] y,\n  output [4:0] result\n);\n  adder_4bit adder_inst (\n    .a(x),\n    .b(y),\n    .sum(result)  // FIXED: corrected port name from 'output_sum' to 'sum'\n  );\nendmodule",
+  "patch": "--- a/top_module.v\n+++ b/top_module.v\n@@ -9,7 +9,7 @@ module top_module (\n   adder_4bit adder_inst (\n     .a(x),\n     .b(y),\n-    .output_sum(result)  // BUG: port name is 'sum', not 'output_sum'\n+    .sum(result)  // FIXED: corrected port name from 'output_sum' to 'sum'\n   );\n endmodule"
+}

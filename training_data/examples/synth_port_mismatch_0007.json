@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.sv\n+++ b/counter.sv\n@@ -1,7 +1,7 @@\n module counter_16bit(\n     input clk,\n     input rst,\n-    input [15:0] load_val,\n+    input [15:0] load_value,\n     input load_en,\n     output [15:0] count_out\n );\n@@ -13,7 +13,7 @@\n module top();\n     logic clk, rst, load_en;\n     logic [15:0] load_data, counter_output;\n     counter_16bit inst(\n-        .load_val(load_data),\n+        .load_value(load_data),\n         .load_en(load_en),\n         .count_out(counter_output),\n         .clk(clk),\n",
+  "before_code": "module counter_16bit(\n    input clk,\n    input rst,\n    input [15:0] load_val,\n    input load_en,\n    output [15:0] count_out\n);\n    always @(posedge clk or posedge rst)\n        if (rst) count_out <= 0;\n        else if (load_en) count_out <= load_val;\n        else count_out <= count_out + 1;\nendmodule\n\nmodule top();\n    logic clk, rst, load_en;\n    logic [15:0] load_data, counter_output;\n    counter_16bit inst(\n        .load_value(load_data),\n        .load_en(load_en),\n        .count_out(counter_output),\n        .clk(clk),\n        .rst(rst)\n    );\nendmodule",
+  "after_code": "module counter_16bit(\n    input clk,\n    input rst,\n    input [15:0] load_value,\n    input load_en,\n    output [15:0] count_out\n);\n    always @(posedge clk or posedge rst)\n        if (rst) count_out <= 0;\n        else if (load_en) count_out <= load_value;\n        else count_out <= count_out + 1;\nendmodule\n\nmodule top();\n    logic clk, rst, load_en;\n    logic [15:0] load_data, counter_output;\n    counter_16bit inst(\n        .load_value(load_data),\n        .load_en(load_en),\n        .count_out(counter_output),\n        .clk(clk),\n        .rst(rst)\n    );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

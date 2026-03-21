@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,13 +1,13 @@\n module comparator_16bit (\n   input [15:0] data_x,\n   input [15:0] data_y,\n   output equal_flag\n );\n   assign equal_flag = (data_x == data_y);\n endmodule\n \n module top;\n   wire [15:0] val1, val2;\n   wire match;\n-  comparator_16bit cmp1 (.data_x(val1[7:0]), .data_y(val2), .equal_flag(match));\n+  comparator_16bit cmp1 (.data_x(val1), .data_y(val2), .equal_flag(match));\n endmodule",
+  "before_code": "module comparator_16bit (\n  input [15:0] data_x,\n  input [15:0] data_y,\n  output equal_flag\n);\n  assign equal_flag = (data_x == data_y);\nendmodule\n\nmodule top;\n  wire [15:0] val1, val2;\n  wire match;\n  comparator_16bit cmp1 (.data_x(val1[7:0]), .data_y(val2), .equal_flag(match));\nendmodule",
+  "after_code": "module comparator_16bit (\n  input [15:0] data_x,\n  input [15:0] data_y,\n  output equal_flag\n);\n  assign equal_flag = (data_x == data_y);\nendmodule\n\nmodule top;\n  wire [15:0] val1, val2;\n  wire match;\n  comparator_16bit cmp1 (.data_x(val1), .data_y(val2), .equal_flag(match));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

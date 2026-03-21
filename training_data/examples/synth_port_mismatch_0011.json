@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier.sv\n+++ b/multiplier.sv\n@@ -1,11 +1,11 @@\n module multiplier_8bit(\n   input wire [7:0] data_a,\n   input wire [7:0] data_b,\n   output wire [15:0] product\n );\n   assign product = data_a * data_b;\n endmodule\n \n module processor;\n   wire [7:0] val1, val2;\n-  wire [15:0] res;\n-  multiplier_8bit mult (.data_a(val1), .data_b(val2[7:0]), .product(res[14:0]));\n+  wire [15:0] res;\n+  multiplier_8bit mult (.data_a(val1), .data_b(val2), .product(res));\n endmodule",
+  "before_code": "module multiplier_8bit(\n  input wire [7:0] data_a,\n  input wire [7:0] data_b,\n  output wire [15:0] product\n);\n  assign product = data_a * data_b;\nendmodule\n\nmodule processor;\n  wire [7:0] val1, val2;\n  wire [15:0] res;\n  multiplier_8bit mult (.data_a(val1), .data_b(val2[7:0]), .product(res[14:0]));\nendmodule",
+  "after_code": "module multiplier_8bit(\n  input wire [7:0] data_a,\n  input wire [7:0] data_b,\n  output wire [15:0] product\n);\n  assign product = data_a * data_b;\nendmodule\n\nmodule processor;\n  wire [7:0] val1, val2;\n  wire [15:0] res;\n  multiplier_8bit mult (.data_a(val1), .data_b(val2), .product(res));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

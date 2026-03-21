@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/synchronizer.v\n+++ b/synchronizer.v\n@@ -9,7 +9,7 @@\n   output logic [63:0] q_out\n );\n \n-  always @(posedge clk) begin\n+  always @(posedge clk or negedge rst_n) begin\n     if (~rst_n)\n       q_out <= 64'b0;\n     else\n",
+  "before_code": "module synchronizer_64bit (\n  input logic clk,\n  input logic rst_n,\n  input logic [63:0] d_in,\n  output logic [63:0] q_out\n);\n\n  always @(posedge clk) begin\n    if (~rst_n)\n      q_out <= 64'b0;\n    else\n      q_out <= d_in;\n  end\n\nendmodule",
+  "after_code": "module synchronizer_64bit (\n  input logic clk,\n  input logic rst_n,\n  input logic [63:0] d_in,\n  output logic [63:0] q_out\n);\n\n  always @(posedge clk or negedge rst_n) begin\n    if (~rst_n)\n      q_out <= 64'b0;\n    else\n      q_out <= d_in;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

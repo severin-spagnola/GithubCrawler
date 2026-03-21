@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "verilog",
+  "before_code": "module shift_register_16bit (\n  input clk,\n  input reset,\n  input [15:0] parallel_in,\n  output [15:0] parallel_out\n);\n  reg [15:0] data;\n  always @(posedge clk) begin\n    if (reset) data <= 16'b0;\n    else data <= parallel_in;\n  end\n  assign parallel_out = data;\nendmodule\n\nmodule datapath (\n  input clk,\n  input rst,\n  input [15:0] input_bus,\n  output [15:0] output_bus\n);\n  shift_register_16bit sreg (\n    .clk(clk),\n    .reset(rst),\n    .parallel_in(input_bus)\n  );\n  assign output_bus = 16'b0;\nendmodule",
+  "after_code": "module shift_register_16bit (\n  input clk,\n  input reset,\n  input [15:0] parallel_in,\n  output [15:0] parallel_out\n);\n  reg [15:0] data;\n  always @(posedge clk) begin\n    if (reset) data <= 16'b0;\n    else data <= parallel_in;\n  end\n  assign parallel_out = data;\nendmodule\n\nmodule datapath (\n  input clk,\n  input rst,\n  input [15:0] input_bus,\n  output [15:0] output_bus\n);\n  shift_register_16bit sreg (\n    .clk(clk),\n    .reset(rst),\n    .parallel_in(input_bus),\n    .parallel_out(output_bus)\n  );\nendmodule",
+  "patch": "--- a/shift_register_16bit.v\n+++ b/shift_register_16bit.v\n@@ -16,8 +16,8 @@ module datapath (\n   shift_register_16bit sreg (\n     .clk(clk),\n     .reset(rst),\n-    .parallel_in(input_bus)\n+    .parallel_in(input_bus),\n+    .parallel_out(output_bus)\n   );\n-  assign output_bus = 16'b0;\n endmodule"
+}

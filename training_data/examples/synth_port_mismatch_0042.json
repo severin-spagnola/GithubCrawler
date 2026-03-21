@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/filter_chain.v\n+++ b/filter_chain.v\n@@ -15,8 +15,9 @@ module filter_chain (\n   low_pass_filter filter_inst (\n     .clk(clock),\n     .rst(reset),\n-    .sample_in(input_sample)\n+    .sample_in(input_sample),\n+    .filtered_out(output_sample)\n   );\n \n endmodule",
+  "before_code": "module low_pass_filter (\n  input clk,\n  input rst,\n  input [7:0] sample_in,\n  output [7:0] filtered_out\n);\n  reg [7:0] prev_sample;\n  \n  always @(posedge clk) begin\n    if (rst) prev_sample <= 0;\n    else prev_sample <= sample_in;\n  end\n  \n  assign filtered_out = (sample_in + prev_sample) >> 1;\nendmodule\n\nmodule filter_chain (\n  input clock,\n  input reset,\n  input [7:0] input_sample,\n  output [7:0] output_sample\n);\n  low_pass_filter filter_inst (\n    .clk(clock),\n    .rst(reset),\n    .sample_in(input_sample)\n  );\nendmodule",
+  "after_code": "module low_pass_filter (\n  input clk,\n  input rst,\n  input [7:0] sample_in,\n  output [7:0] filtered_out\n);\n  reg [7:0] prev_sample;\n  \n  always @(posedge clk) begin\n    if (rst) prev_sample <= 0;\n    else prev_sample <= sample_in;\n  end\n  \n  assign filtered_out = (sample_in + prev_sample) >> 1;\nendmodule\n\nmodule filter_chain (\n  input clock,\n  input reset,\n  input [7:0] input_sample,\n  output [7:0] output_sample\n);\n  low_pass_filter filter_inst (\n    .clk(clock),\n    .rst(reset),\n    .sample_in(input_sample),\n    .filtered_out(output_sample)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

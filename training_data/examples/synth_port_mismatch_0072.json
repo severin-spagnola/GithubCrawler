@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,14 +1,14 @@\n module compare_16bit (\n   input [15:0] value_a,\n   input [15:0] value_b,\n-  output equal\n+  output equal,\n+  output greater\n );\n   assign equal = (value_a == value_b);\n+  assign greater = (value_a > value_b);\n endmodule\n \n module system (\n   input [15:0] num1, num2,\n-  output match\n+  output match, is_greater\n );\n-  compare_16bit cmp (.value_a(num1), .value_b(num2), .equal(match));\n+  compare_16bit cmp (.value_a(num1), .value_b(num2), .equal(match), .greater(is_greater));\n endmodule",
+  "before_code": "module compare_16bit (\n  input [15:0] value_a,\n  input [15:0] value_b,\n  output equal\n);\n  assign equal = (value_a == value_b);\nendmodule\n\nmodule system (\n  input [15:0] num1, num2,\n  output match\n);\n  compare_16bit cmp (.value_a(num1), .value_b(num2), .equal(match));\nendmodule",
+  "after_code": "module compare_16bit (\n  input [15:0] value_a,\n  input [15:0] value_b,\n  output equal,\n  output greater\n);\n  assign equal = (value_a == value_b);\n  assign greater = (value_a > value_b);\nendmodule\n\nmodule system (\n  input [15:0] num1, num2,\n  output match, is_greater\n);\n  compare_16bit cmp (.value_a(num1), .value_b(num2), .equal(match), .greater(is_greater));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

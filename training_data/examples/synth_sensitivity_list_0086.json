@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter_fsm.v\n+++ b/counter_fsm.v\n@@ -10,7 +10,7 @@\n   output reg [15:0] count_val\n );\n \n-  always @(posedge clk) begin\n+  always @(posedge clk or negedge rst_n) begin\n     if (!rst_n) begin\n       count_val <= 16'h0000;\n     end else if (enable) begin",
+  "before_code": "module counter_fsm(\n  input clk,\n  input rst_n,\n  input enable,\n  input [15:0] load_data,\n  input load_en,\n  output reg [15:0] count_val\n);\n\n  always @(posedge clk) begin\n    if (!rst_n) begin\n      count_val <= 16'h0000;\n    end else if (enable) begin\n      if (load_en)\n        count_val <= load_data;\n      else\n        count_val <= count_val + 1;\n    end\n  end\n\nendmodule",
+  "after_code": "module counter_fsm(\n  input clk,\n  input rst_n,\n  input enable,\n  input [15:0] load_data,\n  input load_en,\n  output reg [15:0] count_val\n);\n\n  always @(posedge clk or negedge rst_n) begin\n    if (!rst_n) begin\n      count_val <= 16'h0000;\n    end else if (enable) begin\n      if (load_en)\n        count_val <= load_data;\n      else\n        count_val <= count_val + 1;\n    end\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

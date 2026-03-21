@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier.sv\n+++ b/multiplier.sv\n@@ -10,7 +10,7 @@ module system(\n   input [15:0] x, y,\n   output [31:0] product\n );\n   mult_4bit m0 (\n-    .multiplicand(x[3:0]),\n+    .in_a(x[3:0]),\n     .in_b(y[3:0]),\n     .out(product[7:0])\n   );\n",
+  "before_code": "module mult_4bit(\n  input [3:0] in_a,\n  input [3:0] in_b,\n  output [7:0] out\n);\n  assign out = in_a * in_b;\nendmodule\n\nmodule system(\n  input [15:0] x, y,\n  output [31:0] product\n);\n  mult_4bit m0 (\n    .multiplicand(x[3:0]),\n    .in_b(y[3:0]),\n    .out(product[7:0])\n  );\nendmodule",
+  "after_code": "module mult_4bit(\n  input [3:0] in_a,\n  input [3:0] in_b,\n  output [7:0] out\n);\n  assign out = in_a * in_b;\nendmodule\n\nmodule system(\n  input [15:0] x, y,\n  output [31:0] product\n);\n  mult_4bit m0 (\n    .in_a(x[3:0]),\n    .in_b(y[3:0]),\n    .out(product[7:0])\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

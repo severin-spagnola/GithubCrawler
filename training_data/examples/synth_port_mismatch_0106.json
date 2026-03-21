@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "systemverilog",
+  "before_code": "module multiplier_8bit (\n  input [7:0] multiplicand,\n  input [7:0] multiplier,\n  output [15:0] product\n);\n  assign product = multiplicand * multiplier;\nendmodule\n\nmodule processor (\n  input [7:0] data_a,\n  input [7:0] data_b,\n  output [15:0] result\n);\n  multiplier_8bit mult_inst (\n    .multiplicand(data_a),\n    .multiplier({{8{1'b0}}, data_b}),  // BUG: connecting 16-bit to 8-bit port\n    .product(result)\n  );\nendmodule",
+  "after_code": "module multiplier_8bit (\n  input [7:0] multiplicand,\n  input [7:0] multiplier,\n  output [15:0] product\n);\n  assign product = multiplicand * multiplier;\nendmodule\n\nmodule processor (\n  input [7:0] data_a,\n  input [7:0] data_b,\n  output [15:0] result\n);\n  multiplier_8bit mult_inst (\n    .multiplicand(data_a),\n    .multiplier(data_b),  // FIXED: connected correct 8-bit signal to 8-bit port\n    .product(result)\n  );\nendmodule",
+  "patch": "--- a/processor.sv\n+++ b/processor.sv\n@@ -11,7 +11,7 @@ module processor (\n   multiplier_8bit mult_inst (\n     .multiplicand(data_a),\n-    .multiplier({{8{1'b0}}, data_b}),  // BUG: connecting 16-bit to 8-bit port\n+    .multiplier(data_b),  // FIXED: connected correct 8-bit signal to 8-bit port\n     .product(result)\n   );\n endmodule"
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/alu_control.v\n+++ b/alu_control.v\n@@ -8,7 +8,7 @@\n   output reg [63:0] alu_result\n );\n \n-  always @(opcode) begin\n+  always @(opcode or operand_x or operand_y) begin\n     case(opcode)\n       4'b0000: alu_result = operand_x + operand_y;  // ADD\n       4'b0001: alu_result = operand_x - operand_y;  // SUB",
+  "before_code": "module alu_control(\n  input [3:0] opcode,\n  input [63:0] operand_x,\n  input [63:0] operand_y,\n  output reg [63:0] alu_result\n);\n\n  always @(opcode) begin\n    case(opcode)\n      4'b0000: alu_result = operand_x + operand_y;  // ADD\n      4'b0001: alu_result = operand_x - operand_y;  // SUB\n      4'b0010: alu_result = operand_x & operand_y;  // AND\n      4'b0011: alu_result = operand_x | operand_y;  // OR\n      4'b0100: alu_result = operand_x ^ operand_y;  // XOR\n      default: alu_result = 64'h0;\n    endcase\n  end\n\nendmodule",
+  "after_code": "module alu_control(\n  input [3:0] opcode,\n  input [63:0] operand_x,\n  input [63:0] operand_y,\n  output reg [63:0] alu_result\n);\n\n  always @(opcode or operand_x or operand_y) begin\n    case(opcode)\n      4'b0000: alu_result = operand_x + operand_y;  // ADD\n      4'b0001: alu_result = operand_x - operand_y;  // SUB\n      4'b0010: alu_result = operand_x & operand_y;  // AND\n      4'b0011: alu_result = operand_x | operand_y;  // OR\n      4'b0100: alu_result = operand_x ^ operand_y;  // XOR\n      default: alu_result = 64'h0;\n    endcase\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

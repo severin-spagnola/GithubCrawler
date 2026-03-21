@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -9,7 +9,7 @@\n   output reg [2:0] priority\n );\n \n-  always @(req_bit0) begin\n+  always @(req_bit0 or req_bit1 or req_bit2 or req_bit3 or req_bit4 or req_bit5 or req_bit6 or req_bit7) begin\n     if (req_bit7)\n       priority = 3'b111;\n     else if (req_bit6)\n",
+  "before_code": "module priority_encoder_8 (\n  input req_bit0,\n  input req_bit1,\n  input req_bit2,\n  input req_bit3,\n  input req_bit4,\n  input req_bit5,\n  input req_bit6,\n  input req_bit7,\n  output reg [2:0] priority\n);\n\n  always @(req_bit0) begin\n    if (req_bit7)\n      priority = 3'b111;\n    else if (req_bit6)\n      priority = 3'b110;\n    else if (req_bit5)\n      priority = 3'b101;\n    else if (req_bit4)\n      priority = 3'b100;\n    else if (req_bit3)\n      priority = 3'b011;\n    else if (req_bit2)\n      priority = 3'b010;\n    else if (req_bit1)\n      priority = 3'b001;\n    else\n      priority = 3'b000;\n  end\n\nendmodule",
+  "after_code": "module priority_encoder_8 (\n  input req_bit0,\n  input req_bit1,\n  input req_bit2,\n  input req_bit3,\n  input req_bit4,\n  input req_bit5,\n  input req_bit6,\n  input req_bit7,\n  output reg [2:0] priority\n);\n\n  always @(req_bit0 or req_bit1 or req_bit2 or req_bit3 or req_bit4 or req_bit5 or req_bit6 or req_bit7) begin\n    if (req_bit7)\n      priority = 3'b111;\n    else if (req_bit6)\n      priority = 3'b110;\n    else if (req_bit5)\n      priority = 3'b101;\n    else if (req_bit4)\n      priority = 3'b100;\n    else if (req_bit3)\n      priority = 3'b011;\n    else if (req_bit2)\n      priority = 3'b010;\n    else if (req_bit1)\n      priority = 3'b001;\n    else\n      priority = 3'b000;\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/synchronous_counter_32bit.v\n+++ b/synchronous_counter_32bit.v\n@@ -1,14 +1,14 @@\n module synchronous_counter_32bit (\n   input clk,\n   input reset_n,\n   input enable,\n   output reg [31:0] count\n );\n-  always @(posedge clk) begin\n+  always @(posedge clk or negedge reset_n) begin\n     if (~reset_n) begin\n       count <= 32'b0;\n     end else if (enable) begin\n       count <= count + 1;\n     end\n   end\n endmodule",
+  "before_code": "module synchronous_counter_32bit (\n  input clk,\n  input reset_n,\n  input enable,\n  output reg [31:0] count\n);\n  always @(posedge clk) begin\n    if (~reset_n) begin\n      count <= 32'b0;\n    end else if (enable) begin\n      count <= count + 1;\n    end\n  end\nendmodule",
+  "after_code": "module synchronous_counter_32bit (\n  input clk,\n  input reset_n,\n  input enable,\n  output reg [31:0] count\n);\n  always @(posedge clk or negedge reset_n) begin\n    if (~reset_n) begin\n      count <= 32'b0;\n    end else if (enable) begin\n      count <= count + 1;\n    end\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

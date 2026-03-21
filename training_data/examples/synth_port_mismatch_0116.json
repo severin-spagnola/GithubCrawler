@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.sv\n+++ b/multiplexer.sv\n@@ -8,7 +8,7 @@\n endmodule\n \n module mux_wrapper();\n-  mux_8to1 m1(.sel(selector[2:0]), .out(mux_output));\n+  mux_8to1 m1(.data_in(input_bus), .sel(selector[2:0]), .out(mux_output));\n endmodule",
+  "before_code": "module mux_8to1(\n  input [7:0] data_in,\n  input [2:0] sel,\n  output out\n);\n  assign out = data_in[sel];\nendmodule\n\nmodule mux_wrapper();\n  mux_8to1 m1(.sel(selector[2:0]), .out(mux_output));\nendmodule",
+  "after_code": "module mux_8to1(\n  input [7:0] data_in,\n  input [2:0] sel,\n  output out\n);\n  assign out = data_in[sel];\nendmodule\n\nmodule mux_wrapper();\n  mux_8to1 m1(.data_in(input_bus), .sel(selector[2:0]), .out(mux_output));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

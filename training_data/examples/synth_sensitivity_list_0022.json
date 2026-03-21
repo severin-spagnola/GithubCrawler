@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,10 +1,10 @@\n module magnitude_comparator_32(\n     input [31:0] x, y, offset,\n     output reg greater, equal, less\n );\n-    always @(x)\n+    always @(*)\n         if (x + offset > y)\n             {greater, equal, less} = 3'b100;\n         else if (x + offset == y)\n             {greater, equal, less} = 3'b010;",
+  "before_code": "module magnitude_comparator_32(\n    input [31:0] x, y, offset,\n    output reg greater, equal, less\n);\n    always @(x)\n        if (x + offset > y)\n            {greater, equal, less} = 3'b100;\n        else if (x + offset == y)\n            {greater, equal, less} = 3'b010;\n        else\n            {greater, equal, less} = 3'b001;\nendmodule",
+  "after_code": "module magnitude_comparator_32(\n    input [31:0] x, y, offset,\n    output reg greater, equal, less\n);\n    always @(*)\n        if (x + offset > y)\n            {greater, equal, less} = 3'b100;\n        else if (x + offset == y)\n            {greater, equal, less} = 3'b010;\n        else\n            {greater, equal, less} = 3'b001;\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

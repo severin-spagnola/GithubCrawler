@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.v\n+++ b/multiplexer.v\n@@ -1,14 +1,14 @@\n module mux4_to_1(\n   input [3:0] data_in,\n   input [1:0] sel,\n-  output data_out\n+  output out\n );\n   assign data_out = data_in[sel];\n endmodule\n \n module wrapper(\n   input [3:0] signals,\n   input [1:0] selector,\n-  output selected\n+  output selected\n );\n-  mux4_to_1 mux(.data_in(signals), .sel(selector), .output(selected));\n+  mux4_to_1 mux(.data_in(signals), .sel(selector), .out(selected));\n endmodule",
+  "before_code": "module mux4_to_1(\n  input [3:0] data_in,\n  input [1:0] sel,\n  output data_out\n);\n  assign data_out = data_in[sel];\nendmodule\n\nmodule wrapper(\n  input [3:0] signals,\n  input [1:0] selector,\n  output selected\n);\n  mux4_to_1 mux(.data_in(signals), .sel(selector), .output(selected));\nendmodule",
+  "after_code": "module mux4_to_1(\n  input [3:0] data_in,\n  input [1:0] sel,\n  output out\n);\n  assign data_out = data_in[sel];\nendmodule\n\nmodule wrapper(\n  input [3:0] signals,\n  input [1:0] selector,\n  output selected\n);\n  mux4_to_1 mux(.data_in(signals), .sel(selector), .out(selected));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

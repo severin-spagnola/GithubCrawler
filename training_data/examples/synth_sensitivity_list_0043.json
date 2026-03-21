@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -9,7 +9,7 @@ module priority_encoder(\n   output reg [2:0] priority\n );\n \n-  always @(request[3] or request[2])\n+  always @(request[7] or request[6] or request[5] or request[4] or request[3] or request[2] or request[1] or request[0])\n     casez(request)\n       8'b1xxxxxxx: priority = 3'd7;\n       8'b01xxxxxx: priority = 3'd6;",
+  "before_code": "module priority_encoder(\n  input [7:0] request,\n  output reg [2:0] priority\n);\n\n  always @(request[3] or request[2])\n    casez(request)\n      8'b1xxxxxxx: priority = 3'd7;\n      8'b01xxxxxx: priority = 3'd6;\n      8'b001xxxxx: priority = 3'd5;\n      8'b0001xxxx: priority = 3'd4;\n      8'b00001xxx: priority = 3'd3;\n      8'b000001xx: priority = 3'd2;\n      8'b0000001x: priority = 3'd1;\n      8'b00000001: priority = 3'd0;\n      default: priority = 3'd0;\n    endcase\n\nendmodule",
+  "after_code": "module priority_encoder(\n  input [7:0] request,\n  output reg [2:0] priority\n);\n\n  always @(request[7] or request[6] or request[5] or request[4] or request[3] or request[2] or request[1] or request[0])\n    casez(request)\n      8'b1xxxxxxx: priority = 3'd7;\n      8'b01xxxxxx: priority = 3'd6;\n      8'b001xxxxx: priority = 3'd5;\n      8'b0001xxxx: priority = 3'd4;\n      8'b00001xxx: priority = 3'd3;\n      8'b000001xx: priority = 3'd2;\n      8'b0000001x: priority = 3'd1;\n      8'b00000001: priority = 3'd0;\n      default: priority = 3'd0;\n    endcase\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

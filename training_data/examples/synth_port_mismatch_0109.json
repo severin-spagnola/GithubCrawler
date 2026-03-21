@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "verilog",
+  "before_code": "module alu_32bit (\n  input [31:0] operand_a,\n  input [31:0] operand_b,\n  input [2:0] opcode,\n  output [31:0] result\n);\n  always @(*) begin\n    case(opcode)\n      3'b000: result = operand_a + operand_b;\n      3'b001: result = operand_a - operand_b;\n      3'b010: result = operand_a & operand_b;\n      default: result = 32'h0;\n    endcase\n  end\nendmodule\n\nmodule datapath (\n  input [31:0] x,\n  input [31:0] y,\n  input [2:0] op,\n  output [31:0] out\n);\n  alu_32bit alu_inst (\n    .operand_a(x),\n    .operand_b(y),\n    .opcode(op),\n    .result(out),\n    .extra_port(1'b0)  // BUG: 'extra_port' does not exist in alu_32bit module\n  );\nendmodule",
+  "after_code": "module alu_32bit (\n  input [31:0] operand_a,\n  input [31:0] operand_b,\n  input [2:0] opcode,\n  output [31:0] result\n);\n  always @(*) begin\n    case(opcode)\n      3'b000: result = operand_a + operand_b;\n      3'b001: result = operand_a - operand_b;\n      3'b010: result = operand_a & operand_b;\n      default: result = 32'h0;\n    endcase\n  end\nendmodule\n\nmodule datapath (\n  input [31:0] x,\n  input [31:0] y,\n  input [2:0] op,\n  output [31:0] out\n);\n  alu_32bit alu_inst (\n    .operand_a(x),\n    .operand_b(y),\n    .opcode(op),\n    .result(out)  // FIXED: removed non-existent '.extra_port(1'b0)' connection\n  );\nendmodule",
+  "patch": "--- a/datapath.v\n+++ b/datapath.v\n@@ -23,7 +23,6 @@ module datapath (\n   alu_32bit alu_inst (\n     .operand_a(x),\n     .operand_b(y),\n     .opcode(op),\n-    .result(out),\n-    .extra_port(1'b0)  // BUG: 'extra_port' does not exist in alu_32bit module\n+    .result(out)  // FIXED: removed non-existent '.extra_port(1'b0)' connection\n   );\n endmodule"
+}

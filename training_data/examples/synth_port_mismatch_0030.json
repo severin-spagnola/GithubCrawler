@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder.v\n+++ b/adder.v\n@@ -11,7 +11,7 @@ module top;\n   wire [7:0] result;\n   \n   adder_4bit add_inst (\n-    .input_a(a),\n+    .in_a(a),\n     .in_b(b),\n     .sum(result)\n   );\n",
+  "before_code": "module adder_4bit(\n  input [3:0] in_a,\n  input [3:0] in_b,\n  output [4:0] sum\n);\n  assign sum = in_a + in_b;\nendmodule\n\nmodule top;\n  reg [3:0] a, b;\n  wire [7:0] result;\n  \n  adder_4bit add_inst (\n    .input_a(a),\n    .in_b(b),\n    .sum(result)\n  );\nendmodule",
+  "after_code": "module adder_4bit(\n  input [3:0] in_a,\n  input [3:0] in_b,\n  output [4:0] sum\n);\n  assign sum = in_a + in_b;\nendmodule\n\nmodule top;\n  reg [3:0] a, b;\n  wire [7:0] result;\n  \n  adder_4bit add_inst (\n    .in_a(a),\n    .in_b(b),\n    .sum(result)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.v\n+++ b/shifter.v\n@@ -1,12 +1,12 @@\n module barrel_shifter(\n   input [15:0] data,\n   input [3:0] shamt,\n   input dir,\n   output [15:0] result\n );\n   assign result = (dir == 0) ? (data << shamt) : (data >> shamt);\n endmodule\n \n module datapath(\n   input [15:0] payload,\n   input [3:0] amount,\n-  output [15:0] shifted\n+  output [15:0] shifted,\n+  input shift_dir\n );\n-  barrel_shifter bs(.data(payload), .shamt(amount), .result(shifted));\n+  barrel_shifter bs(.data(payload), .shamt(amount), .dir(shift_dir), .result(shifted));\n endmodule",
+  "before_code": "module barrel_shifter(\n  input [15:0] data,\n  input [3:0] shamt,\n  input dir,\n  output [15:0] result\n);\n  assign result = (dir == 0) ? (data << shamt) : (data >> shamt);\nendmodule\n\nmodule datapath(\n  input [15:0] payload,\n  input [3:0] amount,\n  output [15:0] shifted\n);\n  barrel_shifter bs(.data(payload), .shamt(amount), .result(shifted));\nendmodule",
+  "after_code": "module barrel_shifter(\n  input [15:0] data,\n  input [3:0] shamt,\n  input dir,\n  output [15:0] result\n);\n  assign result = (dir == 0) ? (data << shamt) : (data >> shamt);\nendmodule\n\nmodule datapath(\n  input [15:0] payload,\n  input [3:0] amount,\n  output [15:0] shifted,\n  input shift_dir\n);\n  barrel_shifter bs(.data(payload), .shamt(amount), .dir(shift_dir), .result(shifted));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

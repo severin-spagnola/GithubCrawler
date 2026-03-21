@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,7 +1,7 @@\n module ripple_counter(\n   input clk,\n   input rst_n,\n   output reg [15:0] count\n );\n-  always @(posedge clk) begin\n+  always @(posedge clk or negedge rst_n) begin\n     if (!rst_n)\n       count <= 16'b0;\n     else",
+  "before_code": "module ripple_counter(\n  input clk,\n  input rst_n,\n  output reg [15:0] count\n);\n  always @(posedge clk) begin\n    if (!rst_n)\n      count <= 16'b0;\n    else\n      count <= count + 1;\n  end\nendmodule",
+  "after_code": "module ripple_counter(\n  input clk,\n  input rst_n,\n  output reg [15:0] count\n);\n  always @(posedge clk or negedge rst_n) begin\n    if (!rst_n)\n      count <= 16'b0;\n    else\n      count <= count + 1;\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

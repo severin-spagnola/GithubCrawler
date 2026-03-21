@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.sv\n+++ b/comparator.sv\n@@ -1,7 +1,7 @@\n module comparator_32bit (\n-  output [31:0] a,\n+  input [31:0] a,\n   input [31:0] b,\n-  input eq_flag\n+  output eq_flag\n );\n   assign eq_flag = (a == b);\n endmodule",
+  "before_code": "module comparator_32bit (\n  output [31:0] a,\n  input [31:0] b,\n  input eq_flag\n);\n  assign eq_flag = (a == b);\nendmodule\n\nmodule test_cmp;\n  reg [31:0] val_a, val_b;\n  wire flag;\n  \n  comparator_32bit cmp_inst (\n    .a(val_a),\n    .b(val_b),\n    .eq_flag(flag)\n  );\nendmodule",
+  "after_code": "module comparator_32bit (\n  input [31:0] a,\n  input [31:0] b,\n  output eq_flag\n);\n  assign eq_flag = (a == b);\nendmodule\n\nmodule test_cmp;\n  reg [31:0] val_a, val_b;\n  wire flag;\n  \n  comparator_32bit cmp_inst (\n    .a(val_a),\n    .b(val_b),\n    .eq_flag(flag)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

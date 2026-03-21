@@ -1,0 +1,9 @@
+{
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true,
+  "language": "verilog",
+  "before_code": "module counter_4bit (\n  input clk,\n  input enable,\n  output [4:0] count\n);\n  reg [4:0] counter;\n  always @(posedge clk) begin\n    if (enable) counter <= counter + 1;\n  end\n  assign count = counter;\nendmodule\n\nmodule timer (\n  input clock,\n  input start,\n  output [3:0] timer_out\n);\n  counter_4bit cnt (\n    .clk(clock),\n    .enable(start),\n    .count(timer_out)\n  );\nendmodule",
+  "after_code": "module counter_4bit (\n  input clk,\n  input enable,\n  output [4:0] count\n);\n  reg [4:0] counter;\n  always @(posedge clk) begin\n    if (enable) counter <= counter + 1;\n  end\n  assign count = counter;\nendmodule\n\nmodule timer (\n  input clock,\n  input start,\n  output [4:0] timer_out\n);\n  counter_4bit cnt (\n    .clk(clock),\n    .enable(start),\n    .count(timer_out)\n  );\nendmodule",
+  "patch": "--- a/counter_4bit.v\n+++ b/counter_4bit.v\n@@ -11,7 +11,7 @@ module timer (\n   input clock,\n   input start,\n-  output [3:0] timer_out\n+  output [4:0] timer_out\n );\n   counter_4bit cnt (\n     .clk(clock),"
+}

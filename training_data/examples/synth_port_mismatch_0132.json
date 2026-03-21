@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -9,7 +9,8 @@ module wrapper(\n );\n   comp_unit c0 (\n     .bus_a(val_a),\n-    .bus_b(val_b)\n+    .bus_b(val_b),\n+    .equal_flag(is_equal)\n   );\n endmodule",
+  "before_code": "module comp_unit(\n  input [15:0] bus_a,\n  input [15:0] bus_b,\n  output equal_flag\n);\n  assign equal_flag = (bus_a == bus_b);\nendmodule\n\nmodule wrapper(\n  input [15:0] val_a, val_b,\n  output is_equal\n);\n  comp_unit c0 (\n    .bus_a(val_a),\n    .bus_b(val_b)\n  );\nendmodule",
+  "after_code": "module comp_unit(\n  input [15:0] bus_a,\n  input [15:0] bus_b,\n  output equal_flag\n);\n  assign equal_flag = (bus_a == bus_b);\nendmodule\n\nmodule wrapper(\n  input [15:0] val_a, val_b,\n  output is_equal\n);\n  comp_unit c0 (\n    .bus_a(val_a),\n    .bus_b(val_b),\n    .equal_flag(is_equal)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

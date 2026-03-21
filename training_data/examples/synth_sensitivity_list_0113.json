@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.v\n+++ b/comparator.v\n@@ -1,7 +1,7 @@\n module magnitude_comparator_64bit (\n   input [63:0] a,\n   input [63:0] b,\n-  always @(a)\n+  always @(a or b)\n   begin",
+  "before_code": "module magnitude_comparator_64bit (\n  input [63:0] a,\n  input [63:0] b,\n  output reg eq, lt, gt\n);\n\n  always @(a)\n  begin\n    if (a == b) begin\n      eq = 1'b1;\n      lt = 1'b0;\n      gt = 1'b0;\n    end else if (a < b) begin\n      eq = 1'b0;\n      lt = 1'b1;\n      gt = 1'b0;\n    end else begin\n      eq = 1'b0;\n      lt = 1'b0;\n      gt = 1'b1;\n    end\n  end\n\nendmodule",
+  "after_code": "module magnitude_comparator_64bit (\n  input [63:0] a,\n  input [63:0] b,\n  output reg eq, lt, gt\n);\n\n  always @(a or b)\n  begin\n    if (a == b) begin\n      eq = 1'b1;\n      lt = 1'b0;\n      gt = 1'b0;\n    end else if (a < b) begin\n      eq = 1'b0;\n      lt = 1'b1;\n      gt = 1'b0;\n    end else begin\n      eq = 1'b0;\n      lt = 1'b0;\n      gt = 1'b1;\n    end\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

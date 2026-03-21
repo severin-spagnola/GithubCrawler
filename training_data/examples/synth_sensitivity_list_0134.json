@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.vhd\n+++ b/comparator.vhd\n@@ -1,12 +1,12 @@\n library ieee;\n use ieee.std_logic_1164.all;\n use ieee.numeric_std.all;\n \n entity comparator is\n     port(\n         input_a : in std_logic_vector(63 downto 0);\n         input_b : in std_logic_vector(63 downto 0);\n         equal_flag : out std_logic\n     );\n end entity;\n \n architecture rtl of comparator is\n begin\n-    process(input_a) is\n+    process(input_a, input_b) is\n     begin\n         if input_a = input_b then\n             equal_flag <= '1';\n         else\n             equal_flag <= '0';\n         end if;\n     end process;\n end architecture;",
+  "before_code": "library ieee;\nuse ieee.std_logic_1164.all;\nuse ieee.numeric_std.all;\n\nentity comparator is\n    port(\n        input_a : in std_logic_vector(63 downto 0);\n        input_b : in std_logic_vector(63 downto 0);\n        equal_flag : out std_logic\n    );\nend entity;\n\narchitecture rtl of comparator is\nbegin\n    process(input_a) is\n    begin\n        if input_a = input_b then\n            equal_flag <= '1';\n        else\n            equal_flag <= '0';\n        end if;\n    end process;\nend architecture;",
+  "after_code": "library ieee;\nuse ieee.std_logic_1164.all;\nuse ieee.numeric_std.all;\n\nentity comparator is\n    port(\n        input_a : in std_logic_vector(63 downto 0);\n        input_b : in std_logic_vector(63 downto 0);\n        equal_flag : out std_logic\n    );\nend entity;\n\narchitecture rtl of comparator is\nbegin\n    process(input_a, input_b) is\n    begin\n        if input_a = input_b then\n            equal_flag <= '1';\n        else\n            equal_flag <= '0';\n        end if;\n    end process;\nend architecture;",
+  "language": "vhdl",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

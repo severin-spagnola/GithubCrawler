@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer.v\n+++ b/multiplexer.v\n@@ -1,6 +1,6 @@\n module data_mux_4to1 (\n   input [7:0] in_0,\n   input [7:0] in_1,\n   input [7:0] in_2,\n   input [7:0] in_3,\n   input [1:0] sel,\n@@ -13,9 +13,9 @@\n   output [7:0] mux_out\n );\n   data_mux_4to1 mux_inst (\n     .in_0(data_a),\n-    .in_1(data_b),\n     .in_2(data_c),\n     .in_3(data_d),\n     .sel(select),\n     .mux_out(mux_out)\n   );\n endmodule",
+  "before_code": "module data_mux_4to1 (\n  input [7:0] in_0,\n  input [7:0] in_1,\n  input [7:0] in_2,\n  input [7:0] in_3,\n  input [1:0] sel,\n  output [7:0] mux_out\n);\n  // mux logic\nendmodule\n\nmodule mux_system (\n  input [7:0] data_a, data_b, data_c, data_d,\n  input [1:0] select,\n  output [7:0] mux_out\n);\n  data_mux_4to1 mux_inst (\n    .in_0(data_a),\n    .in_2(data_c),\n    .in_3(data_d),\n    .sel(select),\n    .mux_out(mux_out)\n  );\nendmodule",
+  "after_code": "module data_mux_4to1 (\n  input [7:0] in_0,\n  input [7:0] in_1,\n  input [7:0] in_2,\n  input [7:0] in_3,\n  input [1:0] sel,\n  output [7:0] mux_out\n);\n  // mux logic\nendmodule\n\nmodule mux_system (\n  input [7:0] data_a, data_b, data_c, data_d,\n  input [1:0] select,\n  output [7:0] mux_out\n);\n  data_mux_4to1 mux_inst (\n    .in_0(data_a),\n    .in_1(data_b),\n    .in_2(data_c),\n    .in_3(data_d),\n    .sel(select),\n    .mux_out(mux_out)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

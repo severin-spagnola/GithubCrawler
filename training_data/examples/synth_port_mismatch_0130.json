@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder_module.v\n+++ b/adder_module.v\n@@ -12,7 +12,7 @@ module top_design(\n   adder_unit (\n     .a(input_a),\n     .b(input_b),\n-    .data_out(sum_result)\n+    .sum(sum_result)\n   );\n \n endmodule",
+  "before_code": "module adder_unit(\n  input [7:0] a,\n  input [7:0] b,\n  output [8:0] sum\n);\n  assign sum = a + b;\nendmodule\n\nmodule top_design(\n  input [7:0] input_a,\n  input [7:0] input_b,\n  output [8:0] sum_result\n);\n  adder_unit (\n    .a(input_a),\n    .b(input_b),\n    .data_out(sum_result)\n  );\nendmodule",
+  "after_code": "module adder_unit(\n  input [7:0] a,\n  input [7:0] b,\n  output [8:0] sum\n);\n  assign sum = a + b;\nendmodule\n\nmodule top_design(\n  input [7:0] input_a,\n  input [7:0] input_b,\n  output [8:0] sum_result\n);\n  adder_unit (\n    .a(input_a),\n    .b(input_b),\n    .sum(sum_result)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.sv\n+++ b/comparator.sv\n@@ -1,6 +1,6 @@\n module mag_comparator (\n   input [7:0] a,\n   input [7:0] b,\n-  output reg greater, equal, lesser, unused_port\n+  output reg greater, equal, lesser\n );\n   \n   always @(*) begin\n@@ -16,7 +16,7 @@\n module cmp_wrapper (\n   input [7:0] x, y,\n   output gt, eq, lt\n );\n   \n-  mag_comparator cmp (.a(x), .b(y), .greater(gt), .equal(eq), .lesser(lt), .unused_port());\n+  mag_comparator cmp (.a(x), .b(y), .greater(gt), .equal(eq), .lesser(lt));\n \n endmodule",
+  "before_code": "module mag_comparator (\n  input [7:0] a,\n  input [7:0] b,\n  output reg greater, equal, lesser, unused_port\n);\n  \n  always @(*) begin\n    if (a > b) begin\n      greater = 1'b1;\n      equal = 1'b0;\n      lesser = 1'b0;\n    end else if (a == b) begin\n      greater = 1'b0;\n      equal = 1'b1;\n      lesser = 1'b0;\n    end else begin\n      greater = 1'b0;\n      equal = 1'b0;\n      lesser = 1'b1;\n    end\n    unused_port = 1'b0;\n  end\nendmodule\n\nmodule cmp_wrapper (\n  input [7:0] x, y,\n  output gt, eq, lt\n);\n  \n  mag_comparator cmp (.a(x), .b(y), .greater(gt), .equal(eq), .lesser(lt), .unused_port());\n  \nendmodule",
+  "after_code": "module mag_comparator (\n  input [7:0] a,\n  input [7:0] b,\n  output reg greater, equal, lesser\n);\n  \n  always @(*) begin\n    if (a > b) begin\n      greater = 1'b1;\n      equal = 1'b0;\n      lesser = 1'b0;\n    end else if (a == b) begin\n      greater = 1'b0;\n      equal = 1'b1;\n      lesser = 1'b0;\n    end else begin\n      greater = 1'b0;\n      equal = 1'b0;\n      lesser = 1'b1;\n    end\n  end\nendmodule\n\nmodule cmp_wrapper (\n  input [7:0] x, y,\n  output gt, eq, lt\n);\n  \n  mag_comparator cmp (.a(x), .b(y), .greater(gt), .equal(eq), .lesser(lt));\n  \nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

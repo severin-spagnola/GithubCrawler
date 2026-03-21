@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -12,7 +12,7 @@ module top_counter;\n   wire clk, rst;\n   wire [3:0] count_val;\n   \n-  counter_4bit cnt (.clock(clk), .reset(rst), .overflow_flag(overflow));\n+  counter_4bit cnt (.clock(clk), .reset(rst), .count_out(count_val), .overflow_flag(overflow));\n \n endmodule",
+  "before_code": "module counter_4bit (\n  input clock,\n  input reset,\n  output [3:0] count_out,\n  output overflow_flag\n);\n  reg [3:0] count;\n  \n  always @(posedge clock or posedge reset) begin\n    if (reset) count <= 4'b0000;\n    else count <= count + 1;\n  end\n  \n  assign count_out = count;\n  assign overflow_flag = (count == 4'b1111);\nendmodule\n\nmodule top_counter;\n  wire clk, rst;\n  wire [3:0] count_val;\n  wire overflow;\n  \n  counter_4bit cnt (.clock(clk), .reset(rst), .overflow_flag(overflow));\n\nendmodule",
+  "after_code": "module counter_4bit (\n  input clock,\n  input reset,\n  output [3:0] count_out,\n  output overflow_flag\n);\n  reg [3:0] count;\n  \n  always @(posedge clock or posedge reset) begin\n    if (reset) count <= 4'b0000;\n    else count <= count + 1;\n  end\n  \n  assign count_out = count;\n  assign overflow_flag = (count == 4'b1111);\nendmodule\n\nmodule top_counter;\n  wire clk, rst;\n  wire [3:0] count_val;\n  wire overflow;\n  \n  counter_4bit cnt (.clock(clk), .reset(rst), .count_out(count_val), .overflow_flag(overflow));\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

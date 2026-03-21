@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/register.sv\n+++ b/register.sv\n@@ -1,12 +1,12 @@\n module reg_32(\n-  input [31:0] data_in,\n-  output [31:0] data_out,\n+  output [31:0] data_in,\n+  input [31:0] data_out,\n   input clk\n );\n   reg [31:0] storage;\n   always @(posedge clk) begin\n-    storage <= data_in;\n+    storage <= data_out;\n   end\n-  assign data_out = storage;\n+  assign data_in = storage;\n endmodule\n \n module sys(\n@@ -15,7 +15,7 @@ module sys(\n   output [31:0] q\n );\n   wire [31:0] d_in, d_out;\n-  reg_32 r1(.data_in(d), .data_out(q), .clk(clk));\n+  reg_32 r1(.data_out(d), .data_in(q), .clk(clk));\n endmodule",
+  "before_code": "module reg_32(\n  input [31:0] data_in,\n  output [31:0] data_out,\n  input clk\n);\n  reg [31:0] storage;\n  always @(posedge clk) begin\n    storage <= data_in;\n  end\n  assign data_out = storage;\nendmodule\n\nmodule sys(\n  input clk,\n  input [31:0] d,\n  output [31:0] q\n);\n  wire [31:0] d_in, d_out;\n  reg_32 r1(.data_in(d), .data_out(q), .clk(clk));\nendmodule",
+  "after_code": "module reg_32(\n  output [31:0] data_in,\n  input [31:0] data_out,\n  input clk\n);\n  reg [31:0] storage;\n  always @(posedge clk) begin\n    storage <= data_out;\n  end\n  assign data_in = storage;\nendmodule\n\nmodule sys(\n  input clk,\n  input [31:0] d,\n  output [31:0] q\n);\n  wire [31:0] d_in, d_out;\n  reg_32 r1(.data_out(d), .data_in(q), .clk(clk));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

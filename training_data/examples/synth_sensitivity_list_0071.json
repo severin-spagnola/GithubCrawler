@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -6,7 +6,7 @@\n   output reg [3:0] priority_out\n );\n \n-  always @(req_bits)\n+  always @(*)\n   begin\n     if (req_bits[15]) priority_out = 4'hF;\n     else if (req_bits[14]) priority_out = 4'hE;\n",
+  "before_code": "module priority_encoder_16bit (\n  input [15:0] req_bits,\n  output reg [3:0] priority_out\n);\n\n  always @(req_bits)\n  begin\n    if (req_bits[15]) priority_out = 4'hF;\n    else if (req_bits[14]) priority_out = 4'hE;\n    else if (req_bits[13]) priority_out = 4'hD;\n    else if (req_bits[12]) priority_out = 4'hC;\n    else if (req_bits[11]) priority_out = 4'hB;\n    else priority_out = 4'h0;\n  end\nendmodule",
+  "after_code": "module priority_encoder_16bit (\n  input [15:0] req_bits,\n  output reg [3:0] priority_out\n);\n\n  always @(*)\n  begin\n    if (req_bits[15]) priority_out = 4'hF;\n    else if (req_bits[14]) priority_out = 4'hE;\n    else if (req_bits[13]) priority_out = 4'hD;\n    else if (req_bits[12]) priority_out = 4'hC;\n    else if (req_bits[11]) priority_out = 4'hB;\n    else priority_out = 4'h0;\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

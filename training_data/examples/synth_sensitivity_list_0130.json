@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder_unit.v\n+++ b/adder_unit.v\n@@ -1,7 +1,7 @@\n module adder_unit(\n     input [15:0] operand_a,\n     input [15:0] operand_b,\n     output [16:0] sum_out\n );\n-    always @(operand_a) begin\n+    always @(operand_a or operand_b) begin\n         sum_out = operand_a + operand_b;\n     end\n endmodule",
+  "before_code": "module adder_unit(\n    input [15:0] operand_a,\n    input [15:0] operand_b,\n    output [16:0] sum_out\n);\n    always @(operand_a) begin\n        sum_out = operand_a + operand_b;\n    end\nendmodule",
+  "after_code": "module adder_unit(\n    input [15:0] operand_a,\n    input [15:0] operand_b,\n    output [16:0] sum_out\n);\n    always @(operand_a or operand_b) begin\n        sum_out = operand_a + operand_b;\n    end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

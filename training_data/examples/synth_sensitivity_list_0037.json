@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux_32bit.v\n+++ b/mux_32bit.v\n@@ -10,7 +10,7 @@\n   output reg [31:0] data_out\n );\n \n-  always @(sel or data_a or data_b or data_c) begin\n+  always @(sel or data_a or data_b or data_c or data_d) begin\n     case(sel)\n       2'b00: data_out = data_a;\n       2'b01: data_out = data_b;\n",
+  "before_code": "module mux_32bit(\n  input [1:0] sel,\n  input [31:0] data_a,\n  input [31:0] data_b,\n  input [31:0] data_c,\n  input [31:0] data_d,\n  output reg [31:0] data_out\n);\n\n  always @(sel or data_a or data_b or data_c) begin\n    case(sel)\n      2'b00: data_out = data_a;\n      2'b01: data_out = data_b;\n      2'b10: data_out = data_c;\n      2'b11: data_out = data_d;\n      default: data_out = 32'b0;\n    endcase\n  end\n\nendmodule",
+  "after_code": "module mux_32bit(\n  input [1:0] sel,\n  input [31:0] data_a,\n  input [31:0] data_b,\n  input [31:0] data_c,\n  input [31:0] data_d,\n  output reg [31:0] data_out\n);\n\n  always @(sel or data_a or data_b or data_c or data_d) begin\n    case(sel)\n      2'b00: data_out = data_a;\n      2'b01: data_out = data_b;\n      2'b10: data_out = data_c;\n      2'b11: data_out = data_d;\n      default: data_out = 32'b0;\n    endcase\n  end\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

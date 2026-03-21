@@ -1,0 +1,9 @@
+{
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true,
+  "patch": "--- a/comparator_64bit.v\n+++ b/comparator_64bit.v\n@@ -1,15 +1,15 @@\n module comparator_64bit(\n   input [63:0] data_x,\n   input [63:0] data_y,\n   output reg eq,\n   output reg lt,\n   output reg gt\n );\n \n-  always @(data_x) begin\n+  always @(data_x or data_y) begin\n     if(data_x == data_y) begin\n       eq = 1'b1;\n       lt = 1'b0;\n       gt = 1'b0;\n     end else if(data_x < data_y) begin\n       eq = 1'b0;\n       lt = 1'b1;",
+  "before_code": "module comparator_64bit(\n  input [63:0] data_x,\n  input [63:0] data_y,\n  output reg eq,\n  output reg lt,\n  output reg gt\n);\n\n  always @(data_x) begin\n    if(data_x == data_y) begin\n      eq = 1'b1;\n      lt = 1'b0;\n      gt = 1'b0;\n    end else if(data_x < data_y) begin\n      eq = 1'b0;\n      lt = 1'b1;\n      gt = 1'b0;\n    end else begin\n      eq = 1'b0;\n      lt = 1'b0;\n      gt = 1'b1;\n    end\n  end\n\nendmodule",
+  "after_code": "module comparator_64bit(\n  input [63:0] data_x,\n  input [63:0] data_y,\n  output reg eq,\n  output reg lt,\n  output reg gt\n);\n\n  always @(data_x or data_y) begin\n    if(data_x == data_y) begin\n      eq = 1'b1;\n      lt = 1'b0;\n      gt = 1'b0;\n    end else if(data_x < data_y) begin\n      eq = 1'b0;\n      lt = 1'b1;\n      gt = 1'b0;\n    end else begin\n      eq = 1'b0;\n      lt = 1'b0;\n      gt = 1'b1;\n    end\n  end\n\nendmodule"
+}

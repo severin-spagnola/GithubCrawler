@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/priority_encoder.v\n+++ b/priority_encoder.v\n@@ -6,7 +6,7 @@\n   output [2:0] priority\n );\n \n-  always @(input_bus) begin\n+  always @(input_bus or valid_flag) begin\n     if (!valid_flag) begin\n       priority = 3'b0;\n     end else if (input_bus[7])\n",
+  "before_code": "module priority_encoder (\n  input [7:0] input_bus,\n  input valid_flag,\n  output reg [2:0] priority\n);\n\n  always @(input_bus) begin\n    if (!valid_flag) begin\n      priority = 3'b0;\n    end else if (input_bus[7])\n      priority = 3'd7;\n    else if (input_bus[6])\n      priority = 3'd6;\n    else if (input_bus[5])\n      priority = 3'd5;\n    else\n      priority = 3'd0;\n  end\nendmodule",
+  "after_code": "module priority_encoder (\n  input [7:0] input_bus,\n  input valid_flag,\n  output reg [2:0] priority\n);\n\n  always @(input_bus or valid_flag) begin\n    if (!valid_flag) begin\n      priority = 3'b0;\n    end else if (input_bus[7])\n      priority = 3'd7;\n    else if (input_bus[6])\n      priority = 3'd6;\n    else if (input_bus[5])\n      priority = 3'd5;\n    else\n      priority = 3'd0;\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

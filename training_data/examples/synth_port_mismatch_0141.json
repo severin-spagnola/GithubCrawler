@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplier.sv\n+++ b/multiplier.sv\n@@ -1,7 +1,7 @@\n module mult_8bit (\n   input [7:0] multiplicand,\n   input [7:0] multiplier,\n-  output [15:0] product\n+  output [15:0] product,\n   input clk\n );\n   always @(posedge clk)\n     product <= multiplicand * multiplier;",
+  "before_code": "module mult_8bit (\n  input [7:0] multiplicand,\n  input [7:0] multiplier,\n  output [15:0] product\n);\n  always @(posedge clk)\n    product <= multiplicand * multiplier;\nendmodule\n\nmodule processor (\n  input clk,\n  input [7:0] a, b,\n  output [15:0] p\n);\n  mult_8bit mul_inst (\n    .multiplicand(a),\n    .multiplier(b),\n    .product(p)\n  );\nendmodule",
+  "after_code": "module mult_8bit (\n  input [7:0] multiplicand,\n  input [7:0] multiplier,\n  output [15:0] product,\n  input clk\n);\n  always @(posedge clk)\n    product <= multiplicand * multiplier;\nendmodule\n\nmodule processor (\n  input clk,\n  input [7:0] a, b,\n  output [15:0] p\n);\n  mult_8bit mul_inst (\n    .multiplicand(a),\n    .multiplier(b),\n    .product(p),\n    .clk(clk)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

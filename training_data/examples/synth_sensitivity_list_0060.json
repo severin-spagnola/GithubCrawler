@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/adder_8bit.v\n+++ b/adder_8bit.v\n@@ -1,7 +1,7 @@\n module adder_8bit(\n   input [7:0] a,\n   input [7:0] b,\n   output reg [8:0] sum\n );\n \n-  always @(a)\n+  always @(a or b)\n     sum = a + b;\n \n endmodule",
+  "before_code": "module adder_8bit(\n  input [7:0] a,\n  input [7:0] b,\n  output reg [8:0] sum\n);\n\n  always @(a)\n    sum = a + b;\n\nendmodule",
+  "after_code": "module adder_8bit(\n  input [7:0] a,\n  input [7:0] b,\n  output reg [8:0] sum\n);\n\n  always @(a or b)\n    sum = a + b;\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

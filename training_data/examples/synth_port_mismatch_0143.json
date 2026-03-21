@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.sv\n+++ b/comparator.sv\n@@ -1,9 +1,9 @@\n module comparator_32bit (\n-  output eq,\n-  output lt,\n   input [31:0] a,\n   input [31:0] b,\n+  output eq,\n+  output lt,\n   output gt\n );\n   assign eq = (a == b);\n   assign lt = (a < b);\n   assign gt = (a > b);",
+  "before_code": "module comparator_32bit (\n  output eq,\n  output lt,\n  input [31:0] a,\n  input [31:0] b,\n  output gt\n);\n  assign eq = (a == b);\n  assign lt = (a < b);\n  assign gt = (a > b);\nendmodule\n\nmodule alu_top (\n  input [31:0] x, y,\n  output equal, less_than, greater_than\n);\n  comparator_32bit cmp_inst (\n    .a(x),\n    .b(y),\n    .eq(equal),\n    .lt(less_than),\n    .gt(greater_than)\n  );\nendmodule",
+  "after_code": "module comparator_32bit (\n  input [31:0] a,\n  input [31:0] b,\n  output eq,\n  output lt,\n  output gt\n);\n  assign eq = (a == b);\n  assign lt = (a < b);\n  assign gt = (a > b);\nendmodule\n\nmodule alu_top (\n  input [31:0] x, y,\n  output equal, less_than, greater_than\n);\n  comparator_32bit cmp_inst (\n    .a(x),\n    .b(y),\n    .eq(equal),\n    .lt(less_than),\n    .gt(greater_than)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

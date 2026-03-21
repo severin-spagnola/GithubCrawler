@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/datapath.sv\n+++ b/datapath.sv\n@@ -1,7 +1,7 @@\n module data_processor (\n   input clk,\n-  output [31:0] data_out,\n-  input [31:0] data_in\n+  input [31:0] data_in,\n+  output [31:0] data_out\n );\n   reg [31:0] pipeline_reg;\n   \n",
+  "before_code": "module data_processor (\n  input clk,\n  output [31:0] data_out,\n  input [31:0] data_in\n);\n  reg [31:0] pipeline_reg;\n  \n  always @(posedge clk) begin\n    pipeline_reg <= data_in;\n  end\n  \n  assign data_out = pipeline_reg;\nendmodule\n\nmodule system_top (\n  input clk,\n  input [31:0] din,\n  output [31:0] dout\n);\n  \n  data_processor proc_inst (.clk(clk), .data_in(din), .data_out(dout));\n  \nendmodule",
+  "after_code": "module data_processor (\n  input clk,\n  input [31:0] data_in,\n  output [31:0] data_out\n);\n  reg [31:0] pipeline_reg;\n  \n  always @(posedge clk) begin\n    pipeline_reg <= data_in;\n  end\n  \n  assign data_out = pipeline_reg;\nendmodule\n\nmodule system_top (\n  input clk,\n  input [31:0] din,\n  output [31:0] dout\n);\n  \n  data_processor proc_inst (.clk(clk), .data_in(din), .data_out(dout));\n  \nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

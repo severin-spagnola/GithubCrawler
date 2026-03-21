@@ -1,0 +1,9 @@
+{
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true,
+  "patch": "--- a/multiplexer_4to1.v\n+++ b/multiplexer_4to1.v\n@@ -1,7 +1,7 @@\n module mux_4to1(\n   input [7:0] a, b, c, d,\n   input [1:0] sel,\n   output reg [7:0] out\n );\n \n-  always @(a or b or c) begin\n+  always @(a or b or c or d or sel) begin\n     case(sel)\n       2'b00: out = a;\n       2'b01: out = b;\n",
+  "before_code": "module mux_4to1(\n  input [7:0] a, b, c, d,\n  input [1:0] sel,\n  output reg [7:0] out\n);\n\n  always @(a or b or c) begin\n    case(sel)\n      2'b00: out = a;\n      2'b01: out = b;\n      2'b10: out = c;\n      2'b11: out = d;\n      default: out = 8'h00;\n    endcase\n  end\n\nendmodule",
+  "after_code": "module mux_4to1(\n  input [7:0] a, b, c, d,\n  input [1:0] sel,\n  output reg [7:0] out\n);\n\n  always @(a or b or c or d or sel) begin\n    case(sel)\n      2'b00: out = a;\n      2'b01: out = b;\n      2'b10: out = c;\n      2'b11: out = d;\n      default: out = 8'h00;\n    endcase\n  end\n\nendmodule"
+}

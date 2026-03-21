@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/alu_top.sv\n+++ b/alu_top.sv\n@@ -16,9 +16,9 @@ module alu_top (\n   alu_32bit alu_inst (\n     .operand_a(op_a),\n     .operand_b(op_b),\n-    .alu_result(result),\n     .opcode(operation),\n-    .alu_overflow(overflow)\n+    .alu_result(result),\n+    .overflow_flag(overflow)\n   );\n \n endmodule",
+  "before_code": "module alu_32bit (\n  input [31:0] operand_a,\n  input [31:0] operand_b,\n  input [3:0] opcode,\n  output [31:0] alu_result,\n  output overflow_flag\n);\n  always @(*) begin\n    case(opcode)\n      4'b0000: alu_result = operand_a + operand_b;\n      4'b0001: alu_result = operand_a - operand_b;\n      4'b0010: alu_result = operand_a & operand_b;\n      default: alu_result = 0;\n    endcase\n  end\nendmodule\n\nmodule alu_top (\n  input [31:0] op_a,\n  input [31:0] op_b,\n  input [3:0] operation,\n  output [31:0] result,\n  output overflow\n);\n  alu_32bit alu_inst (\n    .operand_a(op_a),\n    .operand_b(op_b),\n    .alu_result(result),\n    .opcode(operation),\n    .alu_overflow(overflow)\n  );\nendmodule",
+  "after_code": "module alu_32bit (\n  input [31:0] operand_a,\n  input [31:0] operand_b,\n  input [3:0] opcode,\n  output [31:0] alu_result,\n  output overflow_flag\n);\n  always @(*) begin\n    case(opcode)\n      4'b0000: alu_result = operand_a + operand_b;\n      4'b0001: alu_result = operand_a - operand_b;\n      4'b0010: alu_result = operand_a & operand_b;\n      default: alu_result = 0;\n    endcase\n  end\nendmodule\n\nmodule alu_top (\n  input [31:0] op_a,\n  input [31:0] op_b,\n  input [3:0] operation,\n  output [31:0] result,\n  output overflow\n);\n  alu_32bit alu_inst (\n    .operand_a(op_a),\n    .operand_b(op_b),\n    .opcode(operation),\n    .alu_result(result),\n    .overflow_flag(overflow)\n  );\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

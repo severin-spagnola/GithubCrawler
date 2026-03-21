@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/multiplexer_8bit.v\n+++ b/multiplexer_8bit.v\n@@ -8,7 +8,7 @@\n    input [7:0] data_in,\n    output reg [7:0] data_out\n  );\n-  always @(sel) begin\n+  always @(sel or data_in) begin\n     case (sel)\n       1'b0: data_out = 8'h00;\n       1'b1: data_out = data_in;\n",
+  "before_code": "module multiplexer_8bit (\n  input clk,\n  input sel,\n  input [7:0] data_in,\n  output reg [7:0] data_out\n);\n  always @(sel) begin\n    case (sel)\n      1'b0: data_out = 8'h00;\n      1'b1: data_out = data_in;\n    endcase\n  end\nendmodule",
+  "after_code": "module multiplexer_8bit (\n  input clk,\n  input sel,\n  input [7:0] data_in,\n  output reg [7:0] data_out\n);\n  always @(sel or data_in) begin\n    case (sel)\n      1'b0: data_out = 8'h00;\n      1'b1: data_out = data_in;\n    endcase\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

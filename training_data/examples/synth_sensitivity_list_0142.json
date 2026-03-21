@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/alu.v\n+++ b/alu.v\n@@ -1,15 +1,15 @@\n module alu_32bit(\n   input [31:0] operand_a, operand_b,\n   input [2:0] opcode,\n   output reg [31:0] result\n );\n \n-  always @(opcode)\n+  always @(*)\n     case (opcode)\n       3'b000: result = operand_a + operand_b;\n       3'b001: result = operand_a - operand_b;\n       3'b010: result = operand_a & operand_b;\n       3'b011: result = operand_a | operand_b;\n       3'b100: result = operand_a ^ operand_b;\n       default: result = 32'h00000000;\n     endcase\n \n endmodule",
+  "before_code": "module alu_32bit(\n  input [31:0] operand_a, operand_b,\n  input [2:0] opcode,\n  output reg [31:0] result\n);\n\n  always @(opcode)\n    case (opcode)\n      3'b000: result = operand_a + operand_b;\n      3'b001: result = operand_a - operand_b;\n      3'b010: result = operand_a & operand_b;\n      3'b011: result = operand_a | operand_b;\n      3'b100: result = operand_a ^ operand_b;\n      default: result = 32'h00000000;\n    endcase\n\nendmodule",
+  "after_code": "module alu_32bit(\n  input [31:0] operand_a, operand_b,\n  input [2:0] opcode,\n  output reg [31:0] result\n);\n\n  always @(*)\n    case (opcode)\n      3'b000: result = operand_a + operand_b;\n      3'b001: result = operand_a - operand_b;\n      3'b010: result = operand_a & operand_b;\n      3'b011: result = operand_a | operand_b;\n      3'b100: result = operand_a ^ operand_b;\n      default: result = 32'h00000000;\n    endcase\n\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

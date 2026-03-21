@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/comparator.sv\n+++ b/comparator.sv\n@@ -1,15 +1,15 @@\n module Comparator16bit (\n   input [15:0] val_a,\n   input [15:0] val_b,\n   output reg equal,\n   output reg greater\n );\n   always @(*) begin\n     equal = (val_a == val_b);\n     greater = (val_a > val_b);\n   end\n endmodule\n \n module testbench;\n-  wire eq, gt;\n-  Comparator16bit comp (.val_a(16'h1234), .val_b(8'h56), .equal(eq), .greater(gt));\n+  wire eq, gt;\n+  Comparator16bit comp (.val_a(16'h1234), .val_b(16'h0056), .equal(eq), .greater(gt));\n endmodule",
+  "before_code": "module Comparator16bit (\n  input [15:0] val_a,\n  input [15:0] val_b,\n  output reg equal,\n  output reg greater\n);\n  always @(*) begin\n    equal = (val_a == val_b);\n    greater = (val_a > val_b);\n  end\nendmodule\n\nmodule testbench;\n  wire eq, gt;\n  Comparator16bit comp (.val_a(16'h1234), .val_b(8'h56), .equal(eq), .greater(gt));\nendmodule",
+  "after_code": "module Comparator16bit (\n  input [15:0] val_a,\n  input [15:0] val_b,\n  output reg equal,\n  output reg greater\n);\n  always @(*) begin\n    equal = (val_a == val_b);\n    greater = (val_a > val_b);\n  end\nendmodule\n\nmodule testbench;\n  wire eq, gt;\n  Comparator16bit comp (.val_a(16'h1234), .val_b(16'h0056), .equal(eq), .greater(gt));\nendmodule",
+  "language": "systemverilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

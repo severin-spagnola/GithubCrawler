@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux_selector.v\n+++ b/mux_selector.v\n@@ -1,16 +1,16 @@\n module mux_selector(\n   input [31:0] data_a,\n   input [31:0] data_b,\n   input [31:0] data_c,\n   input [31:0] data_d,\n   input [1:0] sel,\n   output reg [31:0] mux_out\n );\n \n-  always @(data_a or data_b or sel)\n+  always @(*)\n   begin\n     case(sel)\n       2'b00: mux_out = data_a;\n       2'b01: mux_out = data_b;\n       2'b10: mux_out = data_c;\n       2'b11: mux_out = data_d;\n       default: mux_out = 32'h0;\n     endcase\n   end",
+  "before_code": "module mux_selector(\n  input [31:0] data_a,\n  input [31:0] data_b,\n  input [31:0] data_c,\n  input [31:0] data_d,\n  input [1:0] sel,\n  output reg [31:0] mux_out\n);\n\n  always @(data_a or data_b or sel)\n  begin\n    case(sel)\n      2'b00: mux_out = data_a;\n      2'b01: mux_out = data_b;\n      2'b10: mux_out = data_c;\n      2'b11: mux_out = data_d;\n      default: mux_out = 32'h0;\n    endcase\n  end\nendmodule",
+  "after_code": "module mux_selector(\n  input [31:0] data_a,\n  input [31:0] data_b,\n  input [31:0] data_c,\n  input [31:0] data_d,\n  input [1:0] sel,\n  output reg [31:0] mux_out\n);\n\n  always @(*)\n  begin\n    case(sel)\n      2'b00: mux_out = data_a;\n      2'b01: mux_out = data_b;\n      2'b10: mux_out = data_c;\n      2'b11: mux_out = data_d;\n      default: mux_out = 32'h0;\n    endcase\n  end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

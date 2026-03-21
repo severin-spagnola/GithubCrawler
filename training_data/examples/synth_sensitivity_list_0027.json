@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/parity_checker_32bit.v\n+++ b/parity_checker_32bit.v\n@@ -5,7 +5,7 @@\n    output reg parity_out\n  );\n   \n-  always @(data_bus[0] or data_bus[1]) begin\n+  always @(*) begin\n     parity_out = ^data_bus;\n   end\n   \n",
+  "before_code": "module parity_checker_32bit (\n  input [31:0] data_bus,\n  output reg parity_out\n);\n  \n  always @(data_bus[0] or data_bus[1]) begin\n    parity_out = ^data_bus;\n  end\n  \nendmodule",
+  "after_code": "module parity_checker_32bit (\n  input [31:0] data_bus,\n  output reg parity_out\n);\n  \n  always @(*) begin\n    parity_out = ^data_bus;\n  end\n  \nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/shifter.v\n+++ b/shifter.v\n@@ -8,7 +8,7 @@\n endmodule\n \n module shifter_top();\n-  barrel_shift bs(.data(data_bus[15:0]), .shamt(5'b00011), .result(shifted));\n+  barrel_shift bs(.data(data_bus[15:0]), .shamt(5'b00011), .result(shifted[31:0]));\n endmodule",
+  "before_code": "module barrel_shift(\n  input [15:0] data,\n  input [4:0] shamt,\n  output [31:0] result\n);\n  assign result = {data, 16'b0} >> shamt;\nendmodule\n\nmodule shifter_top();\n  barrel_shift bs(.data(data_bus[15:0]), .shamt(5'b00011), .result(shifted));\nendmodule",
+  "after_code": "module barrel_shift(\n  input [15:0] data,\n  input [4:0] shamt,\n  output [31:0] result\n);\n  assign result = {data, 16'b0} >> shamt;\nendmodule\n\nmodule shifter_top();\n  barrel_shift bs(.data(data_bus[15:0]), .shamt(5'b00011), .result(shifted[31:0]));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

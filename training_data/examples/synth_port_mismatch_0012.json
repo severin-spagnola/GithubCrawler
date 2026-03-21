@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,14 +1,14 @@\n module counter_16bit(\n   input wire clk,\n   input wire reset,\n   input wire enable,\n   output wire [15:0] count_out\n );\n   reg [15:0] counter;\n   always @(posedge clk or posedge reset)\n     if (reset) counter <= 16'b0;\n     else if (enable) counter <= counter + 1;\n   assign count_out = counter;\n endmodule\n \n module system;\n   wire clk, rst, en;\n-  wire [15:0] cnt;\n-  counter_16bit c1 (.clk(clk), .rst(rst), .en(en));\n+  wire [15:0] cnt;\n+  counter_16bit c1 (.clk(clk), .reset(rst), .enable(en), .count_out(cnt));\n endmodule",
+  "before_code": "module counter_16bit(\n  input wire clk,\n  input wire reset,\n  input wire enable,\n  output wire [15:0] count_out\n);\n  reg [15:0] counter;\n  always @(posedge clk or posedge reset)\n    if (reset) counter <= 16'b0;\n    else if (enable) counter <= counter + 1;\n  assign count_out = counter;\nendmodule\n\nmodule system;\n  wire clk, rst, en;\n  wire [15:0] cnt;\n  counter_16bit c1 (.clk(clk), .rst(rst), .en(en));\nendmodule",
+  "after_code": "module counter_16bit(\n  input wire clk,\n  input wire reset,\n  input wire enable,\n  output wire [15:0] count_out\n);\n  reg [15:0] counter;\n  always @(posedge clk or posedge reset)\n    if (reset) counter <= 16'b0;\n    else if (enable) counter <= counter + 1;\n  assign count_out = counter;\nendmodule\n\nmodule system;\n  wire clk, rst, en;\n  wire [15:0] cnt;\n  counter_16bit c1 (.clk(clk), .reset(rst), .enable(en), .count_out(cnt));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

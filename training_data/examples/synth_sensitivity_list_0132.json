@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/sync_fifo.sv\n+++ b/sync_fifo.sv\n@@ -1,10 +1,10 @@\n module sync_fifo #(parameter WIDTH = 8) (\n     input clk,\n     input rst_n,\n     input [WIDTH-1:0] data_in,\n     input write_en,\n     output reg [WIDTH-1:0] data_out\n );\n     reg [WIDTH-1:0] fifo_mem;\n-    always @(posedge clk) begin\n+    always @(posedge clk or negedge rst_n) begin\n         if (!rst_n) begin\n             data_out <= {WIDTH{1'b0}};\n             fifo_mem <= {WIDTH{1'b0}};\n         end else if (write_en) begin\n             fifo_mem <= data_in;\n             data_out <= fifo_mem;\n         end\n     end\n endmodule",
+  "before_code": "module sync_fifo #(parameter WIDTH = 8) (\n    input clk,\n    input rst_n,\n    input [WIDTH-1:0] data_in,\n    input write_en,\n    output reg [WIDTH-1:0] data_out\n);\n    reg [WIDTH-1:0] fifo_mem;\n    always @(posedge clk) begin\n        if (!rst_n) begin\n            data_out <= {WIDTH{1'b0}};\n            fifo_mem <= {WIDTH{1'b0}};\n        end else if (write_en) begin\n            fifo_mem <= data_in;\n            data_out <= fifo_mem;\n        end\n    end\nendmodule",
+  "after_code": "module sync_fifo #(parameter WIDTH = 8) (\n    input clk,\n    input rst_n,\n    input [WIDTH-1:0] data_in,\n    input write_en,\n    output reg [WIDTH-1:0] data_out\n);\n    reg [WIDTH-1:0] fifo_mem;\n    always @(posedge clk or negedge rst_n) begin\n        if (!rst_n) begin\n            data_out <= {WIDTH{1'b0}};\n            fifo_mem <= {WIDTH{1'b0}};\n        end else if (write_en) begin\n            fifo_mem <= data_in;\n            data_out <= fifo_mem;\n        end\n    end\nendmodule",
+  "language": "verilog",
+  "bug_category": "sensitivity_list",
+  "is_synthetic": true,
+  "synthetic": true
+}

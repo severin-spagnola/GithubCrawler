@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,10 +1,10 @@\n module binary_counter(\n   input clk,\n   input reset,\n   input enable,\n   input [3:0] load_value,\n   input load,\n-  output [3:0] count_val\n+  output [3:0] count_val,\n+  output overflow\n );\n   reg [3:0] counter;\n   always @(posedge clk) begin",
+  "before_code": "module binary_counter(\n  input clk,\n  input reset,\n  input enable,\n  input [3:0] load_value,\n  input load,\n  output [3:0] count_val\n);\n  reg [3:0] counter;\n  always @(posedge clk) begin\n    if (reset)\n      counter <= 0;\n    else if (load)\n      counter <= load_value;\n    else if (enable)\n      counter <= counter + 1;\n  end\n  assign count_val = counter;\nendmodule\n\nmodule top_level();\n  reg clk_sig, rst_sig, en_sig;\n  reg [3:0] load_val;\n  reg load_en;\n  wire [3:0] cnt;\n  wire of;\n  \n  binary_counter cntr(\n    .clk(clk_sig),\n    .reset(rst_sig),\n    .enable(en_sig),\n    .load_value(load_val),\n    .load(load_en),\n    .count_val(cnt),\n    .overflow(of)\n  );\nendmodule",
+  "after_code": "module binary_counter(\n  input clk,\n  input reset,\n  input enable,\n  input [3:0] load_value,\n  input load,\n  output [3:0] count_val,\n  output overflow\n);\n  reg [3:0] counter;\n  always @(posedge clk) begin\n    if (reset)\n      counter <= 0;\n    else if (load)\n      counter <= load_value;\n    else if (enable)\n      counter <= counter + 1;\n  end\n  assign count_val = counter;\n  assign overflow = (counter == 4'hF) && enable;\nendmodule\n\nmodule top_level();\n  reg clk_sig, rst_sig, en_sig;\n  reg [3:0] load_val;\n  reg load_en;\n  wire [3:0] cnt;\n  wire of;\n  \n  binary_counter cntr(\n    .clk(clk_sig),\n    .reset(rst_sig),\n    .enable(en_sig),\n    .load_value(load_val),\n    .load(load_en),\n    .count_val(cnt),\n    .overflow(of)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

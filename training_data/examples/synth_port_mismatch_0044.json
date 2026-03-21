@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/mux_controller.v\n+++ b/mux_controller.v\n@@ -10,7 +10,7 @@ module mux_controller (\n   mux_4to1 mux_inst (\n     .in0(data0),\n     .in1(data1),\n-    .in2(data2),\n+    .in2(data2),\n     .in3(data3),\n     .sel(select),\n     .out(mux_output)\n@@ -10,7 +10,7 @@ module mux_controller (\n   mux_4to1 mux_inst (\n     .in0(data0),\n     .in1(data1),\n-    .in2(data2),\n+    .in2(data2[7:0]),\n     .in3(data3),\n     .sel(select),\n     .out(mux_output)",
+  "before_code": "module mux_4to1 (\n  input [7:0] in0,\n  input [7:0] in1,\n  input [7:0] in2,\n  input [7:0] in3,\n  input [1:0] sel,\n  output [7:0] out\n);\n  assign out = (sel == 2'b00) ? in0 :\n               (sel == 2'b01) ? in1 :\n               (sel == 2'b10) ? in2 : in3;\nendmodule\n\nmodule mux_controller (\n  input [7:0] data0,\n  input [7:0] data1,\n  input [15:0] data2,\n  input [7:0] data3,\n  input [1:0] select,\n  output [7:0] mux_output\n);\n  mux_4to1 mux_inst (\n    .in0(data0),\n    .in1(data1),\n    .in2(data2),\n    .in3(data3),\n    .sel(select),\n    .out(mux_output)\n  );\nendmodule",
+  "after_code": "module mux_4to1 (\n  input [7:0] in0,\n  input [7:0] in1,\n  input [7:0] in2,\n  input [7:0] in3,\n  input [1:0] sel,\n  output [7:0] out\n);\n  assign out = (sel == 2'b00) ? in0 :\n               (sel == 2'b01) ? in1 :\n               (sel == 2'b10) ? in2 : in3;\nendmodule\n\nmodule mux_controller (\n  input [7:0] data0,\n  input [7:0] data1,\n  input [15:0] data2,\n  input [7:0] data3,\n  input [1:0] select,\n  output [7:0] mux_output\n);\n  mux_4to1 mux_inst (\n    .in0(data0),\n    .in1(data1),\n    .in2(data2[7:0]),\n    .in3(data3),\n    .sel(select),\n    .out(mux_output)\n  );\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}

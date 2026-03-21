@@ -1,0 +1,9 @@
+{
+  "patch": "--- a/counter.v\n+++ b/counter.v\n@@ -1,15 +1,15 @@\n module counter_8bit(\n   input clk,\n   input rst,\n   input [7:0] load_val,\n   input load_en,\n   output [7:0] count\n );\n   reg [7:0] counter;\n   always @(posedge clk) begin\n     if (rst) counter <= 8'b0;\n     else if (load_en) counter <= load_val;\n     else counter <= counter + 1;\n   end\n   assign count = counter;\n endmodule\n \n module system(\n   input clock, reset,\n-  input [7:0] initial_value\n+  input [7:0] initial_value,\n+  input enable\n );\n-  counter_8bit cnt(.clk(clock), .rst(reset), .load_val(initial_value), .load_en(enable), .count());\n+  counter_8bit cnt(.clk(clock), .rst(reset), .load_val(initial_value), .load_en(enable));\n endmodule",
+  "before_code": "module counter_8bit(\n  input clk,\n  input rst,\n  input [7:0] load_val,\n  input load_en,\n  output [7:0] count\n);\n  reg [7:0] counter;\n  always @(posedge clk) begin\n    if (rst) counter <= 8'b0;\n    else if (load_en) counter <= load_val;\n    else counter <= counter + 1;\n  end\n  assign count = counter;\nendmodule\n\nmodule system(\n  input clock, reset,\n  input [7:0] initial_value\n);\n  counter_8bit cnt(.clk(clock), .rst(reset), .load_val(initial_value), .load_en(enable), .count());\nendmodule",
+  "after_code": "module counter_8bit(\n  input clk,\n  input rst,\n  input [7:0] load_val,\n  input load_en,\n  output [7:0] count\n);\n  reg [7:0] counter;\n  always @(posedge clk) begin\n    if (rst) counter <= 8'b0;\n    else if (load_en) counter <= load_val;\n    else counter <= counter + 1;\n  end\n  assign count = counter;\nendmodule\n\nmodule system(\n  input clock, reset,\n  input [7:0] initial_value,\n  input enable\n);\n  counter_8bit cnt(.clk(clock), .rst(reset), .load_val(initial_value), .load_en(enable));\nendmodule",
+  "language": "verilog",
+  "bug_category": "port_mismatch",
+  "is_synthetic": true,
+  "synthetic": true
+}
