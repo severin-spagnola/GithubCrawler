@@ -9,8 +9,8 @@ import anthropic
 import pandas as pd
 
 CSV_PATH = "fpga_outreach_leads.csv"
-BATCH_SIZE = 5  # smoke-test: was 25
-MAX_BATCHES = 1  # smoke-test: process only 1 batch then stop
+BATCH_SIZE = 25
+
 INTER_BATCH_SLEEP = 1  # seconds
 
 OUTREACH_RULES = r"""
@@ -278,16 +278,32 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
             f"{rewritten} rewritten, {skipped} skipped"
         )
 
-        # Smoke-test: exit early after MAX_BATCHES
-        if batch_num + 1 >= MAX_BATCHES:
-            print(f"Smoke-test: stopping after {MAX_BATCHES} batch(es).")
-            break
-
         # Sleep between batches (not after the last one)
         if batch_num < total_batches - 1:
             time.sleep(INTER_BATCH_SLEEP)
 
     print("All batches complete.")
+
+    # --- Post-run verification ---
+    df_final = pd.read_csv(csv_path)
+    total_skip = (df_final["done"].astype(str).str.strip().str.upper() == "SKIP").sum()
+    print(f"\nTotal SKIP count: {total_skip}")
+
+    # Check every non-SKIP row has a non-empty outreach_subject
+    non_skip = df_final[df_final["done"].astype(str).str.strip().str.upper() != "SKIP"]
+    empty_subjects = non_skip[non_skip["outreach_subject"].fillna("").astype(str).str.strip() == ""]
+    if len(empty_subjects) > 0:
+        print(f"WARNING: {len(empty_subjects)} non-SKIP rows have empty outreach_subject")
+        print(empty_subjects[["username"]].to_string())
+    else:
+        print("OK: All non-SKIP rows have a non-empty outreach_subject.")
+
+    # Validate CSV is readable
+    try:
+        pd.read_csv(csv_path)
+        print(f"OK: {csv_path} is valid CSV ({len(df_final)} rows).")
+    except Exception as e:
+        print(f"ERROR: CSV validation failed: {e}")
 
 
 if __name__ == "__main__":
