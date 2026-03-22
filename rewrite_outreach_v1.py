@@ -10,8 +10,7 @@ import anthropic
 import pandas as pd
 
 CSV_PATH = "fpga_outreach_leads.csv"
-BATCH_SIZE = 5
-MAX_BATCHES = 1
+BATCH_SIZE = 25
 
 INTER_BATCH_SLEEP = 1  # seconds
 
@@ -210,7 +209,7 @@ Return your response as JSON with exactly these keys:
 If status is "SKIP", set subject and message to empty strings."""
 
 
-def rewrite_outreach(csv_path: str, force: bool = False) -> None:
+def rewrite_outreach(csv_path: str) -> None:
     """Main rewrite loop."""
     client = anthropic.Anthropic()
 
@@ -224,15 +223,8 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
         f.write(str(pre_subject_count))
     print(f"Pre-run outreach_subject count: {pre_subject_count} (saved to /tmp/pre_subject_count.txt)")
 
-    # Determine which rows need processing
+    # Determine which rows need processing — always force-overwrite all rows
     mask = pd.Series([True] * len(df))
-
-    if not force:
-        # Skip rows already marked SKIP (in done column or outreach_message)
-        is_skip = df["done"].astype(str).str.strip().str.upper() == "SKIP"
-        # Skip rows where outreach_message is already non-empty
-        has_message = df["outreach_message"].fillna("").astype(str).str.strip() != ""
-        mask = ~is_skip & ~has_message
 
     indices = df.index[mask].tolist()
     total_rows = len(indices)
@@ -292,9 +284,6 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
         if batch_num < total_batches - 1:
             time.sleep(INTER_BATCH_SLEEP)
 
-        if batch_num + 1 >= MAX_BATCHES:
-            break
-
     print("All batches complete.")
 
     # --- Post-run verification ---
@@ -321,8 +310,7 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rewrite outreach messages via Claude claude-sonnet-4-6")
-    parser.add_argument("--force", action="store_true", help="Process all rows, even those already written or marked SKIP")
     parser.add_argument("--csv", default=CSV_PATH, help=f"Path to CSV (default: {CSV_PATH})")
     args = parser.parse_args()
 
-    rewrite_outreach(args.csv, force=args.force)
+    rewrite_outreach(args.csv)
