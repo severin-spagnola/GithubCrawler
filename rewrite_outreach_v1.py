@@ -216,6 +216,14 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
 
     df = pd.read_csv(csv_path)
 
+    # Record pre-run count of rows with non-empty outreach_subject
+    pre_subject_count = int(
+        (df["outreach_subject"].fillna("").astype(str).str.strip() != "").sum()
+    )
+    with open("/tmp/pre_subject_count.txt", "w") as f:
+        f.write(str(pre_subject_count))
+    print(f"Pre-run outreach_subject count: {pre_subject_count} (saved to /tmp/pre_subject_count.txt)")
+
     # Determine which rows need processing
     mask = pd.Series([True] * len(df))
 
