@@ -258,6 +258,7 @@ def rewrite_outreach(csv_path: str, start_row: int = 0, end_row: int = None) -> 
                 result = json.loads(clean)
 
                 status = result.get("status", "SKIP").upper()
+                print(f"  [{idx}] {status} — {df.at[idx, 'username']}")
                 if status == "SKIP":
                     df.at[idx, "done"] = "SKIP"
                     df.at[idx, "outreach_subject"] = ""
