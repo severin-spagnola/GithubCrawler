@@ -9,7 +9,8 @@ import anthropic
 import pandas as pd
 
 CSV_PATH = "fpga_outreach_leads.csv"
-BATCH_SIZE = 25
+BATCH_SIZE = 5
+MAX_BATCHES = 1
 
 INTER_BATCH_SLEEP = 1  # seconds
 
@@ -247,7 +248,6 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
                     model="claude-sonnet-4-6",
                     max_tokens=1024,
                     messages=[{"role": "user", "content": prompt}],
-                    response_format={"type": "json"},
                 )
 
                 import json
@@ -281,6 +281,9 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
         # Sleep between batches (not after the last one)
         if batch_num < total_batches - 1:
             time.sleep(INTER_BATCH_SLEEP)
+
+        if batch_num + 1 >= MAX_BATCHES:
+            break
 
     print("All batches complete.")
 
