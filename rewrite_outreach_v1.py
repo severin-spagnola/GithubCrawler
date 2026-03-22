@@ -209,7 +209,7 @@ Return your response as JSON with exactly these keys:
 If status is "SKIP", set subject and message to empty strings."""
 
 
-def rewrite_outreach(csv_path: str) -> None:
+def rewrite_outreach(csv_path: str, start_row: int = 0, end_row: int = None) -> None:
     """Main rewrite loop."""
     client = anthropic.Anthropic()
 
@@ -227,6 +227,7 @@ def rewrite_outreach(csv_path: str) -> None:
     mask = pd.Series([True] * len(df))
 
     indices = df.index[mask].tolist()
+    indices = indices[start_row:(end_row + 1 if end_row is not None else None)]
     total_rows = len(indices)
     total_batches = math.ceil(total_rows / BATCH_SIZE) if total_rows > 0 else 0
 
@@ -311,6 +312,8 @@ def rewrite_outreach(csv_path: str) -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rewrite outreach messages via Claude claude-sonnet-4-6")
     parser.add_argument("--csv", default=CSV_PATH, help=f"Path to CSV (default: {CSV_PATH})")
+    parser.add_argument("--start-row", type=int, default=0)
+    parser.add_argument("--end-row", type=int, default=None)
     args = parser.parse_args()
 
-    rewrite_outreach(args.csv)
+    rewrite_outreach(args.csv, start_row=args.start_row, end_row=args.end_row)
