@@ -3,6 +3,7 @@
 
 import argparse
 import math
+import re
 import time
 
 import anthropic
@@ -252,7 +253,8 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
 
                 import json
                 text = response.content[0].text
-                result = json.loads(text)
+                clean = re.sub(r'^```[a-z]*\n?|```$', '', text.strip(), flags=re.MULTILINE).strip()
+                result = json.loads(clean)
 
                 status = result.get("status", "SKIP").upper()
                 if status == "SKIP":
