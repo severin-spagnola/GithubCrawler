@@ -9,7 +9,8 @@ import anthropic
 import pandas as pd
 
 CSV_PATH = "fpga_outreach_leads.csv"
-BATCH_SIZE = 25
+BATCH_SIZE = 5  # smoke-test: was 25
+MAX_BATCHES = 1  # smoke-test: process only 1 batch then stop
 INTER_BATCH_SLEEP = 1  # seconds
 
 OUTREACH_RULES = r"""
@@ -276,6 +277,11 @@ def rewrite_outreach(csv_path: str, force: bool = False) -> None:
             f"Batch {batch_num + 1}/{total_batches} done — "
             f"{rewritten} rewritten, {skipped} skipped"
         )
+
+        # Smoke-test: exit early after MAX_BATCHES
+        if batch_num + 1 >= MAX_BATCHES:
+            print(f"Smoke-test: stopping after {MAX_BATCHES} batch(es).")
+            break
 
         # Sleep between batches (not after the last one)
         if batch_num < total_batches - 1:
