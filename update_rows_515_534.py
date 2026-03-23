@@ -13,10 +13,10 @@ UPDATES = {
         "outreach_message": (
             "Hey zawy,\n\n"
             "The EMA window that minimizes selfish-mining incentive and the "
-            "window that minimizes honest-miner variance under sudden hashrate "
-            "drops are not the same \u2014 that forces an explicit policy choice "
-            "about which attack you are optimizing against. In the BCH EMA "
-            "proposal, how did you settle on the window size?\n\n"
+            "one that minimizes honest-miner variance under sudden hashrate "
+            "drops differ \u2014 forcing a policy choice about which attack to "
+            "optimize against. In the BCH EMA proposal, how did you settle "
+            "on the window size?\n\n"
             "Severin"
         ),
     },
