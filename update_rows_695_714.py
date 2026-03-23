@@ -158,7 +158,7 @@ UPDATES = {
             "transitions often comes from stale references not "
             "recomputed when the representation changes \u2014 the edge "
             "exists in one form but isn\u2019t visible in the other. Was "
-            "the root cause a missing invalidation pass or a "
+            "the root cause a missing invalidation pass or "
             "structural mismatch?\n\n"
             "Severin"
         ),
