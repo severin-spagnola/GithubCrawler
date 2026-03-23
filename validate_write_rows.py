@@ -2,6 +2,7 @@
 Validate quality of WRITE rows in fpga_outreach_leads.csv.
 
 Checks for each row where status=WRITE:
+  (0) outreach_subject, outreach_message, outreach_channel are non-empty
   (a) outreach_message has <= 4 sentences
   (b) first word is not 'I'
   (c) message does not contain banned phrases:
@@ -45,7 +46,15 @@ def validate():
             if status != "WRITE":
                 continue
 
+            subj = (row.get("outreach_subject") or "").strip()
             msg = (row.get("outreach_message") or "").strip()
+            chan = (row.get("outreach_channel") or "").strip()
+
+            # (0) check required fields are non-empty
+            if not subj:
+                violations.append(f"Row {row_num}: outreach_subject is empty")
+            if not chan:
+                violations.append(f"Row {row_num}: outreach_channel is empty")
             if not msg:
                 violations.append(f"Row {row_num}: outreach_message is empty")
                 continue
