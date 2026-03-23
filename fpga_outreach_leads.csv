@@ -3295,91 +3295,115 @@ Severin"
 Optical-only mode needs optical photons to bypass the EM step limiter — Cherenkov and EM tracks share the same transport loop in Celeritas. Does the optical core params carry a separate process manager, or disable EM steps via a flag?
 
 Severin"
-"815","NO","","fix simulation mismatch","5","commit","hadhiee/molecul-journey","molecul-journey","hadhiee","User","1","TypeScript","0","hadhiee","hadhiee","hadhiee@gmail.com","Moklet","just little","Ngalam","https://github.com/hadhiee","","","","fix: normalize email to lowercase across ALL games + add handleExit to future/simulation
+"815","YES","SKIP","fix simulation mismatch","5","commit","hadhiee/molecul-journey","molecul-journey","hadhiee","User","1","TypeScript","0","hadhiee","hadhiee","hadhiee@gmail.com","Moklet","just little","Ngalam","https://github.com/hadhiee","","","","fix: normalize email to lowercase across ALL games + add handleExit to future/simulation
 
 Root cause: homepage queries user_progress with .toLowerCase() but
 games saved with original case from session","https://github.com/hadhiee/molecul-journey/commit/459f027887f0c88507064c0e3b008d75f423912f","2026-02-27T23:49:03.000+07:00","email","",""
-"816","NO","","fix simulation mismatch","5","commit","mihneagiurgea/gmarena","gmarena","mihneagiurgea","User","2","JavaScript","0","mihneagiurgea","Mihnea Giurgea","GiurgeaMihnea@gmail.com","Airbnb","","San Francisco, CA","https://github.com/mihneagiurgea","","mihneagiurgea","","Fix simulation/game mismatch by using same AI depth
+"816","YES","","fix simulation mismatch","5","commit","mihneagiurgea/gmarena","gmarena","mihneagiurgea","User","2","JavaScript","0","mihneagiurgea","Mihnea Giurgea","GiurgeaMihnea@gmail.com","Airbnb","","San Francisco, CA","https://github.com/mihneagiurgea","","mihneagiurgea","","Fix simulation/game mismatch by using same AI depth
 
 Simulation was using maxDepth: 2 while actual game used maxDepth: 3,
 causing different AI decisions and different outcomes for same seed.
 
-🤖 Genera","https://github.com/mihneagiurgea/gmarena/commit/c6650d0f9c3cacf54a198634c467a458749a60a2","2026-01-07T22:52:52.000-08:00","email","",""
-"817","NO","","fix simulation mismatch","5","commit","redocinortyC/biorsp-dev2","biorsp-dev2","redocinortyC","User","1","Python","1","cytronicoder","Zeyu Yao","novodoodle@gmail.com","@hackclub","I build projects in @hackclub and @aimed-lab! prev. @buildingblocs @saishackclub @geekcampsg","Singapore","https://github.com/cytronicoder","","cytronicoder","https://www.cytronicoder.com/","refactor(kidney): Use canonical colors from PlotSpec
+🤖 Genera","https://github.com/mihneagiurgea/gmarena/commit/c6650d0f9c3cacf54a198634c467a458749a60a2","2026-01-07T22:52:52.000-08:00","email","AI search depth parity: simulation vs live game divergence","Hey Mihnea,
+
+Using different AI search depths between simulation and live game creates a training-reality gap — the agent optimizes against a policy it never actually faces. Was the mismatch a depth parameter not being shared, or the simulation running a different search budget?
+
+Severin"
+"817","YES","SKIP","fix simulation mismatch","5","commit","redocinortyC/biorsp-dev2","biorsp-dev2","redocinortyC","User","1","Python","1","cytronicoder","Zeyu Yao","novodoodle@gmail.com","@hackclub","I build projects in @hackclub and @aimed-lab! prev. @buildingblocs @saishackclub @geekcampsg","Singapore","https://github.com/cytronicoder","","cytronicoder","https://www.cytronicoder.com/","refactor(kidney): Use canonical colors from PlotSpec
 
 - Import ARCHETYPE_COLORS from spec module instead of local definitions
 - Update legend ordering to use ARCHETYPE_ORDER
 - Fixes color mismatch bet","https://github.com/redocinortyC/biorsp-dev2/commit/a7cbe5d4231e856ae56061eafcdd583883db2a62","2026-01-16T20:19:53.000+08:00","email","",""
-"818","NO","","fix simulation mismatch","5","commit","penserai/acteon","acteon","penserai","User","2","Rust","2","penserai","Renzo Sanchez-Silva","renzo@tesserai.io","","Symbolic AI Generation","","https://github.com/penserai","","","","fix: sub_chain_simulation cancel_chain args and unused import
+"818","YES","SKIP","fix simulation mismatch","5","commit","penserai/acteon","acteon","penserai","User","2","Rust","2","penserai","Renzo Sanchez-Silva","renzo@tesserai.io","","Symbolic AI Generation","","https://github.com/penserai","","","","fix: sub_chain_simulation cancel_chain args and unused import
 
 CI runs `cargo test --workspace` which includes examples. Fix type
 mismatch in cancel_chain() call (Option<String> vs &str) and remove
 un","https://github.com/penserai/acteon/commit/c23b870329013398c3d41d7063224c49570ea00a","2026-02-16T10:52:53.000-08:00","email","",""
-"819","NO","","fix simulation mismatch","5","commit","kunal-drall/halo-mainnet-stellar","halo-mainnet-stellar","kunal-drall","User","1","TypeScript","0","kunal-drall","Kunal","kunaldrall29@gmail.com","","full stack web3 developer","Delhi, India","https://github.com/kunal-drall","","kunaldrall_","","fix: redeploy circle contract to fix create_circle Trapped error
+"819","YES","SKIP","fix simulation mismatch","5","commit","kunal-drall/halo-mainnet-stellar","halo-mainnet-stellar","kunal-drall","User","1","TypeScript","0","kunal-drall","Kunal","kunaldrall29@gmail.com","","full stack web3 developer","Delhi, India","https://github.com/kunal-drall","","kunaldrall_","","fix: redeploy circle contract to fix create_circle Trapped error
 
 The deployed circle contract had a non-deterministic generate_circle_id
 that used ledger timestamp/sequence, causing footprint mismatc","https://github.com/kunal-drall/halo-mainnet-stellar/commit/01711226ced0c39bb2fdec008694a0d9196ef5dd","2026-02-27T02:08:12.000Z","email","",""
-"820","NO","","fix simulation mismatch","5","commit","Lcking/dpstock","dpstock","Lcking","User","8","Python","0","Lcking","Alexck","624025171@qq.com","","","","https://github.com/Lcking","","","","feat: UI Polish & E2E Tests
+"820","YES","SKIP","fix simulation mismatch","5","commit","Lcking/dpstock","dpstock","Lcking","User","8","Python","0","Lcking","Alexck","624025171@qq.com","","","","https://github.com/Lcking","","","","feat: UI Polish & E2E Tests
 
 - UI: Added Skeleton loading and EmptyState components for Watchlist/Journal
 - Fix: Resolved TushareClient.daily attribute error in WatchlistService
 - DB: Added migration ","https://github.com/Lcking/dpstock/commit/9ede3554e40a410435769bd4fe3a6d05b8a9ab3a","2026-01-27T10:24:33.000+08:00","email","",""
-"821","NO","","fix simulation mismatch","5","commit","MizunoPK/FantasyFootballHelperScripts","FantasyFootballHelperScripts","MizunoPK","User","1","Python","0","MizunoPK","Kai Mizuno","Mizuno.PK@gmail.com","","I am a Technology Solutions consultant at Credera. I graduated from Colorado School of Mines in 2022 with a B.S. and M.S. in Computer Science.","Centennial, Colorado","https://github.com/MizunoPK","","","","Fix accuracy simulation bugs found during smoke testing
+"821","YES","SKIP","fix simulation mismatch","5","commit","MizunoPK/FantasyFootballHelperScripts","FantasyFootballHelperScripts","MizunoPK","User","1","Python","0","MizunoPK","Kai Mizuno","Mizuno.PK@gmail.com","","I am a Technology Solutions consultant at Credera. I graduated from Colorado School of Mines in 2022 with a B.S. and M.S. in Computer Science.","Centennial, Colorado","https://github.com/MizunoPK","","","","Fix accuracy simulation bugs found during smoke testing
 
 - Fix resume state type mismatch in run_both()
 - Fix AccuracyCalculator init signature in ParallelAccuracyRunner
 - Rewrite parallel worker to r","https://github.com/MizunoPK/FantasyFootballHelperScripts/commit/66a7a801cacc20e894b0449f628dffdf3ccbb4a5","2025-12-18T21:23:08.000-07:00","email","",""
-"822","NO","","fix simulation mismatch","5","commit","docxology/MetaInformAnt","MetaInformAnt","docxology","User","4","Python","5","docxology","Daniel Ari Friedman","danielarifriedman@gmail.com","Active Inference Institute","https://docxology.omg.lol/","Internet","https://github.com/docxology","","","https://docxology.omg.lol/","fix: resolve integration test failures for network scalability and simulation ecology
+"822","YES","","fix simulation mismatch","5","commit","docxology/MetaInformAnt","MetaInformAnt","docxology","User","4","Python","5","docxology","Daniel Ari Friedman","danielarifriedman@gmail.com","Active Inference Institute","https://docxology.omg.lol/","Internet","https://github.com/docxology","","","https://docxology.omg.lol/","fix: resolve integration test failures for network scalability and simulation ecology
 
 - Fix create_network() call passing node names instead of edge tuples
-- Fix random.Random vs numpy.RandomState ty","https://github.com/docxology/MetaInformAnt/commit/b5e554ddc4ecdb9a261e9fb2a2357a8a045baf2a","2026-02-07T16:04:20.000-08:00","email","",""
-"823","NO","","fix simulation mismatch","5","commit","rootdraws/ag-euler-lite-balancer","ag-euler-lite-balancer","rootdraws","User","1","TypeScript","0","rootdraws","root","rootdraws@gmail.com","","Building analytics and treasury management infrastructure for DeFi.","Madison, WI","https://github.com/rootdraws","","rootdraws","","fix: sub-account mismatch and display formatting in Loop Zap
+- Fix random.Random vs numpy.RandomState ty","https://github.com/docxology/MetaInformAnt/commit/b5e554ddc4ecdb9a261e9fb2a2357a8a045baf2a","2026-02-07T16:04:20.000-08:00","email","Scalability test failures in simulation ecology: emergent network coupling","Hey Daniel,
+
+Scalability test failures in active inference networks often expose emergent coupling — agents independent at small N become correlated through shared generative models at scale. Was the failure a timeout or a state consistency issue that only appears at higher node counts?
+
+Severin"
+"823","YES","SKIP","fix simulation mismatch","5","commit","rootdraws/ag-euler-lite-balancer","ag-euler-lite-balancer","rootdraws","User","1","TypeScript","0","rootdraws","root","rootdraws@gmail.com","","Building analytics and treasury management infrastructure for DeFi.","Madison, WI","https://github.com/rootdraws","","rootdraws","","fix: sub-account mismatch and display formatting in Loop Zap
 
 - Resolve EVC sub-account before building quotes so deposit destination,
   verify account, and borrow account all reference the same addre","https://github.com/rootdraws/ag-euler-lite-balancer/commit/0aabb9bbfcddc25bc50a053dc6afbcf28ad200a1","2026-03-07T18:11:35.000-06:00","email","",""
-"824","NO","","fix simulation mismatch","5","commit","ajsmit/spesim","spesim","ajsmit","User","1","HTML","0","ajsmit","AJ Smit","ajsmit@uwc.ac.za","University of the Western Cape","","Cape Town","https://github.com/ajsmit","","","http://www.uwc.ac.za/Biography/Pages/ALBERTUS-SMIT.aspx","spesim 0.4.0
+"824","YES","SKIP","fix simulation mismatch","5","commit","ajsmit/spesim","spesim","ajsmit","User","1","HTML","0","ajsmit","AJ Smit","ajsmit@uwc.ac.za","University of the Western Cape","","Cape Town","https://github.com/ajsmit","","","http://www.uwc.ac.za/Biography/Pages/ALBERTUS-SMIT.aspx","spesim 0.4.0
 
 - Bump version to 0.4.0; fix Author/Authors@R mismatch by relying on Authors@R only
 - Restore package logo assets
 - Update runner API: spesim_run() as primary; run_spatial_simulation() d","https://github.com/ajsmit/spesim/commit/99f13c85dd0e760a679cfc09a3119ef37067e85a","2026-02-17T19:39:19.000+02:00","email","",""
-"825","NO","","fix simulation mismatch","5","commit","Jordan-Sun/simulated-chem","simulated-chem","Jordan-Sun","User","1","Jupyter Notebook","1","Jordan-Sun","Jor","zhuoran.sun@wustl.edu","","","","https://github.com/Jordan-Sun","","","","Fix simulation interval display mismatch.","https://github.com/Jordan-Sun/simulated-chem/commit/425f531dbcfa96b1099ee10de496eef141795ae1","2025-03-18T20:26:14.000Z","email","",""
-"826","NO","","fix simulation mismatch","5","commit","WeijieChen2017/SASWISE_Fed","SASWISE_Fed","WeijieChen2017","User","3","Python","0","WeijieChen2017","Winston Chen","weijiechen1994@gmail.com","University of Wisconsin-Madison","","Madison, WI","https://github.com/WeijieChen2017","","","","Fix model architecture mismatch in run_simulation.py","https://github.com/WeijieChen2017/SASWISE_Fed/commit/62461a6ebbc56d6e4ee868ca8fcb454624e8c941","2025-04-22T00:15:19.000-05:00","email","",""
-"827","NO","","fix simulation mismatch","5","commit","yonghwan1106/autonomous-response-platform","autonomous-response-platform","yonghwan1106","User","1","TypeScript","0","yonghwan1106","YongHwan","sanoramyun8@gmail.com","","","","https://github.com/yonghwan1106","","","","fix: Change sensor simulation unit_id from string to null
+"825","YES","SKIP","fix simulation mismatch","5","commit","Jordan-Sun/simulated-chem","simulated-chem","Jordan-Sun","User","1","Jupyter Notebook","1","Jordan-Sun","Jor","zhuoran.sun@wustl.edu","","","","https://github.com/Jordan-Sun","","","","Fix simulation interval display mismatch.","https://github.com/Jordan-Sun/simulated-chem/commit/425f531dbcfa96b1099ee10de496eef141795ae1","2025-03-18T20:26:14.000Z","email","",""
+"826","YES","","fix simulation mismatch","5","commit","WeijieChen2017/SASWISE_Fed","SASWISE_Fed","WeijieChen2017","User","3","Python","0","WeijieChen2017","Winston Chen","weijiechen1994@gmail.com","University of Wisconsin-Madison","","Madison, WI","https://github.com/WeijieChen2017","","","","Fix model architecture mismatch in run_simulation.py","https://github.com/WeijieChen2017/SASWISE_Fed/commit/62461a6ebbc56d6e4ee868ca8fcb454624e8c941","2025-04-22T00:15:19.000-05:00","email","Model architecture mismatch: training vs inference config in simulation","Hey Winston,
+
+Architecture mismatches between training and inference configs are invisible until simulation — the model loads but silently produces garbage because weight shapes are subtly wrong. Was the mismatch a layer ordering issue, or a hidden size inconsistency?
+
+Severin"
+"827","YES","","fix simulation mismatch","5","commit","yonghwan1106/autonomous-response-platform","autonomous-response-platform","yonghwan1106","User","1","TypeScript","0","yonghwan1106","YongHwan","sanoramyun8@gmail.com","","","","https://github.com/yonghwan1106","","","","fix: Change sensor simulation unit_id from string to null
 
 Fixed UUID type mismatch error by using null instead of
 'simulated-drone'/'simulated-robot' strings for unit_id in
 sensor data simulation.
 
-🤖","https://github.com/yonghwan1106/autonomous-response-platform/commit/f3b8c1dfb6b66016c099d86ad7b21cd61664a0f0","2025-10-31T18:51:24.000+09:00","email","",""
-"828","NO","","fix simulation mismatch","5","commit","Bronco84/budget-planner-vue","budget-planner-vue","Bronco84","User","1","PHP","0","Bronco84","Brad McColey","bamccoley@gmail.com","","","Little Rock, AR","https://github.com/Bronco84","","","","Add What-If simulation mode and fix account filter
+🤖","https://github.com/yonghwan1106/autonomous-response-platform/commit/f3b8c1dfb6b66016c099d86ad7b21cd61664a0f0","2025-10-31T18:51:24.000+09:00","email","Sensor unit_id string-to-null: downstream strict equality fallthrough","Hey YongHwan,
+
+Changing unit_id from string to null fixes the falsy-check path, but any consumer doing strict equality against an empty string now falls through instead of matching. Was the bug an empty-string sentinel that null replaced, or a missing-sensor case?
+
+Severin"
+"828","YES","SKIP","fix simulation mismatch","5","commit","Bronco84/budget-planner-vue","budget-planner-vue","Bronco84","User","1","PHP","0","Bronco84","Brad McColey","bamccoley@gmail.com","","","Little Rock, AR","https://github.com/Bronco84","","","","Add What-If simulation mode and fix account filter
 
 - Add What-If Mode toggle to simulate income/expense changes
 - Fix account filter type mismatch (string vs number comparison)
 - Show real-time updat","https://github.com/Bronco84/budget-planner-vue/commit/0f4144c720ef499400d4ca62a53b26079ea66dde","2026-01-19T07:58:01.000-06:00","email","",""
-"829","NO","","fix simulation mismatch","5","commit","Maurilio97-P/6d-pose-vision-workshop","6d-pose-vision-workshop","Maurilio97-P","User","2","Jupyter Notebook","1","Maurilio97-P","Maurilio Patino","maurilio.pp97@gmail.com","E80 Group","Mechatronics Engineer
+"829","YES","","fix simulation mismatch","5","commit","Maurilio97-P/6d-pose-vision-workshop","6d-pose-vision-workshop","Maurilio97-P","User","2","Jupyter Notebook","1","Maurilio97-P","Maurilio Patino","maurilio.pp97@gmail.com","E80 Group","Mechatronics Engineer
 ITESM CEM","México","https://github.com/Maurilio97-P","https://www.linkedin.com/in/mauriliopatino97/","","https://www.linkedin.com/in/mauriliopatino97/","Fix NB08: rename simulation fn, fix round-trip K mismatch, add remap loop cell
 
 - Rename apply_radial_distortion → simulate_distortion_for_viz and rewrite
-  its docstring to honestly explain the inver","https://github.com/Maurilio97-P/6d-pose-vision-workshop/commit/9ab475e010cf59b88fad39d3fc57a50c4b8727d8","2026-03-09T13:05:09.000-06:00","email","",""
-"830","NO","","fix simulation mismatch","5","commit","mattdanielmurphy/block-puzzle","block-puzzle","mattdanielmurphy","User","1","JavaScript","0","mattdanielmurphy","Matthew Daniel Murphy","matt@mattmurphy.ca","","An international man of mystery.","Toronto, Canada","https://github.com/mattdanielmurphy","","","https://mattmurphy.ca","Fix: Replay verification score mismatch by aligning time tracking in replay logic.
+  its docstring to honestly explain the inver","https://github.com/Maurilio97-P/6d-pose-vision-workshop/commit/9ab475e010cf59b88fad39d3fc57a50c4b8727d8","2026-03-09T13:05:09.000-06:00","email","NB08 round-trip K mismatch: kinematic convention in remap loop","Hey Maurilio,
+
+Round-trip K mismatches in kinematic simulation usually mean forward and inverse models don’t share the same joint-offset convention. Did the remap loop cell correct a frame definition mismatch, or compensate for different K parameterizations between directions?
+
+Severin"
+"830","YES","SKIP","fix simulation mismatch","5","commit","mattdanielmurphy/block-puzzle","block-puzzle","mattdanielmurphy","User","1","JavaScript","0","mattdanielmurphy","Matthew Daniel Murphy","matt@mattmurphy.ca","","An international man of mystery.","Toronto, Canada","https://github.com/mattdanielmurphy","","","https://mattmurphy.ca","Fix: Replay verification score mismatch by aligning time tracking in replay logic.
 
 This resolves the SCORE_MISMATCH error by ensuring that the fast-move multiplier
 is calculated consistently between ","https://github.com/mattdanielmurphy/block-puzzle/commit/4b3fe3addaa295e758376be4f7149b18776a150a","2025-12-16T21:12:09.000-07:00","email","",""
-"831","NO","","fix simulation mismatch","5","commit","h4x0r/cybrisk","cybrisk","h4x0r","User","1","TypeScript","0","h4x0r","Albert Hui","i@hack9u.online","Security Ronin","Forensic Hacker","London","https://github.com/h4x0r","","","https://www.securityronin.com/","fix: critical sessionStorage key mismatch + review fixes
+"831","YES","","fix simulation mismatch","5","commit","h4x0r/cybrisk","cybrisk","h4x0r","User","1","TypeScript","0","h4x0r","Albert Hui","i@hack9u.online","Security Ronin","Forensic Hacker","London","https://github.com/h4x0r","","","https://www.securityronin.com/","fix: critical sessionStorage key mismatch + review fixes
 
 - Fix results page reading 'cybrisk-results' instead of 'results'
   (broke entire post-simulation flow)
-- Fix PERT fallback calling sampleBeta","https://github.com/h4x0r/cybrisk/commit/90792a817ab321e9d52aeca31df0684ca21ada20","2026-02-25T11:15:16.000+08:00","email","",""
-"832","NO","","fix simulation mismatch","5","commit","wildhash/SYMBIOSIS","SYMBIOSIS","wildhash","User","3","TypeScript","0","cursoragent","Cursor Agent","cursoragent@cursor.com","","","","https://github.com/cursoragent","","","","fix: resolve pnpm version mismatch and improve code quality
+- Fix PERT fallback calling sampleBeta","https://github.com/h4x0r/cybrisk/commit/90792a817ab321e9d52aeca31df0684ca21ada20","2026-02-25T11:15:16.000+08:00","email","sessionStorage key mismatch: orphaned session forensic artifacts","Hey Albert,
+
+Orphaned sessionStorage keys from a mismatch persist across navigation and appear as active sessions in browser forensic artifacts. Was the collision between tabs, or a key rename that wasn’t propagated to all read paths?
+
+Severin"
+"832","YES","SKIP","fix simulation mismatch","5","commit","wildhash/SYMBIOSIS","SYMBIOSIS","wildhash","User","3","TypeScript","0","cursoragent","Cursor Agent","cursoragent@cursor.com","","","","https://github.com/cursoragent","","","","fix: resolve pnpm version mismatch and improve code quality
 
 - Remove explicit pnpm version from CI workflow (reads from packageManager field)
 - Make simulation delay configurable in ArchitectAgent vi","https://github.com/wildhash/SYMBIOSIS/commit/ab5fe060a7c9a357fedd547c07c164db967d1b3c","2026-01-18T08:14:35.000Z","email","",""
-"833","NO","","fix simulation mismatch","5","commit","waggertron/trade-bot","trade-bot","waggertron","User","1","Python","0","waggertron","weylin","weylinwagnon@gmail.com","","","","https://github.com/waggertron","","","","fix: resolve 0% win rate in simulation backtest
+"833","YES","SKIP","fix simulation mismatch","5","commit","waggertron/trade-bot","trade-bot","waggertron","User","1","Python","0","waggertron","weylin","weylinwagnon@gmail.com","","","","https://github.com/waggertron","","","","fix: resolve 0% win rate in simulation backtest
 
 Five compounding issues caused all simulations to produce 0% win rate:
 - Calendar vs trading days mismatch left only 6 test bars instead of 30
 - SMA wi","https://github.com/waggertron/trade-bot/commit/fcbbee7f526bb0d145dc10442c15ea09a4f69cfc","2026-02-18T20:38:30.000-08:00","email","",""
-"834","NO","","fix simulation mismatch","5","commit","MindustryTool/MindustryServerManager","MindustryServerManager","MindustryTool","Organization","2","Java","1","sharrlotte","Sharlotte","nguyennhonhau25052003@gmail.com","","- Nguyễn Nhơn Hậu
+"834","YES","SKIP","fix simulation mismatch","5","commit","MindustryTool/MindustryServerManager","MindustryServerManager","MindustryTool","Organization","2","Java","1","sharrlotte","Sharlotte","nguyennhonhau25052003@gmail.com","","- Nguyễn Nhơn Hậu
 - yuii1805#0000
 
 ","","https://github.com/sharrlotte","","","https://nguyen-nhon-hau.vercel.app/","fix(flood): correct flood update condition to check full grid
