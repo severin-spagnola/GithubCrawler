@@ -203,7 +203,7 @@ UPDATES = {
     "732": {
         "done": "YES",
         "status": "",
-        "outreach_subject": "Low-voltage reboot hang after App config on RAK WisMeshTag",
+        "outreach_subject": "Low-voltage reboot",
         "outreach_message": (
             "Hey Ethac,\n\n"
             "Low-voltage hangs after App config usually mean radio "
