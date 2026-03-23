@@ -3189,80 +3189,100 @@ Infinite scroll busy loops at end of content usually mean the load-more trigger 
 Severin"
 "793","YES","SKIP","fix reset logic","5","pr","ita-social-projects/VictoryCenter-Client","VictoryCenter-Client","ita-social-projects","Organization","4","TypeScript","3","denys-pavskyi","Denys","den.pavski@gmail.com","","","","https://github.com/denys-pavskyi","","","","Fix modal closing behavior when canceling draft confirmation in Program modal","https://github.com/ita-social-projects/VictoryCenter-Client/pull/265","2026-03-10T11:24:50Z","email","",""
 "794","YES","SKIP","fix reset logic","5","pr","OpenStackweb/openstack-search-widget","openstack-search-widget","OpenStackweb","Organization","2","JavaScript","0","smarcet","sebastian marcet","smarcet@gmail.com","@tipitnet @OpenStack-mobile @OpenStackweb ","FullStack Software Engineer","Buenos Aires, Argentina","https://github.com/smarcet","","","","chore(refactor): add unit tests","https://github.com/OpenStackweb/openstack-search-widget/pull/1","2026-03-11T19:08:57Z","email","",""
-"795","NO","","fix reset logic","5","pr","debuglebowski/slayzone","slayzone","debuglebowski","User","8","TypeScript","94","marcocello","Marco Cello","","Meshify","Get your sales out of your head || Building Meshify","Remote","https://github.com/marcocello","https://www.linkedin.com/in/marcocello/","","https://www.linkedin.com/in/marcocello/","Worktree: fix reliability, session handling, cleanup also enhance the creation to include file options and add related types and tests","https://github.com/debuglebowski/slayzone/pull/24","2026-03-03T21:43:18Z","linkedin","",""
-"796","NO","","fix reset logic","5","pr","idaholab/moose","moose","idaholab","Organization","480","C++","2174","zachmprince","Zachary Prince","zachmprince@gmail.com","@idaholab ","","","https://github.com/zachmprince","","","","Dynamic reset time","https://github.com/idaholab/moose/pull/31046","2025-07-15T18:48:48Z","email","",""
-"797","NO","","fix reset logic","5","pr","MetaMask/metamask-mobile","metamask-mobile","MetaMask","Organization","300","TypeScript","2870","bfullam","Bryan Fullam","bryanfullam@gmail.com","@consensys","Senior Fullstack Engineer @ Consensys","Berlin, DE","https://github.com/bfullam","","","bryanfullam.com","feat: add controlled cursor handling for bridge source input","https://github.com/MetaMask/metamask-mobile/pull/27367","2026-03-11T16:19:51Z","email","",""
-"798","NO","","latch inferred"" language:vhdl","5","issue","stnolting/neorv32","neorv32","stnolting","User","60","VHDL","2000","Alirio926","Alirio Oliveira","aliriofilho926@yahoo.com.br","","","Brasil","https://github.com/Alirio926","","","","Cannot fit on XC6SLX9","https://github.com/stnolting/neorv32/issues/132","2021-07-24T22:06:58Z","email","NEORV32 on Spartan-6 XC6SLX9","Fitting NEORV32 on an XC6SLX9 is a tight squeeze. That's one of the smallest Spartan-6 parts, and the RISC-V core plus peripherals can easily blow past its LUT budget.
+"795","YES","","fix reset logic","5","pr","debuglebowski/slayzone","slayzone","debuglebowski","User","8","TypeScript","94","marcocello","Marco Cello","","Meshify","Get your sales out of your head || Building Meshify","Remote","https://github.com/marcocello","https://www.linkedin.com/in/marcocello/","","https://www.linkedin.com/in/marcocello/","Worktree: fix reliability, session handling, cleanup also enhance the creation to include file options and add related types and tests","https://github.com/debuglebowski/slayzone/pull/24","2026-03-03T21:43:18Z","linkedin","Worktree session handling: root vs path keying in slayzone","Hey Marco,
 
-Which NEORV32 features were you trying to keep, and did you find specific peripherals or ISA extensions that were the biggest resource hogs on Spartan-6?
+Worktree session bugs that also affect cleanup usually mean session state is keyed on repo root instead of worktree path — root-keyed state mutates the wrong session when two worktrees coexist. Was the bug stale handles surviving cleanup, or cross-worktree state collisions?
 
 Severin"
-"799","NO","","latch inferred"" language:vhdl","5","issue","ghdl/ghdl","ghdl","ghdl","Organization","150","VHDL","2768","carljohnsen","Carl-Johannes Johnsen","carl-johannes@di.ku.dk","","","","https://github.com/carljohnsen","","","","Different Block RAM behaviour, compared to Xilinx Vivado Simulator","https://github.com/ghdl/ghdl/issues/1544","2020-12-22T14:14:20Z","email","ghdl vs Vivado BRAM behavior","Hey Carl-Johannes,
+"796","YES","","fix reset logic","5","pr","idaholab/moose","moose","idaholab","Organization","480","C++","2174","zachmprince","Zachary Prince","zachmprince@gmail.com","@idaholab ","","","https://github.com/zachmprince","","","","Dynamic reset time","https://github.com/idaholab/moose/pull/31046","2025-07-15T18:48:48Z","email","Dynamic reset time coupling consistency in MOOSE","Hey Zachary,
 
-The Block RAM behavior divergence you reported between ghdl and Vivado's simulator is a really practical problem. BRAM inference is already vendor-specific in synthesis, but when the simulators disagree on read-during-write behavior, you can't trust your testbench results to predict what the hardware will do.
-
-Did you end up having to write your BRAM descriptions differently to get consistent behavior across both simulators, or was there a ghdl-side fix?
+Dynamic time resets in MOOSE must propagate to every coupled physics — if one MultiApp resets while another doesn't, the residual evaluates across inconsistent time states. Did the fix push reset through the MultiApp hierarchy, or add a synchronization barrier?
 
 Severin"
-"800","NO","","latch inferred"" language:verilog","5","issue","chili-chips-ba/wireguard-fpga","wireguard-fpga","chili-chips-ba","User","12","Verilog","1317","chili-chips-ba","Chili.CHIPS","ask@chili-chips.xyz","Chili.CHIPS*ba","Making math audible, visible, tangible in a number of big.LITTLE ways, we're engineers, entrepreneurs, creatives who love 2 think up & fire up FPGA, CPU, NPU...","Bosnia-Herzegovina","https://github.com/chili-chips-ba","","","www.chili-chips.xyz","Add MCP feature to Pipeline-C","https://github.com/chili-chips-ba/wireguard-fpga/issues/18","2025-06-05T05:15:57Z","email","MCP feature in Pipeline-C for wireguard-fpga","Hey,
+"797","YES","","fix reset logic","5","pr","MetaMask/metamask-mobile","metamask-mobile","MetaMask","Organization","300","TypeScript","2870","bfullam","Bryan Fullam","bryanfullam@gmail.com","@consensys","Senior Fullstack Engineer @ Consensys","Berlin, DE","https://github.com/bfullam","","","bryanfullam.com","feat: add controlled cursor handling for bridge source input","https://github.com/MetaMask/metamask-mobile/pull/27367","2026-03-11T16:19:51Z","email","Controlled cursor and selection sync in MetaMask bridge input","Hey Bryan,
 
-The MCP feature addition to Pipeline-C for wireguard-fpga is an approach to handling multi-cycle paths in a tool designed for single-cycle combinational logic. WireGuard's ChaCha20-Poly1305 at line rate demands a carefully balanced pipeline.
-
-What's the target deployment for wireguard-fpga — network appliances, datacenter NICs, or something else?
+Controlled cursor in React Native requires text and selection state to update atomically — if the bridge input reformats on value change, selection lags and the cursor jumps. Did you track cursor position via a ref, or explicitly pass the selection back on each update?
 
 Severin"
-"801","NO","","latch inferred"" language:verilog","5","issue","chili-chips-ba/openCologne","openCologne","chili-chips-ba","User","12","Verilog","91","goran-mahovlic","Goran Mahovlic","goran.mahovlic@gmail.com","Intergalaktik d.o.o.","","Croatia","https://github.com/goran-mahovlic","","GMahovlic","https://intergalaktik.eu/","Error 10 on simple keyboard module","https://github.com/chili-chips-ba/openCologne/issues/27","2024-07-30T12:46:33Z","email","Error 10 on keyboard module in openCologne","Hey Goran,
+"798","YES","","latch inferred"" language:vhdl","5","issue","stnolting/neorv32","neorv32","stnolting","User","60","VHDL","2000","Alirio926","Alirio Oliveira","aliriofilho926@yahoo.com.br","","","Brasil","https://github.com/Alirio926","","","","Cannot fit on XC6SLX9","https://github.com/stnolting/neorv32/issues/132","2021-07-24T22:06:58Z","email","NEORV32 on XC6SLX9: LUT budget at minimum config","Hey Alirio,
 
-The Error 10 you reported on the keyboard module in openCologne is the kind of synthesis feedback that can be cryptic — Cologne Chip's toolchain doesn't always give the clearest diagnostics. Making the GateMate FPGA accessible with open source tooling is valuable work.
-
-Was the error related to the GateMate's IO cell configuration for the keyboard interface, or something in the HDL itself?
+At absolute minimum config — RV32I only, no debug unit, IMEM as BRAM — NEORV32 barely clears the XC6SLX9 LUT budget, leaving almost nothing for peripherals. Did you use BRAM for instruction memory to free up LUTs, or switch to a smaller core?
 
 Severin"
-"802","NO","","fix simulation mismatch","5","commit","Miho1254/nckh_sdn_payload","nckh_sdn_payload","Miho1254","User","1","Python","0","Miho1254","Đặng Quang Hiển","wanghien.miho.dev@gmail.com","Thuy Loi University - Southern Campus","nothing","HO CHI MINH CITY, VIETNAM","https://github.com/Miho1254","","","miho.worldsimp.com","fix(charts): handle inference model shape mismatch and add fallback simulation","https://github.com/Miho1254/nckh_sdn_payload/commit/ed30ff17b371ec11599fc6a9c56b45558ed80004","2026-03-04T17:31:49.000+07:00","email","",""
-"803","NO","","fix simulation mismatch","5","commit","websublime/vite-open-api-server","vite-open-api-server","websublime","Organization","3","TypeScript","3","miguelramos","Miguel Ramos","miguel.ramos@websublime.dev","Software Engineer","NodeJS, Javascript, Go and Typescript. Love backend technologies and dedicated now as a frontend master.","Viana do Castelo, Portugal","https://github.com/miguelramos","","","https://miguelramos.dev","chore: sync changeset for fix/vite-bzb-simulation-path-mismatch","https://github.com/websublime/vite-open-api-server/commit/06ba5cf4a590cc9876188c2cfc3e0fc95ca2c7ad","2026-02-09T14:46:00.000Z","email","",""
-"804","NO","","fix simulation mismatch","5","commit","sssamuelll/openclo","openclo","sssamuelll","User","2","TypeScript","0","sssamuelll","Samuel Ballesteros","sssamuelll@gmail.com","","Software Composer 
+"799","YES","","latch inferred"" language:vhdl","5","issue","ghdl/ghdl","ghdl","ghdl","Organization","150","VHDL","2768","carljohnsen","Carl-Johannes Johnsen","carl-johannes@di.ku.dk","","","","https://github.com/carljohnsen","","","","Different Block RAM behaviour, compared to Xilinx Vivado Simulator","https://github.com/ghdl/ghdl/issues/1544","2020-12-22T14:14:20Z","email","GHDL vs Vivado BRAM: RTL vs primitive read-during-write semantics","Hey Carl-Johannes,
+
+GHDL models read-during-write as generic RTL; Vivado models the BRAM's READ_FIRST/WRITE_FIRST mode — they will always disagree unless your VHDL explicitly encodes the access policy. Did the fix use a BRAM attribute, or restructure to avoid same-cycle collisions?
+
+Severin"
+"800","YES","SKIP","latch inferred"" language:verilog","5","issue","chili-chips-ba/wireguard-fpga","wireguard-fpga","chili-chips-ba","User","12","Verilog","1317","chili-chips-ba","Chili.CHIPS","ask@chili-chips.xyz","Chili.CHIPS*ba","Making math audible, visible, tangible in a number of big.LITTLE ways, we're engineers, entrepreneurs, creatives who love 2 think up & fire up FPGA, CPU, NPU...","Bosnia-Herzegovina","https://github.com/chili-chips-ba","","","www.chili-chips.xyz","Add MCP feature to Pipeline-C","https://github.com/chili-chips-ba/wireguard-fpga/issues/18","2025-06-05T05:15:57Z","email","",""
+"801","YES","","latch inferred"" language:verilog","5","issue","chili-chips-ba/openCologne","openCologne","chili-chips-ba","User","12","Verilog","91","goran-mahovlic","Goran Mahovlic","goran.mahovlic@gmail.com","Intergalaktik d.o.o.","","Croatia","https://github.com/goran-mahovlic","","GMahovlic","https://intergalaktik.eu/","Error 10 on simple keyboard module","https://github.com/chili-chips-ba/openCologne/issues/27","2024-07-30T12:46:33Z","email","GateMate IO primitive requirement for keyboard ports in openCologne","Hey Goran,
+
+GateMate's toolchain needs explicit CC_IBUF/CC_OBUF on IO ports rather than inferring them — plain logic driving a top-level port skips the IO cell wrapper and usually errors at placement. Was Error 10 the missing IO primitive, or a constraint pin assignment?
+
+Severin"
+"802","YES","","fix simulation mismatch","5","commit","Miho1254/nckh_sdn_payload","nckh_sdn_payload","Miho1254","User","1","Python","0","Miho1254","Đặng Quang Hiển","wanghien.miho.dev@gmail.com","Thuy Loi University - Southern Campus","nothing","HO CHI MINH CITY, VIETNAM","https://github.com/Miho1254","","","miho.worldsimp.com","fix(charts): handle inference model shape mismatch and add fallback simulation","https://github.com/Miho1254/nckh_sdn_payload/commit/ed30ff17b371ec11599fc6a9c56b45558ed80004","2026-03-04T17:31:49.000+07:00","email","Inference shape fallback masking checkpoint weight errors","Hey Hiển,
+
+A fallback on shape mismatch prevents chart crashes, but silently hides cases where the model loaded wrong weights — the shape error might be a checkpoint mismatch, not just a batch size issue. Does the fallback log the mismatch, or just substitute zeros?
+
+Severin"
+"803","YES","SKIP","fix simulation mismatch","5","commit","websublime/vite-open-api-server","vite-open-api-server","websublime","Organization","3","TypeScript","3","miguelramos","Miguel Ramos","miguel.ramos@websublime.dev","Software Engineer","NodeJS, Javascript, Go and Typescript. Love backend technologies and dedicated now as a frontend master.","Viana do Castelo, Portugal","https://github.com/miguelramos","","","https://miguelramos.dev","chore: sync changeset for fix/vite-bzb-simulation-path-mismatch","https://github.com/websublime/vite-open-api-server/commit/06ba5cf4a590cc9876188c2cfc3e0fc95ca2c7ad","2026-02-09T14:46:00.000Z","email","",""
+"804","YES","","fix simulation mismatch","5","commit","sssamuelll/openclo","openclo","sssamuelll","User","2","TypeScript","0","sssamuelll","Samuel Ballesteros","sssamuelll@gmail.com","","Software Composer 
 Music Developer
 I do stuff while traveling","Venezuela","https://github.com/sssamuelll","","","http://sdar.dev","fix: resolve simulation freeze and build errors by standardizing TypedArray usage
 
 - Restored simulation movement by correctly passing Float32Array to Wasm/Worker
-- Updated all simulation interfaces (","https://github.com/sssamuelll/openclo/commit/fcbd5c20cc36f6b6ce2e55bf06adc59531780e20","2026-02-27T04:50:32.000+01:00","email","TypedArray mismatch freezing your cloth sim","Passing the wrong array type to a Wasm worker is one of those bugs that silently corrupts everything instead of throwing — the fact that it froze the simulation rather than crashing must have made it brutal to track down. Standardizing on Float32Array across every interface boundary is the clean fix. Are you marshaling the entire particle state each frame, or did you find a way to share the buffer directly between the main thread and the worker via SharedArrayBuffer?
+- Updated all simulation interfaces (","https://github.com/sssamuelll/openclo/commit/fcbd5c20cc36f6b6ce2e55bf06adc59531780e20","2026-02-27T04:50:32.000+01:00","email","Float32Array/Wasm worker boundary type loss in openclo","Hey Samuel,
+
+Float32Array passed through a transferable worker boundary loses its type if the worker reconstructs from raw ArrayBuffer — SharedArrayBuffer avoids the copy but needs COOP/COEP headers. Did you marshal state per frame, or share the buffer directly?
 
 Severin"
-"805","NO","","fix simulation mismatch","5","commit","LouisRosche/Kairos.Sci.Repo","Kairos.Sci.Repo","LouisRosche","User","3","HTML","1","LouisRosche","Louis Rosche","louis.rosche@gmail.com","","I think and make.","St. Louis, MO","https://github.com/LouisRosche","","LouisRosche","https://drive.google.com/drive/folders/1rXOkf0wbWpUNO98XWgvqlXDyi36LM0RN?usp=drive_link","Merge pull request #597 from LouisRosche/claude/align-content-documentation-QqdJL
+"805","YES","SKIP","fix simulation mismatch","5","commit","LouisRosche/Kairos.Sci.Repo","Kairos.Sci.Repo","LouisRosche","User","3","HTML","1","LouisRosche","Louis Rosche","louis.rosche@gmail.com","","I think and make.","St. Louis, MO","https://github.com/LouisRosche","","LouisRosche","https://drive.google.com/drive/folders/1rXOkf0wbWpUNO98XWgvqlXDyi36LM0RN?usp=drive_link","Merge pull request #597 from LouisRosche/claude/align-content-documentation-QqdJL
 
 fix(content): integrate orphaned simulations and fix title mismatch","https://github.com/LouisRosche/Kairos.Sci.Repo/commit/a5275d3df681024f9f0ef92199d08142dcee6a6c","2026-01-20T16:48:52.000-06:00","email","",""
-"806","NO","","fix simulation mismatch","5","commit","choreonoid/choreonoid","choreonoid","choreonoid","Organization","60","C++","179","s-nakaoka","Shin'ichiro Nakaoka","s.nakaoka@gmail.com","Founder & CEO at Choreonoid Inc.","Robot Simulator Architect","Tsukuba, Ibaraki, Japan","https://github.com/s-nakaoka","","","https://s-nakaoka.github.io/","Fix color mismatch in RangeCamera simulation with non-organized configuration","https://github.com/choreonoid/choreonoid/commit/a48a169d60baa76b0b74865a557ff13f5af21da0","2025-10-15T14:44:38.000+09:00","email","",""
-"807","NO","","fix simulation mismatch","5","commit","BernardoFL/PharmacyAlloc","PharmacyAlloc","BernardoFL","User","2","Jupyter Notebook","0","BernardoFL","","flores.lopez.bernardo@gmail.com","University of Texas at Austin","","Austin, TX","https://github.com/BernardoFL","","Brnrdo","","fix: handle condition dimension mismatch in simulation","https://github.com/BernardoFL/PharmacyAlloc/commit/b882511df7f97c44d5a31d2b18272beb91d45274","2025-09-03T17:10:32.000-05:00","email","",""
-"808","NO","","fix simulation mismatch","5","commit","ron746/manaxc-repo","manaxc-repo","ron746","User","2","TypeScript","0","ron746","Ron Ernst","ron@manaxc.com","","","","https://github.com/ron746","","","","fix(training): fix 2 title mismatches in 1600m key_2 slot workout links
+"806","YES","","fix simulation mismatch","5","commit","choreonoid/choreonoid","choreonoid","choreonoid","Organization","60","C++","179","s-nakaoka","Shin'ichiro Nakaoka","s.nakaoka@gmail.com","Founder & CEO at Choreonoid Inc.","Robot Simulator Architect","Tsukuba, Ibaraki, Japan","https://github.com/s-nakaoka","","","https://s-nakaoka.github.io/","Fix color mismatch in RangeCamera simulation with non-organized configuration","https://github.com/choreonoid/choreonoid/commit/a48a169d60baa76b0b74865a557ff13f5af21da0","2025-10-15T14:44:38.000+09:00","email","RangeCamera non-organized point cloud color index mapping","Hey Shin'ichiro,
+
+Non-organized point clouds drop the image-coordinate index used to map RGB to depth — sequential color assignment misaligns the moment any point is culled or reordered. Was the mismatch an index offset into the color buffer, or a stride error?
+
+Severin"
+"807","YES","SKIP","fix simulation mismatch","5","commit","BernardoFL/PharmacyAlloc","PharmacyAlloc","BernardoFL","User","2","Jupyter Notebook","0","BernardoFL","","flores.lopez.bernardo@gmail.com","University of Texas at Austin","","Austin, TX","https://github.com/BernardoFL","","Brnrdo","","fix: handle condition dimension mismatch in simulation","https://github.com/BernardoFL/PharmacyAlloc/commit/b882511df7f97c44d5a31d2b18272beb91d45274","2025-09-03T17:10:32.000-05:00","email","",""
+"808","YES","SKIP","fix simulation mismatch","5","commit","ron746/manaxc-repo","manaxc-repo","ron746","User","2","TypeScript","0","ron746","Ron Ernst","ron@manaxc.com","","","","https://github.com/ron746","","","","fix(training): fix 2 title mismatches in 1600m key_2 slot workout links
 
 '400s with Standing Rest' → '400s Standing Rest'
 'Race Sim 1200' → 'Race Simulation 1200'
 
 Co-Authored-By: Claude Opus 4.6 <nor","https://github.com/ron746/manaxc-repo/commit/197ed2b7628a588e304bf1e78d723c089f4770a1","2026-03-01T12:07:30.000-08:00","email","",""
-"809","NO","","fix simulation mismatch","5","commit","Unipisa/Simu5G","Simu5G","Unipisa","Organization","10","C++","218","avarga","Andras Varga","andras@omnetpp.org","Opensim Ltd.","OMNeT++ (@omnetpp) primary author, project lead","Budapest","https://github.com/avarga","","","","Mec: Fix uninitialized variables
+"809","YES","","fix simulation mismatch","5","commit","Unipisa/Simu5G","Simu5G","Unipisa","Organization","10","C++","218","avarga","Andras Varga","andras@omnetpp.org","Opensim Ltd.","OMNeT++ (@omnetpp) primary author, project lead","Budapest","https://github.com/avarga","","","","Mec: Fix uninitialized variables
 
 This fixes long-standing fingerprint failures of certain MEC simulations
 in DEBUG mode only, and only on the Github CI.
 
 Failures:
-    /simulations/nr/mec/singleMecHo","https://github.com/Unipisa/Simu5G/commit/847dcc78b39e2a9b2747a7bf5cc557c6e6f31aa8","2026-02-19T10:27:04.000+01:00","email","",""
-"810","NO","","fix simulation mismatch","5","commit","Gokul1111-cmd/portfolio","portfolio","Gokul1111-cmd","User","1","JavaScript","0","Gokul1111-cmd","Gokul A","gokulanbalagan1112@gmail.com","Karpagam College of Engineering","Full-Stack Developer | Java, Spring Boot, React | Cloud & DevSecOps-aware | Building security-focused, real-world web systems","Coimbatore","https://github.com/Gokul1111-cmd","","","https://gokul--portfolio.vercel.app","Fix domain/focusArea mismatches for proper UI display
+    /simulations/nr/mec/singleMecHo","https://github.com/Unipisa/Simu5G/commit/847dcc78b39e2a9b2747a7bf5cc557c6e6f31aa8","2026-02-19T10:27:04.000+01:00","email","Simu5G MEC uninitialized vars: debug vs release init semantics","Hey Andras,
+
+Debug allocators zero-initialize memory; release allocators leave garbage — uninitialized vars that only affect fingerprints in DEBUG mode are taking different simulation branches on that zero value. Was the fix explicit init, or dead-code removal?
+
+Severin"
+"810","YES","SKIP","fix simulation mismatch","5","commit","Gokul1111-cmd/portfolio","portfolio","Gokul1111-cmd","User","1","JavaScript","0","Gokul1111-cmd","Gokul A","gokulanbalagan1112@gmail.com","Karpagam College of Engineering","Full-Stack Developer | Java, Spring Boot, React | Cloud & DevSecOps-aware | Building security-focused, real-world web systems","Coimbatore","https://github.com/Gokul1111-cmd","","","https://gokul--portfolio.vercel.app","Fix domain/focusArea mismatches for proper UI display
 
 - Changed entry-secure-platform-capstone domain: Platform Engineering  Kubernetes
 - Changed entry-dr-restore-simulation domain: SRE  Incident Res","https://github.com/Gokul1111-cmd/portfolio/commit/0636d7c7e9c144e906291160c4874baa07c5e3fa","2026-01-31T16:11:49.000+05:30","email","",""
-"811","NO","","fix simulation mismatch","5","commit","winstar/percolator-launch","percolator-launch","winstar","User","1","TypeScript","1","winstar","Intl Codesphere","intl.codesphere@gmail.com","","","","https://github.com/winstar","","","http://blog.eveow.com","fix: add /api/simulation/bots route + fix React hydration mismatch
+"811","YES","SKIP","fix simulation mismatch","5","commit","winstar/percolator-launch","percolator-launch","winstar","User","1","TypeScript","1","winstar","Intl Codesphere","intl.codesphere@gmail.com","","","","https://github.com/winstar","","","http://blog.eveow.com","fix: add /api/simulation/bots route + fix React hydration mismatch
 
 - Added missing bots endpoint to Railway server
 - Fixed SSR hydration error #418 by gating wallet UI on mounted state
 - WalletMultiB","https://github.com/winstar/percolator-launch/commit/baaf99ccd03c9e2713f24d09eed0080b954496c6","2026-02-15T05:25:49.000Z","email","",""
-"812","NO","","fix simulation mismatch","5","commit","TaoishTechy/PazuzuCore","PazuzuCore","TaoishTechy","User","1","Python","1","TaoishTechy","Michael Landry","506mikey@gmail.com","GhostMesh48","Freelancer / Demi-Stack Developer","Canada","https://github.com/TaoishTechy","","MyKey00110000","https://www.ghost-mesh.io","Fix issues and enhance AGI Emergence Simulation
+"812","YES","SKIP","fix simulation mismatch","5","commit","TaoishTechy/PazuzuCore","PazuzuCore","TaoishTechy","User","1","Python","1","TaoishTechy","Michael Landry","506mikey@gmail.com","GhostMesh48","Freelancer / Demi-Stack Developer","Canada","https://github.com/TaoishTechy","","MyKey00110000","https://www.ghost-mesh.io","Fix issues and enhance AGI Emergence Simulation
 
 This update addresses several issues in the AGI Emergence Simulation, including fixing plot mismatches, improving stage utility calculations, and ensur","https://github.com/TaoishTechy/PazuzuCore/commit/69e6a42818d9712881c40839e55e77fd854cf4ff","2025-10-22T20:07:17.000-03:00","email","",""
-"813","NO","","fix simulation mismatch","5","commit","yongkyuns/RustRobotics","RustRobotics","yongkyuns","User","1","Rust","0","yongkyuns","Yongkyun Shin","yongkyuns@gmail.com","","","","https://github.com/yongkyuns","","","","fix: initialize SLAM algorithms with current pose when enabled mid-simulation
+"813","YES","","fix simulation mismatch","5","commit","yongkyuns/RustRobotics","RustRobotics","yongkyuns","User","1","Rust","0","yongkyuns","Yongkyun Shin","yongkyuns@gmail.com","","","","https://github.com/yongkyuns","","","","fix: initialize SLAM algorithms with current pose when enabled mid-simulation
 
 When EKF or Graph SLAM is enabled after the simulation has started,
-initialize them with the current dead-reckoning pose ","https://github.com/yongkyuns/RustRobotics/commit/45002847d8ef158d3bf399bb62cb277d20f959f9","2026-01-25T16:51:16.000-05:00","email","",""
-"814","NO","","fix simulation mismatch","5","commit","celeritas-project/celeritas","celeritas","celeritas-project","Organization","28","C++","94","amandalund","Amanda Lund","alund@anl.gov","Argonne National Laboratory","","Chicago, IL","https://github.com/amandalund","","","","Add optical problem input and setup (#2189)
+initialize them with the current dead-reckoning pose ","https://github.com/yongkyuns/RustRobotics/commit/45002847d8ef158d3bf399bb62cb277d20f959f9","2026-01-25T16:51:16.000-05:00","email","SLAM mid-simulation init: EKF covariance P0 vs dead-reckoning pose","Hey Yongkyun,
+
+Initializing EKF with the dead-reckoning pose fixes state mismatch, but P0 also needs to reflect accumulated drift uncertainty — a tight default P0 will reject sensor updates that disagree with the pose. Did you set P0 based on elapsed time, or use a fixed default?
+
+Severin"
+"814","YES","","fix simulation mismatch","5","commit","celeritas-project/celeritas","celeritas","celeritas-project","Organization","28","C++","94","amandalund","Amanda Lund","alund@anl.gov","Argonne National Laboratory","","Chicago, IL","https://github.com/amandalund","","","","Add optical problem input and setup (#2189)
 
 * Store aux registry in optical core params
 
@@ -3270,7 +3290,11 @@ initialize them with the current dead-reckoning pose ","https://github.com/yongk
 
 * Fix mismatched tags
 
-* clang-tidy","https://github.com/celeritas-project/celeritas/commit/3bc3c1628f4b0df4d4f38bc13a1cd26933b0a881","2026-01-12T19:06:34.000-06:00","email","",""
+* clang-tidy","https://github.com/celeritas-project/celeritas/commit/3bc3c1628f4b0df4d4f38bc13a1cd26933b0a881","2026-01-12T19:06:34.000-06:00","email","Optical-only Celeritas: decoupled EM and optical physics stacks","Hey Amanda,
+
+Optical-only mode needs optical photons to bypass the EM step limiter — Cherenkov and EM tracks share the same transport loop in Celeritas. Does the optical core params carry a separate process manager, or disable EM steps via a flag?
+
+Severin"
 "815","NO","","fix simulation mismatch","5","commit","hadhiee/molecul-journey","molecul-journey","hadhiee","User","1","TypeScript","0","hadhiee","hadhiee","hadhiee@gmail.com","Moklet","just little","Ngalam","https://github.com/hadhiee","","","","fix: normalize email to lowercase across ALL games + add handleExit to future/simulation
 
 Root cause: homepage queries user_progress with .toLowerCase() but
