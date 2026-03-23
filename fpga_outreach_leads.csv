@@ -1483,97 +1483,75 @@ Severin"
 VossII failing to compile on Ubuntu limits adoption of an already niche formal verification tool — if it doesn't build on the most common Linux distro, most users never get past install. Was this a specific library version incompatibility, or a deeper build system issue?
 
 Severin"
-300,NO,,fix instantiation language:Verilog,4,pr,pConst/basic_verilog,basic_verilog,pConst,User,4,Verilog,1937,JacyCui,Jacy,jiacaicui@smail.nju.edu.cn,Nanjing University,,Nanjing,https://github.com/JacyCui,,,https://www.cuijiacai.com/,Fix undefined `clk_div` in `freq_meter.sv`,https://github.com/pConst/basic_verilog/pull/7,2025-07-25T08:53:04Z,email,Undefined clk_div fix in freq_meter.sv,"Hey Jacy,
+300,YES,WRITE,fix instantiation language:Verilog,4,pr,pConst/basic_verilog,basic_verilog,pConst,User,4,Verilog,1937,JacyCui,Jacy,jiacaicui@smail.nju.edu.cn,Nanjing University,,Nanjing,https://github.com/JacyCui,,,https://www.cuijiacai.com/,Fix undefined `clk_div` in `freq_meter.sv`,https://github.com/pConst/basic_verilog/pull/7,2025-07-25T08:53:04Z,email,Undefined clk_div in freq_meter.sv,"Hey Jacy,
 
-Your PR fixing the undefined clk_div in freq_meter.sv in basic_verilog is a clean bug fix. An undefined clock divider in a frequency meter module would cause simulation failures or unpredictable synthesis results for anyone using it as a reference.
-
-Do you use these modules in your coursework or research at the university?
+An undefined clk_div in a frequency meter module would silently produce wrong measurements or fail to synthesize depending on the tool — good catch in basic_verilog. Was the signal just undeclared, or was there a missing connection in the instantiation hierarchy?
 
 Severin"
-301,NO,,fix instantiation language:Verilog,4,issue,ZipCPU/dspfilters,dspfilters,ZipCPU,User,3,Verilog,167,fjpolo,Fran Co,fjpolo@gmail.com,,"Embedded audio developer who works with QCC | HiFi platforms in C/C++, plays with FPGAs in Verilog and creates games in NESFab.
+301,YES,WRITE,fix instantiation language:Verilog,4,issue,ZipCPU/dspfilters,dspfilters,ZipCPU,User,3,Verilog,167,fjpolo,Fran Co,fjpolo@gmail.com,,"Embedded audio developer who works with QCC | HiFi platforms in C/C++, plays with FPGAs in Verilog and creates games in NESFab.
 
-Music? Strudel please",Berlin,https://github.com/fjpolo,,,https://www.matecito.co/fjpolo,make[1]: *** [Makefile:69: obj-pc/lfsr_tb.o] Error 1,https://github.com/ZipCPU/dspfilters/issues/4,2025-02-10T10:15:14Z,email,LFSR testbench build error in ZipCPU dspfilters,"Hey Fran,
+Music? Strudel please",Berlin,https://github.com/fjpolo,,,https://www.matecito.co/fjpolo,make[1]: *** [Makefile:69: obj-pc/lfsr_tb.o] Error 1,https://github.com/ZipCPU/dspfilters/issues/4,2025-02-10T10:15:14Z,email,LFSR testbench build failure in dspfilters,"Hey Fran,
 
-The LFSR testbench build error you hit in ZipCPU dspfilters is one of those issues where the test infrastructure fails before you can even verify the DSP module. With your embedded audio background on QCC/HiFi platforms, FPGA DSP filters are a natural extension.
-
-Do you implement audio processing on FPGAs professionally, or is the Verilog side more experimental?
+An LFSR testbench that won't compile in ZipCPU's dspfilters blocks verification of the actual filter — the Makefile error at obj-pc/lfsr_tb.o suggests a toolchain or dependency issue rather than an HDL problem. Was this a missing include path, or something specific to your simulation environment?
 
 Severin"
-302,NO,,fix instantiation language:Verilog,4,pr,tillitis/tillitis-key1,tillitis-key1,tillitis,Organization,12,C,433,secworks,Joachim Strömbergson,joachim.strombergson@assured.se,Assured AB,"IT Security expert with focus on embedded systems, Internet of Things and crypto. I develop embedded and hardware implementations of cryptographic primitives.","Gothenburg, Sweden",https://github.com/secworks,,,https://assured.se,Fix tk1 lint,https://github.com/tillitis/tillitis-key1/pull/233,2024-06-07T09:23:50Z,email,TK1 lint fix in Tillitis Key1,"Hey Joachim,
+302,YES,WRITE,fix instantiation language:Verilog,4,pr,tillitis/tillitis-key1,tillitis-key1,tillitis,Organization,12,C,433,secworks,Joachim Strömbergson,joachim.strombergson@assured.se,Assured AB,"IT Security expert with focus on embedded systems, Internet of Things and crypto. I develop embedded and hardware implementations of cryptographic primitives.","Gothenburg, Sweden",https://github.com/secworks,,,https://assured.se,Fix tk1 lint,https://github.com/tillitis/tillitis-key1/pull/233,2024-06-07T09:23:50Z,email,TK1 lint fix in Tillitis Key1,"Hey Joachim,
 
-Your lint fix PR on TK1 in Tillitis Key1 is part of keeping the hardware clean for a security-critical device. On a physical security key with open-source firmware and hardware, even lint warnings need to be tracked because any unexpected logic could be a security concern.
-
-Does the Key1 use your own crypto cores from Assured, or do the hardware primitives come from somewhere else?
+Lint cleanup on TK1 matters more than usual when the hardware is a physical security key — any unexpected logic flagged by lint could be a security concern in a device where every gate needs to be accounted for. Does Tillitis Key1 use your crypto cores from Assured, or are the hardware primitives sourced separately?
 
 Severin"
-303,NO,,fix instantiation language:Verilog,4,issue,olofk/serv,serv,olofk,User,60,Verilog,1762,rschlaikjer,Ross Schlaikjer,developers@schlaikjer.com,,,Tokyo,https://github.com/rschlaikjer,,,https://rhye.org/,Possible incorrect `ret` behaviour using default `serv_rf_top` instantiation,https://github.com/olofk/serv/issues/73,2022-01-07T18:49:33Z,email,Possible incorrect ret in SERV serv_rf_top,"Hey Ross,
+303,YES,WRITE,fix instantiation language:Verilog,4,issue,olofk/serv,serv,olofk,User,60,Verilog,1762,rschlaikjer,Ross Schlaikjer,developers@schlaikjer.com,,,Tokyo,https://github.com/rschlaikjer,,,https://rhye.org/,Possible incorrect `ret` behaviour using default `serv_rf_top` instantiation,https://github.com/olofk/serv/issues/73,2022-01-07T18:49:33Z,email,SERV ret behavior with default serv_rf_top,"Hey Ross,
 
-The possible incorrect ret behavior you reported when using the default serv_rf_top instantiation in SERV is a subtle bug in the world's smallest RISC-V CPU. A return instruction getting the wrong address from the register file would silently break function call flow.
-
-Did you hit this in a real application, or did it surface while testing the bit-serial register file?
+A return instruction pulling the wrong address from the register file in SERV would silently break function call flow — especially subtle in a bit-serial CPU where register access is already unconventional. Did this surface during real application testing, or while verifying the bit-serial register file directly?
 
 Severin"
-304,NO,,fix instantiation language:Verilog,4,pr,antonblanchard/microwatt,microwatt,antonblanchard,User,27,Verilog,712,Jbalkind,Jonathan Balkind,jbalkind@ucsb.edu,UC Santa Barbara,,,https://github.com/Jbalkind,,jbalkind,https://jbalkind.github.io,Changing use of others in core files to satisfy VCS,https://github.com/antonblanchard/microwatt/pull/173,2020-05-14T21:27:17Z,email,VCS compatibility fix for Microwatt,"Hey Jonathan,
+304,YES,WRITE,fix instantiation language:Verilog,4,pr,antonblanchard/microwatt,microwatt,antonblanchard,User,27,Verilog,712,Jbalkind,Jonathan Balkind,jbalkind@ucsb.edu,UC Santa Barbara,,,https://github.com/Jbalkind,,jbalkind,https://jbalkind.github.io,Changing use of others in core files to satisfy VCS,https://github.com/antonblanchard/microwatt/pull/173,2020-05-14T21:27:17Z,email,VCS compatibility fix for Microwatt VHDL,"Hey Jonathan,
 
-Your PR changing the use of ""others"" in Microwatt's core files to satisfy VCS addresses one of those VHDL portability issues where code that is valid in GHDL fails in a commercial simulator. Getting Microwatt to compile across multiple tools matters for adoption.
-
-Do you use Microwatt in your research at UCSB, or is the contribution about supporting the open POWER ISA ecosystem?
+Using ""others"" in VHDL aggregate assignments is valid per the standard but trips up VCS — fixing this in Microwatt's core files is one of those portability issues that gates adoption by teams locked into commercial simulators. Are you using Microwatt in your research, or focused on broadening open POWER ISA toolchain support?
 
 Severin"
-305,NO,,fix instantiation language:Verilog,4,pr,XUANTIE-RV/wujian100_open,wujian100_open,XUANTIE-RV,Organization,9,Verilog,1986,xqbumu,卜木,xqbumu@163.com,,,,https://github.com/xqbumu,,,,fix(iverilog): remove static from tb,https://github.com/XUANTIE-RV/wujian100_open/pull/22,2019-10-26T13:49:34Z,email,removing static from wujian100 testbench,"Stripping the static qualifier from the wujian100 testbench so it actually compiles under Icarus Verilog is a classic portability fix — Icarus doesn't support static in the same way commercial simulators do. Did the original testbench also have issues with other open-source simulators like Verilator, or was this purely an iverilog gap?
+305,YES,WRITE,fix instantiation language:Verilog,4,pr,XUANTIE-RV/wujian100_open,wujian100_open,XUANTIE-RV,Organization,9,Verilog,1986,xqbumu,卜木,xqbumu@163.com,,,,https://github.com/xqbumu,,,,fix(iverilog): remove static from tb,https://github.com/XUANTIE-RV/wujian100_open/pull/22,2019-10-26T13:49:34Z,email,Icarus Verilog static qualifier fix in wujian100,"Stripping the static qualifier from the wujian100 testbench so it compiles under Icarus Verilog is a classic portability fix — Icarus doesn't support static the same way commercial simulators do. Did the original testbench have issues with other open-source simulators like Verilator, or was this purely an iverilog gap?
 
 Severin"
-306,NO,,fix instantiation language:Verilog,4,pr,cfelton/test_jpeg,test_jpeg,cfelton,User,5,Verilog,18,mkatsimpris,Merkourios Katsimpris,merkourioskatsimpris@gmail.com,,,Zurich,https://github.com/mkatsimpris,,,,Frontend new,https://github.com/cfelton/test_jpeg/pull/35,2016-07-20T13:37:51Z,email,,
-307,NO,,fix instantiation language:Verilog,4,pr,openrisc/orpsoc-cores,orpsoc-cores,openrisc,Organization,21,Verilog,125,skristiansson,Stefan Kristiansson,stefan.kristiansson@saunalahti.fi,,,"Espoo, Finland",https://github.com/skristiansson,,,,wb_intercon_gen instantiation template,https://github.com/openrisc/orpsoc-cores/pull/6,2013-09-19T06:42:04Z,email,Wishbone interconnect gen for orpsoc-cores,"Hey Stefan,
+306,YES,SKIP,fix instantiation language:Verilog,4,pr,cfelton/test_jpeg,test_jpeg,cfelton,User,5,Verilog,18,mkatsimpris,Merkourios Katsimpris,merkourioskatsimpris@gmail.com,,,Zurich,https://github.com/mkatsimpris,,,,Frontend new,https://github.com/cfelton/test_jpeg/pull/35,2016-07-20T13:37:51Z,email,,
+307,YES,WRITE,fix instantiation language:Verilog,4,pr,openrisc/orpsoc-cores,orpsoc-cores,openrisc,Organization,21,Verilog,125,skristiansson,Stefan Kristiansson,stefan.kristiansson@saunalahti.fi,,,"Espoo, Finland",https://github.com/skristiansson,,,,wb_intercon_gen instantiation template,https://github.com/openrisc/orpsoc-cores/pull/6,2013-09-19T06:42:04Z,email,Wishbone interconnect generator template for orpsoc-cores,"Hey Stefan,
 
-Your PR adding a Wishbone interconnect generator instantiation template to orpsoc-cores simplified SoC integration for OpenRISC designs. Automating interconnect instantiation removes one of the most error-prone manual steps in SoC assembly.
-
-Do you still actively work with OpenRISC, or has the ecosystem mostly moved to RISC-V at this point?
+Adding a Wishbone interconnect generator instantiation template to orpsoc-cores removes one of the most error-prone manual steps in OpenRISC SoC assembly — getting bus connections wrong is a silent failure that only shows up at simulation or on hardware. Do you still work with OpenRISC designs, or has your focus shifted?
 
 Severin"
-308,NO,,fix instantiation language:SystemVerilog,4,issue,pulp-platform/apb,apb,pulp-platform,Organization,11,SystemVerilog,24,kaanari,Kaan Arı,kaan.ari.tr@gmail.com,,TUM - Master of Communication Engineering,"Munich, Germany",https://github.com/kaanari,https://www.linkedin.com/in/kaanaritr/,,https://www.linkedin.com/in/kaanaritr/,clk_reset_gen and Initial Value Problem,https://github.com/pulp-platform/apb/issues/12,2025-01-07T12:57:28Z,email,APB clk_reset_gen initial value problem,"Hey Kaan,
+308,YES,WRITE,fix instantiation language:SystemVerilog,4,issue,pulp-platform/apb,apb,pulp-platform,Organization,11,SystemVerilog,24,kaanari,Kaan Arı,kaan.ari.tr@gmail.com,,TUM - Master of Communication Engineering,"Munich, Germany",https://github.com/kaanari,https://www.linkedin.com/in/kaanaritr/,,https://www.linkedin.com/in/kaanaritr/,clk_reset_gen and Initial Value Problem,https://github.com/pulp-platform/apb/issues/12,2025-01-07T12:57:28Z,email,clk_reset_gen initial value problem in PULP APB,"Hey Kaan,
 
-The initial value problem you filed on PULP's APB repo with clk_reset_gen is one of those simulation gotchas where the reset sequence itself is not clean. If the clock and reset generators do not initialize properly, every downstream module starts from an undefined state.
-
-Are you building something on top of PULP, or contributing to the platform infrastructure itself?
+An initial value problem in PULP's clk_reset_gen means every downstream module starts from undefined state — reset sequence bugs are especially painful because they only manifest intermittently depending on simulator initialization. Did this cause nondeterministic test failures, or did you catch it through waveform inspection?
 
 Severin"
-309,NO,,fix instantiation language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,vsukhoml,Vadím Sukhomlínov,vadim.sukhomlinov@gmail.com,Google,,"United States, Santa Clara, CA",https://github.com/vsukhoml,https://www.linkedin.com/in/vsukhomlinov,vsukhoml,https://www.linkedin.com/in/vsukhomlinov,[cryptolib] support for EC key generation from provided DRBG,https://github.com/lowRISC/opentitan/issues/21936,2024-03-08T21:56:37Z,email,EC key generation from provided DRBG in OpenTitan cryptolib,"Hey Vadim,
+309,YES,WRITE,fix instantiation language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,vsukhoml,Vadím Sukhomlínov,vadim.sukhomlinov@gmail.com,Google,,"United States, Santa Clara, CA",https://github.com/vsukhoml,https://www.linkedin.com/in/vsukhomlinov,vsukhoml,https://www.linkedin.com/in/vsukhomlinov,[cryptolib] support for EC key generation from provided DRBG,https://github.com/lowRISC/opentitan/issues/21936,2024-03-08T21:56:37Z,email,EC key generation from provided DRBG in OpenTitan,"Hey Vadim,
 
-Your issue on supporting EC key generation from a provided DRBG in OpenTitan's cryptolib is about giving callers control over the randomness source for key generation. For a root-of-trust chip, deterministic key derivation from a known DRBG is essential for testing and certification.
-
-Is this driven by FIPS certification requirements, or a specific deployment use case?
+Supporting EC key generation from a caller-provided DRBG in OpenTitan's cryptolib gives deterministic key derivation for testing and certification — critical for a root-of-trust chip where you need reproducible key material. Is this driven by FIPS certification requirements, or a specific deployment use case?
 
 Severin"
-310,NO,,fix instantiation language:SystemVerilog,4,pr,OFS/examples-afu,examples-afu,OFS,Organization,13,SystemVerilog,4,petermurphyiv,Peter Murphy,peter.j.murphy@intel.com,Intel,,,https://github.com/petermurphyiv,,,,[Fix] Resolving issue where QuestaSim Simulations encounter SIGSEGV,https://github.com/OFS/examples-afu/pull/17,2024-02-21T23:33:42Z,email,QuestaSim SIGSEGV in OFS examples-afu,"A SIGSEGV in QuestaSim during AFU simulation usually points to a simulator bug triggered by specific SystemVerilog constructs -- parameterized interfaces and virtual function calls are common culprits. Tracking that down in the OFS examples-afu codebase and getting PR #17 merged is a real service to anyone onboarding to OFS.
+310,YES,WRITE,fix instantiation language:SystemVerilog,4,pr,OFS/examples-afu,examples-afu,OFS,Organization,13,SystemVerilog,4,petermurphyiv,Peter Murphy,peter.j.murphy@intel.com,Intel,,,https://github.com/petermurphyiv,,,,[Fix] Resolving issue where QuestaSim Simulations encounter SIGSEGV,https://github.com/OFS/examples-afu/pull/17,2024-02-21T23:33:42Z,email,QuestaSim SIGSEGV fix in OFS examples-afu,"Hey Peter,
 
-Did the fix involve restructuring the SV code to avoid the construct that triggered the crash, or was it a simulator flag/workaround?
-
-Severin"
-311,NO,,fix instantiation language:SystemVerilog,4,pr,pulp-platform/snitch_cluster,snitch_cluster,pulp-platform,Organization,60,C,124,paulsc96,Paul Scheffler,paulsc@iis.ee.ethz.ch,,,,https://github.com/paulsc96,,,,"hw: Improve debug parameterization, fix debug CSR RW",https://github.com/pulp-platform/snitch_cluster/pull/27,2023-07-13T16:14:40Z,email,Debug parameterization and CSR RW fix in Snitch cluster,"Hey Paul,
-
-Your PR improving debug parameterization and fixing debug CSR read/write in Snitch cluster addresses the kind of issue that makes or breaks external debugger support. If debug CSRs do not read back correctly, GDB and OpenOCD produce misleading state information.
-
-Does your work focus on the Snitch core microarchitecture, the cluster interconnect, or the software stack?
+A SIGSEGV in QuestaSim during AFU simulation usually points to a simulator bug triggered by specific SystemVerilog constructs — parameterized interfaces and virtual function calls are common culprits. Did the fix involve restructuring the SV to avoid the crashing construct, or was it a simulator flag workaround?
 
 Severin"
-312,NO,,fix instantiation language:SystemVerilog,4,pr,openhwgroup/cva6,cva6,openhwgroup,Organization,240,Assembly,2843,cfuguet,Cesar Fuguet,,"Inria, TIMA Laboratory, University Grenoble Alpes","Researcher on computer architecture, digital hardware designer and processor architect.","Grenoble, France",https://github.com/cfuguet,https://www.linkedin.com/in/cesar-fuguet/,,https://www.linkedin.com/in/cesar-fuguet/,Add the HPDcache as cache subsystem,https://github.com/openhwgroup/cva6/pull/1513,2023-10-08T22:16:23Z,linkedin,,"Your PR adding the HPDcache as a cache subsystem to CVA6 is a significant architectural change — replacing the cache subsystem in a 2843-star application-class RISC-V core affects performance, area, and verification scope. What area of CVA6 do you focus on beyond the cache integration?
+311,YES,WRITE,fix instantiation language:SystemVerilog,4,pr,pulp-platform/snitch_cluster,snitch_cluster,pulp-platform,Organization,60,C,124,paulsc96,Paul Scheffler,paulsc@iis.ee.ethz.ch,,,,https://github.com/paulsc96,,,,"hw: Improve debug parameterization, fix debug CSR RW",https://github.com/pulp-platform/snitch_cluster/pull/27,2023-07-13T16:14:40Z,email,Debug CSR read/write fix in Snitch cluster,"Hey Paul,
+
+Debug CSRs that don't read back correctly in Snitch cluster would cause GDB and OpenOCD to report misleading processor state — fixing the CSR RW alongside improving debug parameterization makes external debugger support actually reliable. Does your work on Snitch focus on the core microarchitecture, the cluster interconnect, or the debug infrastructure specifically?
 
 Severin"
-313,NO,,fix instantiation language:SystemVerilog,4,pr,openhwgroup/cva6,cva6,openhwgroup,Organization,240,Assembly,2843,niwis,Nils Wistoff,nwistoff@iis.ee.ethz.ch,ETH Zurich,,Zurich,https://github.com/niwis,,,,ariane_testharness: Fix ariane port list,https://github.com/openhwgroup/cva6/pull/742,2021-10-01T08:13:51Z,email,Ariane testharness port list fix in CVA6,"Hey Nils,
-
-Your PR fixing the ariane testharness port list in CVA6 is the kind of fix where a mismatched port list silently breaks simulation without a clear error message. Testharness maintenance is unglamorous but essential when 240+ contributors depend on it.
-
-Does your focus on CVA6 center on the pipeline, the memory subsystem, or the verification side?
+312,YES,WRITE,fix instantiation language:SystemVerilog,4,pr,openhwgroup/cva6,cva6,openhwgroup,Organization,240,Assembly,2843,cfuguet,Cesar Fuguet,,"Inria, TIMA Laboratory, University Grenoble Alpes","Researcher on computer architecture, digital hardware designer and processor architect.","Grenoble, France",https://github.com/cfuguet,https://www.linkedin.com/in/cesar-fuguet/,,https://www.linkedin.com/in/cesar-fuguet/,Add the HPDcache as cache subsystem,https://github.com/openhwgroup/cva6/pull/1513,2023-10-08T22:16:23Z,linkedin,,"Adding HPDcache to CVA6 is a major cache subsystem swap. What drove the design — area efficiency, or a specific workload needing different cache behavior?
 
 Severin"
-314,NO,,fix instantiation language:SystemVerilog,4,pr,openhwgroup/cva6,cva6,openhwgroup,Organization,240,Assembly,2843,whutddk,Ruige Lee,wut.ruigeli@gmail.com,Wuhan University of Technology,"武汉理工大学 鉴湖实验室2013级 606-6组
+313,YES,WRITE,fix instantiation language:SystemVerilog,4,pr,openhwgroup/cva6,cva6,openhwgroup,Organization,240,Assembly,2843,niwis,Nils Wistoff,nwistoff@iis.ee.ethz.ch,ETH Zurich,,Zurich,https://github.com/niwis,,,,ariane_testharness: Fix ariane port list,https://github.com/openhwgroup/cva6/pull/742,2021-10-01T08:13:51Z,email,Ariane testharness port list fix in CVA6,"Hey Nils,
+
+A mismatched port list in the ariane testharness silently breaks simulation without a clear error message — the kind of issue that wastes hours before anyone realizes the testharness itself is wrong. Does your CVA6 work focus on the pipeline, the memory subsystem, or the verification side?
+
+Severin"
+314,YES,SKIP,fix instantiation language:SystemVerilog,4,pr,openhwgroup/cva6,cva6,openhwgroup,Organization,240,Assembly,2843,whutddk,Ruige Lee,wut.ruigeli@gmail.com,Wuhan University of Technology,"武汉理工大学 鉴湖实验室2013级 606-6组
 ",Antarctica,https://github.com/whutddk,,,whutddk.github.io,Code style correction of cva6,https://github.com/openhwgroup/cva6/pull/485,2020-07-27T13:48:35Z,email,,
-315,NO,,fix instantiation language:SystemVerilog,4,pr,veripool/verilog-mode,verilog-mode,veripool,Organization,60,SystemVerilog,282,vinamarora8,Vinam Arora,vinam@seas.upenn.edu,University of Pennsylvania,"Computer Science PhD at UPenn | Ex - Georgia Tech,  IIT Roorkee '19","Philadelphia, PA",https://github.com/vinamarora8,,vinam_arora,https://vinam.dev,"Corrects a syntax error, to fix issue https://github.com/veripool/ver…",https://github.com/veripool/verilog-mode/pull/1680,2020-06-14T16:37:28Z,email,Syntax error fix in verilog-mode,"Hey Vinam,
+315,YES,WRITE,fix instantiation language:SystemVerilog,4,pr,veripool/verilog-mode,verilog-mode,veripool,Organization,60,SystemVerilog,282,vinamarora8,Vinam Arora,vinam@seas.upenn.edu,University of Pennsylvania,"Computer Science PhD at UPenn | Ex - Georgia Tech,  IIT Roorkee '19","Philadelphia, PA",https://github.com/vinamarora8,,vinam_arora,https://vinam.dev,"Corrects a syntax error, to fix issue https://github.com/veripool/ver…",https://github.com/veripool/verilog-mode/pull/1680,2020-06-14T16:37:28Z,email,Syntax error fix in verilog-mode,"Hey Vinam,
 
-Your PR correcting a syntax error in verilog-mode fixes a tool that a large chunk of the Emacs-using hardware design community relies on daily. Editor mode bugs silently corrupt auto-generated module instantiations and port lists.
-
-Do you use verilog-mode in your research at Penn, or is the contribution about improving tooling for the broader community?
+Fixing a syntax error in verilog-mode's auto-instantiation matters because a broken template silently generates wrong port connections that only show up downstream in simulation. Was the issue specific to certain module parameterizations, or did it affect all auto-inst expansions?
 
 Severin"
 316,NO,,fix instantiation language:SystemVerilog,4,pr,chipsalliance/sv-tests,sv-tests,chipsalliance,Organization,90,SystemVerilog,367,dalance,Naoya Hatta,dalance@gmail.com,PEZY Computing K.K.,,"Kanagawa, Japan",https://github.com/dalance,,dalance1982,,Fix error at basejump,https://github.com/chipsalliance/sv-tests/pull/475,2019-11-29T05:49:39Z,email,BaseJump error fix in sv-tests,"Hey Naoya,
