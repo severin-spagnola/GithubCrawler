@@ -156,11 +156,11 @@ UPDATES = {
         "outreach_message": (
             "Hey Ed,\n\n"
             "Rebranding from community to official SDK freezes "
-            "the API surface faster than community iteration can "
-            "tolerate — contributors who built against the old "
-            "package name need a redirect or migration path, not "
-            "just a rename. Did the rebrand include a "
-            "compatibility layer or deprecation notice?\n\n"
+            "the API surface faster than community iteration "
+            "tolerates — contributors who built against the old "
+            "package name need a migration path, not just a "
+            "rename. Did the rebrand include a compatibility "
+            "layer or deprecation notice?\n\n"
             "Severin"
         ),
     },
