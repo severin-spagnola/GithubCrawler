@@ -2,6 +2,7 @@
 """rewrite_outreach_v1.py — Rewrite outreach messages using Claude claude-sonnet-4-6 + the Outreach Writing Guide."""
 
 import argparse
+import json
 import math
 import re
 import time
@@ -209,7 +210,7 @@ Return your response as JSON with exactly these keys:
 If status is "SKIP", set subject and message to empty strings."""
 
 
-def rewrite_outreach(csv_path: str, start_row: int = 0, end_row: int = None) -> None:
+def rewrite_outreach(csv_path: str, start_row: int = 0, end_row: int = None, force: bool = False) -> None:
     """Main rewrite loop."""
     client = anthropic.Anthropic()
 
@@ -223,13 +224,21 @@ def rewrite_outreach(csv_path: str, start_row: int = 0, end_row: int = None) -> 
         f.write(str(pre_subject_count))
     print(f"Pre-run outreach_subject count: {pre_subject_count} (saved to /tmp/pre_subject_count.txt)")
 
-    # Determine which rows need processing — always force-overwrite all rows
-    mask = pd.Series([True] * len(df))
+    # Determine which rows need processing
+    if force:
+        mask = pd.Series([True] * len(df))
+    else:
+        done_col = df["done"].fillna("").astype(str).str.strip().str.upper()
+        mask = ~done_col.isin(["YES", "SKIP"])
 
     indices = df.index[mask].tolist()
-    indices = indices[start_row:(end_row + 1 if end_row is not None else None)]
+    indices = indices[start_row:(end_row if end_row is not None else None)]
     total_rows = len(indices)
     total_batches = math.ceil(total_rows / BATCH_SIZE) if total_rows > 0 else 0
+
+    if total_rows == 0:
+        print("WARNING: 0 rows selected — nothing to do. Check --start-row/--end-row or use --force to override.")
+        return
 
     print(f"Total rows to process: {total_rows} in {total_batches} batches")
 
@@ -252,7 +261,6 @@ def rewrite_outreach(csv_path: str, start_row: int = 0, end_row: int = None) -> 
                     messages=[{"role": "user", "content": prompt}],
                 )
 
-                import json
                 text = response.content[0].text
                 clean = re.sub(r'^```[a-z]*\n?|```$', '', text.strip(), flags=re.MULTILINE).strip()
                 result = json.loads(clean)
@@ -314,7 +322,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rewrite outreach messages via Claude claude-sonnet-4-6")
     parser.add_argument("--csv", default=CSV_PATH, help=f"Path to CSV (default: {CSV_PATH})")
     parser.add_argument("--start-row", type=int, default=0)
-    parser.add_argument("--end-row", type=int, default=None)
+    parser.add_argument("--end-row", type=int, default=None, help="Exclusive end index for row processing")
+    parser.add_argument("--force", action="store_true", help="Force-overwrite all rows, ignoring done status")
     args = parser.parse_args()
 
-    rewrite_outreach(args.csv, start_row=args.start_row, end_row=args.end_row)
+    rewrite_outreach(args.csv, start_row=args.start_row, end_row=args.end_row, force=args.force)
