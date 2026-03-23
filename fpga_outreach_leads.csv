@@ -1339,7 +1339,7 @@ The dcsr cause mismatch when entering debug after a step in CV32E40X is a subtle
 Was the mismatch specific to the single-step-then-halt transition, or did it also show up when entering debug from other causes like breakpoints?
 
 Severin"
-270,YES,WRITE,signal width mismatch language:SystemVerilog,4,pr,pulp-platform/axi,axi,pulp-platform,Organization,60,SystemVerilog,1516,suehtamacv,Matheus Cavalcante,,Arago Computing Inc.,Ohm Sweet Ohm,Arcueil,https://github.com/suehtamacv,https://www.linkedin.com/in/matheuscvlc/,,https://www.linkedin.com/in/matheuscvlc/,AXI DW Conversion,https://github.com/pulp-platform/axi/pull/43,2020-01-30T12:19:59Z,linkedin,,"PR #43 on PULP's AXI lib — getting data width conversion right while preserving transaction ordering and atomicity is brutal protocol work. What was the hardest corner case?
+270,YES,WRITE,signal width mismatch language:SystemVerilog,4,pr,pulp-platform/axi,axi,pulp-platform,Organization,60,SystemVerilog,1516,suehtamacv,Matheus Cavalcante,,Arago Computing Inc.,Ohm Sweet Ohm,Arcueil,https://github.com/suehtamacv,https://www.linkedin.com/in/matheuscvlc/,,https://www.linkedin.com/in/matheuscvlc/,AXI DW Conversion,https://github.com/pulp-platform/axi/pull/43,2020-01-30T12:19:59Z,linkedin,AXI data width conversion in PULP,"PR #43 on PULP's AXI lib — getting data width conversion right while preserving transaction ordering and atomicity is brutal protocol work. What was the hardest corner case?
 
 Severin"
 271,YES,WRITE,fix port map language:VHDL,4,issue,MiSTer-devel/Atari800_MiSTer,Atari800_MiSTer,MiSTer-devel,Organization,6,VHDL,42,happycube,Chad Page,Chad.Page@gmail.com,,,"Goleta, CA, US",https://github.com/happycube,,,,Atari 800 mode support,https://github.com/MiSTer-devel/Atari800_MiSTer/issues/4,2019-08-27T04:23:20Z,email,Atari 800 mode in MiSTer,"Hey Chad,
@@ -1419,11 +1419,7 @@ Severin"
 Building the Debian image inside the GFE Docker container is the difference between a reproducible dev environment and one that breaks for every new contributor who tries to set up BESSPIN. Was the main obstacle cross-compilation toolchain dependencies, or Docker layer size constraints?
 
 Severin"
-286,YES,WRITE,fix port map language:Verilog,4,issue,EttusResearch/uhd,uhd,EttusResearch,Organization,240,Verilog,1212,TheNageek,Keegan Walsh,keegan.k.walsh@gmail.com,,,"Salt Lake City, UT",https://github.com/TheNageek,,,,Build/Compile Tuple Error,https://github.com/EttusResearch/uhd/issues/327,2020-02-04T21:41:27Z,email,UHD build tuple error,"Hey Keegan,
-
-The build tuple error in Ettus UHD blocks new users before they can even start using USRP hardware — build failures in the driver framework affect the entire downstream SDR community. Was this specific to a particular compiler version, or a general build configuration issue?
-
-Severin"
+286,YES,SKIP,fix port map language:Verilog,4,issue,EttusResearch/uhd,uhd,EttusResearch,Organization,240,Verilog,1212,TheNageek,Keegan Walsh,keegan.k.walsh@gmail.com,,,"Salt Lake City, UT",https://github.com/TheNageek,,,,Build/Compile Tuple Error,https://github.com/EttusResearch/uhd/issues/327,2020-02-04T21:41:27Z,email,,
 287,YES,WRITE,fix port map language:Verilog,4,issue,esa-tu-darmstadt/tapasco,tapasco,esa-tu-darmstadt,Organization,28,Verilog,118,sommerlukas,Lukas Sommer,lsommer@amd.com,@amd,,Germany,https://github.com/sommerlukas,,,,"Local memory slots not considered in area estimation, causing DSE to fail",https://github.com/esa-tu-darmstadt/tapasco/issues/30,2019-01-22T16:16:30Z,email,TaPaSCo DSE local memory area estimation,"Hey Lukas,
 
 Local memory slots not being counted in TaPaSCo's area estimation means DSE suggests accelerator compositions that don't physically fit on the target FPGA — wasting entire synthesis runs on impossible configurations. Was this an oversight in the resource model, or did certain accelerator types expose it more than others?
@@ -1469,7 +1465,7 @@ Severin"
 The SLINK RX FIFO overflow in neorv32 only surfaces under sustained high-throughput streaming, and if it overflows silently, downstream data gets corrupted without any error flag. Was this triggered by a specific streaming peripheral, or did you catch it through simulation?
 
 Severin"
-296,YES,WRITE,fix instantiation language:VHDL,4,issue,the-aerospace-corporation/satcat5,satcat5,the-aerospace-corporation,Organization,5,VHDL,492,stamenkovicsasa,Sasa Stamenkovic,,OneSpin,,"San Jose, CA",https://github.com/stamenkovicsasa,https://www.linkedin.com/in/sasastamenkovic/,,https://www.linkedin.com/in/sasastamenkovic/,[port_axi_mailbox block] axi_bvalid should not be high during or after reset,https://github.com/the-aerospace-corporation/satcat5/issues/1,2020-09-25T18:43:34Z,linkedin,,"The axi_bvalid reset bug you flagged on SatCat5 is a real AXI compliance issue — BVALID high during reset causes spurious write acks. Did you catch this through formal or simulation?
+296,YES,WRITE,fix instantiation language:VHDL,4,issue,the-aerospace-corporation/satcat5,satcat5,the-aerospace-corporation,Organization,5,VHDL,492,stamenkovicsasa,Sasa Stamenkovic,,OneSpin,,"San Jose, CA",https://github.com/stamenkovicsasa,https://www.linkedin.com/in/sasastamenkovic/,,https://www.linkedin.com/in/sasastamenkovic/,[port_axi_mailbox block] axi_bvalid should not be high during or after reset,https://github.com/the-aerospace-corporation/satcat5/issues/1,2020-09-25T18:43:34Z,linkedin,axi_bvalid reset bug in SatCat5,"The axi_bvalid reset bug you flagged on SatCat5 is a real AXI compliance issue — BVALID high during reset causes spurious write acks. Did you catch this through formal or simulation?
 
 Severin"
 297,YES,WRITE,fix instantiation language:VHDL,4,pr,firesim/aws-fpga-firesim,aws-fpga-firesim,firesim,Organization,60,VHDL,13,davidbiancolin,David Biancolin,david.biancolin@gmail.com,@sifive,Engineer @sifive; U of T + Cal Alum,Berkeley,https://github.com/davidbiancolin,,,davidbiancolin.github.io,FireSim 1.10.0 Release (Dev -> Master PR),https://github.com/firesim/aws-fpga-firesim/pull/25,2020-02-06T02:18:57Z,email,FireSim 1.10 AWS FPGA release,"Hey David,
