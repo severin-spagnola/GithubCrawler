@@ -1111,9 +1111,7 @@ Your issue about Coyote not meeting timing constraints when porting to other pla
 Which platform were you porting to, and was the bottleneck in the RDMA path, the memory subsystem, or the TLB?
 
 Severin"
-231,YES,SKIP,fix module language:SystemVerilog,4,pr,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,bo3z,Benjamin Ramhorst,,ETH Zurich,,,https://github.com/bo3z,https://www.linkedin.com/in/benjamin-ramhorst/,,https://www.linkedin.com/in/benjamin-ramhorst/,Improve timing closure in tlb_fsm,https://github.com/fpgasystems/Coyote/pull/180,2026-01-10T11:24:10Z,linkedin,,"Your tlb_fsm timing closure fix in Coyote targets a critical path in the address translation pipeline. Was the bottleneck in the TLB lookup or the FSM state transitions?
-
-Severin"
+231,YES,SKIP,fix module language:SystemVerilog,4,pr,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,bo3z,Benjamin Ramhorst,,ETH Zurich,,,https://github.com/bo3z,https://www.linkedin.com/in/benjamin-ramhorst/,,https://www.linkedin.com/in/benjamin-ramhorst/,Improve timing closure in tlb_fsm,https://github.com/fpgasystems/Coyote/pull/180,2026-01-10T11:24:10Z,linkedin,,
 232,YES,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,ayj,Jason Young,jasonyoung@google.com,Google ,jasonyoung@google.com,"Kirkland, WA - United States",https://github.com/ayj,,,,[bazel] Allow manufactoring code to be used by downstream repos.,https://github.com/lowRISC/opentitan/pull/29000,2025-12-23T22:52:26Z,email,Bazel downstream repo support for OpenTitan,"Hey Jason,
 
 Your PR allowing the lowrisc_opentitan Bazel module to work as a non-root module for downstream repos solves a real integration problem. Any team building on top of OpenTitan needs to pull it in as a dependency, not fork the entire workspace.
