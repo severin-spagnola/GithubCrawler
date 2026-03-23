@@ -1931,7 +1931,7 @@ How did you discover the issue, and was it manifesting as a synthesis failure or
 Severin"
 "395","YES","","fix rtl language:SystemVerilog","4","pr","pulp-platform/croc","croc","pulp-platform","Organization","10","SystemVerilog","212","ezelioli","Enrico Zelioli","enricozelioli97@gmail.com","@pulp-platform","IT Engeneering student","Zurich, Switzerland","https://github.com/ezelioli","","","","Add CircumSpect support","https://github.com/pulp-platform/croc/pull/109","2026-01-06T15:38:59Z","email","CircumSpect leakage model on PULP CROC","Hey Enrico,
 
-CircumSpect on a compact in-order core like CROC is a different problem from a superscalar — fewer microarchitectural side channels but also fewer places to add masking countermeasures without destroying area efficiency. What leakage model does CircumSpect target for CROC — power side channels, timing-based leakage, or both?
+CircumSpect on a compact in-order core like CROC differs from a superscalar — fewer microarchitectural side channels but also fewer places to add masking without destroying area efficiency. What leakage model does CircumSpect target for CROC — power, timing, or both?
 
 Severin"
 "396","YES","","fix rtl language:SystemVerilog","4","issue","openhwgroup/core-v-mcu","core-v-mcu","openhwgroup","Organization","15","SystemVerilog","195","jeremybennett","Jeremy Bennett","jeremy.bennett@embecosm.com","Embecosm","","Lymington, UK","https://github.com/jeremybennett","","","www.embecosm.com","FPU register 0 reported through debug unit as tied to constant positive 0","https://github.com/openhwgroup/core-v-mcu/issues/187","2021-11-03T20:07:26Z","email","FPU reg0 debug view in Core-V-MCU","Hey Jeremy,
@@ -1956,7 +1956,7 @@ Wrong vmax/vmin operation masks pass scalar test suites and only surface when ve
 Severin"
 "400","YES","","fix rtl language:SystemVerilog","4","issue","lowRISC/ibex","ibex","lowRISC","Organization","120","SystemVerilog","1797","bekbeis","Bekzat Skakov","bekzat.beis@gmail.com","","C in my name stands for Competent Software Engineer","","https://github.com/bekbeis","","","","Tests failing when running regression using Questa","https://github.com/lowRISC/ibex/issues/2198","2024-07-29T11:36:59Z","email","Ibex regression failures on Questa","Hey Bekzat,
 
-Questa and VCS diverge most on X-propagation and SystemVerilog scheduling semantics — both are spec-compliant but make different choices that expose test assumptions baked into one simulator’s behavior. Were the Ibex failures concentrated in specific categories like CSR tests or debug mode, or scattered randomly across the regression?
+Questa and VCS diverge on X-propagation and SystemVerilog scheduling — both are spec-compliant but make different choices that expose assumptions baked into one simulator. Were the Ibex failures in specific categories like CSR or debug mode, or scattered across the regression?
 
 Severin"
 "401","YES","","fix rtl language:SystemVerilog","4","pr","openhwgroup/cvw","cvw","openhwgroup","Organization","120","SystemVerilog","499","doganulus","Doğan Ulus","dogan.ulus@bogazici.edu.tr","Boğaziçi University @bouncmpe ","Assistant Professor of Computer Science","Istanbul, TR","https://github.com/doganulus","","","doganulus.github.io","Introduce Wally development containers","https://github.com/openhwgroup/cvw/pull/1502","2025-08-08T20:04:16Z","email","Wally development containers for academic courses","Hey Dogan,
@@ -2021,7 +2021,7 @@ Broken testbenches in educational FPGA repos cause more damage than broken testb
 Severin"
 "412","YES","","fix sensitivity list"" language:vhdl","5","pr","robinsonb5/ZPUFlex","ZPUFlex","robinsonb5","User","4","VHDL","36","ikorb","Ingo Korb","ingo@akana.de","","","","https://github.com/ikorb","","","http://www.sd2iec.de","Fix sensitivity list of decodeControl process","https://github.com/robinsonb5/ZPUFlex/pull/4","2014-06-19T22:01:35Z","email","ZPUFlex decodeControl sensitivity list fix","Hey Ingo,
 
-An incomplete sensitivity list in a VHDL decode process causes simulation to treat it as edge-triggered when synthesis infers combinational logic — the synthesized hardware is correct but simulation diverges, so testbenches pass while the actual device behaves differently. Did the ZPUFlex fix change what the synthesized hardware did, or was it purely a simulation correctness issue?
+An incomplete sensitivity list in a VHDL decode process makes simulation treat it as edge-triggered while synthesis infers combinational logic — hardware is correct but simulation diverges. Did the ZPUFlex fix change synthesized behavior, or was it purely a sim correctness issue?
 
 Severin"
 "413","YES","SKIP","fix sensitivity list"" language:verilog","5","issue","The-OpenROAD-Project/OpenROAD","OpenROAD","The-OpenROAD-Project","Organization","240","Verilog","2482","mingodad","Domingo Alvarez Duarte","mingodad@gmail.com","","","","https://github.com/mingodad","","","","Grammar railroad diagram","https://github.com/The-OpenROAD-Project/OpenROAD/issues/2488","2022-11-12T10:36:35Z","email","",""
@@ -2030,108 +2030,114 @@ Severin"
 Ring-oscillator TRNGs are the default FPGA choice but also the most well-characterized attack target — digital post-processing can mask low entropy if the oscillator sources are correlated. What TRNG approach were you evaluating for Betrusted — ring oscillator jitter, metastability-based, or something else?
 
 Severin"
-"415","NO","","fix clock domain crossing","5","commit","zhangxuezhi1234561/rocket-chip","rocket-chip","zhangxuezhi1234561","User","180","Scala","0","jerryz123","Jerry Zhao","jerry@openai.com","OpenAI","Computer Architect at OpenAI.
-Ex-Cal","SF Bay","https://github.com/jerryz123","","","jzhao.me","Fix int clock crossings to use CLINT/PLIC domains","https://github.com/zhangxuezhi1234561/rocket-chip/commit/d48b45da568c0d370479325258018a8a5cf3369c","2023-10-18T00:26:13.000-07:00","email","Rocket-Chip CLINT/PLIC clock domain crossing fix","Hey Jerry,
+"415","YES","","fix clock domain crossing","5","commit","zhangxuezhi1234561/rocket-chip","rocket-chip","zhangxuezhi1234561","User","180","Scala","0","jerryz123","Jerry Zhao","jerry@openai.com","OpenAI","Computer Architect at OpenAI.
+Ex-Cal","SF Bay","https://github.com/jerryz123","","","jzhao.me","Fix int clock crossings to use CLINT/PLIC domains","https://github.com/zhangxuezhi1234561/rocket-chip/commit/d48b45da568c0d370479325258018a8a5cf3369c","2023-10-18T00:26:13.000-07:00","email","CLINT/PLIC clock domain isolation in Rocket Chip","Hey Jerry,
 
-Your fix for interrupt clock crossings to use CLINT/PLIC domains in Rocket-Chip addresses a subtle correctness issue — interrupt signals crossing clock domains without proper synchronization can cause missed or spurious interrupts that are nearly impossible to debug. What does hardware architecture look like at OpenAI's scale?
+Routing CLINT and PLIC interrupts through separate clock domains in Rocket Chip means the CDC path directly affects interrupt latency guarantees. Was the original crossing causing metastability on FPGA, or was this caught through timing analysis?
 
 Severin"
-"416","NO","","fix clock domain crossing","5","commit","im-tomu/valentyusb","valentyusb","im-tomu","Organization","11","Python","133","xobs","Sean Cross","sean@xobs.io","Foosn and Kosagi","","Singapore","https://github.com/xobs","","","http://xobs.io","cpu: eptri: first attempt at fixing clock domain crossing
+"416","YES","","fix clock domain crossing","5","commit","im-tomu/valentyusb","valentyusb","im-tomu","Organization","11","Python","133","xobs","Sean Cross","sean@xobs.io","Foosn and Kosagi","","Singapore","https://github.com/xobs","","","http://xobs.io","cpu: eptri: first attempt at fixing clock domain crossing
 
 This patchset implements clock domain crossing. It is currently
 untested.
 
-Patch originally from bunnie <bunnie@bunniestudios.com>","https://github.com/im-tomu/valentyusb/commit/00bdf187a3168c0d0bf6a4d1e0d2452f6626b1ff","2020-05-19T12:05:07.000+08:00","email","ValentyUSB clock domain crossing fix","Hey Sean,
+Patch originally from bunnie <bunnie@bunniestudios.com>","https://github.com/im-tomu/valentyusb/commit/00bdf187a3168c0d0bf6a4d1e0d2452f6626b1ff","2020-05-19T12:05:07.000+08:00","email","CDC in valentyusb eptri USB core","Hey Sean,
 
-The clock domain crossing fix in ValentyUSB's eptri endpoint is critical — USB timing is unforgiving, and CDC issues in the USB controller can cause intermittent packet corruption that's extremely hard to diagnose. Was this CDC bug manifesting as actual data corruption on hardware, or was it caught through formal CDC analysis?
-
-Severin"
-"417","NO","","fix clock domain crossing","5","commit","SiLab-Bonn/pymosa","pymosa","SiLab-Bonn","Organization","8","Python","1","laborleben","Jens Janssen","jens.janssen@gmx.net","","Currently working for DHL Group.","Bonn, Germany","https://github.com/laborleben","","","","BUG: fix clock domain crossing, fixes #14","https://github.com/SiLab-Bonn/pymosa/commit/c4dd35909dfbff6ad6c290bb688e7dd1637375ef","2018-08-28T16:05:36.000+02:00","email","Clock domain crossing fix in pymosa","Clock domain crossing bugs in sensor readout are nasty -- they tend to show up as intermittent data corruption that only appears under specific hit rates. Was the fix adding a proper synchronizer stage, or was it a deeper issue with the handshake protocol between the MOSA pixel matrix clock and the readout FPGA domain?
+Clock domain crossing in a USB PHY is unforgiving — one metastable flip and the host resets the device. The eptri CDC patch was marked untested at the time — did you validate it against real host controllers, or did the Fomu community catch edge cases in the field?
 
 Severin"
-"418","NO","","fix clock domain crossing","5","commit","apertus-open-source-cinema/naps","naps","apertus-open-source-cinema","Organization","4","Python","45","tpwrules","Thomas Watson","twatson52@mac.com","Thomas Computer Industries","","?","https://github.com/tpwrules","","","","cores.cmv12k.s7_phy: fix clock domain crossing violation in PokeReg","https://github.com/apertus-open-source-cinema/naps/commit/9d0481e265fdabcb076d195847c950e2451b985b","2021-07-16T15:48:15.000-05:00","email","CMV12K PHY clock domain crossing fix in NAPS","Hey Thomas,
+"417","YES","","fix clock domain crossing","5","commit","SiLab-Bonn/pymosa","pymosa","SiLab-Bonn","Organization","8","Python","1","laborleben","Jens Janssen","jens.janssen@gmx.net","","Currently working for DHL Group.","Bonn, Germany","https://github.com/laborleben","","","","BUG: fix clock domain crossing, fixes #14","https://github.com/SiLab-Bonn/pymosa/commit/c4dd35909dfbff6ad6c290bb688e7dd1637375ef","2018-08-28T16:05:36.000+02:00","email","CDC fix in pymosa MAPS detector readout","Hey Jens,
 
-Your fix for the clock domain crossing violation in the CMV12K S7 PHY's PokeReg is the kind of bug that causes intermittent image artifacts — sensor register writes crossing clock domains without proper synchronization can corrupt configuration at random. Was this showing up as visual glitches in the camera output, or did you catch it through timing analysis?
-
-Severin"
-"419","NO","","fix clock domain crossing","5","commit","cbakalis/vmm_boards_firmware","vmm_boards_firmware","cbakalis","User","13","TeX","1","parasxos","Paris Moschovakos","paris.moschovakos@cern.ch","CERN","Software engineer @CERN","Geneva","https://github.com/parasxos","","","","Stability fixes on clock domain crossing signals of readout","https://github.com/cbakalis/vmm_boards_firmware/commit/a4a7b6b203e91adeb713e1452b9f971fa0a07ff5","2017-02-25T17:41:40.000+01:00","email","VMM readout clock domain crossing stability","Hey Paris,
-
-Your stability fixes on clock domain crossing signals in the VMM boards readout firmware address a critical reliability issue — in particle physics detector readout, CDC-induced data corruption means lost physics events that can't be replayed. What detector system at CERN are these VMM boards deployed in?
+A CDC bug in MAPS readout can corrupt hit data silently — the detector keeps running but physics analysis downstream gets garbage. Was the pymosa fix triggered by data corruption during beam tests, or did simulation catch the crossing violation first?
 
 Severin"
-"420","NO","","fix clock domain crossing","5","commit","spark2k06/PCXT_MiSTer","PCXT_MiSTer","spark2k06","User","12","Verilog","59","spark2k06","Aitor Gómez García","info@aitorgomez.net","","","Spain","https://github.com/spark2k06","","spark2k06","https://www.aitorgomez.net","Release 20230408
+"418","YES","","fix clock domain crossing","5","commit","apertus-open-source-cinema/naps","naps","apertus-open-source-cinema","Organization","4","Python","45","tpwrules","Thomas Watson","twatson52@mac.com","Thomas Computer Industries","","?","https://github.com/tpwrules","","","","cores.cmv12k.s7_phy: fix clock domain crossing violation in PokeReg","https://github.com/apertus-open-source-cinema/naps/commit/9d0481e265fdabcb076d195847c950e2451b985b","2021-07-16T15:48:15.000-05:00","email","PokeReg CDC violation in CMV12000 S7 PHY","Hey Thomas,
+
+A CDC violation in PokeReg means sensor register writes could glitch during configuration — intermittent corruption that mimics a sensor fault. Was this showing up as pixel artifacts on the AXIOM camera, or did timing analysis flag it before real frames were affected?
+
+Severin"
+"419","YES","","fix clock domain crossing","5","commit","cbakalis/vmm_boards_firmware","vmm_boards_firmware","cbakalis","User","13","TeX","1","parasxos","Paris Moschovakos","paris.moschovakos@cern.ch","CERN","Software engineer @CERN","Geneva","https://github.com/parasxos","","","","Stability fixes on clock domain crossing signals of readout","https://github.com/cbakalis/vmm_boards_firmware/commit/a4a7b6b203e91adeb713e1452b9f971fa0a07ff5","2017-02-25T17:41:40.000+01:00","email","CDC stability in VMM readout firmware at CERN","Hey Paris,
+
+CDC instability in VMM readout can cause trigger-correlated data drops that mimic detector inefficiency — hard to separate from physics. Were the stability fixes driven by data quality issues during beam runs, or caught during commissioning with test pulses?
+
+Severin"
+"420","YES","","fix clock domain crossing","5","commit","spark2k06/PCXT_MiSTer","PCXT_MiSTer","spark2k06","User","12","Verilog","59","spark2k06","Aitor Gómez García","info@aitorgomez.net","","","Spain","https://github.com/spark2k06","","spark2k06","https://www.aitorgomez.net","Release 20230408
 
 * Always register SDRAM input to make use of Fast Input Registers
 * Remove some unnecessary clock domain crossings
 * Generate the opl2_cen in the clk_chipset domain
-* Fix the rate wh","https://github.com/spark2k06/PCXT_MiSTer/commit/86a6e717e2f033c03ce96ae89dd0245cb95cdaea","2023-04-08T19:15:45.000+02:00","email","PCXT MiSTer SDRAM and clock domain improvements","Hey Aitor,
+* Fix the rate wh","https://github.com/spark2k06/PCXT_MiSTer/commit/86a6e717e2f033c03ce96ae89dd0245cb95cdaea","2023-04-08T19:15:45.000+02:00","email","SDRAM fast input registers in PCXT MiSTer core","Hey Aitor,
 
-Your release with fast input registers for SDRAM and removal of unnecessary clock domain crossings in the PCXT core shows deep attention to timing. Getting the OPL2 sound chip timing right across clock domains is tricky — was the rate fix related to audio artifacts users were hearing?
+Fast input registers for SDRAM in the PCXT MiSTer core buy real timing margin on the 8088 bus interface, and removing unnecessary clock domain logic simplifies the design. After these changes, did you see measurable improvement in SDRAM reliability at speed?
 
 Severin"
-"421","NO","","fix clock domain crossing","5","commit","reason-healthcare/rh","rh","reason-healthcare","Organization","4","Rust","9","bkaney","Brian Kaney","brian@vermonster.com","@Vermonster ","","Boston","https://github.com/bkaney","","","https://www.vermonster.com","Cql work (#18)
+"421","YES","SKIP","fix clock domain crossing","5","commit","reason-healthcare/rh","rh","reason-healthcare","Organization","4","Rust","9","bkaney","Brian Kaney","brian@vermonster.com","@Vermonster ","","Boston","https://github.com/bkaney","","","https://www.vermonster.com","Cql work (#18)
 
 * feat(cql): add ELM type definitions for CQL support
 
 - Add complete ELM (Expression Logical Model) type definitions
 - Support 220+ expression types with serde serialization
 - Include","https://github.com/reason-healthcare/rh/commit/3608d673bde318ba601091507c5022e9070d028d","2026-03-07T23:42:19.000-05:00","email","",""
-"422","NO","","fix clock domain crossing","5","commit","cornell-brg/bsg_replicant","bsg_replicant","cornell-brg","Organization","19","C++","1","bornaehsani","Borna Ehsani","eborna@apple.com","@APPLE","Senior GPU Software Engineer","Bay Area","https://github.com/bornaehsani","https://www.linkedin.com/in/behsani/","","https://www.linkedin.com/in/behsani/","Adds snooping the bus to axi_to_mcl for print_stat packets  (#469)
+"422","YES","","fix clock domain crossing","5","commit","cornell-brg/bsg_replicant","bsg_replicant","cornell-brg","Organization","19","C++","1","bornaehsani","Borna Ehsani","eborna@apple.com","@APPLE","Senior GPU Software Engineer","Bay Area","https://github.com/bornaehsani","https://www.linkedin.com/in/behsani/","","https://www.linkedin.com/in/behsani/","Adds snooping the bus to axi_to_mcl for print_stat packets  (#469)
 
-* Added snooping from the loader_link_sif_li/lo to intercept packets intended for bsg_print_stat and use it as input for vanilla cor","https://github.com/cornell-brg/bsg_replicant/commit/111c77ca41e43f74cf2969ed5900a418c55e21ef","2020-01-07T12:26:35.000-08:00","email","AXI bus snooping for bsg_print_stat in BSG Replicant","Hey Borna,
+* Added snooping from the loader_link_sif_li/lo to intercept packets intended for bsg_print_stat and use it as input for vanilla cor","https://github.com/cornell-brg/bsg_replicant/commit/111c77ca41e43f74cf2969ed5900a418c55e21ef","2020-01-07T12:26:35.000-08:00","email","AXI bus snooping for print_stat in BSG manycore","Hey Borna,
 
-Your patch adding bus snooping from loader_link_sif to intercept bsg_print_stat packets in BSG Replicant is a clever approach to performance instrumentation — tapping the AXI bus for stat collection avoids adding dedicated instrumentation ports. How does that snooping approach scale when you need stats from many vanilla cores simultaneously?
-
-Severin"
-"423","NO","","fix clock domain crossing","5","commit","ucb-bar/chisel2-deprecated","chisel2-deprecated","ucb-bar","Organization","90","Scala","388","ucbjrl","Jim Lawson","ucbjrl@berkeley.edu","UC Berkeley","","Berkeley, CA","https://github.com/ucbjrl","","","","Compatibility issues, multiple clock domains, top-level dot file module crossings (when partitioning), handling non-bits node input chains.
-
-Output the monolithic cpp file (for compatibility testing).","https://github.com/ucb-bar/chisel2-deprecated/commit/9fe1c84caf2f87b77f6cb2ed47069f96c7064121","2014-08-19T09:01:45.000-07:00","email","Chisel2 multiple clock domains and partitioning","Hey Jim,
-
-Your commit handling multiple clock domains, non-bits node chains, and top-level dot file module crossings in Chisel2 touched some of the hardest problems in hardware compiler infrastructure. What do you think about the current evolution toward CIRCT and MLIR-based hardware compilation compared to the original Chisel/FIRRTL approach?
+Snooping loader_link for print_stat on the AXI-to-MCL bridge avoids adding a dedicated debug side channel. Did this pattern generalize to other packet types in the BSG manycore, or was print_stat uniquely suited to bus snooping over a dedicated path?
 
 Severin"
-"424","NO","","fix entity language:VHDL","4","issue","kokkonisd/pixhdl","pixhdl","kokkonisd","User","2","VHDL","7","bezborodow","Damien Bezborodov","dbezborodov@gmail.com","","","Adelaide, South Australia","https://github.com/bezborodow","","","","Does not support signed/unsigned types","https://github.com/kokkonisd/pixhdl/issues/24","2025-10-02T18:38:47Z","email","pixhdl signed/unsigned support","Hey Damien,
+"423","YES","","fix clock domain crossing","5","commit","ucb-bar/chisel2-deprecated","chisel2-deprecated","ucb-bar","Organization","90","Scala","388","ucbjrl","Jim Lawson","ucbjrl@berkeley.edu","UC Berkeley","","Berkeley, CA","https://github.com/ucbjrl","","","","Compatibility issues, multiple clock domains, top-level dot file module crossings (when partitioning), handling non-bits node input chains.
 
-The signed/unsigned type support issue you filed on pixhdl is a good catch. VHDL's numeric type system with std_logic_vector, signed, and unsigned being distinct types is one of those things that trips up every tool that tries to parse or visualize HDL.
+Output the monolithic cpp file (for compatibility testing).","https://github.com/ucb-bar/chisel2-deprecated/commit/9fe1c84caf2f87b77f6cb2ed47069f96c7064121","2014-08-19T09:01:45.000-07:00","email","Multi-clock domain partitioning in Chisel2","Hey Jim,
 
-What was the design you were trying to visualize when you hit that limitation? Curious whether pixhdl was useful for understanding signal flow despite the type gap.
-
-Severin"
-"425","NO","","fix entity language:VHDL","4","issue","gnovakowski/Lab_1","Lab_1","gnovakowski","User","1","VHDL","1","toddbranch","Todd Branchflower","todd.branchflower@gmail.com","","","","https://github.com/toddbranch","","","","Grade","https://github.com/gnovakowski/Lab_1/issues/1","2014-02-12T16:28:29Z","email","",""
-"426","NO","","fix entity language:VHDL","4","pr","BekdoucheAmine/osvvm-template","osvvm-template","BekdoucheAmine","User","1","VHDL","5","BekdoucheAmine","Amine Bekdouche","amineadelbekdouche@gmail.com","","SoC FPGA Engineer  
-[Master’s in Electronic, Sensors, and IoT]","France","https://github.com/BekdoucheAmine","","","","Refactor VHDL testbenches, workflow, and formatting","https://github.com/BekdoucheAmine/osvvm-template/pull/7","2026-01-19T17:20:10Z","email","OSVVM testbench refactoring","Hey Amine,
-
-Your PR refactoring the VHDL testbenches, workflow, and formatting in your OSVVM template brings much-needed structure to OSVVM-based verification — consistent testbench organization is what separates a framework that scales from one that becomes unmaintainable. What types of designs are you verifying with the OSVVM template?
+Partitioning a Chisel2 design across clock domains at the top-level dot file means CDC boundaries become a graph-cut problem. Did the monolithic cpp fallback exist because multi-clock partitioning broke Verilator compatibility?
 
 Severin"
-"427","NO","","fix entity language:VHDL","4","issue","mrisc32/mc1","mc1","mrisc32","Organization","1","VHDL","53","mbitsnbites","","m@bitsnbites.eu","","Software and hardware designer. Open-source advocate since the 1990s.","Sweden","https://github.com/mbitsnbites","","m_bitsnbites","http://www.bitsnbites.eu","video: Fix incorrect timing (video_tb.vhd vs mc1.vhd)","https://github.com/mrisc32/mc1/issues/14","2019-11-24T20:18:43Z","email","MRISC32 video timing discrepancy","Hey,
+"424","YES","","fix entity language:VHDL","4","issue","kokkonisd/pixhdl","pixhdl","kokkonisd","User","2","VHDL","7","bezborodow","Damien Bezborodov","dbezborodov@gmail.com","","","Adelaide, South Australia","https://github.com/bezborodow","","","","Does not support signed/unsigned types","https://github.com/kokkonisd/pixhdl/issues/24","2025-10-02T18:38:47Z","email","pixhdl signed/unsigned type support gap","Hey Damien,
 
-The video timing mismatch between video_tb.vhd and mc1.vhd in MRISC32 is the kind of bug that makes display output work in simulation but fail on real hardware. Building a custom ISA with its own compiler backend and FPGA SoC is a massive undertaking — what motivated creating MRISC32 rather than building on an existing open ISA like RISC-V?
-
-Severin"
-"428","NO","","fix entity language:Verilog","4","issue","alexforencich/verilog-ethernet","verilog-ethernet","alexforencich","User","2","Verilog","2878","vmayoral","Víctor Mayoral Vilches","v.mayoralv@gmail.com","Alias Robotics","Roboticist. AI and security researcher. ","Vitoria, Spain","https://github.com/vmayoral","","","","Porting verilog-ethernet to KR260","https://github.com/alexforencich/verilog-ethernet/issues/146","2023-02-13T16:43:43Z","email","Porting verilog-ethernet to KR260","Hey Victor,
-
-Porting verilog-ethernet to the KR260 is useful work — the KR260's Kria SOM with integrated robotics support makes it a natural fit for high-bandwidth sensor and network interfaces. Does the ethernet port connect to real-time networking needs for the robotics work at Alias Robotics?
+The signed/unsigned gap in pixhdl means any image processing pipeline needing negative coefficients — like convolution kernels — won't synthesize correctly from pixel art. Are you looking at this from a DSP perspective, or more general pixel manipulation?
 
 Severin"
-"429","NO","","fix entity language:Verilog","4","issue","zhemao/md5cracker","md5cracker","zhemao","User","1","Verilog","12","acourt","Alexandre Courtemanche","a.courtemanche@villotec.com","@Villotec ","President of IoT company Villotec. Nice guy. Also known as ""Alex Lesuper"". ","Montreal, QC","https://github.com/acourt","","alexlesuper","https://www.villotec.com","Quartus project does not compile out-of-the-box","https://github.com/zhemao/md5cracker/issues/1","2014-01-10T20:29:44Z","email","Quartus compilation for md5cracker","Getting a Verilog MD5 cracker to compile out-of-the-box in Quartus is trickier than it sounds. Vendor toolchains love to silently accept things during synthesis that blow up during fitting.
+"425","YES","SKIP","fix entity language:VHDL","4","issue","gnovakowski/Lab_1","Lab_1","gnovakowski","User","1","VHDL","1","toddbranch","Todd Branchflower","todd.branchflower@gmail.com","","","","https://github.com/toddbranch","","","","Grade","https://github.com/gnovakowski/Lab_1/issues/1","2014-02-12T16:28:29Z","email","",""
+"426","YES","","fix entity language:VHDL","4","pr","BekdoucheAmine/osvvm-template","osvvm-template","BekdoucheAmine","User","1","VHDL","5","BekdoucheAmine","Amine Bekdouche","amineadelbekdouche@gmail.com","","SoC FPGA Engineer  
+[Master’s in Electronic, Sensors, and IoT]","France","https://github.com/BekdoucheAmine","","","","Refactor VHDL testbenches, workflow, and formatting","https://github.com/BekdoucheAmine/osvvm-template/pull/7","2026-01-19T17:20:10Z","email","OSVVM testbench refactoring for SoC verification","Hey Amine,
 
-At Villotec, when you're bringing up IoT hardware, how do you typically handle the gap between a design that simulates cleanly and one that actually closes timing on real silicon?
-
-Severin"
-"430","NO","","fix module language:VHDL","4","pr","avkatdongda/KJZ","KJZ","avkatdongda","User","1","VHDL","0","avkatdongda","Bowei Zhang","avkatdongda@gmail.com","","","","https://github.com/avkatdongda","","","","Fix DownSample AXIS output when line buffer is empty","https://github.com/avkatdongda/KJZ/pull/2","2026-02-11T03:16:16Z","email","DownSample AXIS output fix when line buffer empty","Fixing the AXIS output behavior when the line buffer is empty is a subtle one -- an empty buffer can easily cause TVALID to assert without valid data if the FSM doesn't gate on buffer occupancy. Was the root cause a missing TVALID deassert, or was the downstream block actually consuming garbage samples during the drain cycle?
-
-Severin"
-"431","NO","","fix module language:VHDL","4","issue","RPeschke/SCROD_ETHERNET_V3","SCROD_ETHERNET_V3","RPeschke","User","2","VHDL","0","nathankp","","nathankp@hawaii.edu","","","","https://github.com/nathankp","","","","Illegal gtpClk connections in firmware-ethernet/ExampleProject","https://github.com/RPeschke/SCROD_ETHERNET_V3/issues/1","2019-03-30T02:40:44Z","email","Illegal gtpClk connections in SCROD Ethernet firmware","Illegal GTP clock connections are the kind of bug that can pass synthesis but cause completely unpredictable transceiver behavior on hardware. Was the issue routing a fabric clock to the GTP refclk input instead of using a dedicated MGTREFCLK pin, or was it a constraint mismatch in the clock buffer instantiation?
+Refactoring OSVVM testbenches well is underrated — most SoC teams inherit messy verification environments and just bolt on more tests. Were you restructuring the template to support a specific SoC verification workflow, or making it more reusable across different FPGA projects?
 
 Severin"
-"432","NO","","fix module language:VHDL","4","pr","VladisM/MARK_II","MARK_II","VladisM","User","1","VHDL","28","VladisM","Vladislav Mlejnecký","geek@vladism.cz","Siemens s.r.o.","Interested in microcontrollers and photography. Working on custom CPU architecture and toolchain at free time. Also building a railway occasionally! ","Prague","https://github.com/VladisM","","","http://vladism.cz","Board for MARK-II ","https://github.com/VladisM/MARK_II/pull/25","2018-01-19T14:07:33Z","email","MARK II custom CPU board design","Hey Vladislav,
+"427","YES","","fix entity language:VHDL","4","issue","mrisc32/mc1","mc1","mrisc32","Organization","1","VHDL","53","mbitsnbites","","m@bitsnbites.eu","","Software and hardware designer. Open-source advocate since the 1990s.","Sweden","https://github.com/mbitsnbites","","m_bitsnbites","http://www.bitsnbites.eu","video: Fix incorrect timing (video_tb.vhd vs mc1.vhd)","https://github.com/mrisc32/mc1/issues/14","2019-11-24T20:18:43Z","email","MRISC32 video timing mismatch between tb and RTL","Hey,
 
-The board design PR for MARK_II takes your custom CPU from simulation to physical hardware — that's the step most hobby CPU projects never make. What design decisions in the MARK_II ISA led you to create a custom architecture rather than building on RISC-V or another open ISA?
+The timing mismatch between video_tb.vhd and mc1.vhd in MRISC32 means the testbench was validating against wrong timing — simulation passes but real hardware could show tearing or blanking. Was this caught on actual FPGA output or through waveform inspection?
 
 Severin"
-"433","NO","","fix module language:VHDL","4","issue","HiSPARC/firmware","firmware","HiSPARC","Organization","2","VHDL","0","153957","Arne de Laat","arne@delaat.net","@leukeleu "," .","Netherlands","https://github.com/153957","","","https://arne.delaat.net","Update docs","https://github.com/HiSPARC/firmware/issues/2","2015-09-28T11:22:19Z","email","",""
-"434","NO","","fix module language:Verilog","4","issue","ShilpaMayannavar/tinetapeout_ex","tinetapeout_ex","ShilpaMayannavar","User","1","Verilog","0","algofoogle","Anton Maurovic","anton@maurovic.com","","I enjoy making software, designing hardware, writing documentation, and helping others on their own learning journeys.","Adelaide, Australia","https://github.com/algofoogle","","","https://foogle.com/anton","Fix top module name in `test/tb.v`","https://github.com/ShilpaMayannavar/tinetapeout_ex/issues/2","2026-03-09T11:08:05Z","email","Top module name fix in Tiny Tapeout project","Getting the top module name wrong in tb.v is one of those bugs that blocks the entire tapeout CI pipeline since the harness can't bind to the user macro. Given your experience helping others with tapeout projects, do you find that most first-time submitters hit issues in the testbench wiring or more in the OpenLane flow configuration?
+"428","YES","","fix entity language:Verilog","4","issue","alexforencich/verilog-ethernet","verilog-ethernet","alexforencich","User","2","Verilog","2878","vmayoral","Víctor Mayoral Vilches","v.mayoralv@gmail.com","Alias Robotics","Roboticist. AI and security researcher. ","Vitoria, Spain","https://github.com/vmayoral","","","","Porting verilog-ethernet to KR260","https://github.com/alexforencich/verilog-ethernet/issues/146","2023-02-13T16:43:43Z","email","verilog-ethernet port to KR260","Hey Victor,
+
+Porting verilog-ethernet to the KR260 involves bridging the AXI-Stream Ethernet MAC with the PS-PL interconnect and the SFP+ transceiver — nontrivial given the Kria's clock architecture. Are you targeting bare-metal networking or integrating with a Linux-side network stack?
+
+Severin"
+"429","YES","","fix entity language:Verilog","4","issue","zhemao/md5cracker","md5cracker","zhemao","User","1","Verilog","12","acourt","Alexandre Courtemanche","a.courtemanche@villotec.com","@Villotec ","President of IoT company Villotec. Nice guy. Also known as ""Alex Lesuper"". ","Montreal, QC","https://github.com/acourt","","alexlesuper","https://www.villotec.com","Quartus project does not compile out-of-the-box","https://github.com/zhemao/md5cracker/issues/1","2014-01-10T20:29:44Z","email","Quartus out-of-box compilation for md5cracker","Hey Alexandre,
+
+Quartus compilation issues on Verilog projects often come down to missing pin assignments or IP core version mismatches that the original environment handled implicitly. Did the md5cracker fail at synthesis or during fitter placement?
+
+Severin"
+"430","YES","","fix module language:VHDL","4","pr","avkatdongda/KJZ","KJZ","avkatdongda","User","1","VHDL","0","avkatdongda","Bowei Zhang","avkatdongda@gmail.com","","","","https://github.com/avkatdongda","","","","Fix DownSample AXIS output when line buffer is empty","https://github.com/avkatdongda/KJZ/pull/2","2026-02-11T03:16:16Z","email","AXIS DownSample line buffer empty edge case","Hey Bowei,
+
+The DownSample AXIS fix when the line buffer is empty suggests the module was outputting stale data on buffer underrun — a classic streaming pipeline edge case. Was this triggered by a specific frame size that drained the buffer mid-line, or a reset-sequence corner case?
+
+Severin"
+"431","YES","","fix module language:VHDL","4","issue","RPeschke/SCROD_ETHERNET_V3","SCROD_ETHERNET_V3","RPeschke","User","2","VHDL","0","nathankp","","nathankp@hawaii.edu","","","","https://github.com/nathankp","","","","Illegal gtpClk connections in firmware-ethernet/ExampleProject","https://github.com/RPeschke/SCROD_ETHERNET_V3/issues/1","2019-03-30T02:40:44Z","email","Illegal GTP clock connections in SCROD Ethernet","Hey,
+
+Illegal GTP clock connections can pass synthesis but fail in hardware — Xilinx GTP transceivers have strict clock routing rules that Vivado doesn't always enforce at the RTL level. Did this cause link-up failures on actual hardware, or was it caught during bitstream generation?
+
+Severin"
+"432","YES","","fix module language:VHDL","4","pr","VladisM/MARK_II","MARK_II","VladisM","User","1","VHDL","28","VladisM","Vladislav Mlejnecký","geek@vladism.cz","Siemens s.r.o.","Interested in microcontrollers and photography. Working on custom CPU architecture and toolchain at free time. Also building a railway occasionally! ","Prague","https://github.com/VladisM","","","http://vladism.cz","Board for MARK-II ","https://github.com/VladisM/MARK_II/pull/25","2018-01-19T14:07:33Z","email","MARK-II custom CPU from ISA to physical board","Hey Vladislav,
+
+Taking MARK-II from custom ISA to a physical board means bus timing and IO constraints become real problems the toolchain can't abstract away. What drove designing a new instruction set rather than extending RISC-V — a specific architectural tradeoff you wanted to explore?
+
+Severin"
+"433","YES","SKIP","fix module language:VHDL","4","issue","HiSPARC/firmware","firmware","HiSPARC","Organization","2","VHDL","0","153957","Arne de Laat","arne@delaat.net","@leukeleu "," .","Netherlands","https://github.com/153957","","","https://arne.delaat.net","Update docs","https://github.com/HiSPARC/firmware/issues/2","2015-09-28T11:22:19Z","email","",""
+"434","YES","","fix module language:Verilog","4","issue","ShilpaMayannavar/tinetapeout_ex","tinetapeout_ex","ShilpaMayannavar","User","1","Verilog","0","algofoogle","Anton Maurovic","anton@maurovic.com","","I enjoy making software, designing hardware, writing documentation, and helping others on their own learning journeys.","Adelaide, Australia","https://github.com/algofoogle","","","https://foogle.com/anton","Fix top module name in `test/tb.v`","https://github.com/ShilpaMayannavar/tinetapeout_ex/issues/2","2026-03-09T11:08:05Z","email","Top module naming in Tiny Tapeout testbench","Hey Anton,
+
+A wrong top module name in the testbench means simulation runs against the wrong hierarchy — tests pass but don't exercise the tapeout design. Was this caught during the Tiny Tapeout submission flow, or did the CI miss it because the sim still elaborated without error?
 
 Severin"
 "435","NO","","fix module language:Verilog","4","pr","Adrofier/HDLBits-Verilog-Solutions","HDLBits-Verilog-Solutions","Adrofier","User","2","Verilog","41","Shivaaaydv","Shiva Yadav","shivayadavofficial123@gmail.com","Dr. S. & S. Ghandhy Government Engineering College, Surat","Electronics Engineer | VLSI & Digital Design Enthusiast | Passionate about building and exploring innovative electronic systems","Surat, Gujarat","https://github.com/Shivaaaydv","","","","Fix replication operator syntax in Verilog module","https://github.com/Adrofier/HDLBits-Verilog-Solutions/pull/6","2025-12-03T09:22:44Z","email","replication operator syntax fix in HDLBits solutions","Replication operator syntax is one of those Verilog gotchas where the concatenation braces interact badly with the replication count — easy to get wrong, hard to debug when the bit-width silently mismatches. Was the bug producing a synthesis error, or was it a simulation mismatch where the wrong bits were being replicated?
