@@ -848,57 +848,47 @@ Severin"
 Your issue about building OpenROAD with Bazel on ARM Mac is fighting two battles at once — Bazel's hermetic toolchain assumptions clash with Apple Silicon in ways that CMake builds dodge entirely. Was the goal reproducible builds, or was there something else pulling you toward Bazel for OpenROAD?
 
 Severin"
-180.0,NO,,fix module language:Verilog,4,pr,suttonr/ws2812_driver,ws2812_driver,suttonr,User,3,Verilog,0,suttonr,Ryan Sutton,git@ryanmsutton.com,,,,https://github.com/suttonr,,,http://ryanmsutton.com,RGB565 Support and Testbench updates,https://github.com/suttonr/ws2812_driver/pull/1,2026-01-19T01:27:15Z,email,RGB565 support in ws2812_driver,"Adding RGB565 to a WS2812 driver is a useful conversion layer since those LEDs expect 24-bit GRB -- the bit-packing from 5-6-5 to 8-8-8 can introduce visible banding if the expansion math isn't right. Solid move pairing it with testbench updates in the same PR.
+180.0,YES,,fix module language:Verilog,4,pr,suttonr/ws2812_driver,ws2812_driver,suttonr,User,3,Verilog,0,suttonr,Ryan Sutton,git@ryanmsutton.com,,,,https://github.com/suttonr,,,http://ryanmsutton.com,RGB565 Support and Testbench updates,https://github.com/suttonr/ws2812_driver/pull/1,2026-01-19T01:27:15Z,email,RGB565 support in ws2812_driver,"Hey Ryan,
 
-Are you scaling the 5/6-bit channels to full 8-bit range (e.g., R5 << 3 | R5 >> 2) or just zero-padding the lower bits?
-
-Severin"
-181.0,NO,,fix module language:Verilog,4,issue,efabless/caravel_user_project,caravel_user_project,efabless,Organization,27,Verilog,229,growly,Arya Reais-Parsi,aryap@berkeley.edu,,,,https://github.com/growly,,,,make design fails: 'permission denied' accessing file inside docker container,https://github.com/efabless/caravel_user_project/issues/221,2022-12-05T06:15:39Z,email,Caravel user project at Berkeley,"Hey Arya,
-
-Caravel user project at 229 stars from Berkeley. The Efabless shuttle program has made it possible for students and researchers to actually tape out chips. Curious what you designed for the caravel. Did you get silicon back, and how did it compare to simulation?
+Adding RGB565 to a WS2812 driver requires the 5-6-5 to 8-8-8 expansion math to be right — zero-padding the lower bits versus scaling to full range (R5 << 3 | R5 >> 2) produces visibly different output at low brightness. Are you scaling each channel to full range, or zero-padding?
 
 Severin"
-182.0,NO,,fix module language:Verilog,4,issue,asicsforthemasses/LunaPnR,LunaPnR,asicsforthemasses,User,4,Verilog,47,GetPsyched,Priyanshu Tripathi,priyanshu@getpsyched.dev,@deshaw,"Creating software solutions to my first world problems. I use NixOS, btw.",India,https://github.com/GetPsyched,,,,Build fails with error tools/doctool: not found,https://github.com/asicsforthemasses/LunaPnR/issues/7,2024-06-28T13:44:09Z,email,LunaPnR and EDA at DE Shaw,"Hey Priyanshu,
+181.0,YES,SKIP,fix module language:Verilog,4,issue,efabless/caravel_user_project,caravel_user_project,efabless,Organization,27,Verilog,229,growly,Arya Reais-Parsi,aryap@berkeley.edu,,,,https://github.com/growly,,,,make design fails: 'permission denied' accessing file inside docker container,https://github.com/efabless/caravel_user_project/issues/221,2022-12-05T06:15:39Z,email,,
+182.0,YES,SKIP,fix module language:Verilog,4,issue,asicsforthemasses/LunaPnR,LunaPnR,asicsforthemasses,User,4,Verilog,47,GetPsyched,Priyanshu Tripathi,priyanshu@getpsyched.dev,@deshaw,"Creating software solutions to my first world problems. I use NixOS, btw.",India,https://github.com/GetPsyched,,,,Build fails with error tools/doctool: not found,https://github.com/asicsforthemasses/LunaPnR/issues/7,2024-06-28T13:44:09Z,email,,
+183.0,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,wsnyder,Wilson Snyder,wsnyder@wsnyder.org,Veripool,,,https://github.com/wsnyder,,,www.veripool.org,Fix resolving default/nondefault type parameters,https://github.com/verilator/verilator/issues/7171,2026-03-02T11:02:46Z,email,Verilator default/nondefault type parameter resolution (issue #7171),"Hey Wilson,
 
-DE Shaw and contributing to LunaPnR. A new place-and-route tool in the open source EDA space is ambitious. Curious what gap LunaPnR is targeting that OpenROAD doesn't cover. Is it a different algorithmic approach, or targeting a different part of the design flow?
-
-Severin"
-183.0,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,wsnyder,Wilson Snyder,wsnyder@wsnyder.org,Veripool,,,https://github.com/wsnyder,,,www.veripool.org,Fix resolving default/nondefault type parameters,https://github.com/verilator/verilator/issues/7171,2026-03-02T11:02:46Z,email,Verilator at 3419 stars,"Hey Wilson,
-
-Verilator at 3419 stars with 330 contributors is arguably the most important open source EDA tool in existence. Curious what you think the next major frontier is for Verilator. Is it full SystemVerilog coverage, simulation performance, or something else? The project seems to keep expanding scope while maintaining quality.
+The default vs. nondefault type parameter resolution bug you filed (issue #7171) — when a type parameter has both a default and an explicit override, the elaboration order can cause the default to shadow the override if the lookup isn't disambiguated by parameter kind. Is this specific to parameterized class hierarchies, or does it show up with module-level type parameters as well?
 
 Severin"
-184.0,NO,,fix module language:SystemVerilog,4,pr,EfficientComputer/verilator,verilator,EfficientComputer,Organization,300,SystemVerilog,0,TJackhammer,Tom Jackson,tom@efficient.computer,,,,https://github.com/TJackhammer,,,,Fix SYMRSVDWORD not renaming module names matching C++ keywords,https://github.com/EfficientComputer/verilator/pull/2,2026-02-20T15:32:46Z,email,Verilator at Efficient Computer,"Hey Tom,
+184.0,YES,,fix module language:SystemVerilog,4,pr,EfficientComputer/verilator,verilator,EfficientComputer,Organization,300,SystemVerilog,0,TJackhammer,Tom Jackson,tom@efficient.computer,,,,https://github.com/TJackhammer,,,,Fix SYMRSVDWORD not renaming module names matching C++ keywords,https://github.com/EfficientComputer/verilator/pull/2,2026-02-20T15:32:46Z,email,Verilator C++ keyword collision in generated module names (PR #2),"Hey Tom,
 
-Efficient Computer maintaining a Verilator fork with 300 contributors. Curious what modifications you need for your workflow that upstream Verilator doesn't provide. Custom simulator features for specific architecture exploration, or more about integration with your design flow?
-
-Severin"
-185.0,NO,,fix module language:SystemVerilog,4,issue,openhwgroup/core-v-mcu,core-v-mcu,openhwgroup,Organization,15,SystemVerilog,195,zarubaf,Florian Zaruba,florian@zaruba.email,Axelera AI,,Zurich,https://github.com/zarubaf,www.linkedin.com/in/zarubaf,be4web,www.linkedin.com/in/zarubaf,Re-think FPGA specific modules,https://github.com/openhwgroup/core-v-mcu/issues/89,2021-04-11T17:05:38Z,email,Core-V-MCU at Axelera AI,"Hey Florian,
-
-Axelera AI in Zurich contributing to Core-V-MCU at 195 stars. The OpenHW Group RISC-V ecosystem is growing fast. Curious how the Core-V work connects to what Axelera is building for AI edge inference. Is RISC-V the control plane for the AI accelerator, or something more integrated?
+The SYMRSVDWORD fix in Efficient Computer's Verilator fork (PR #2) — module names that collide with C++ reserved words producing invalid generated code is the kind of failure that surfaces as a confusing compiler error rather than a Verilator diagnostic. Was this hitting specific module hierarchies in production, or did it surface during fork integration testing?
 
 Severin"
-186.0,NO,,fix module language:SystemVerilog,4,pr,pulp-platform/pulpissimo,pulpissimo,pulp-platform,Organization,60,SystemVerilog,463,PengchengYang-xdu,PengchengYang,24241214835@stu.xidian.edu.cn,,"Currently pursuing MSE degree in Xidian University, Hangzhou Institute of Technology.
-Interested in Dgital IC, RISC-V, SOC, AI Accelerator...","Hangzhou, China",https://github.com/PengchengYang-xdu,,,,Fix: fix tdo io direction from input to inout,https://github.com/pulp-platform/pulpissimo/pull/446,2026-01-13T02:47:18Z,email,PULPissimo and RISC-V SoC research,"Hey Pengcheng,
+185.0,YES,,fix module language:SystemVerilog,4,issue,openhwgroup/core-v-mcu,core-v-mcu,openhwgroup,Organization,15,SystemVerilog,195,zarubaf,Florian Zaruba,florian@zaruba.email,Axelera AI,,Zurich,https://github.com/zarubaf,www.linkedin.com/in/zarubaf,be4web,www.linkedin.com/in/zarubaf,Re-think FPGA specific modules,https://github.com/openhwgroup/core-v-mcu/issues/89,2021-04-11T17:05:38Z,email,FPGA-specific module handling in Core-V-MCU (issue #89),"Hey Florian,
 
-MSE at Xidian working on PULPissimo at 463 stars. Interested in digital IC, RISC-V, SoC, and AI accelerators. Curious which part of PULPissimo you focus on. The processor core integration, the peripheral subsystem, or the AI accelerator interface?
-
-Severin"
-187.0,NO,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,Charitha-Jeewanka,Charitha Jeewanka,cjrathnayake24@gmail.com,Synopsys Inc.,"M.Sc. Student, Big Data Analytics | ML Engineer ",Sri Lanka,https://github.com/Charitha-Jeewanka,,charitha98,,Fix missing logic normalization when using -fno-gate (#6952),https://github.com/verilator/verilator/pull/7075,2026-02-14T07:43:45Z,email,Verilator -fno-gate normalization fix,"Hey Charitha,
-
-Your fix for the missing logic normalization under -fno-gate in Verilator is a specific edge case that could silently produce wrong simulation results. Working at Synopsys while contributing to open source EDA gives you a unique vantage point. Curious how you narrowed down where normalization breaks under that optimization flag.
+The issue you raised on rethinking FPGA-specific modules in Core-V-MCU (issue #89) hits the fundamental tension in mixed-target projects — FPGA primitives like PLLs and block RAMs need wrapper abstractions that work for both simulation and ASIC replacement cells without leaking vendor assumptions. Was the main pain point vendor-specific cell instantiations in the core, or the clock and reset infrastructure?
 
 Severin"
-188.0,NO,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,godblesszhouzhou,Zhou Shen,599239118@qq.com,,,,https://github.com/godblesszhouzhou,,,,Fix instance parameters with wrong initial values (#5890),https://github.com/verilator/verilator/pull/6849,2025-12-21T04:04:21Z,email,Verilator parameter initialization fix,"Hey Zhou,
+186.0,YES,,fix module language:SystemVerilog,4,pr,pulp-platform/pulpissimo,pulpissimo,pulp-platform,Organization,60,SystemVerilog,463,PengchengYang-xdu,PengchengYang,24241214835@stu.xidian.edu.cn,,"Currently pursuing MSE degree in Xidian University, Hangzhou Institute of Technology.
+Interested in Dgital IC, RISC-V, SOC, AI Accelerator...","Hangzhou, China",https://github.com/PengchengYang-xdu,,,,Fix: fix tdo io direction from input to inout,https://github.com/pulp-platform/pulpissimo/pull/446,2026-01-13T02:47:18Z,email,PULPissimo JTAG TDO direction fix (PR #446),"Hey Pengcheng,
 
-Your fix for instance parameters with wrong initial values in Verilator touches a subtle area. Parameter evaluation order and default values interacting incorrectly is the kind of bug that can silently produce wrong simulation results for a long time before anyone notices.
-
-What was the design pattern that originally exposed the issue? Curious whether it was a specific parameterized module hierarchy or something more general about how Verilator was resolving defaults.
+The TDO direction fix in PULPissimo (PR #446) — changing from input to inout suggests TDO needs to be tristatable when JTAG isn't actively selected. Was the original input declaration causing a tool conflict on the port, or were you seeing actual simulation failures when multiple JTAG devices were chained?
 
 Severin"
-189.0,NO,,fix module language:SystemVerilog,4,issue,planvtech/PlanV_Verilator_Feature_Tests,PlanV_Verilator_Feature_Tests,planvtech,Organization,3,SystemVerilog,1,YilouWang,Yilou Wang,yilou.wang@planv.tech,PlanV,Digital Verification Engineer,Munich,https://github.com/YilouWang,,,,Randomization: solve...before inside foreach is silently ignored,https://github.com/planvtech/PlanV_Verilator_Feature_Tests/issues/91,2026-03-12T10:00:46Z,email,Verification at PlanV,"Hey Yilou,
+187.0,YES,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,Charitha-Jeewanka,Charitha Jeewanka,cjrathnayake24@gmail.com,Synopsys Inc.,"M.Sc. Student, Big Data Analytics | ML Engineer ",Sri Lanka,https://github.com/Charitha-Jeewanka,,charitha98,,Fix missing logic normalization when using -fno-gate (#6952),https://github.com/verilator/verilator/pull/7075,2026-02-14T07:43:45Z,email,Verilator -fno-gate normalization fix (PR #7075),"Hey Charitha,
 
-Digital verification engineer at PlanV in Munich working on Verilator feature tests. Verification-focused companies pushing open source simulator capabilities forward is exactly what the ecosystem needs. Curious what the biggest gap in Verilator's verification feature set is from PlanV's perspective.
+Your fix for missing logic normalization under -fno-gate in Verilator (PR #7075) is a silent correctness problem — a user enabling that flag gets wrong simulation results with no warning. Did the PR #6952 work expose this as a latent issue, or did you find it through a separate test path?
+
+Severin"
+188.0,YES,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,godblesszhouzhou,Zhou Shen,599239118@qq.com,,,,https://github.com/godblesszhouzhou,,,,Fix instance parameters with wrong initial values (#5890),https://github.com/verilator/verilator/pull/6849,2025-12-21T04:04:21Z,email,Verilator instance parameter initialization (PR #6849),"Hey Zhou,
+
+Your fix for instance parameters with wrong initial values in Verilator (PR #6849) — incorrect parameter initialization can silently break any design that relies on parameterized constants, and the failure only appears when the wrong value actually affects logic output. What design pattern originally exposed the issue — a specific override vs. default interaction, or an evaluation order problem?
+
+Severin"
+189.0,YES,,fix module language:SystemVerilog,4,issue,planvtech/PlanV_Verilator_Feature_Tests,PlanV_Verilator_Feature_Tests,planvtech,Organization,3,SystemVerilog,1,YilouWang,Yilou Wang,yilou.wang@planv.tech,PlanV,Digital Verification Engineer,Munich,https://github.com/YilouWang,,,,Randomization: solve...before inside foreach is silently ignored,https://github.com/planvtech/PlanV_Verilator_Feature_Tests/issues/91,2026-03-12T10:00:46Z,email,solve...before inside foreach silently ignored (issue #91),"Hey Yilou,
+
+The solve...before constraint being silently ignored inside foreach in Verilator (PlanV issue #91) is a correctness gap — constraint solvers are supposed to respect solve ordering even within iterative constructs, and dropping it silently means coverage holes can go undetected. Was this surfacing as functional coverage gaps on a real verification environment, or did the PlanV test suite catch it directly?
 
 Severin"
 190.0,NO,,fix module language:SystemVerilog,4,pr,pulp-platform/common_cells,common_cells,pulp-platform,Organization,90,SystemVerilog,723,phsauter,Philippe Sauter,phsauter@iis.ee.ethz.ch,ETH Zürich,EE PhD with a focus towards open-source EDA tools," Zürich, Switzerland",https://github.com/phsauter,,,,Fix non-synchronized path in cdc_2phase_clearable,https://github.com/pulp-platform/common_cells/pull/243,2024-10-11T11:42:00Z,email,Open source EDA at ETH Zurich,"Hey Philippe,
