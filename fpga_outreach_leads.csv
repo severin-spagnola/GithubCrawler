@@ -307,7 +307,7 @@ Severin"
 62.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,suoto,Andre Souto,,,,United Kingdom,https://github.com/suoto,https://www.linkedin.com/in/andremsouto,,https://www.linkedin.com/in/andremsouto,Incorrect values passed to procedures when using unconstrained subtypes,https://github.com/ghdl/ghdl/issues/1549,2020-12-25T13:51:20Z,linkedin,,"Hey Andre, your ghdl issue about incorrect values passed to procedures with unconstrained subtypes (issue #1549) touches a real type-system edge case. Did that turn out to be a simulation bug or a spec ambiguity in how unconstrained subtypes should propagate through procedure calls?
 
 Severin"
-63.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,targeted,Dmitry Dvoinikov,dmitry@targeted.org,,,,https://github.com/targeted,,,http://www.targeted.org/,Crash from a syntactically incorrect reference to entity in a separate file,https://github.com/ghdl/ghdl/issues/1490,2020-10-10T10:02:20Z,email,ghdl crash from cross-file entity references,"Hey Dmitry,
+63.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,targeted,Dmitry Dvoinikov,dmitry@targeted.org,,,,https://github.com/targeted,,,http://www.targeted.org/,Crash from a syntactically incorrect reference to entity in a separate file,https://github.com/ghdl/ghdl/issues/1490,2020-10-10T10:02:20Z,email,,"Hey Dmitry,
 
 The ghdl crash from a syntactically incorrect cross-file entity reference you reported (issue #1490) exposes how the tool resolves design units across compilation boundaries. Did you find that ghdl generally handles multi-file projects well outside of that edge case, or was it symptomatic of a broader pattern?
 
@@ -374,7 +374,7 @@ Severin"
 75.0,NO,fix entity language:VHDL,4,issue,salmansamie/DSD-E,DSD-E,salmansamie,User,6,VHDL,0,Nnadozie,Nnadozie Okeke,,Fronte.io,"I write high quality code, and deploy it to the cloud in rock-solid environments.",Remote,https://github.com/Nnadozie, linkedin.com/in/nnadozie-okeke,dozieokk, linkedin.com/in/nnadozie-okeke,corrections needed for lab3 universal shiftreg and counter,https://github.com/salmansamie/DSD-E/issues/13,2017-11-14T23:28:07Z,linkedin,,"Hey Nnadozie, your corrections for the universal shift register and counter in DSD-E (issue #13) are the kind of fixes that help future students avoid the same pitfalls. At Fronte.io, how does the hardware design perspective from your EE coursework connect to your cloud deployment work?
 
 Severin"
-76.0,NO,fix entity language:VHDL,4,issue,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,dave2pi,Dave O'Brien,dave.2pi@gmail.com,,,UK,https://github.com/dave2pi,,,,"Modelsim: Invalid value for generic ""output_path"".  Not using this value.",https://github.com/VUnit/vunit/issues/280,2017-10-26T09:24:10Z,email,VUnit Modelsim generic output_path issue,"Hey Dave,
+76.0,NO,fix entity language:VHDL,4,issue,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,dave2pi,Dave O'Brien,dave.2pi@gmail.com,,,UK,https://github.com/dave2pi,,,,"Modelsim: Invalid value for generic ""output_path"".  Not using this value.",https://github.com/VUnit/vunit/issues/280,2017-10-26T09:24:10Z,email,,"Hey Dave,
 
 The VUnit issue you filed about Modelsim rejecting the generic output_path value (issue #280) is the kind of simulator-specific friction that makes cross-tool verification painful. Is VUnit something you use at work, or more of a personal workflow choice?
 
@@ -393,7 +393,9 @@ Severin"
 80.0,NO,fix entity language:VHDL,4,pr,LaNoC-UFC/NoCThor,NoCThor,LaNoC-UFC,Organization,6,VHDL,1,rafaelgmota,Rafael Mota,faelmota@gmail.com,,,,https://github.com/rafaelgmota,,,,Create of circular fifo buffer entity,https://github.com/LaNoC-UFC/NoCThor/pull/34,2016-10-21T18:25:08Z,email,Circular FIFO in NoCThor,"Circular FIFOs in NoC routers are deceptively tricky once you need backpressure across virtual channels. Did you end up needing separate read/write pointer domains, or does NoCThor keep everything in a single clock domain?
 
 Severin"
-81.0,NO,fix entity language:VHDL,4,pr,LaNoC-UFC/NoCThor,NoCThor,LaNoC-UFC,Organization,6,VHDL,1,jmferreiratech,JM Ferreira,marcelo@trincatech.com.br,@TrincaTech ,Software Engineer,Brazil,https://github.com/jmferreiratech,,jmFerreiraTech,,Fixes compilation flags,https://github.com/LaNoC-UFC/NoCThor/pull/58,2016-10-31T17:58:57Z,email,NoCThor compilation flags,"Fixing compilation flags on a Network-on-Chip simulator like NoCThor suggests the build was probably silently accepting non-standard VHDL constructs. NoC research has so many moving parts between routing, arbitration, and flow control.
+81.0,NO,fix entity language:VHDL,4,pr,LaNoC-UFC/NoCThor,NoCThor,LaNoC-UFC,Organization,6,VHDL,1,jmferreiratech,JM Ferreira,marcelo@trincatech.com.br,@TrincaTech ,Software Engineer,Brazil,https://github.com/jmferreiratech,,jmFerreiraTech,,Fixes compilation flags,https://github.com/LaNoC-UFC/NoCThor/pull/58,2016-10-31T17:58:57Z,email,NoCThor compilation flags,"Hey JM,
+
+Fixing compilation flags on a Network-on-Chip simulator like NoCThor suggests the build was probably silently accepting non-standard VHDL constructs. NoC research has so many moving parts between routing, arbitration, and flow control.
 
 At TrincaTech, how do you approach validating NoC architectures when the design space (topology, buffer depth, routing algorithm) is so wide?
 
