@@ -141,24 +141,24 @@ Severin"
 Your PR with fixes and clarifications for the SURF tutorial (PR #3) reads like it came from watching people struggle to ramp up on the framework. Does the tutorial repo come from direct pain you saw with new engineers onboarding onto SLAC's FPGA firmware stack?
 
 Severin"
-30.0,YES,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,jefflieu,JEFF LIEU,lieumychuong@gmail.com,,Let's make something,Australia,https://github.com/jefflieu,,,,Checking if the following errors are because limitation of GHDL,https://github.com/ghdl/ghdl/issues/2925,2025-03-15T02:36:35Z,email,Testing ghdl limitations,"Hey Jeff,
+30.0,YES,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,jefflieu,JEFF LIEU,lieumychuong@gmail.com,,Let's make something,Australia,https://github.com/jefflieu,,,,Checking if the following errors are because limitation of GHDL,https://github.com/ghdl/ghdl/issues/2925,2025-03-15T02:36:35Z,email,ghdl limitations boundary testing (issue #2925),"Hey Jeff,
 
-Your ghdl issue checking whether specific errors are ghdl limitations vs. user error (issue #2925) is the kind of boundary testing that helps clarify what the tool actually supports. Did you end up finding that those were genuine ghdl limitations, or was there a VHDL spec subtlety involved?
-
-Severin"
-31.0,NO,fix entity language:VHDL,4,issue,UVVM/UVVM,UVVM,UVVM,User,60,VHDL,423,Remillard,Mark Norton,remillard@gmail.com,,EE specializing in digital board design and HDL design of FPGAs,"Lenexa, KS",https://github.com/Remillard,,,,Documentation Error: bitvis_vip_avalon_st,https://github.com/UVVM/UVVM/issues/214,2023-09-13T14:01:39Z,email,UVVM and FPGA board design,"Hey Mark,
-
-EE doing both digital board design and HDL, contributing to UVVM. That's a useful perspective since you see both the hardware and the firmware sides. How does UVVM compare to VUnit in your experience? People seem to pick camps and I'm curious what drives the choice for someone who's actually used them.
+The errors you reported in ghdl issue #2925 look like they sit right on the boundary between ghdl limitations and VHDL spec edge cases. Did those turn out to be genuine ghdl gaps, or was there a spec subtlety involved?
 
 Severin"
-32.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,MJoergen,Michael Jørgensen,michael.finn.jorgensen@gmail.com,Weibel Scientific,"Experienced software and firmware developer. Primary focus is with embedded applications in telecommunications, see my LinkedIn profile.",Denmark,https://github.com/MJoergen,http://www.linkedin.com/in/michaeljoergensen,,http://www.linkedin.com/in/michaeljoergensen,error: unhandled dyn operation: IIR_PREDEFINED_IEEE_NUMERIC_STD_UNSIGNED_TO_SLV_NAT_NAT,https://github.com/ghdl/ghdl/issues/2678,2024-06-28T13:26:02Z,email,ghdl unhandled numeric_std operation,"Hey Michael,
+31.0,NO,fix entity language:VHDL,4,issue,UVVM/UVVM,UVVM,UVVM,User,60,VHDL,423,Remillard,Mark Norton,remillard@gmail.com,,EE specializing in digital board design and HDL design of FPGAs,"Lenexa, KS",https://github.com/Remillard,,,,Documentation Error: bitvis_vip_avalon_st,https://github.com/UVVM/UVVM/issues/214,2023-09-13T14:01:39Z,email,UVVM Avalon ST doc error (issue #214),"Hey Mark,
 
-The unhandled numeric_std operation you hit in ghdl (issue #2678) suggests the dynamic evaluator is missing coverage for unsigned-to-slv conversions. Weibel does radar signal processing, so numeric_std edge cases probably show up a lot. Does ghdl play any role in radar firmware development at Weibel?
+The documentation error you reported in bitvis_vip_avalon_st (issue #214) is the kind of thing that silently trips up anyone integrating Avalon ST verification for the first time. Was the doc mismatch causing simulation failures, or did you catch it before it got that far?
+
+Severin"
+32.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,MJoergen,Michael Jørgensen,michael.finn.jorgensen@gmail.com,Weibel Scientific,"Experienced software and firmware developer. Primary focus is with embedded applications in telecommunications, see my LinkedIn profile.",Denmark,https://github.com/MJoergen,http://www.linkedin.com/in/michaeljoergensen,,http://www.linkedin.com/in/michaeljoergensen,error: unhandled dyn operation: IIR_PREDEFINED_IEEE_NUMERIC_STD_UNSIGNED_TO_SLV_NAT_NAT,https://github.com/ghdl/ghdl/issues/2678,2024-06-28T13:26:02Z,email,ghdl unhandled numeric_std IIR operation (issue #2678),"Hey Michael,
+
+The unhandled IIR_PREDEFINED_IEEE_NUMERIC_STD operation you hit in ghdl (issue #2678) suggests the dynamic evaluator is missing coverage for unsigned-to-slv conversions with explicit range parameters. Did you find an alternative conversion that ghdl handles, or did this block the design entirely?
 
 Severin"
 33.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,tmeissner,T. Meissner,programming@goodcleanfun.de,,"FPGA-Engineer doing design and verification using VHDL, SystemVerilog, SVA and PSL.","Dresden, Germany",https://github.com/tmeissner,,__tmeissner__,https://git.goodcleanfun.de,GHDL bug when using generic package with string type,https://github.com/ghdl/ghdl/issues/2686,2024-07-08T12:43:55Z,email,PSL adoption for FPGA formal verification,"Hey T.,
 
-The ghdl issue you filed about generic packages with string types (issue #2686) is a language corner case that probably came up while building verification infrastructure. What made you adopt PSL specifically over SVA, given that PSL tooling support seems like the main bottleneck?
+The ghdl bug with generic packages using string types (issue #2686) hits a language corner case in VHDL generics resolution. What made you adopt PSL over SVA for formal verification, given that PSL tooling support seems like the main bottleneck?
 
 Severin"
 34.0,NO,fix entity language:VHDL,4,issue,jpt13653903/tree-sitter-vhdl,tree-sitter-vhdl,jpt13653903,User,5,C++,21,ribru17,Riley Bruins,ribru17@gmail.com,Google,,/dev/urandom,https://github.com/ribru17,,,https://rb-portfolio-site.vercel.app/,bug: library identifiers not given the proper field,https://github.com/jpt13653903/tree-sitter-vhdl/issues/27,2024-07-17T04:12:40Z,email,tree-sitter-vhdl library identifier field bug,"Hey Riley,
@@ -179,9 +179,9 @@ Postdoctoral researcher @ ETH Zürich
 The vhsnunzip issue where the buffered core returns nothing for certain inputs (issue #4) sounds like an edge case in the decompression state machine. Is the target use case accelerating data ingestion on FPGAs in a datacenter pipeline?
 
 Severin"
-37.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,EmilioPeJu,Emilio Perez Juarez,emiliopeju@gmail.com,,,,https://github.com/EmilioPeJu,,,,Type of element is ambiguous in a nested array or record position asignment with concatenation,https://github.com/ghdl/ghdl/issues/2650,2024-04-17T13:58:00Z,email,ghdl and VHDL development workflows,"Hey Emilio,
+37.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,EmilioPeJu,Emilio Perez Juarez,emiliopeju@gmail.com,,,,https://github.com/EmilioPeJu,,,,Type of element is ambiguous in a nested array or record position asignment with concatenation,https://github.com/ghdl/ghdl/issues/2650,2024-04-17T13:58:00Z,email,ghdl ambiguous type in nested array assignment (issue #2650),"Hey Emilio,
 
-With 150 contributors, ghdl has gotten big enough that coordination itself becomes a challenge. Curious whether you run into cases where changes in one part of the codebase break assumptions in another. How does the project handle that at scale?
+The type ambiguity you reported in ghdl for nested array position assignment with concatenation (issue #2650) looks like the analyzer cannot resolve the element type when multiple overloaded concatenation operators are in scope. Did you hit this in a real design, or was it a minimal reproducer from a larger pattern?
 
 Severin"
 38.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,arbrauns,Armin Brauns,armin.brauns@embedded-solutions.at,SILA Embedded Solutions,,Austria,https://github.com/arbrauns,,,,Out port default value is not used if unconnected in port mapping,https://github.com/ghdl/ghdl/issues/2566,2023-12-22T10:26:55Z,email,ghdl out port default values in port mapping,"Hey Armin,
@@ -191,7 +191,7 @@ The ghdl issue where out port default values are not used when unconnected in po
 Severin"
 39.0,NO,fix entity language:VHDL,4,issue,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,JC-LL,Jean-Christophe Le Lann,jc.lelann@gmail.com,,,"Brest, France",https://github.com/JC-LL,,,http://www.jcll.fr,Cannot upload  neorv32_exe.bin for demo CFS on NexysA7 ,https://github.com/stnolting/neorv32/issues/781,2024-01-30T18:34:19Z,email,neorv32 CFS demo upload on NexysA7,"Hey Jean-Christophe,
 
-The neorv32 issue about failing to upload neorv32_exe.bin for the CFS demo on NexysA7 (issue #781) sounds like a bootloader or serial protocol mismatch. neorv32 is one of the few RISC-V cores written in VHDL rather than Verilog or Chisel. Do you think VHDL's stronger typing actually catches bugs earlier in processor design?
+The neorv32 upload failure for the CFS demo on NexysA7 (issue #781) sounds like a bootloader or serial protocol mismatch rather than a CFS configuration problem. Did you end up isolating whether the failure was in the upload path or in the CFS initialization itself?
 
 Severin"
 40.0,NO,fix entity language:VHDL,4,pr,UVVM/UVVM,UVVM,UVVM,User,60,VHDL,423,am9417,Konsta M,konsta.maenpanen@outlook.com,Vaasan Yliopisto / University of Vaasa,"SW Developer / FPGA Engineer, M.Sc. in Electrical Engineering","Vaasa, Finland",https://github.com/am9417,,,https://stackoverflow.com/users/8063451/am9417,Bug: Generic GC_CMD_QUEUE_COUNT_MAX in AXI VVC does not update sizes of command queues,https://github.com/UVVM/UVVM/pull/198,2023-02-07T10:52:25Z,email,UVVM AXI VVC command queue bug,"Hey Konsta,
