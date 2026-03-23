@@ -720,81 +720,71 @@ Severin"
 Naming mismatches between synthesis and simulation in the GF180 PDK silently break gate-level verification — your cell renaming PR (#24) fixes exactly that. Were you hitting this in an actual tapeout flow, or did it surface during standalone simulation?
 
 Severin"
-150.0,NO,,fix module language:Verilog,4,issue,Peter-van-Tol/LiteX-CNC,LiteX-CNC,Peter-van-Tol,User,5,Verilog,78,Peter-van-Tol,,PeterTGvanTol@gmail.com,,"A enthousiast Python programmer, with some knowledge on C, C#.NET and VB.NET. ","Rotterdam, The Netherlands",https://github.com/Peter-van-Tol,,,,New module `shift_in` and `shift_out` for using shift registers,https://github.com/Peter-van-Tol/LiteX-CNC/issues/86,2024-02-19T09:37:01Z,email,LiteX-CNC shift register modules,"Hey,
+150.0,YES,,fix module language:Verilog,4,issue,Peter-van-Tol/LiteX-CNC,LiteX-CNC,Peter-van-Tol,User,5,Verilog,78,Peter-van-Tol,,PeterTGvanTol@gmail.com,,"A enthousiast Python programmer, with some knowledge on C, C#.NET and VB.NET. ","Rotterdam, The Netherlands",https://github.com/Peter-van-Tol,,,,New module `shift_in` and `shift_out` for using shift registers,https://github.com/Peter-van-Tol/LiteX-CNC/issues/86,2024-02-19T09:37:01Z,email,LiteX-CNC shift register modules,"Hey,
 
-Your issue proposing shift_in and shift_out modules for LiteX-CNC would expand the I/O capability for LinuxCNC-compatible motion control. Using LiteX to generate FPGA firmware for CNC is a practical project that fills a real gap. Curious what made you choose LiteX over a traditional FPGA approach.
-
-Severin"
-151.0,NO,,fix module language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,jhkim-pii,Jaehyun Kim,jhkim@precisioninno.com,,,,https://github.com/jhkim-pii,,,,odb: `replace_hier_module` command causes a loop in the netlist,https://github.com/The-OpenROAD-Project/OpenROAD/issues/9489,2026-02-18T11:21:19Z,email,netlist loop from replace_hier_module,"Hey Jaehyun,
-
-Your issue about replace_hier_module causing a loop in OpenROAD's netlist is a serious one — hierarchical module replacement creating circular references in the odb data structure could silently corrupt downstream optimization passes. Were you able to reproduce the loop consistently, or did it only manifest with specific hierarchy depths or module configurations?
+The shift_in and shift_out modules you proposed for LiteX-CNC (issue #86) would solve a real I/O expansion problem for motion control setups with limited FPGA pins. What made you choose LiteX over writing the shift register logic directly in Verilog?
 
 Severin"
-152.0,NO,,fix module language:Verilog,4,issue,hplp/MEMulator,MEMulator,hplp,Organization,6,Verilog,6,smosanu,Sergiu Mosanu,sm7ed@virginia.edu,@hplp,Ph.D. UVA HPLP,"Charlottesville, VA",https://github.com/smosanu,,smosanu,,Rank is not supported correctly,https://github.com/hplp/MEMulator/issues/15,2022-01-25T21:57:17Z,email,MEMulator at UVA HPLP,"Hey Sergiu,
+151.0,YES,,fix module language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,jhkim-pii,Jaehyun Kim,jhkim@precisioninno.com,,,,https://github.com/jhkim-pii,,,,odb: `replace_hier_module` command causes a loop in the netlist,https://github.com/The-OpenROAD-Project/OpenROAD/issues/9489,2026-02-18T11:21:19Z,email,netlist loop from replace_hier_module,"Hey Jaehyun,
 
-PhD at UVA's High Performance Low Power lab working on MEMulator. Memory emulation in hardware is a niche but important research area. Curious what MEMulator's target is. Emulating emerging memory technologies, or more about characterizing existing memory behavior under different workloads?
-
-Severin"
-153.0,NO,,fix module language:Verilog,4,pr,chipsalliance/yosys-f4pga-plugins,yosys-f4pga-plugins,chipsalliance,Organization,60,Verilog,83,kamilrakoczy,Kamil Rakoczy,krakoczy@antmicro.com,,,,https://github.com/kamilrakoczy,,,,systemverilog-plugin: fix handling large constants,https://github.com/chipsalliance/yosys-f4pga-plugins/pull/465,2023-03-06T12:42:24Z,email,F4PGA plugins at Antmicro,"Hey Kamil,
-
-Antmicro and yosys-f4pga-plugins. Antmicro has been one of the biggest drivers of the open source FPGA ecosystem. Curious what the internal perspective is on where F4PGA is relative to production readiness. Is it getting pulled into real customer projects, or still mostly R&D?
+The replace_hier_module loop you reported in OpenROAD (issue #9489) — hierarchical module replacement creating circular references in the odb data structure could silently corrupt downstream optimization passes. Were you able to reproduce the loop consistently, or did it only manifest with specific hierarchy depths or module configurations?
 
 Severin"
-154.0,NO,,fix module language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,hongted,Ted Hong,aj6du@arrl.net,,,,https://github.com/hongted,,,,bazel: remove the manual tag for tests marked MANUAL_FOR_BAZEL_TESTS,https://github.com/The-OpenROAD-Project/OpenROAD/issues/8610,2025-10-10T23:57:48Z,email,OpenROAD bazel test coverage,"Hey Ted,
+152.0,YES,,fix module language:Verilog,4,issue,hplp/MEMulator,MEMulator,hplp,Organization,6,Verilog,6,smosanu,Sergiu Mosanu,sm7ed@virginia.edu,@hplp,Ph.D. UVA HPLP,"Charlottesville, VA",https://github.com/smosanu,,smosanu,,Rank is not supported correctly,https://github.com/hplp/MEMulator/issues/15,2022-01-25T21:57:17Z,email,MEMulator rank support (issue #15),"Hey Sergiu,
 
-Removing manual tags from tests marked MANUAL_FOR_BAZEL_TESTS in OpenROAD is the kind of CI hygiene work that tells you a lot about where the build system friction actually lives.
-
-Curious what the story was behind those tests getting tagged manual in the first place. Was it mostly flaky tests that needed environment-specific setup, or were there deeper incompatibilities between the Bazel and CMake build paths?
+The rank support issue you reported in MEMulator (issue #15) suggests the memory controller model isn't correctly handling multi-rank DIMM addressing — that could mask real timing behavior in emulation. Was the rank selection logic producing incorrect chip-select signals, or was it a higher-level address mapping problem?
 
 Severin"
-155.0,NO,,fix module language:Verilog,4,issue,nand2mario/nestang,nestang,nand2mario,User,5,Verilog,436,uglyoldbob,Thomas Epperson,thomas.epperson@gmail.com,,,,https://github.com/uglyoldbob,,,https://www.uglyoldbob.com/,unable to build for nano 20k on linux,https://github.com/nand2mario/nestang/issues/99,2024-11-15T15:51:55Z,email,NESTang NES on Tang FPGA,"Hey Thomas,
+153.0,YES,,fix module language:Verilog,4,pr,chipsalliance/yosys-f4pga-plugins,yosys-f4pga-plugins,chipsalliance,Organization,60,Verilog,83,kamilrakoczy,Kamil Rakoczy,krakoczy@antmicro.com,,,,https://github.com/kamilrakoczy,,,,systemverilog-plugin: fix handling large constants,https://github.com/chipsalliance/yosys-f4pga-plugins/pull/465,2023-03-06T12:42:24Z,email,yosys-f4pga large constant handling,"Hey Kamil,
 
-Contributing to NESTang at 436 stars. An NES implementation targeting Tang Nano FPGAs is a smart choice since those boards are cheap and accessible. Curious what the development workflow looks like. Do you simulate in Verilator first, or is it mostly test-on-hardware for the retro cores?
-
-Severin"
-156.0,NO,,fix module language:Verilog,4,pr,scale-lab/DRUM,DRUM,scale-lab,Organization,3,Verilog,32,ysba,Yuri Arbeletche,ysba000@gmail.com,Companytec Automação e Controle Ltda.,"Electronics Engineering, Hardware Development, Embedded Software","São Leopoldo, RS",https://github.com/ysba,,,ysba.github.io,Fixed DRUM4_16_u and DRUM7_16_u,https://github.com/scale-lab/DRUM/pull/4,2023-05-04T22:58:12Z,email,DRUM approximate multiplier at Companytec,"Hey Yuri,
-
-Electronics engineering at Companytec in Brazil, contributing to DRUM approximate multipliers. Approximate computing in hardware is one of those areas where the power savings can be massive if you can tolerate the error. Curious what the target application is. ML inference, image processing, or something else?
+Your fix for large constant handling in the SystemVerilog plugin (PR #465) addresses a corner case that could silently truncate values during synthesis. Was the issue specific to certain bit widths, or was it a more general problem with how the plugin represents constants internally?
 
 Severin"
-157.0,NO,,fix module language:Verilog,4,issue,FPGAwars/FPGA-peripherals,FPGA-peripherals,FPGAwars,Organization,5,Verilog,185,newhouseb,Ben Newhouse,newhouseb@gmail.com,,,East Coast,https://github.com/newhouseb,,newhouseb,http://bennewhouse.com,UART RX Requires 2 stop bits ,https://github.com/FPGAwars/FPGA-peripherals/issues/8,2020-01-10T20:21:16Z,email,UART RX stop bit issue in FPGA-peripherals,"Hey Ben,
+154.0,YES,,fix module language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,hongted,Ted Hong,aj6du@arrl.net,,,,https://github.com/hongted,,,,bazel: remove the manual tag for tests marked MANUAL_FOR_BAZEL_TESTS,https://github.com/The-OpenROAD-Project/OpenROAD/issues/8610,2025-10-10T23:57:48Z,email,OpenROAD Bazel test tags (issue #8610),"Hey Ted,
+
+Removing the MANUAL_FOR_BAZEL_TESTS tags in OpenROAD (issue #8610) suggests those tests were originally excluded for a reason. Were they mostly flaky tests needing environment-specific setup, or were there deeper incompatibilities between the Bazel and CMake build paths?
+
+Severin"
+155.0,YES,,fix module language:Verilog,4,issue,nand2mario/nestang,nestang,nand2mario,User,5,Verilog,436,uglyoldbob,Thomas Epperson,thomas.epperson@gmail.com,,,,https://github.com/uglyoldbob,,,https://www.uglyoldbob.com/,unable to build for nano 20k on linux,https://github.com/nand2mario/nestang/issues/99,2024-11-15T15:51:55Z,email,NESTang build issue on Nano 20K,"Hey Thomas,
+
+The NESTang build failure you reported on the Tang Nano 20K under Linux (issue #99) hits a pain point with Gowin's toolchain — cross-platform support for their newer boards has been inconsistent. Was it a toolchain version issue, or something specific to the 20K target that differs from the other Tang Nano boards?
+
+Severin"
+156.0,YES,,fix module language:Verilog,4,pr,scale-lab/DRUM,DRUM,scale-lab,Organization,3,Verilog,32,ysba,Yuri Arbeletche,ysba000@gmail.com,Companytec Automação e Controle Ltda.,"Electronics Engineering, Hardware Development, Embedded Software","São Leopoldo, RS",https://github.com/ysba,,,ysba.github.io,Fixed DRUM4_16_u and DRUM7_16_u,https://github.com/scale-lab/DRUM/pull/4,2023-05-04T22:58:12Z,email,DRUM approximate multiplier fix,"Hey Yuri,
+
+Your fix on DRUM4_16_u and DRUM7_16_u (PR #4) touches the core truncation logic in the DRUM approximate multiplier. Getting the rounding stages right is critical since the whole point is controlled accuracy loss for power savings. Were the original implementations producing incorrect truncation, or was it a structural wiring issue in the rounding stages?
+
+Severin"
+157.0,YES,,fix module language:Verilog,4,issue,FPGAwars/FPGA-peripherals,FPGA-peripherals,FPGAwars,Organization,5,Verilog,185,newhouseb,Ben Newhouse,newhouseb@gmail.com,,,East Coast,https://github.com/newhouseb,,newhouseb,http://bennewhouse.com,UART RX Requires 2 stop bits ,https://github.com/FPGAwars/FPGA-peripherals/issues/8,2020-01-10T20:21:16Z,email,UART RX stop bit issue in FPGA-peripherals,"Hey Ben,
 
 Your issue about the UART RX requiring 2 stop bits in FPGA-peripherals is a classic timing margin problem — the receiver sampling window drifting enough that one stop bit isn't sufficient for reliable framing. Did you find the root cause was in the baud rate generator or the actual sampling logic?
 
 Severin"
-158.0,NO,,fix module language:Verilog,4,issue,google/CFU-Playground,CFU-Playground,google,Organization,60,Verilog,544,ggangliu,Yonggang Liu,ggang.liu@gmail.com,,"I just like studying some technology and enjoy it, even sometime I would like to share them, that's all",Chengdu. China,https://github.com/ggangliu,,,,proj_template is not working,https://github.com/google/CFU-Playground/issues/408,2022-01-10T15:24:04Z,email,CFU-Playground proj_template issue,"Hey Yonggang,
+158.0,YES,SKIP,fix module language:Verilog,4,issue,google/CFU-Playground,CFU-Playground,google,Organization,60,Verilog,544,ggangliu,Yonggang Liu,ggang.liu@gmail.com,,"I just like studying some technology and enjoy it, even sometime I would like to share them, that's all",Chengdu. China,https://github.com/ggangliu,,,,proj_template is not working,https://github.com/google/CFU-Playground/issues/408,2022-01-10T15:24:04Z,email,,
+159.0,YES,,fix module language:Verilog,4,pr,jotego/jt49,jt49,jotego,User,7,Verilog,43,frno7,Fredrik Noring,fredrik.noring@gmail.com,,,Sweden,https://github.com/frno7,,,,Fix channel and noise period of zero,https://github.com/jotego/jt49/pull/11,2025-01-02T17:32:34Z,email,JT49 channel and noise period fix,"Hey Fredrik,
 
-Your issue about the CFU-Playground project template not working is a first-experience problem that affects onboarding. Custom function units for ML acceleration on FPGAs is where a lot of edge AI is heading. Curious what models or operations you have found benefit most from custom hardware acceleration.
-
-Severin"
-159.0,NO,,fix module language:Verilog,4,pr,jotego/jt49,jt49,jotego,User,7,Verilog,43,frno7,Fredrik Noring,fredrik.noring@gmail.com,,,Sweden,https://github.com/frno7,,,,Fix channel and noise period of zero,https://github.com/jotego/jt49/pull/11,2025-01-02T17:32:34Z,email,JT49 YM2149 sound core,"Hey Fredrik,
-
-Contributing to jt49, the YM2149 sound chip implementation, from Sweden. Recreating vintage sound chips in FPGA requires getting the analog behavior right in digital. Curious whether you've worked with the actual hardware to validate the implementation, or if it's more documentation-driven.
+Your fix for channel and noise period of zero in JT49 (PR #11) addresses an edge case where the YM2149 behavior at period zero isn't well-documented — different sources disagree on whether it should produce max frequency or silence. Did you validate against actual YM2149 hardware, or was it based on die analysis documentation?
 
 Severin"
-160.0,NO,,fix module language:Verilog,4,issue,nandland/spi-slave,spi-slave,nandland,User,4,Verilog,229,zzattack,Frank Razenberg,frank@zzattack.org,,,Netherlands,https://github.com/zzattack,,,,SPI_MODE/CPHA incorrectly implemented,https://github.com/nandland/spi-slave/issues/11,2022-10-24T19:02:58Z,email,SPI slave at 229 stars,"Hey Frank,
+160.0,YES,,fix module language:Verilog,4,issue,nandland/spi-slave,spi-slave,nandland,User,4,Verilog,229,zzattack,Frank Razenberg,frank@zzattack.org,,,Netherlands,https://github.com/zzattack,,,,SPI_MODE/CPHA incorrectly implemented,https://github.com/nandland/spi-slave/issues/11,2022-10-24T19:02:58Z,email,SPI CPHA implementation in spi-slave,"Hey Frank,
 
-The nandland SPI slave at 229 stars from the Netherlands. A clean SPI implementation is one of those building blocks everyone needs but few people get right. Curious whether you wrote this for a specific project or more as a reusable peripheral for the community.
+The SPI_MODE/CPHA issue you reported on nandland's spi-slave (issue #11) is a subtle one — getting clock polarity and phase wrong means the slave samples data on the wrong edge, which can work intermittently and be painful to debug. Did you catch it through logic analyzer traces, or did it show up as corrupted data on a specific SPI mode?
 
 Severin"
-161.0,NO,,fix module language:Verilog,4,pr,intv0id/tt-ihp-TinyKalman,tt-ihp-TinyKalman,intv0id,User,3,Verilog,0,intv0id,Clément Trassoudaine,,@Google,"Software Engineer |
+161.0,YES,,fix module language:Verilog,4,pr,intv0id/tt-ihp-TinyKalman,tt-ihp-TinyKalman,intv0id,User,3,Verilog,0,intv0id,Clément Trassoudaine,,@Google,"Software Engineer |
 
 Data Science MSc (IMT Atlantique/Eurecom) |
 
-Machine Learning enthousiast",France,https://github.com/intv0id,https://www.linkedin.com/in/clement-trassoudaine/,,https://www.linkedin.com/in/clement-trassoudaine/,🔒 [security fix] Add default cases to state machines,https://github.com/intv0id/tt-ihp-TinyKalman/pull/6,2026-03-08T12:39:24Z,linkedin,,"Hey Clement, TinyKalman on IHP silicon is a cool project. Curious whether the Kalman filter design was driven by a specific application or more as a proof of concept for the IHP shuttle."
-162.0,NO,,fix module language:Verilog,4,issue,XUANTIE-RV/openc906,openc906,XUANTIE-RV,Organization,4,Verilog,391,mp-17,Matteo Perotti,mperotti17@gmail.com,,"Homo sum, humani nihil a me alienum puto.","Zürich, Switzerland",https://github.com/mp-17,,,,The vector unit seems disabled,https://github.com/XUANTIE-RV/openc906/issues/3,2021-11-05T20:00:40Z,email,OpenC906 RISC-V core,"Hey Matteo,
+Machine Learning enthousiast",France,https://github.com/intv0id,https://www.linkedin.com/in/clement-trassoudaine/,,https://www.linkedin.com/in/clement-trassoudaine/,🔒 [security fix] Add default cases to state machines,https://github.com/intv0id/tt-ihp-TinyKalman/pull/6,2026-03-08T12:39:24Z,linkedin,TinyKalman IHP state machine defaults,"Hey Clement, adding default cases to TinyKalman's state machines for IHP silicon — was the Kalman filter targeting a specific sensor fusion use case, or more a proof of concept for the shuttle?"
+162.0,YES,,fix module language:Verilog,4,issue,XUANTIE-RV/openc906,openc906,XUANTIE-RV,Organization,4,Verilog,391,mp-17,Matteo Perotti,mperotti17@gmail.com,,"Homo sum, humani nihil a me alienum puto.","Zürich, Switzerland",https://github.com/mp-17,,,,The vector unit seems disabled,https://github.com/XUANTIE-RV/openc906/issues/3,2021-11-05T20:00:40Z,email,OpenC906 vector unit (issue #3),"Hey Matteo,
 
-Contributing to the OpenC906 from Zurich. An in-order RISC-V core at 391 stars from XuanTie with only 4 contributors means deep involvement. Curious what your focus area is. The microarchitecture, the verification, or the integration with the broader XuanTie ecosystem?
-
-Severin"
-163.0,NO,,fix module language:Verilog,4,pr,efabless/caravel_mgmt_soc_litex,caravel_mgmt_soc_litex,efabless,Organization,13,Verilog,29,tmichalak,Tomasz Michalak,tmichalak@antmicro.com,@antmicro ,,"Poznan, Poland",https://github.com/tmichalak,,,,Update Litex mgmt soc,https://github.com/efabless/caravel_mgmt_soc_litex/pull/122,2023-02-03T13:44:10Z,email,Caravel SoC at Antmicro,"Hey Tomasz,
-
-Antmicro and the Caravel management SoC for Efabless shuttle runs. The open source silicon pipeline from design to tape-out is still new territory. Curious what the biggest friction point is in the flow right now. Is it the tooling, the PDK maturity, or the turnaround time?
+Your issue about the vector unit being disabled in OpenC906 (issue #3) suggests the RVV extension isn't wired up by default in the open-sourced version. Were you trying to enable it for a specific vector workload, or investigating the microarchitecture more broadly?
 
 Severin"
-164.0,NO,,fix module language:Verilog,4,issue,chipsalliance/synlig,synlig,chipsalliance,Organization,27,Verilog,229,s-holst,Stefan Holst,holstsn@gmail.com,,,,https://github.com/s-holst,,,,Segfault with certain typedef names,https://github.com/chipsalliance/synlig/issues/2647,2024-11-12T03:23:42Z,email,Synlig SystemVerilog frontend,"Hey Stefan,
+163.0,YES,SKIP,fix module language:Verilog,4,pr,efabless/caravel_mgmt_soc_litex,caravel_mgmt_soc_litex,efabless,Organization,13,Verilog,29,tmichalak,Tomasz Michalak,tmichalak@antmicro.com,@antmicro ,,"Poznan, Poland",https://github.com/tmichalak,,,,Update Litex mgmt soc,https://github.com/efabless/caravel_mgmt_soc_litex/pull/122,2023-02-03T13:44:10Z,email,,
+164.0,YES,,fix module language:Verilog,4,issue,chipsalliance/synlig,synlig,chipsalliance,Organization,27,Verilog,229,s-holst,Stefan Holst,holstsn@gmail.com,,,,https://github.com/s-holst,,,,Segfault with certain typedef names,https://github.com/chipsalliance/synlig/issues/2647,2024-11-12T03:23:42Z,email,Synlig typedef segfault (issue #2647),"Hey Stefan,
 
-Synlig at 229 stars is doing important work bridging SystemVerilog into the Yosys ecosystem. SystemVerilog support has been the biggest gap in open source synthesis for years. Curious how complete the language coverage is now. Are most real-world designs synthesizable through Synlig, or are there still major gaps?
+The segfault you reported in Synlig with certain typedef names (issue #2647) — name-dependent crashes in a SystemVerilog frontend usually point to hash collisions or missing escaping in the symbol table. Were you able to identify a pattern in which typedef names triggered it, or was it seemingly random?
 
 Severin"
 165.0,NO,,fix module language:Verilog,4,issue,CMU-SAFARI/SoftMC,SoftMC,CMU-SAFARI,Organization,4,Verilog,146,WalkerLau,,walker.lau@qq.com,,,,https://github.com/WalkerLau,,,,cable driver installation failed ,https://github.com/CMU-SAFARI/SoftMC/issues/1,2020-11-05T13:32:04Z,email,SoftMC DRAM controller,"Hey,
