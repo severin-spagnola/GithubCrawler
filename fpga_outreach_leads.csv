@@ -301,10 +301,10 @@ The ghdl issue about unhandled IIR_PREDEFINED_IEEE_NUMERIC_STD_RESIZE_UNS_NAT (i
 Severin"
 61.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,FFY00,Filipe Laíns,lains@riseup.net,,"python core dev, archlinux packager • electro-metrology, semiconductor manufacturing, and nuclear physics enthusiast",Portugal,https://github.com/FFY00,,MissingClara,https://ffy00.github.io/,Allow running the test suite in tree (without install),https://github.com/ghdl/ghdl/issues/1255,2020-04-22T15:50:34Z,email,Running ghdl test suite without install,"Hey Filipe,
 
-Your ghdl issue about running the test suite in-tree without installing (issue #1255) is a classic developer workflow friction point. Python core dev, Arch Linux packager, and semiconductor manufacturing enthusiast is a rare stack. Does the semiconductor interest extend to actually writing HDL, or is it more on the fabrication side?
+Running ghdl's test suite without installing first (issue #1255) is a packaging workflow problem — if you are building distro packages, you need in-tree testing before the install step even exists. Did the Arch packaging workflow specifically drive that issue, or was it a broader development friction?
 
 Severin"
-62.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,suoto,Andre Souto,,,,United Kingdom,https://github.com/suoto,https://www.linkedin.com/in/andremsouto,,https://www.linkedin.com/in/andremsouto,Incorrect values passed to procedures when using unconstrained subtypes,https://github.com/ghdl/ghdl/issues/1549,2020-12-25T13:51:20Z,linkedin,ghdl unconstrained subtype procedure bug,"Hey Andre, your ghdl issue about incorrect values passed to procedures with unconstrained subtypes (issue #1549) touches a real type-system edge case. Did that turn out to be a simulation bug or a spec ambiguity in how unconstrained subtypes should propagate through procedure calls?
+62.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,suoto,Andre Souto,,,,United Kingdom,https://github.com/suoto,https://www.linkedin.com/in/andremsouto,,https://www.linkedin.com/in/andremsouto,Incorrect values passed to procedures when using unconstrained subtypes,https://github.com/ghdl/ghdl/issues/1549,2020-12-25T13:51:20Z,linkedin,,"Hey Andre, your ghdl issue about incorrect values passed to procedures with unconstrained subtypes (issue #1549) touches a real type-system edge case. Did that turn out to be a simulation bug or a spec ambiguity in how unconstrained subtypes should propagate through procedure calls?
 
 Severin"
 63.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,targeted,Dmitry Dvoinikov,dmitry@targeted.org,,,,https://github.com/targeted,,,http://www.targeted.org/,Crash from a syntactically incorrect reference to entity in a separate file,https://github.com/ghdl/ghdl/issues/1490,2020-10-10T10:02:20Z,email,ghdl crash on cross-file entity references,"Hey Dmitry,
@@ -314,7 +314,7 @@ The ghdl crash from a syntactically incorrect cross-file entity reference you re
 Severin"
 64.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,benreynwar,Ben Reynwar,ben@reynwar.net,Independent,,"Tucson, Arizona, USA",https://github.com/benreynwar,,,http://www.reynwar.net/ben,Declaration of array of record subtype triggers bug.,https://github.com/ghdl/ghdl/issues/1287,2020-05-07T04:48:30Z,email,ghdl array of record subtype bug,"Hey Ben,
 
-The ghdl bug you reported where declaring an array of record subtype triggers a crash (issue #1287) sounds like a type elaboration failure. As an independent engineer, does the ghdl work tie into consulting or contract FPGA projects, or is it more of a personal deep-dive?
+The ghdl bug where declaring an array of record subtype triggers a crash (issue #1287) sounds like a type elaboration failure — the compiler cannot resolve the subtype constraint inside the array declaration. Was this from a real design that needed record arrays, or did you hit it while exploring ghdl's type support?
 
 Severin"
 65.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,forrestv,Forrest Voight,forrest.voight@gmail.com,,,USA,https://github.com/forrestv,,,http://forre.st/,"Process ""drives"" entries in a record type that it can never set when array is indexed by a non-constant expression",https://github.com/ghdl/ghdl/issues/1438,2020-08-15T05:10:51Z,email,ghdl phantom record drivers with non-constant indexing,"Hey Forrest,
@@ -322,9 +322,9 @@ Severin"
 The ghdl issue about processes driving record entries they can never set when arrays use non-constant indexing (issue #1438) is a deep simulation semantics problem. The simulator tracking phantom drivers because it cannot statically resolve the index causes false errors in correct VHDL. Was this blocking a parameterized design you were working on?
 
 Severin"
-66.0,NO,fix entity language:VHDL,4,pr,slaclab/lcls-timing-core,lcls-timing-core,slaclab,Organization,16,VHDL,0,thatweaver,Matt Weaver,weaver@slac.stanford.edu,SLAC National Accelerator Laboratory,,"Menlo Park, CA",https://github.com/thatweaver,,,,Add Complementary Trigger Feature,https://github.com/slaclab/lcls-timing-core/pull/112,2020-05-24T06:17:25Z,email,LCLS timing core at SLAC,"Hey Matt,
+66.0,NO,fix entity language:VHDL,4,pr,slaclab/lcls-timing-core,lcls-timing-core,slaclab,Organization,16,VHDL,0,thatweaver,Matt Weaver,weaver@slac.stanford.edu,SLAC National Accelerator Laboratory,,"Menlo Park, CA",https://github.com/thatweaver,,,,Add Complementary Trigger Feature,https://github.com/slaclab/lcls-timing-core/pull/112,2020-05-24T06:17:25Z,email,Complementary trigger feature in LCLS timing core,"Hey Matt,
 
-The LCLS timing core at SLAC with 16 contributors is specialized work. Timing distribution for a free-electron laser has some of the tightest requirements out there. Curious how the team handles changes to the VHDL when the timing margins are that critical. Is there a formal verification step, or is it more simulation-heavy?
+Your PR adding a complementary trigger feature to lcls-timing-core (PR #112) implies the existing trigger logic could not handle certain beam timing patterns. In a free-electron laser timing system, what failure mode does complementary triggering prevent that a single-edge trigger misses?
 
 Severin"
 67.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,bellaz89,,bellaz89@gmail.com,,Working on RF controllers,,https://github.com/bellaz89,,,,Memory leak when using vpi_iterate/vpi_scan.,https://github.com/ghdl/ghdl/issues/1233,2020-04-16T17:35:06Z,email,ghdl VPI memory leak with vpi_iterate,"Hey bellaz89,
@@ -334,26 +334,26 @@ The memory leak you reported in ghdl when using vpi_iterate/vpi_scan (issue #123
 Severin"
 68.0,NO,fix entity language:VHDL,4,pr,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,dstadelm,David Stadelmann,david.stadelmann@gmail.com,Supercomputing Systems AG,,,https://github.com/dstadelm,,,https://www.scs.ch,add possibility to configure random stalls for axi_stream,https://github.com/VUnit/vunit/pull/557,2019-10-04T14:43:12Z,email,VUnit configurable random stalls for AXI stream,"Hey David,
 
-Your PR adding configurable random stalls for axi_stream in VUnit (PR #557) is great for stress-testing backpressure handling. Is VUnit part of the verification flow at Supercomputing Systems, or is it more of a personal workflow choice you bring into projects?
+Your PR adding configurable random stalls for axi_stream in VUnit (PR #557) lets you stress-test backpressure handling without writing custom stimulus. Did you build it for a specific project at Supercomputing Systems, or was it solving a gap you kept hitting across multiple designs?
 
 Severin"
 69.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,Fatsie,Staf Verhaegen,staf@stafverhaegen.be,,"Videopac G7000->C64->A2000->HPUX@Univ->A1200->
 (Linux&AROS)->(Atlys&cryptos)->(OrConf&34C3)->Chips4Makers->...
-",,https://github.com/Fatsie,,,,synth: handle IIR_PREDEFINED_ARRAY_ARRAY_CONCAT,https://github.com/ghdl/ghdl/issues/1045,2019-11-29T13:16:47Z,email,Chips4Makers and the open silicon path,"Hey Staf,
+",,https://github.com/Fatsie,,,,synth: handle IIR_PREDEFINED_ARRAY_ARRAY_CONCAT,https://github.com/ghdl/ghdl/issues/1045,2019-11-29T13:16:47Z,email,ghdl synth array concatenation support,"Hey Staf,
 
-Your progression from retro computing through OrConf and 34C3 to Chips4Makers tells a story. Open silicon and ghdl contributions are a natural fit. Curious where Chips4Makers is headed. Are you targeting actual tape-outs, or more focused on the tooling and design side?
+The ghdl synthesis issue about handling IIR_PREDEFINED_ARRAY_ARRAY_CONCAT (issue #1045) means the synth backend was dropping a core VHDL operation — array concatenation shows up constantly in bus assembly and data packing. Is the Chips4Makers work relying on ghdl synthesis, or are you using a different open-source synth flow?
 
 Severin"
 70.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,anquegi,Antonio Juan Querol,antoniojuan.querolginer@telefonica.com,@ElevenPaths Telefónica,,Valencia,https://github.com/anquegi,,,,Undefined symbols for architecture x86_64,https://github.com/ghdl/ghdl/issues/959,2019-10-01T16:04:28Z,email,ghdl undefined symbols on x86_64,"Hey Antonio,
 
-The undefined symbols for x86_64 error you reported in ghdl (issue #959) sounds like a linker configuration problem with the code-generation backend. ElevenPaths at Telefonica does telecom security, which does not obviously overlap with VHDL. Is there a hardware security angle that connects these interests?
+The undefined symbols for x86_64 error you reported in ghdl (issue #959) sounds like a linker configuration problem with the code-generation backend. Was ghdl working on a different architecture for you, or was x86_64 the first platform you tried it on?
 
 Severin"
 71.0,NO,fix entity language:VHDL,4,issue,hdl4fpga/hdl4fpga,hdl4fpga,hdl4fpga,User,6,VHDL,185,gojimmypi,gojimmypi,gojimmypi@gmail.com,Contractor,"Gizmos! Embedded Devices @wolfSSL;
 Bachelor of Science in Electronic Engineering from @CalPoly;
-Senior Software Engineer. C/C++ SQL C# dotnet.",California,https://github.com/gojimmypi,,gojimmypi,http://gojimmypi.github.io/,Lattice Diamond for Windows crashes when opening ULX3S project,https://github.com/hdl4fpga/hdl4fpga/issues/227,2019-10-11T22:55:11Z,email,hdl4fpga and wolfSSL embedded work,"Hey gojimmypi,
+Senior Software Engineer. C/C++ SQL C# dotnet.",California,https://github.com/gojimmypi,,gojimmypi,http://gojimmypi.github.io/,Lattice Diamond for Windows crashes when opening ULX3S project,https://github.com/hdl4fpga/hdl4fpga/issues/227,2019-10-11T22:55:11Z,email,Lattice Diamond crash with ULX3S project,"Hey gojimmypi,
 
-CalPoly EE background, wolfSSL embedded security work, and contributing to hdl4fpga at 185 stars. That's a strong embedded-to-FPGA pipeline. Curious what hdl4fpga's main use case is for you. Does it tie into the security work, or is it a separate hardware project?
+The Lattice Diamond crash when opening a ULX3S project (hdl4fpga issue #227) is the kind of toolchain bug that makes the open-source FPGA flow more appealing by comparison. Did you end up switching to an open-source toolchain for the ULX3S work, or did Diamond eventually cooperate?
 
 Severin"
 72.0,NO,fix entity language:VHDL,4,pr,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,pepijndevos,Pepijn de Vos,(apply str (interleave ppjdvsgalcm eineo@mi.o)),,,"Loenen, Gelderland, Netherlands",https://github.com/pepijndevos,,,pepijndevos.nl,Synth: Support for constants [WIP],https://github.com/ghdl/ghdl/pull/815,2019-05-05T09:10:54Z,email,ghdl synth support for constants,"Hey Pepijn,
@@ -363,15 +363,15 @@ Your WIP PR adding constant support to ghdl synthesis (PR #815) addresses a fund
 Severin"
 73.0,NO,fix entity language:VHDL,4,issue,hdl4fpga/hdl4fpga,hdl4fpga,hdl4fpga,User,6,VHDL,185,hdl4fpga,Miguel Angel,hdl4fpga@gmail.com,,,"Buenos Aires, Argentina",https://github.com/hdl4fpga,,HDL4FPGA,https://discord.gg/66M5QX4,Merging trigger downsampler and capture system,https://github.com/hdl4fpga/hdl4fpga/issues/165,2019-07-28T19:32:22Z,email,hdl4fpga trigger downsampler and capture merge,"Hey Miguel,
 
-Merging the trigger downsampler and capture system in hdl4fpga (issue #165) sounds like a significant architectural change. With 185 stars and 6 contributors, what is the primary use case people are using hdl4fpga for, prototyping or production designs?
+Merging the trigger downsampler and capture system in hdl4fpga (issue #165) is an architectural consolidation that affects how data gets sampled and stored. Did combining them simplify the timing constraints, or did it introduce new challenges around trigger latency to first capture?
 
 Severin"
-74.0,NO,fix entity language:VHDL,4,pr,t-crest/patmos,patmos,t-crest,Organization,90,VHDL,153,egk696,Eleftherios Kyriakakis,egk696@hotmail.com,Silicom Denmark,"Former Java developer to real-time systems PhD candidate, to ASIC engineer and currently an FPGA developer.","Copenhagen, Denmark ",https://github.com/egk696,,,,Commiting PTP library demo,https://github.com/t-crest/patmos/pull/35,2018-05-01T08:55:15Z,email,Patmos and the path from Java to FPGA,"Hey Eleftherios,
+74.0,NO,fix entity language:VHDL,4,pr,t-crest/patmos,patmos,t-crest,Organization,90,VHDL,153,egk696,Eleftherios Kyriakakis,egk696@hotmail.com,Silicom Denmark,"Former Java developer to real-time systems PhD candidate, to ASIC engineer and currently an FPGA developer.","Copenhagen, Denmark ",https://github.com/egk696,,,,Commiting PTP library demo,https://github.com/t-crest/patmos/pull/35,2018-05-01T08:55:15Z,email,PTP library demo on Patmos,"Hey Eleftherios,
 
-Java developer to real-time systems PhD to ASIC to FPGA at Silicom Denmark is one of the more interesting career arcs I have seen. Contributing to Patmos at 153 stars too. Curious how the real-time systems research influences your FPGA work at Silicom. Does the time-predictable architecture from Patmos show up in commercial designs?
+Your PTP library demo on Patmos (PR #35) brings precision time protocol onto a time-predictable processor — the deterministic execution model should make PTP timestamping more accurate than on conventional cores. Did the Patmos architecture measurably improve PTP precision compared to a standard soft core?
 
 Severin"
-75.0,NO,fix entity language:VHDL,4,issue,salmansamie/DSD-E,DSD-E,salmansamie,User,6,VHDL,0,Nnadozie,Nnadozie Okeke,,Fronte.io,"I write high quality code, and deploy it to the cloud in rock-solid environments.",Remote,https://github.com/Nnadozie, linkedin.com/in/nnadozie-okeke,dozieokk, linkedin.com/in/nnadozie-okeke,corrections needed for lab3 universal shiftreg and counter,https://github.com/salmansamie/DSD-E/issues/13,2017-11-14T23:28:07Z,linkedin,DSD-E shift register and counter corrections,"Hey Nnadozie, your corrections for the universal shift register and counter in DSD-E (issue #13) are the kind of fixes that help future students avoid the same pitfalls. At Fronte.io, how does the hardware design perspective from your EE coursework connect to your cloud deployment work?
+75.0,NO,fix entity language:VHDL,4,issue,salmansamie/DSD-E,DSD-E,salmansamie,User,6,VHDL,0,Nnadozie,Nnadozie Okeke,,Fronte.io,"I write high quality code, and deploy it to the cloud in rock-solid environments.",Remote,https://github.com/Nnadozie, linkedin.com/in/nnadozie-okeke,dozieokk, linkedin.com/in/nnadozie-okeke,corrections needed for lab3 universal shiftreg and counter,https://github.com/salmansamie/DSD-E/issues/13,2017-11-14T23:28:07Z,linkedin,,"Hey Nnadozie, the universal shift register and counter corrections in DSD-E (issue #13) — were those bugs you hit during coursework, or were you reviewing the lab code for a different reason?
 
 Severin"
 76.0,NO,fix entity language:VHDL,4,issue,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,dave2pi,Dave O'Brien,dave.2pi@gmail.com,,,UK,https://github.com/dave2pi,,,,"Modelsim: Invalid value for generic ""output_path"".  Not using this value.",https://github.com/VUnit/vunit/issues/280,2017-10-26T09:24:10Z,email,Modelsim generic output_path rejection in VUnit,"Hey Dave,
@@ -381,13 +381,13 @@ The VUnit issue you filed about Modelsim rejecting the generic output_path value
 Severin"
 77.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,jbnote,Jean-Baptiste Note,jbnote@gmail.com,criteo,,"Paris, France",https://github.com/jbnote,,,,Process defined in generate body accessing signal in generate clause crashes GHDL,https://github.com/ghdl/ghdl/issues/155,2016-09-27T20:32:14Z,email,ghdl crash with process in generate body,"Hey Jean-Baptiste,
 
-The ghdl crash you reported when a process in a generate body accesses a signal in the generate clause (issue #155) is a scoping bug in the elaboration engine. Criteo does serious data processing at scale. Is there an FPGA acceleration angle at Criteo that connects to this work?
+The ghdl crash when a process in a generate body accesses a signal in the generate clause (issue #155) is a scoping bug in the elaboration engine — the signal should be visible but the compiler loses track of it across the generate boundary. Were you using generate statements heavily in that design?
 
 Severin"
 78.0,SKIP,fix entity language:VHDL,4,issue,DerekYu177/425G14,425G14,DerekYu177,User,3,VHDL,1,DerekYu177,Derek Y,derek.yu.lind@gmail.com,@Shopify @ressystlab ,,Montreal,https://github.com/DerekYu177,,,,TODO,https://github.com/DerekYu177/425G14/issues/16,2017-03-12T05:31:26Z,email,,
-79.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl-yosys-plugin,ghdl-yosys-plugin,ghdl,Organization,20,VHDL,356,Obijuan,Juan Gonzalez-Gomez,obijuan.cube@gmail.com,URJC,Hola!Soy Obijuan! I'm an assitant professor at the Engineering school of the  URJC University.  I really believe in the opensource spirit of sharing information,Madrid (Spain),https://github.com/Obijuan,,Obijuan_cube,https://obijuan.github.io/,Crash when an vector bit with index different than 0 is assigned to a signal,https://github.com/ghdl/ghdl-yosys-plugin/issues/6,2017-02-14T19:58:31Z,email,Open source FPGA at URJC,"Hey Juan,
+79.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl-yosys-plugin,ghdl-yosys-plugin,ghdl,Organization,20,VHDL,356,Obijuan,Juan Gonzalez-Gomez,obijuan.cube@gmail.com,URJC,Hola!Soy Obijuan! I'm an assitant professor at the Engineering school of the  URJC University.  I really believe in the opensource spirit of sharing information,Madrid (Spain),https://github.com/Obijuan,,Obijuan_cube,https://obijuan.github.io/,Crash when an vector bit with index different than 0 is assigned to a signal,https://github.com/ghdl/ghdl-yosys-plugin/issues/6,2017-02-14T19:58:31Z,email,ghdl-yosys-plugin crash on non-zero vector bit assignment,"Hey Juan,
 
-An assistant professor at URJC who genuinely believes in open source, contributing to the ghdl-yosys-plugin. Curious how you use open source FPGA tooling in your teaching. Do students actually use ghdl and yosys in coursework, or is it still mostly Vivado and Quartus in the classroom?
+The ghdl-yosys-plugin crash when assigning a vector bit with a non-zero index to a signal (issue #6) suggests the synthesis bridge was only handling the base-case indexing. Was this from a design you were running through the full open-source flow (ghdl to yosys to nextpnr), or were you specifically testing the plugin?
 
 Severin"
 80.0,NO,fix entity language:VHDL,4,pr,LaNoC-UFC/NoCThor,NoCThor,LaNoC-UFC,Organization,6,VHDL,1,rafaelgmota,Rafael Mota,faelmota@gmail.com,,,,https://github.com/rafaelgmota,,,,Create of circular fifo buffer entity,https://github.com/LaNoC-UFC/NoCThor/pull/34,2016-10-21T18:25:08Z,email,Circular FIFO in NoCThor,"Hey Rafael,
@@ -397,9 +397,7 @@ Circular FIFOs in NoC routers are deceptively tricky once you need backpressure 
 Severin"
 81.0,NO,fix entity language:VHDL,4,pr,LaNoC-UFC/NoCThor,NoCThor,LaNoC-UFC,Organization,6,VHDL,1,jmferreiratech,JM Ferreira,marcelo@trincatech.com.br,@TrincaTech ,Software Engineer,Brazil,https://github.com/jmferreiratech,,jmFerreiraTech,,Fixes compilation flags,https://github.com/LaNoC-UFC/NoCThor/pull/58,2016-10-31T17:58:57Z,email,NoCThor compilation flags,"Hey JM,
 
-Fixing compilation flags on a Network-on-Chip simulator like NoCThor suggests the build was probably silently accepting non-standard VHDL constructs. NoC research has so many moving parts between routing, arbitration, and flow control.
-
-At TrincaTech, how do you approach validating NoC architectures when the design space (topology, buffer depth, routing algorithm) is so wide?
+Fixing compilation flags on NoCThor (PR #58) suggests the build was probably silently accepting non-standard VHDL constructs that would fail on stricter tools. What simulator or synthesis tool exposed the flag issues — was it a move from one toolchain to another?
 
 Severin"
 82.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,clynamen,Vincenzo Comito,clynamen@gmail.com,,,Turin,https://github.com/clynamen,,,http://clynamen.github.io/,Compiler crash on syntax error,https://github.com/ghdl/ghdl/issues/144,2016-08-21T21:54:49Z,email,ghdl compiler crash on syntax error,"Hey Vincenzo,
@@ -407,24 +405,24 @@ Severin"
 The ghdl compiler crash on syntax error you reported (issue #144) is a parser robustness issue where malformed input should produce a diagnostic, not a crash. Was this from a typo during normal development, or were you specifically testing ghdl's error recovery?
 
 Severin"
-83.0,NO,fix entity language:VHDL,4,issue,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,jarickc,Jarick Cammarato,jarickc@gmail.com,,,,https://github.com/jarickc,,,jarcamm.com,Using add_vivado_ip with Zynq,https://github.com/VUnit/vunit/issues/172,2016-05-23T17:47:04Z,email,VUnit framework contributions,"Hey Jarick,
+83.0,NO,fix entity language:VHDL,4,issue,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,jarickc,Jarick Cammarato,jarickc@gmail.com,,,,https://github.com/jarickc,,,jarcamm.com,Using add_vivado_ip with Zynq,https://github.com/VUnit/vunit/issues/172,2016-05-23T17:47:04Z,email,VUnit add_vivado_ip with Zynq,"Hey Jarick,
 
-Contributing to VUnit at 820 stars. VUnit has become the standard VHDL/SystemVerilog unit testing framework. Curious what brought you to the project. Are you using it professionally for verification, or was it a community contribution?
-
-Severin"
-84.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,m42uko,Markus,markus@notsyncing.net,,"Geek, love electronics and computers, fan of Japanese culture.",Germany,https://github.com/m42uko,,,https://notsyncing.net,Big output file with Adesto device library and crash of GtkWave,https://github.com/ghdl/ghdl/issues/71,2016-05-20T18:09:40Z,email,Electronics and ghdl,"Hey Markus,
-
-Electronics enthusiast contributing to ghdl. Curious whether the contribution comes from a professional FPGA workflow or more from personal hardware projects. What was the trigger that took you from using ghdl to contributing to it?
+Using VUnit's add_vivado_ip with Zynq (issue #172) hits the boundary where the open-source verification framework meets Xilinx's proprietary IP catalog. Did you get VUnit working smoothly with Zynq IP blocks, or did the Vivado integration stay painful?
 
 Severin"
-85.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,WayneBooth,Wayne Booth,wbooth@clearscene.net,@MasterCard - Payment Gateway Services,,"Scotland, UK",https://github.com/WayneBooth,,,http://WayneBooth.me/,Error compiling,https://github.com/ghdl/ghdl/issues/13,2016-01-05T20:47:36Z,email,ghdl compilation error,"Hey Wayne,
+84.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,m42uko,Markus,markus@notsyncing.net,,"Geek, love electronics and computers, fan of Japanese culture.",Germany,https://github.com/m42uko,,,https://notsyncing.net,Big output file with Adesto device library and crash of GtkWave,https://github.com/ghdl/ghdl/issues/71,2016-05-20T18:09:40Z,email,ghdl large output file crashing GtkWave,"Hey Markus,
 
-Your early ghdl compilation error report (issue #13) was one of the first issues on the project. MasterCard Payment Gateway Services and VHDL is an unusual combination. Is there a hardware acceleration angle in payment processing, or is the VHDL work a completely separate interest?
+The ghdl issue where a big output file from the Adesto device library crashes GtkWave (issue #71) — was the VCD file genuinely huge because the Adesto library has deep signal hierarchies, or was ghdl generating redundant data that inflated the file?
+
+Severin"
+85.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,WayneBooth,Wayne Booth,wbooth@clearscene.net,@MasterCard - Payment Gateway Services,,"Scotland, UK",https://github.com/WayneBooth,,,http://WayneBooth.me/,Error compiling,https://github.com/ghdl/ghdl/issues/13,2016-01-05T20:47:36Z,email,ghdl compilation error (issue #13),"Hey Wayne,
+
+Your ghdl compilation error (issue #13) was filed when the project had barely launched — early bug reports shape how a tool handles edge cases for years. What were you building in VHDL at the time?
 
 Severin"
 86.0,NO,fix entity language:VHDL,4,issue,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,vermaete,Jan Vermaete,jan.vermaete@gmail.com,,,Belgium,https://github.com/vermaete,,,,generic packages,https://github.com/VUnit/vunit/issues/85,2015-10-29T10:26:26Z,email,VUnit generic packages support,"Hey Jan,
 
-The generic packages issue you filed on VUnit (issue #85) was early in the project's life. VHDL-2008 generics are powerful but tool support was patchy back then. Is VUnit your primary verification framework now, or does it supplement something else in your workflow?
+The generic packages issue you filed on VUnit (issue #85) was early in the project — VHDL-2008 generic packages require the framework to handle a much more flexible type system under the hood. Did VUnit end up supporting your use case, or did you have to work around it?
 
 Severin"
 87.0,NO,fix entity language:VHDL,4,pr,nickg/nvc,nvc,nickg,User,60,C,782,hiyuh,KIMURA Masaru,hiyuh.root@gmail.com,,,Imperial Kyoto,https://github.com/hiyuh,,,http://theoutsideofparr.blogspot.com/,Fix for type conversion.,https://github.com/nickg/nvc/pull/50,2014-02-25T06:21:22Z,email,NVC type conversion fix,"Hey Masaru,
@@ -432,14 +430,14 @@ Severin"
 Your fix for type conversion in nvc (PR #50) was an early contribution to what is now a 782-star VHDL simulator. What drew you to nvc over ghdl as the project to contribute to?
 
 Severin"
-88.0,NO,fix entity language:VHDL,4,issue,lerwys/bpm-sw-old-backup,bpm-sw-old-backup,lerwys,User,3,VHDL,3,lerwys,Lucas Russo,lerwys@gmail.com,"LBNL, Lawrence Berkeley National Laboratory",,"Berkeley, CA, USA",https://github.com/lerwys,,,,[fmc-adc-common] Fix BUFIO/BUFR/BUFG clk generation ,https://github.com/lerwys/bpm-sw-old-backup/issues/25,2013-08-30T04:14:55Z,email,BPM firmware at LBNL,"Hey Lucas,
+88.0,NO,fix entity language:VHDL,4,issue,lerwys/bpm-sw-old-backup,bpm-sw-old-backup,lerwys,User,3,VHDL,3,lerwys,Lucas Russo,lerwys@gmail.com,"LBNL, Lawrence Berkeley National Laboratory",,"Berkeley, CA, USA",https://github.com/lerwys,,,,[fmc-adc-common] Fix BUFIO/BUFR/BUFG clk generation ,https://github.com/lerwys/bpm-sw-old-backup/issues/25,2013-08-30T04:14:55Z,email,BUFIO/BUFR/BUFG clock generation fix in BPM firmware,"Hey Lucas,
 
-Beam position monitor firmware at Lawrence Berkeley National Lab. Particle accelerator instrumentation has some of the most demanding FPGA timing requirements. Curious how the firmware development workflow looks at a national lab. Do you have formal verification in the loop, or is it mostly simulation-driven?
+The BUFIO/BUFR/BUFG clock generation fix in fmc-adc-common (issue #25) touches Xilinx clock primitive selection, which directly affects jitter and timing closure. Was the original clock tree failing timing, or was it functionally wrong — routing through BUFG when the ADC sampling needed the lower-latency BUFR path?
 
 Severin"
-89.0,NO,fix entity language:Verilog,4,pr,yuri-panchul/basics-graphics-music,basics-graphics-music,yuri-panchul,User,60,Verilog,158,anton-malakhov,Anton Malakhov,Anton.A.Malakhov@gmail.com,,,,https://github.com/anton-malakhov,http://linkedin.com/in/antonmalakhov/,,http://linkedin.com/in/antonmalakhov/,Use any key to reset FSMs for melody recogintion,https://github.com/yuri-panchul/basics-graphics-music/pull/209,2024-12-23T14:46:22Z,email,basics-graphics-music Verilog project,"Hey Anton,
+89.0,NO,fix entity language:Verilog,4,pr,yuri-panchul/basics-graphics-music,basics-graphics-music,yuri-panchul,User,60,Verilog,158,anton-malakhov,Anton Malakhov,Anton.A.Malakhov@gmail.com,,,,https://github.com/anton-malakhov,http://linkedin.com/in/antonmalakhov/,,http://linkedin.com/in/antonmalakhov/,Use any key to reset FSMs for melody recogintion,https://github.com/yuri-panchul/basics-graphics-music/pull/209,2024-12-23T14:46:22Z,email,FSM reset for melody recognition in basics-graphics-music,"Hey Anton,
 
-The basics-graphics-music repo at 158 stars with 60 contributors is a big educational Verilog project. Curious what the teaching approach looks like. Is this used in a formal course, or more of a community-driven learning resource? Making FPGA accessible to beginners is hard to do well.
+Your PR changing FSM reset to use any key for the melody recognition module (PR #209) is a UX fix — having to find the right reset key breaks the flow when you are demoing. Was the original reset tied to a specific board button, or was it a keyboard scancode issue?
 
 Severin"
 90.0,NO,fix entity language:Verilog,4,pr,bittide/bittide-hardware,bittide-hardware,bittide,Organization,17,Haskell,25,kleinreact,Felix Klein,felix@qbaylogic.com,@QBayLogic,,Germany,https://github.com/kleinreact,,,https://qbaylogic.com/company,Add stability checker to the simulation,https://github.com/bittide/bittide-hardware/pull/245,2023-01-30T13:26:32Z,email,Bittide hardware at QBayLogic,"Hey Felix,
