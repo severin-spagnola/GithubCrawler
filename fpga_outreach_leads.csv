@@ -445,73 +445,73 @@ Severin"
 QBayLogic and bittide-hardware in Haskell is a unique approach. Using Clash to generate hardware from Haskell is one of those ideas that seems either brilliant or insane depending on who you ask. Curious what the practical experience has been. Does the type system actually catch hardware bugs that VHDL or Verilog would miss?
 
 Severin"
-91.0,NO,,fix entity language:Verilog,4,pr,YosysHQ/apicula,apicula,YosysHQ,Organization,60,Verilog,647,trabucayre,Gwenhael Goavec-Merou,gwenhael.goavec-merou@trabucayre.com,,,France,https://github.com/trabucayre,,GwenhaelG,,examples: fix the number of leds according to the targeted board,https://github.com/YosysHQ/apicula/pull/33,2021-07-05T06:06:20Z,email,Apicula LED example fix for board targeting,"Hey Gwenhael,
+91.0,YES,,fix entity language:Verilog,4,pr,YosysHQ/apicula,apicula,YosysHQ,Organization,60,Verilog,647,trabucayre,Gwenhael Goavec-Merou,gwenhael.goavec-merou@trabucayre.com,,,France,https://github.com/trabucayre,,GwenhaelG,,examples: fix the number of leds according to the targeted board,https://github.com/YosysHQ/apicula/pull/33,2021-07-05T06:06:20Z,email,Apicula LED example fix for board targeting,"Hey Gwenhael,
 
 Your Apicula PR fixing the LED count per target board is the kind of detail that trips up anyone porting examples across ECP5 boards. Was the mismatch causing silent failures where extra LEDs just mapped to nonexistent pins, or did nextpnr actually error out?
 
 Severin
 "
-92.0,NO,,fix entity language:SystemVerilog,4,issue,MiSTer-devel/NES_MiSTer,NES_MiSTer,MiSTer-devel,Organization,25,SystemVerilog,194,loglow,Daniel Gilbert,loglow@gmail.com,Tall Dog Electronics,,"Easthampton, MA",https://github.com/loglow,,,http://danielbgilbert.com,Stand-alone PPU adaptation,https://github.com/MiSTer-devel/NES_MiSTer/issues/337,2023-01-05T22:53:38Z,email,NES MiSTer stand-alone PPU adaptation,"Hey Daniel,
+92.0,YES,,fix entity language:SystemVerilog,4,issue,MiSTer-devel/NES_MiSTer,NES_MiSTer,MiSTer-devel,Organization,25,SystemVerilog,194,loglow,Daniel Gilbert,loglow@gmail.com,Tall Dog Electronics,,"Easthampton, MA",https://github.com/loglow,,,http://danielbgilbert.com,Stand-alone PPU adaptation,https://github.com/MiSTer-devel/NES_MiSTer/issues/337,2023-01-05T22:53:38Z,email,NES MiSTer stand-alone PPU adaptation,"Hey Daniel,
 
 The stand-alone PPU adaptation you proposed for NES_MiSTer is a non-trivial separation given how tightly coupled the PPU and CPU buses are in the original core. Did you need to stub out the CPU-side register interface entirely, or were you able to keep the existing bus arbitration intact?
 
 Severin
 "
-93.0,NO,,fix entity language:SystemVerilog,4,pr,pulp-platform/snitch_cluster,snitch_cluster,pulp-platform,Organization,60,C,124,zero9178,Markus Böck,markus.boeck02@gmail.com,ETH Zurich,Having fun with MLIR and LLVM,Zurich,https://github.com/zero9178,,,https://zero9178.github.io/,sw: Adjust `*_decls` headers for usability in downstream projects,https://github.com/pulp-platform/snitch_cluster/pull/132,2024-04-22T18:19:23Z,email,Snitch cluster downstream header usability,"Hey Markus,
+93.0,YES,,fix entity language:SystemVerilog,4,pr,pulp-platform/snitch_cluster,snitch_cluster,pulp-platform,Organization,60,C,124,zero9178,Markus Böck,markus.boeck02@gmail.com,ETH Zurich,Having fun with MLIR and LLVM,Zurich,https://github.com/zero9178,,,https://zero9178.github.io/,sw: Adjust `*_decls` headers for usability in downstream projects,https://github.com/pulp-platform/snitch_cluster/pull/132,2024-04-22T18:19:23Z,email,Snitch cluster downstream header usability,"Hey Markus,
 
 Your PR adjusting the snitch_cluster decl headers for downstream usability suggests the existing includes were pulling in internal dependencies that broke out-of-tree builds. Were downstream projects hitting missing-symbol errors at link time, or was it compile-time include ordering issues?
 
 Severin
 "
-94.0,NO,,fix entity language:SystemVerilog,4,pr,HoneyGol-Microsystems/vesp-alpha,vesp-alpha,HoneyGol-Microsystems,Organization,3,SystemVerilog,3,andreondra,Ondřej Golasowski,golasowski.o@gmail.com,Tropic Square,,Prague,https://github.com/andreondra,,,ondrej.golasowski.cz,RISC-V tests top entity,https://github.com/HoneyGol-Microsystems/vesp-alpha/pull/12,2023-08-15T10:13:04Z,email,vesp-alpha RISC-V test top entity,"Hey Ondřej,
+94.0,YES,,fix entity language:SystemVerilog,4,pr,HoneyGol-Microsystems/vesp-alpha,vesp-alpha,HoneyGol-Microsystems,Organization,3,SystemVerilog,3,andreondra,Ondřej Golasowski,golasowski.o@gmail.com,Tropic Square,,Prague,https://github.com/andreondra,,,ondrej.golasowski.cz,RISC-V tests top entity,https://github.com/HoneyGol-Microsystems/vesp-alpha/pull/12,2023-08-15T10:13:04Z,email,vesp-alpha RISC-V test top entity,"Hey Ondřej,
 
 The RISC-V test top entity PR for vesp-alpha looks like it sets up a proper testbench wrapper for the processor core. Are you running the RISC-V compliance tests against it, or is this more of a custom functional verification setup for HoneyGol's pipeline?
 
 Severin
 "
-95.0,NO,,fix entity language:SystemVerilog,4,issue,openhwgroup/cvw,cvw,openhwgroup,Organization,120,SystemVerilog,499,rosethompson,Rose Thompson,rose@rosethompson.net,Oklahoma State University,Ph.D. student at Oklahoma State University,"Stillwater, OK",https://github.com/rosethompson,,,,ImperasDV Generates Load Page Fault in Linux Boot,https://github.com/openhwgroup/cvw/issues/225,2023-04-10T03:59:18Z,email,ImperasDV load page fault during CVW Linux boot,"Hey Rose,
+95.0,YES,,fix entity language:SystemVerilog,4,issue,openhwgroup/cvw,cvw,openhwgroup,Organization,120,SystemVerilog,499,rosethompson,Rose Thompson,rose@rosethompson.net,Oklahoma State University,Ph.D. student at Oklahoma State University,"Stillwater, OK",https://github.com/rosethompson,,,,ImperasDV Generates Load Page Fault in Linux Boot,https://github.com/openhwgroup/cvw/issues/225,2023-04-10T03:59:18Z,email,ImperasDV load page fault during CVW Linux boot,"Hey Rose,
 
 The load page fault ImperasDV generates during CVW Linux boot sounds like it could be a TLB refill race or a PTE access bit not getting set before the reference model checks it. Did the fault show up consistently at the same virtual address, or was it intermittent across boots?
 
 Severin
 "
-96.0,NO,,fix entity language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,matutem,Matute,matute@zerorisc.com,,"I have been a Synopsys fellow, started a couple of companies, and architected u-processors at SunMicro. I have a Physics Ph.D.","Berkeley, CA",https://github.com/matutem,,,,[rtl/clkmgr] Remove clk_io_div4_peri glitches,https://github.com/lowRISC/opentitan/issues/7524,2021-07-29T16:05:35Z,email,OpenTitan clk_io_div4_peri glitch removal,"Hey Matute,
+96.0,YES,,fix entity language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,matutem,Matute,matute@zerorisc.com,,"I have been a Synopsys fellow, started a couple of companies, and architected u-processors at SunMicro. I have a Physics Ph.D.","Berkeley, CA",https://github.com/matutem,,,,[rtl/clkmgr] Remove clk_io_div4_peri glitches,https://github.com/lowRISC/opentitan/issues/7524,2021-07-29T16:05:35Z,email,OpenTitan clk_io_div4_peri glitch removal,"Hey Matute,
 
 The clk_io_div4_peri glitch issue you filed on OpenTitan's clock manager is subtle — divided clocks are notorious for glitching during mux switches. Was this showing up as spurious peripheral resets in silicon, or did you catch it in simulation first?
 
 Severin
 "
-97.0,NO,,fix entity language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,rswarbrick,Rupert Swarbrick,rswarbrick@gmail.com,lowRISC,,"Cambridge, UK",https://github.com/rswarbrick,,,,[reggen] Could we move the CDC from prim_subreg_async to a register-level class?,https://github.com/lowRISC/opentitan/issues/7810,2021-08-18T16:10:23Z,email,Moving CDC out of prim_subreg_async in OpenTitan,"Hey Rupert,
+97.0,YES,,fix entity language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,rswarbrick,Rupert Swarbrick,rswarbrick@gmail.com,lowRISC,,"Cambridge, UK",https://github.com/rswarbrick,,,,[reggen] Could we move the CDC from prim_subreg_async to a register-level class?,https://github.com/lowRISC/opentitan/issues/7810,2021-08-18T16:10:23Z,email,Moving CDC out of prim_subreg_async in OpenTitan,"Hey Rupert,
 
 Your proposal to move the CDC logic out of prim_subreg_async into a register-level class makes sense for keeping synchronizer placement explicit. Was the main driver that downstream tools were double-inserting synchronizers, or was it more about making CDC paths visible to formal checks?
 
 Severin
 "
-98.0,NO,,fix entity language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,svenka3,Srinivasan Venkataramanan,svenka3@gmail.com,VerifWorks,,,https://github.com/svenka3,,sricvc,http://www.verifworks.com,dvsim: QSTA support - sim_tops needs to be moved to run_opts,https://github.com/lowRISC/opentitan/issues/4340,2020-11-30T18:11:50Z,email,OpenTitan dvsim QSTA support and sim_tops,"Hey Srinivasan,
+98.0,YES,,fix entity language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,svenka3,Srinivasan Venkataramanan,svenka3@gmail.com,VerifWorks,,,https://github.com/svenka3,,sricvc,http://www.verifworks.com,dvsim: QSTA support - sim_tops needs to be moved to run_opts,https://github.com/lowRISC/opentitan/issues/4340,2020-11-30T18:11:50Z,email,OpenTitan dvsim QSTA support and sim_tops,"Hey Srinivasan,
 
 The dvsim issue about moving sim_tops to run_opts for QSTA support suggests the current config hierarchy doesn't cleanly separate synthesis targets from simulation targets. Was QSTA choking on the sim-only top modules, or was it a flow ordering problem where sim_tops got parsed too early?
 
 Severin
 "
-99.0,SKIP,SKIP,fix module language:VHDL,4,commit,bvaughn/react-highlight.js,react-highlight.js,bvaughn,User,5,JavaScript,108,bvaughn,Brian Vaughn,brian.david.vaughn@gmail.com,Citadel,"Turning coffee into software.
+99.0,YES,SKIP,fix module language:VHDL,4,commit,bvaughn/react-highlight.js,react-highlight.js,bvaughn,User,5,JavaScript,108,bvaughn,Brian Vaughn,brian.david.vaughn@gmail.com,Citadel,"Turning coffee into software.
 
 Formerly developer tooling at @replayio, React core at @facebook, and @google.","Brooklyn, NY",https://github.com/bvaughn,,,https://bvaughn.me,"Added a test and patched up a previous one that had broken without my noticing due to the failing
 > react-highlight.js@1.0.2 test /Users/brianvaughn/Documents/git/react-highlight.js
 > NODE_ENV=test ka",https://github.com/bvaughn/react-highlight.js/commit/7c979f1dd01e77ef427beefdb1685fbb1b983aec,2016-05-07T09:42:37.000-07:00,email,,
-100.0,NO,,fix module language:VHDL,4,pr,kevinpt/vhdl-extras,vhdl-extras,kevinpt,User,4,VHDL,194,oswald3141,Andrei Smoliakov,main@avsm.me,,"FPGA developer. VHDL, Verilog and a bit of C++.",Finland,https://github.com/oswald3141,,,,Fix dependency bug in fir_filter,https://github.com/kevinpt/vhdl-extras/pull/16,2023-06-28T18:29:55Z,email,vhdl-extras fir_filter dependency fix,"Hey Andrei,
+100.0,YES,,fix module language:VHDL,4,pr,kevinpt/vhdl-extras,vhdl-extras,kevinpt,User,4,VHDL,194,oswald3141,Andrei Smoliakov,main@avsm.me,,"FPGA developer. VHDL, Verilog and a bit of C++.",Finland,https://github.com/oswald3141,,,,Fix dependency bug in fir_filter,https://github.com/kevinpt/vhdl-extras/pull/16,2023-06-28T18:29:55Z,email,vhdl-extras fir_filter dependency fix,"Hey Andrei,
 
 The dependency bug you fixed in vhdl-extras' fir_filter is the kind of issue that hides until someone tries a clean build. Was the missing dependency causing an elaboration failure, or was it a subtler simulation mismatch where signals stayed uninitialized?
 
 Severin
 "
-101.0,SKIP,SKIP,fix module language:VHDL,4,issue,t-crest/patmos,patmos,t-crest,Organization,90,VHDL,153,Emoun,Emad Jacob Maroun,emoun.open@gmail.com,,,,https://github.com/Emoun,,,,Project cleanup master issue,https://github.com/t-crest/patmos/issues/145,2024-02-06T13:44:28Z,email,,
-102.0,NO,,fix module language:VHDL,4,issue,brnorris03/Orio,Orio,brnorris03,User,29,VHDL,37,mahdifani14,Mahdi Fanidisfani,Mahdifani1369@gmail.com,,Co-founder & Advisor,"Amsterdam, Netherlands",https://github.com/mahdifani14,,MahdiFani14,,Problem with header files and static type of functions,https://github.com/brnorris03/Orio/issues/12,2017-04-30T11:13:46Z,email,Orio autotuning header file issues,"Hey Mahdi,
+101.0,YES,SKIP,fix module language:VHDL,4,issue,t-crest/patmos,patmos,t-crest,Organization,90,VHDL,153,Emoun,Emad Jacob Maroun,emoun.open@gmail.com,,,,https://github.com/Emoun,,,,Project cleanup master issue,https://github.com/t-crest/patmos/issues/145,2024-02-06T13:44:28Z,email,,
+102.0,YES,,fix module language:VHDL,4,issue,brnorris03/Orio,Orio,brnorris03,User,29,VHDL,37,mahdifani14,Mahdi Fanidisfani,Mahdifani1369@gmail.com,,Co-founder & Advisor,"Amsterdam, Netherlands",https://github.com/mahdifani14,,MahdiFani14,,Problem with header files and static type of functions,https://github.com/brnorris03/Orio/issues/12,2017-04-30T11:13:46Z,email,Orio autotuning header file issues,"Hey Mahdi,
 
 The header file and static function type issue you reported in Orio sounds like the autotuner's code generator is emitting declarations that conflict with the user's includes. Was the generated code shadowing standard library types, or were the static qualifiers getting dropped during transformation?
 
 Severin
 "
-103.0,NO,,fix module language:VHDL,4,pr,MohamedAbdelaiem/RISCify,RISCify,MohamedAbdelaiem,User,4,VHDL,0,MohamedAbdelaiem,Mohamed Abdelaziem,mohamedabdelaziem96@gmail.com,cairo university ,"Student in faculty of engineering ,Computer department.
+103.0,YES,,fix module language:VHDL,4,pr,MohamedAbdelaiem/RISCify,RISCify,MohamedAbdelaiem,User,4,VHDL,0,MohamedAbdelaiem,Mohamed Abdelaziem,mohamedabdelaziem96@gmail.com,cairo university ,"Student in faculty of engineering ,Computer department.
 
 ",Cairo,https://github.com/MohamedAbdelaiem,,,,Feat/forwarding unit,https://github.com/MohamedAbdelaiem/RISCify/pull/1,2025-12-06T05:14:38Z,email,RISCify forwarding unit implementation,"Hey Mohamed,
 
@@ -519,74 +519,74 @@ The forwarding unit PR for RISCify is a critical piece — getting data hazard d
 
 Severin
 "
-104.0,SKIP,SKIP,fix module language:VHDL,4,pr,myriadrf/LimeSDR_GW,LimeSDR_GW,myriadrf,Organization,6,Python,19,enjoy-digital,,florent@enjoy-digital.fr,EnjoyDigital,,France,https://github.com/enjoy-digital,,,http://www.enjoy-digital.fr,Add GPSDO support to LimeSDR XTRX/Mini-V2 via LimePPSDO.,https://github.com/myriadrf/LimeSDR_GW/pull/24,2025-11-13T15:22:53Z,email,,
-105.0,NO,,fix module language:VHDL,4,pr,PandABlocks/PandABlocks-FPGA,PandABlocks-FPGA,PandABlocks,Organization,60,VHDL,20,shu-soleil,Shu ZHANG,szhang@synchrotron-soleil.fr,Synchrotron SOLEIL,,,https://github.com/shu-soleil,,,,Add sum^2 calculation for PCAP module when the pcap_std_dev option is set,https://github.com/PandABlocks/PandABlocks-FPGA/pull/68,2021-11-09T10:02:17Z,email,PandABlocks PCAP sum-squared for standard deviation,"Hey Shu,
+104.0,YES,SKIP,fix module language:VHDL,4,pr,myriadrf/LimeSDR_GW,LimeSDR_GW,myriadrf,Organization,6,Python,19,enjoy-digital,,florent@enjoy-digital.fr,EnjoyDigital,,France,https://github.com/enjoy-digital,,,http://www.enjoy-digital.fr,Add GPSDO support to LimeSDR XTRX/Mini-V2 via LimePPSDO.,https://github.com/myriadrf/LimeSDR_GW/pull/24,2025-11-13T15:22:53Z,email,,
+105.0,YES,,fix module language:VHDL,4,pr,PandABlocks/PandABlocks-FPGA,PandABlocks-FPGA,PandABlocks,Organization,60,VHDL,20,shu-soleil,Shu ZHANG,szhang@synchrotron-soleil.fr,Synchrotron SOLEIL,,,https://github.com/shu-soleil,,,,Add sum^2 calculation for PCAP module when the pcap_std_dev option is set,https://github.com/PandABlocks/PandABlocks-FPGA/pull/68,2021-11-09T10:02:17Z,email,PandABlocks PCAP sum-squared for standard deviation,"Hey Shu,
 
 Adding sum-squared calculation to the PCAP module when pcap_std_dev is set is a clean way to push variance computation into the FPGA fabric instead of post-processing. Are you accumulating in fixed-point with enough guard bits to avoid overflow on long captures, or does the module reset the accumulator periodically?
 
 Severin
 "
-106.0,NO,,fix module language:VHDL,4,issue,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,CharlesAverill,Charles Averill,charles.averill@utdallas.edu,@SoftwareLanguagesSecurityLab,"UTD CS PhD, losing my mind grading",Dallas,https://github.com/CharlesAverill,,,https://www.charles.systems/,More precise instruction timing documentation,https://github.com/stnolting/neorv32/issues/1297,2025-06-24T19:28:31Z,email,neorv32 instruction timing precision,"Hey Charles,
+106.0,YES,,fix module language:VHDL,4,issue,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,CharlesAverill,Charles Averill,charles.averill@utdallas.edu,@SoftwareLanguagesSecurityLab,"UTD CS PhD, losing my mind grading",Dallas,https://github.com/CharlesAverill,,,https://www.charles.systems/,More precise instruction timing documentation,https://github.com/stnolting/neorv32/issues/1297,2025-06-24T19:28:31Z,email,neorv32 instruction timing precision,"Hey Charles,
 
 The neorv32 instruction timing documentation issue you opened highlights a real gap — getting cycle-accurate timing right for a configurable RISC-V core is tricky since different extensions change the pipeline behavior. Was the imprecision causing issues in a specific use case, or more about making the docs match what you were observing in simulation?
 
 Severin"
-107.0,NO,,fix module language:VHDL,4,pr,EPFL-LAP/dynamatic,dynamatic,EPFL-LAP,Organization,60,VHDL,170,AyaElAkhras,Aya ElAkhras,ayatallah.elakhras@epfl.ch,EPFL,PhD Student in Computer and Communication Sciences ,Switzerland,https://github.com/AyaElAkhras,,,,"[HDL] Modularizing merges and generalizing their implementation {.v,.vhd} ",https://github.com/EPFL-LAP/dynamatic/pull/200,2024-12-05T21:08:15Z,email,Dynamatic merge modularization,"Hey Aya,
+107.0,YES,,fix module language:VHDL,4,pr,EPFL-LAP/dynamatic,dynamatic,EPFL-LAP,Organization,60,VHDL,170,AyaElAkhras,Aya ElAkhras,ayatallah.elakhras@epfl.ch,EPFL,PhD Student in Computer and Communication Sciences ,Switzerland,https://github.com/AyaElAkhras,,,,"[HDL] Modularizing merges and generalizing their implementation {.v,.vhd} ",https://github.com/EPFL-LAP/dynamatic/pull/200,2024-12-05T21:08:15Z,email,Dynamatic merge modularization,"Hey Aya,
 
 PR #200 modularizing the merge implementations across both Verilog and VHDL in Dynamatic is a nontrivial generalization — merge behavior in dataflow circuits has subtle timing differences between the two HDLs. Did the generalization require rethinking the handshake protocol, or was it mostly structural refactoring?
 
 Severin"
-108.0,NO,,fix module language:VHDL,4,pr,pllab/elephant,elephant,pllab,Organization,7,VHDL,4,dpetrisko,Dan Ruelas-Petrisko,petrisko.bsg@gmail.com,,,,https://github.com/dpetrisko,,,,Fix for bad parameterization in BlackParrot microbenchmarks. DC drops the parameters during elaborat…,https://github.com/pllab/elephant/pull/9,2025-04-21T20:48:51Z,email,DC dropping parameters during BlackParrot elaboration,"Hey Dan,
+108.0,YES,,fix module language:VHDL,4,pr,pllab/elephant,elephant,pllab,Organization,7,VHDL,4,dpetrisko,Dan Ruelas-Petrisko,petrisko.bsg@gmail.com,,,,https://github.com/dpetrisko,,,,Fix for bad parameterization in BlackParrot microbenchmarks. DC drops the parameters during elaborat…,https://github.com/pllab/elephant/pull/9,2025-04-21T20:48:51Z,email,DC dropping parameters during BlackParrot elaboration,"Hey Dan,
 
 Bad parameterization bugs that only surface during DC elaboration are some of the most frustrating to track down, especially when the synthesizer silently drops them instead of erroring out. Your fix in PR #9 for BlackParrot microbenchmarks suggests the defaults were masking the issue until specific configurations exposed it. Was DC inferring incorrect default values, or were the parameters being optimized away entirely during elaboration?
 
 Severin"
-109.0,NO,,fix module language:VHDL,4,pr,hdl-modules/hdl-modules,hdl-modules,hdl-modules,Organization,6,VHDL,198,watsonjj,Jason Watson,jason.watson@desy.de,DESY,"Astrophysicist, Data Scientist & Software Developer for the SST Camera and CTA (Cherenkov Telescope Array)",Germany,https://github.com/watsonjj,,,,Respect the signature of setup_vunit in Module subclasses,https://github.com/hdl-modules/hdl-modules/pull/152,2025-01-31T09:51:01Z,email,VUnit setup signature in hdl-modules,"Hey Jason,
+109.0,YES,,fix module language:VHDL,4,pr,hdl-modules/hdl-modules,hdl-modules,hdl-modules,Organization,6,VHDL,198,watsonjj,Jason Watson,jason.watson@desy.de,DESY,"Astrophysicist, Data Scientist & Software Developer for the SST Camera and CTA (Cherenkov Telescope Array)",Germany,https://github.com/watsonjj,,,,Respect the signature of setup_vunit in Module subclasses,https://github.com/hdl-modules/hdl-modules/pull/152,2025-01-31T09:51:01Z,email,VUnit setup signature in hdl-modules,"Hey Jason,
 
 The setup_vunit signature mismatch you fixed in hdl-modules PR #152 is the kind of API inconsistency that silently breaks downstream module integration. Was it causing test failures in specific subclasses, or did it surface as a type error when VUnit's interface changed?
 
 Severin"
-110.0,NO,,fix module language:VHDL,4,issue,TerosTechnology/vscode-terosHDL,vscode-terosHDL,TerosTechnology,Organization,20,VHDL,702,gfcwfzkm,Pazzy,gfcwfzkm@protonmail.com,,"Programming mostly microcontrollers (C) / Occasionally also writing PC Software (C++, Python) / Developing hardware / PCBs.",Switzerland,https://github.com/gfcwfzkm,,gfcwfzkm,https://ko-fi.com/gfcwfzkm,"Schematic Viewer fails (GHDL + Yosys, Windows)",https://github.com/TerosTechnology/vscode-terosHDL/issues/717,2025-01-20T10:30:11Z,email,TerosHDL schematic viewer on Windows,"Hey Pazzy,
+110.0,YES,,fix module language:VHDL,4,issue,TerosTechnology/vscode-terosHDL,vscode-terosHDL,TerosTechnology,Organization,20,VHDL,702,gfcwfzkm,Pazzy,gfcwfzkm@protonmail.com,,"Programming mostly microcontrollers (C) / Occasionally also writing PC Software (C++, Python) / Developing hardware / PCBs.",Switzerland,https://github.com/gfcwfzkm,,gfcwfzkm,https://ko-fi.com/gfcwfzkm,"Schematic Viewer fails (GHDL + Yosys, Windows)",https://github.com/TerosTechnology/vscode-terosHDL/issues/717,2025-01-20T10:30:11Z,email,TerosHDL schematic viewer on Windows,"Hey Pazzy,
 
 The GHDL + Yosys schematic viewer failure on Windows you reported in TerosHDL is a common pain point — the synthesis-to-viewer pipeline has a lot of platform-specific assumptions baked in. Was it failing during the GHDL analysis step or when Yosys tried to generate the schematic output?
 
 Severin"
-111.0,NO,,fix module language:VHDL,4,issue,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,ohenley,olivier henley,olivier.henley@gmail.com,,"@Ubisoft: Your Shape: Fitness Evolved (patent US8884949B1), Rainbow Six Siege, ForHonor @Autodesk: Stingray, 3ds Max @AdaCore: 🚀",Saint-Calixte-de-Kilkenny,https://github.com/ohenley,,,,demo_clint access faults on the neorv32-setups minimalboot for the radiona ulx3s,https://github.com/stnolting/neorv32/issues/1154,2025-01-13T17:14:13Z,email,neorv32 CLINT access faults on ULX3S,"Hey Olivier,
+111.0,YES,,fix module language:VHDL,4,issue,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,ohenley,olivier henley,olivier.henley@gmail.com,,"@Ubisoft: Your Shape: Fitness Evolved (patent US8884949B1), Rainbow Six Siege, ForHonor @Autodesk: Stingray, 3ds Max @AdaCore: 🚀",Saint-Calixte-de-Kilkenny,https://github.com/ohenley,,,,demo_clint access faults on the neorv32-setups minimalboot for the radiona ulx3s,https://github.com/stnolting/neorv32/issues/1154,2025-01-13T17:14:13Z,email,neorv32 CLINT access faults on ULX3S,"Hey Olivier,
 
 CLINT access faults during minimalboot on the ULX3S suggest either the memory map configuration doesn't match what the boot code expects, or the CLINT peripheral isn't being instantiated correctly for the Lattice target. Was the fault happening on timer register reads, or on the software interrupt side?
 
 Severin"
-112.0,NO,,fix module language:VHDL,4,pr,lnls-dig/fofb-ctrl-gw,fofb-ctrl-gw,lnls-dig,Organization,4,VHDL,1,guilhermerc,Guilherme Ricioli,guilherme.riciolic@gmail.com,@lnls-dig @cnpem ,"Computer Engineer graduated from the State University of Campinas (UNICAMP).
+112.0,YES,,fix module language:VHDL,4,pr,lnls-dig/fofb-ctrl-gw,fofb-ctrl-gw,lnls-dig,Organization,4,VHDL,1,guilhermerc,Guilherme Ricioli,guilherme.riciolic@gmail.com,@lnls-dig @cnpem ,"Computer Engineer graduated from the State University of Campinas (UNICAMP).
 Mostly interested in firmware/gateware development.",Campinas - Sao Paulo (Brazil),https://github.com/guilhermerc,,,,fofb_shaper_filt: add module,https://github.com/lnls-dig/fofb-ctrl-gw/pull/30,2023-09-20T20:33:07Z,email,FOFB shaper filter module,"Hey Guilherme,
 
 Adding the shaper filter module in PR #30 for the FOFB controller gateware — shaping the correction signal is critical for loop stability at the update rates synchrotron orbit feedback demands. Is the filter designed to compensate for actuator response characteristics, or more about suppressing high-frequency noise in the BPM readings?
 
 Severin"
-113.0,NO,,fix module language:VHDL,4,issue,stnolting/neorv32-setups,neorv32-setups,stnolting,User,21,VHDL,89,ivanholmes,Ivan Holmes,ivan@ivanholmes.co.uk,,,United Kingdom,https://github.com/ivanholmes,,,,Can't simulate de0-nano-test-setup with Questa Intel FPGA Edition,https://github.com/stnolting/neorv32-setups/issues/191,2024-09-19T14:59:30Z,email,Questa simulation issue with neorv32 de0-nano setup,"Hey Ivan,
+113.0,YES,,fix module language:VHDL,4,issue,stnolting/neorv32-setups,neorv32-setups,stnolting,User,21,VHDL,89,ivanholmes,Ivan Holmes,ivan@ivanholmes.co.uk,,,United Kingdom,https://github.com/ivanholmes,,,,Can't simulate de0-nano-test-setup with Questa Intel FPGA Edition,https://github.com/stnolting/neorv32-setups/issues/191,2024-09-19T14:59:30Z,email,Questa simulation issue with neorv32 de0-nano setup,"Hey Ivan,
 
 The Questa Intel FPGA Edition simulation failure with the de0-nano test setup is likely a vendor library or VHDL standard compatibility issue — Questa's Intel edition has some quirks with mixed-language or VHDL-2008 constructs. Was it throwing elaboration errors, or did the simulation start but produce incorrect behavior?
 
 Severin"
-114.0,NO,,fix module language:VHDL,4,issue,MiSTer-devel/SNES_MiSTer,SNES_MiSTer,MiSTer-devel,Organization,25,VHDL,235,MP2E,Cray Elliott,crayelliott@gmail.com,,,"Las Vegas, NV",https://github.com/MP2E,,,,Kirby’s Dreamland 3 freezes before first level,https://github.com/MiSTer-devel/SNES_MiSTer/issues/381,2024-09-25T10:03:20Z,email,Kirby's Dreamland 3 freeze in SNES MiSTer,"Hey Cray,
+114.0,YES,,fix module language:VHDL,4,issue,MiSTer-devel/SNES_MiSTer,SNES_MiSTer,MiSTer-devel,Organization,25,VHDL,235,MP2E,Cray Elliott,crayelliott@gmail.com,,,"Las Vegas, NV",https://github.com/MP2E,,,,Kirby’s Dreamland 3 freezes before first level,https://github.com/MiSTer-devel/SNES_MiSTer/issues/381,2024-09-25T10:03:20Z,email,Kirby's Dreamland 3 freeze in SNES MiSTer,"Hey Cray,
 
 Kirby's Dreamland 3 freezing before the first level on the SNES MiSTer core — pre-level freezes often point to initialization sequence timing or DMA transfer issues in the FPGA implementation. Did it hang consistently at the same point, or was the behavior intermittent across different MiSTer firmware versions?
 
 Severin"
-115.0,NO,,fix module language:VHDL,4,pr,jonahshader/vampire_survivors_vhdl,vampire_survivors_vhdl,jonahshader,User,3,VHDL,0,jonahshader,Jonah Shader,jonah.shader@gmail.com,,Programming enjoyer,"United States, MI",https://github.com/jonahshader,,,,Screen,https://github.com/jonahshader/vampire_survivors_vhdl/pull/11,2023-11-29T17:51:58Z,email,Vampire Survivors in VHDL,"Hey Jonah,
+115.0,YES,,fix module language:VHDL,4,pr,jonahshader/vampire_survivors_vhdl,vampire_survivors_vhdl,jonahshader,User,3,VHDL,0,jonahshader,Jonah Shader,jonah.shader@gmail.com,,Programming enjoyer,"United States, MI",https://github.com/jonahshader,,,,Screen,https://github.com/jonahshader/vampire_survivors_vhdl/pull/11,2023-11-29T17:51:58Z,email,Vampire Survivors in VHDL,"Hey Jonah,
 
 Implementing Vampire Survivors entirely in VHDL is an ambitious hardware design project — managing sprite rendering, game state, and collision detection all in synthesizable logic is a different beast than doing it in software. How are you handling the entity management when the screen fills up with enemies?
 
 Severin"
-116.0,NO,,fix module language:VHDL,4,issue,byuccl/bfasst,bfasst,byuccl,Organization,16,VHDL,14,jgoeders,Jeff Goeders,jeff.goeders@gmail.com,,Associate Professor at Brigham Young University,,https://github.com/jgoeders,,,goeders.net,ninja_flow_manager.py doesn't find correct design path,https://github.com/byuccl/bfasst/issues/311,2023-10-09T17:27:04Z,email,bfasst design path resolution,"Hey Jeff,
+116.0,YES,,fix module language:VHDL,4,issue,byuccl/bfasst,bfasst,byuccl,Organization,16,VHDL,14,jgoeders,Jeff Goeders,jeff.goeders@gmail.com,,Associate Professor at Brigham Young University,,https://github.com/jgoeders,,,goeders.net,ninja_flow_manager.py doesn't find correct design path,https://github.com/byuccl/bfasst/issues/311,2023-10-09T17:27:04Z,email,bfasst design path resolution,"Hey Jeff,
 
 The ninja_flow_manager path resolution bug in bfasst — incorrect design paths in the build flow silently produce results against the wrong design, which is especially problematic for a tool that's comparing synthesis outputs. Was it a relative vs absolute path issue, or something about how the flow manager discovers design hierarchies?
 
 Severin"
-117.0,NO,SKIP,fix module language:VHDL,4,issue,TerosTechnology/vscode-terosHDL,vscode-terosHDL,TerosTechnology,Organization,20,VHDL,702,pintert3,Phillip Samuel K.,pintert3@kalabentate.com,Auri Studio,"Embedded & software engineer, Codewarrior,  and the best on the continent ;)","Kampala, Uganda",https://github.com/pintert3,,,,"'""""' not recognized as an internal or external command",https://github.com/TerosTechnology/vscode-terosHDL/issues/432,2023-07-26T05:08:00Z,email,,
-118.0,NO,SKIP,fix module language:VHDL,4,pr,vgacentrifuge/fpga,fpga,vgacentrifuge,Organization,7,VHDL,0,LorgeN,Eirik,eirikltanberg@gmail.com,,"I smash my keyboard systematically 
+117.0,YES,SKIP,fix module language:VHDL,4,issue,TerosTechnology/vscode-terosHDL,vscode-terosHDL,TerosTechnology,Organization,20,VHDL,702,pintert3,Phillip Samuel K.,pintert3@kalabentate.com,Auri Studio,"Embedded & software engineer, Codewarrior,  and the best on the continent ;)","Kampala, Uganda",https://github.com/pintert3,,,,"'""""' not recognized as an internal or external command",https://github.com/TerosTechnology/vscode-terosHDL/issues/432,2023-07-26T05:08:00Z,email,,
+118.0,YES,SKIP,fix module language:VHDL,4,pr,vgacentrifuge/fpga,fpga,vgacentrifuge,Organization,7,VHDL,0,LorgeN,Eirik,eirikltanberg@gmail.com,,"I smash my keyboard systematically 
 
 Currently studying computer science",Norway,https://github.com/LorgeN,,l0rg3n,,Paolo pipeline transparency,https://github.com/vgacentrifuge/fpga/pull/3,2022-11-14T22:31:31Z,email,,
-119.0,NO,,fix module language:VHDL,4,issue,MiSTer-devel/Arcade-Inferno_MiSTer,Arcade-Inferno_MiSTer,MiSTer-devel,Organization,4,VHDL,1,birdybro,Kevin Coleman,kcoleman@misterfpga.co,,"IT Generalist with birds, learning programming and hdl","Longmont, CO",https://github.com/birdybro,,,https://mister-devel.github.io/MkDocs_MiSTer/,Sound playback is not working correctly,https://github.com/MiSTer-devel/Arcade-Inferno_MiSTer/issues/1,2022-09-10T18:14:28Z,email,Arcade Inferno sound playback on MiSTer,"Hey Kevin,
+119.0,YES,,fix module language:VHDL,4,issue,MiSTer-devel/Arcade-Inferno_MiSTer,Arcade-Inferno_MiSTer,MiSTer-devel,Organization,4,VHDL,1,birdybro,Kevin Coleman,kcoleman@misterfpga.co,,"IT Generalist with birds, learning programming and hdl","Longmont, CO",https://github.com/birdybro,,,https://mister-devel.github.io/MkDocs_MiSTer/,Sound playback is not working correctly,https://github.com/MiSTer-devel/Arcade-Inferno_MiSTer/issues/1,2022-09-10T18:14:28Z,email,Arcade Inferno sound playback on MiSTer,"Hey Kevin,
 
 Sound playback bugs in arcade FPGA cores are tricky — the original hardware often used custom DACs or unusual sample rates that are hard to replicate exactly. With the Inferno core, was the audio completely broken or more of a pitch/timing issue where it sounded wrong but was partially working?
 
