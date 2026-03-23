@@ -32,12 +32,11 @@ UPDATES = {
         "outreach_subject": "Microwatt Arty A7: Linux PPC ISA assumptions as hard RTL constraints",
         "outreach_message": (
             "Hey Paul,\n\n"
-            "The Linux PowerPC port's assumptions about cache line "
-            "sizes and TLB invalidation sequences \u2014 things baked in "
-            "when you wrote them \u2014 become hard RTL constraints on "
-            "Microwatt that a clean-sheet RISC-V core wouldn't "
-            "inherit. Did the Arty A7 work surface any of those "
-            "tensions, or was it purely a resource and timing exercise?"
+            "Linux PPC's assumptions about cache line sizes and TLB "
+            "invalidation become hard RTL constraints on Microwatt "
+            "that a clean-sheet RISC-V core wouldn't inherit. Did "
+            "the Arty A7 work surface those tensions, or was it "
+            "purely a resource and timing exercise?"
             "\n\nSeverin"
         ),
     },
