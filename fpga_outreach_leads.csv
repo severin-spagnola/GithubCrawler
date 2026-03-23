@@ -1046,66 +1046,64 @@ Severin"
 219,YES,,fix module language:SystemVerilog,4,issue,pulp-platform/pulpissimo,pulpissimo,pulp-platform,Organization,60,SystemVerilog,463,vignajeth,Vignajeth,,,,Denmark,https://github.com/vignajeth,https://www.linkedin.com/in/vignajeth/,,https://www.linkedin.com/in/vignajeth/,Post Synthesis Simulation Fails in RI5CY Core,https://github.com/pulp-platform/pulpissimo/issues/255,2021-05-11T09:07:35Z,linkedin,,"Post-synth sim failures in RI5CY — was it X-propagation in the datapath or control flow in decode? Curious how you debugged it.
 
 Severin"
-220,NO,,fix module language:SystemVerilog,4,issue,openhwgroup/cv32e40x,cv32e40x,openhwgroup,Organization,90,SystemVerilog,261,StMiky,Michele Caon,st.miky77@gmail.com,EPFL,Postdoc @ ESL-EPFL,"Lausanne, Switzerland",https://github.com/StMiky,,,,[XIF] Coprocessor XIF Issue response not sampled by ID-EX pipeline registers,https://github.com/openhwgroup/cv32e40x/issues/941,2023-09-07T14:27:58Z,email,XIF issue response timing on CV32E40X,"Hey Michele,
+220,YES,,fix module language:SystemVerilog,4,issue,openhwgroup/cv32e40x,cv32e40x,openhwgroup,Organization,90,SystemVerilog,261,StMiky,Michele Caon,st.miky77@gmail.com,EPFL,Postdoc @ ESL-EPFL,"Lausanne, Switzerland",https://github.com/StMiky,,,,[XIF] Coprocessor XIF Issue response not sampled by ID-EX pipeline registers,https://github.com/openhwgroup/cv32e40x/issues/941,2023-09-07T14:27:58Z,email,XIF issue response missed by ID-EX latch in CV32E40X,"Hey Michele,
 
-The coprocessor XIF issue response not being sampled by the ID-EX pipeline registers in CV32E40X is a subtle timing bug. If the coprocessor response arrives in the same cycle but misses the pipeline latch, the instruction either stalls or gets wrong data forwarded.
+Your issue on the coprocessor XIF response not being sampled by the ID-EX pipeline registers points to a subtle latch-timing gap that could cause wrong data forwarding or stalls. Getting the handshake right between the coprocessor interface and the main pipeline is one of the harder parts of the XIF spec.
 
-Did this surface during simulation with a specific coprocessor, or was it caught through formal analysis of the pipeline handshake?
-
-Severin"
-221,NO,,fix module language:SystemVerilog,4,pr,PMohan-27/FPGA-IEEE-HACKATHON,FPGA-IEEE-HACKATHON,PMohan-27,User,3,SystemVerilog,0,l-krrish,Krrish Lala,k2lala@uwaterloo.ca,@RogersCommunications,Machine Learning Engineer @RogersCommunications | Computer Enginnering Freshman @UWaterloo,Toronto,https://github.com/l-krrish,,,,Branch krrish,https://github.com/PMohan-27/FPGA-IEEE-HACKATHON/pull/3,2026-02-20T23:23:29Z,email,,
-222,NO,,fix module language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,alphan,Alphan Ulusoy,alphan@opentitan.org,OpenTitan,,"Framingham, MA",https://github.com/alphan,,,https://www.alphanulusoy.com,[coverage] Coverage Measurements,https://github.com/lowRISC/opentitan/issues/16761,2022-12-09T17:16:21Z,email,Coverage measurements for OpenTitan,"Hey Alphan,
-
-Your issue on coverage measurements for OpenTitan touches one of the hardest problems in open-source silicon: defining what ""enough"" verification coverage means for a security-critical chip. Commercial tapeouts have coverage closure checklists, but open projects rarely formalize this.
-
-What coverage metrics are you tracking, and is the goal functional coverage, code coverage, or something more domain-specific like security property coverage?
+Did this surface during simulation with a specific coprocessor, or through formal analysis of the pipeline handshake?
 
 Severin"
-223,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,sterin,Baruch Sterin,github@bsterin.com,,,,https://github.com/sterin,,,,Support nested SytemVerilog interface as a port connection in a module,https://github.com/verilator/verilator/issues/5066,2024-04-25T12:14:07Z,email,Nested SV interfaces in Verilator,"Hey Baruch,
+221,YES,SKIP,fix module language:SystemVerilog,4,pr,PMohan-27/FPGA-IEEE-HACKATHON,FPGA-IEEE-HACKATHON,PMohan-27,User,3,SystemVerilog,0,l-krrish,Krrish Lala,k2lala@uwaterloo.ca,@RogersCommunications,Machine Learning Engineer @RogersCommunications | Computer Enginnering Freshman @UWaterloo,Toronto,https://github.com/l-krrish,,,,Branch krrish,https://github.com/PMohan-27/FPGA-IEEE-HACKATHON/pull/3,2026-02-20T23:23:29Z,email,,
+222,YES,,fix module language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,alphan,Alphan Ulusoy,alphan@opentitan.org,OpenTitan,,"Framingham, MA",https://github.com/alphan,,,https://www.alphanulusoy.com,[coverage] Coverage Measurements,https://github.com/lowRISC/opentitan/issues/16761,2022-12-09T17:16:21Z,email,Coverage closure criteria for OpenTitan verification,"Hey Alphan,
 
-Your issue on nested SystemVerilog interfaces as port connections in Verilator hits one of the trickier corners of the SV spec. Nested interfaces are powerful for modular bus architectures but few open-source tools handle them correctly.
+Your issue on coverage measurements for OpenTitan raises a key question: what does ""enough"" verification coverage mean for a security-critical open-source chip? Commercial tapeouts have formal coverage closure checklists, but open projects rarely define these.
 
-What was the design pattern that required nested interfaces rather than flattened port bundles?
-
-Severin"
-224,NO,,fix module language:SystemVerilog,4,pr,aws/aws-fpga,aws-fpga,aws,Organization,90,SystemVerilog,1645,yarons,Yaron Shahrabani,sh.yaron@gmail.com,Open Source,,Israel,https://github.com/yarons,,,http://wiki.hamakor.org.il/index.php/Gezer,Add required packages for test_create_afi.py,https://github.com/aws/aws-fpga/pull/772,2026-01-29T08:26:52Z,email,Required packages for test_create_afi.py,"Hey Yaron,
-
-Your PR adding the required packages for test_create_afi.py in aws-fpga fixes the kind of dependency gap that silently blocks new users from running the AFI creation flow. Missing Python packages in the test path is a common onboarding friction point.
-
-Did you hit this while setting up your own AFI workflow, or was it flagged by someone else trying to run the test suite?
+Are you targeting functional coverage, code coverage, or something more domain-specific like security property coverage?
 
 Severin"
-225,NO,,fix module language:SystemVerilog,4,pr,pulp-platform/serial_link,serial_link,pulp-platform,Organization,5,SystemVerilog,36,fischeti,Tim Fischer,fischeti@iis.ee.ethz.ch,ETH Zurich,,Zurich,https://github.com/fischeti,,fischetim,,hw: Fix configuration dependent field names,https://github.com/pulp-platform/serial_link/pull/17,2025-12-04T14:24:12Z,email,Configuration-dependent field names in serial_link,"Hey Tim,
+223,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,sterin,Baruch Sterin,github@bsterin.com,,,,https://github.com/sterin,,,,Support nested SytemVerilog interface as a port connection in a module,https://github.com/verilator/verilator/issues/5066,2024-04-25T12:14:07Z,email,Nested SV interface port connections in Verilator,"Hey Baruch,
 
-Your PR fixing configuration-dependent field names in PULP serial_link is the kind of parameterization bug that breaks when someone changes the config but passes with defaults. Chip-to-chip serial links have to work across every valid configuration or the SoC integration fails silently.
+Your issue on nested SystemVerilog interfaces as port connections hits a part of the SV spec that most open-source tools still get wrong. Nested interfaces are useful for modular bus architectures, but the elaboration and name resolution logic is tricky to implement correctly.
+
+What design pattern needed nested interfaces rather than flattened port bundles?
+
+Severin"
+224,YES,,fix module language:SystemVerilog,4,pr,aws/aws-fpga,aws-fpga,aws,Organization,90,SystemVerilog,1645,yarons,Yaron Shahrabani,sh.yaron@gmail.com,Open Source,,Israel,https://github.com/yarons,,,http://wiki.hamakor.org.il/index.php/Gezer,Add required packages for test_create_afi.py,https://github.com/aws/aws-fpga/pull/772,2026-01-29T08:26:52Z,email,Missing Python deps blocking test_create_afi.py,"Hey Yaron,
+
+Your PR adding the required packages for test_create_afi.py fixes a dependency gap that silently blocks new users from running the AFI creation flow. These kinds of missing-package issues are common onboarding friction in the aws-fpga toolchain.
+
+Did you hit this setting up your own AFI workflow, or was it flagged by someone else trying to run the test suite?
+
+Severin"
+225,YES,,fix module language:SystemVerilog,4,pr,pulp-platform/serial_link,serial_link,pulp-platform,Organization,5,SystemVerilog,36,fischeti,Tim Fischer,fischeti@iis.ee.ethz.ch,ETH Zurich,,Zurich,https://github.com/fischeti,,fischetim,,hw: Fix configuration dependent field names,https://github.com/pulp-platform/serial_link/pull/17,2025-12-04T14:24:12Z,email,Config-dependent field name bug in PULP serial_link,"Hey Tim,
+
+Your PR fixing configuration-dependent field names in serial_link catches the kind of parameterization bug that passes with defaults but breaks on any non-default config. For chip-to-chip links, that failure mode is especially dangerous since it can show up late in SoC integration.
 
 Was this caught during integration with a specific PULP SoC, or through standalone testing with non-default parameters?
 
 Severin"
-226,NO,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,cameronwaite-mq,Cameron Waite,cameron.waite@mq.edu.au,Macquarie University,,"Sydney, Australia",https://github.com/cameronwaite-mq,,,,Fix null pointer dereference in class member trigger expressions,https://github.com/verilator/verilator/pull/6946,2026-01-21T03:45:18Z,email,Null pointer fix in Verilator class member triggers,"Hey Cameron,
+226,YES,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,cameronwaite-mq,Cameron Waite,cameron.waite@mq.edu.au,Macquarie University,,"Sydney, Australia",https://github.com/cameronwaite-mq,,,,Fix null pointer dereference in class member trigger expressions,https://github.com/verilator/verilator/pull/6946,2026-01-21T03:45:18Z,email,Null deref fix in Verilator class member trigger expressions,"Hey Cameron,
 
-Your PR fixing the null pointer dereference in class member trigger expressions in Verilator addresses a crash that would have hit anyone using class-based event triggers. Those null dereferences are hard to catch without actually exercising the specific class hierarchy.
+Your PR fixing the null pointer dereference in class member trigger expressions addresses a crash path that would hit anyone using class-based event triggers in Verilator. These null dereferences are hard to catch without exercising the specific class hierarchy that triggers them.
 
-Did you hit this with UVM-style testbench code, or was it a simpler class construct that triggered the crash?
-
-Severin"
-227,NO,,fix module language:SystemVerilog,4,issue,chipsalliance/sv-tests,sv-tests,chipsalliance,Organization,90,SystemVerilog,367,caryr,Cary R.,cygcary@yahoo.com,,,,https://github.com/caryr,,,,@ * is valid and should not be excluded in ivtest,https://github.com/chipsalliance/sv-tests/issues/1315,2021-01-30T22:55:34Z,email,@ * sensitivity list in ivtest,"Hey Cary,
-
-Your issue about @ * being valid but excluded in ivtest catches exactly the kind of spec compliance gap that matters. If the test suite itself rejects valid SystemVerilog, every tool tested against it inherits that false negative.
-
-Was this something you noticed while testing Icarus Verilog specifically, or did it come up comparing compliance across multiple simulators?
+Did you hit this with UVM-style testbench code, or a simpler class construct?
 
 Severin"
-228,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,johnjohnlin,Yu-Sheng Lin,johnjohnlys@media.ee.ntu.edu.tw,,My research topic is GPU and VLSI design.,Taiwan,https://github.com/johnjohnlin,,,,Compile error assigning to unpacked from packed array,https://github.com/verilator/verilator/issues/2843,2021-03-18T12:42:31Z,email,Packed-to-unpacked array assignment in Verilator,"Hey Yu-Sheng,
+227,YES,,fix module language:SystemVerilog,4,issue,chipsalliance/sv-tests,sv-tests,chipsalliance,Organization,90,SystemVerilog,367,caryr,Cary R.,cygcary@yahoo.com,,,,https://github.com/caryr,,,,@ * is valid and should not be excluded in ivtest,https://github.com/chipsalliance/sv-tests/issues/1315,2021-01-30T22:55:34Z,email,@ * excluded from ivtest despite being valid SV,"Hey Cary,
 
-The compile error you hit assigning to unpacked from packed arrays in Verilator is a common pain point. The packed/unpacked distinction in SystemVerilog is one of those areas where the spec and tool behavior diverge across implementations.
+Your issue about @ * being valid SystemVerilog but excluded in ivtest catches a spec compliance gap in the test suite itself. If the test suite rejects valid constructs, every tool tested against it inherits that false negative.
 
-Did this come up in GPU RTL simulation for your VLSI research, or was it a standalone Verilator issue?
-
-Severin"
-229,NO,,fix module language:SystemVerilog,4,issue,lowRISC/ibex,ibex,lowRISC,Organization,120,SystemVerilog,1797,raiyyanfaisal09,Raiyyan Masumdar,,,Graduated Masters in Electrical Engineering from California State University,Northridge,https://github.com/raiyyanfaisal09,https://www.linkedin.com/in/raiyyan-masumdar-91795068/,,https://www.linkedin.com/in/raiyyan-masumdar-91795068/,Error while installing spike simulator,https://github.com/lowRISC/ibex/issues/2011,2023-04-06T17:53:53Z,linkedin,,"The spike simulator install error on Ibex is one of those setup hurdles that blocks the whole verification flow before you even get to run a test. What verification flow did you end up using for Ibex after the simulator setup problems?
+Did you notice this while testing Icarus Verilog specifically, or comparing compliance across multiple simulators?
 
 Severin"
+228,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,johnjohnlin,Yu-Sheng Lin,johnjohnlys@media.ee.ntu.edu.tw,,My research topic is GPU and VLSI design.,Taiwan,https://github.com/johnjohnlin,,,,Compile error assigning to unpacked from packed array,https://github.com/verilator/verilator/issues/2843,2021-03-18T12:42:31Z,email,Packed-to-unpacked array assignment error in Verilator,"Hey Yu-Sheng,
+
+The compile error assigning to unpacked from packed arrays in Verilator is a known pain point where spec semantics and tool behavior diverge across implementations. The packed/unpacked distinction is one of the most inconsistently handled parts of SystemVerilog.
+
+Was this blocking a specific design you were simulating, or did you hit it exploring Verilator's type system behavior?
+
+Severin"
+229,YES,SKIP,fix module language:SystemVerilog,4,issue,lowRISC/ibex,ibex,lowRISC,Organization,120,SystemVerilog,1797,raiyyanfaisal09,Raiyyan Masumdar,,,Graduated Masters in Electrical Engineering from California State University,Northridge,https://github.com/raiyyanfaisal09,https://www.linkedin.com/in/raiyyan-masumdar-91795068/,,https://www.linkedin.com/in/raiyyan-masumdar-91795068/,Error while installing spike simulator,https://github.com/lowRISC/ibex/issues/2011,2023-04-06T17:53:53Z,linkedin,,
 230,NO,,fix module language:SystemVerilog,4,issue,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,jxc98728,Chris John,459830713@qq.com,Zhejiang University,,"Hangzhou, Zhejiang, China",https://github.com/jxc98728,,,,Porting Coyote to other platforms cannot meet the required timing constraints,https://github.com/fpgasystems/Coyote/issues/184,2026-01-21T12:23:04Z,email,Coyote timing constraints on new platforms,"Hey Chris,
 
 Your issue about Coyote not meeting timing constraints when porting to other platforms hits one of the fundamental challenges with FPGA datacenter shells. An RDMA-capable shell optimized for one board will have completely different critical paths on another device.
