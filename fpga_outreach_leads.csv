@@ -196,22 +196,22 @@ The neorv32 upload failure for the CFS demo on NexysA7 (issue #781) sounds like 
 Severin"
 40.0,NO,fix entity language:VHDL,4,pr,UVVM/UVVM,UVVM,UVVM,User,60,VHDL,423,am9417,Konsta M,konsta.maenpanen@outlook.com,Vaasan Yliopisto / University of Vaasa,"SW Developer / FPGA Engineer, M.Sc. in Electrical Engineering","Vaasa, Finland",https://github.com/am9417,,,https://stackoverflow.com/users/8063451/am9417,Bug: Generic GC_CMD_QUEUE_COUNT_MAX in AXI VVC does not update sizes of command queues,https://github.com/UVVM/UVVM/pull/198,2023-02-07T10:52:25Z,email,UVVM AXI VVC command queue bug,"Hey Konsta,
 
-Your PR fixing the generic GC_CMD_QUEUE_COUNT_MAX bug in UVVM's AXI VVC (PR #198) addresses a real usability problem where queue sizes silently ignore configuration. Do you find the verification methodology transfers between your software and FPGA work, or are they fundamentally different workflows?
+The GC_CMD_QUEUE_COUNT_MAX bug you fixed in UVVM's AXI VVC (PR #198) is a nasty one — queue sizes silently ignoring configuration means tests pass with the wrong capacity and you only find out when real traffic hits. Did the queue overflow manifest as lost commands, or did UVVM just silently drop transactions?
 
 Severin"
-41.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,igmar,Igmar Palsenberg,igmar@palsenberg.com,@ing-bank ,,Roosendaal,https://github.com/igmar,,Palsenberg,http://www.palsenberg.com,Hierarchical names,https://github.com/ghdl/ghdl/issues/24,2016-01-19T16:13:15Z,email,ghdl from ING Bank,"Hey Igmar,
+41.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,igmar,Igmar Palsenberg,igmar@palsenberg.com,@ing-bank ,,Roosendaal,https://github.com/igmar,,Palsenberg,http://www.palsenberg.com,Hierarchical names,https://github.com/ghdl/ghdl/issues/24,2016-01-19T16:13:15Z,email,ghdl hierarchical names issue #24,"Hey Igmar,
 
-ING Bank and ghdl contributions is an unexpected combo. Most people don't associate banking with VHDL. Is the ghdl work a personal interest, or does ING have hardware acceleration use cases that most people don't know about? Curious because FPGA adoption in fintech keeps growing quietly.
-
-Severin"
-42.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,JimLewis,Jim Lewis,jim@synthworks.com,SynthWorks / OSVVM,"VHDL Verification Specialist, OSVVM author, VHDL Trainer (including on OSVVM), IEEE VHDL WG Chair, Yoga Teacher ","Tigard, OR",https://github.com/JimLewis,,,http://synthworks.com/,Difference in calling to_signed with literal vs variable - both of same value,https://github.com/ghdl/ghdl/issues/2489,2023-09-08T19:23:57Z,email,OSVVM and VHDL verification methodology,"Hey Jim,
-
-OSVVM has become foundational for VHDL verification, and your ghdl issue about to_signed behavior differences between literals and variables (issue #2489) shows you are still actively stress-testing tool compliance. What do you think is the biggest gap remaining in VHDL verification methodology that the language or tooling has not solved yet?
+Your ghdl issue on hierarchical names (issue #24, 2016) is one of the oldest open issues in the repo. That is a fundamental scoping feature for any non-trivial testbench. Was it ever resolved on your end, or did you find a workaround?
 
 Severin"
-43.0,NO,fix entity language:VHDL,4,pr,VHDL/Compliance-Tests,Compliance-Tests,VHDL,Organization,9,VHDL,32,nickg,Nick Gasson,nick@nickg.me.uk,,,,https://github.com/nickg,,,,Fix error in tb_generic_packages_on_entity entity instantiation,https://github.com/VHDL/Compliance-Tests/pull/44,2023-05-12T10:44:41Z,email,VHDL Compliance Tests,"Hey Nick,
+42.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,JimLewis,Jim Lewis,jim@synthworks.com,SynthWorks / OSVVM,"VHDL Verification Specialist, OSVVM author, VHDL Trainer (including on OSVVM), IEEE VHDL WG Chair, Yoga Teacher ","Tigard, OR",https://github.com/JimLewis,,,http://synthworks.com/,Difference in calling to_signed with literal vs variable - both of same value,https://github.com/ghdl/ghdl/issues/2489,2023-09-08T19:23:57Z,email,ghdl to_signed literal vs variable discrepancy,"Hey Jim,
 
-Maintaining the VHDL Compliance Tests repo with 9 contributors is important work that most people never think about. Curious how comprehensive the coverage actually is right now. Are there areas of the VHDL spec that are still basically untested across simulators?
+The to_signed discrepancy you filed (issue #2489) — literal vs variable of the same value producing different results — is the kind of bug that silently corrupts fixed-point math in simulation while synthesis gets it right. Did you hit this in real verification, or did OSVVM's own test suite catch it first?
+
+Severin"
+43.0,NO,fix entity language:VHDL,4,pr,VHDL/Compliance-Tests,Compliance-Tests,VHDL,Organization,9,VHDL,32,nickg,Nick Gasson,nick@nickg.me.uk,,,,https://github.com/nickg,,,,Fix error in tb_generic_packages_on_entity entity instantiation,https://github.com/VHDL/Compliance-Tests/pull/44,2023-05-12T10:44:41Z,email,generic_packages_on_entity compliance test fix,"Hey Nick,
+
+Your PR fixing the generic_packages_on_entity instantiation in the VHDL Compliance Tests (PR #44) is a corner of the spec that most simulators probably get wrong without anyone noticing. Are there other areas of the spec where you know coverage is still thin and simulators are likely non-compliant?
 
 Severin"
 44.0,NO,fix entity language:VHDL,4,issue,UVVM/UVVM,UVVM,UVVM,User,60,VHDL,423,bpadalino,Brian Padalino,bpadalino@gmail.com,,,"Rochester, NY",https://github.com/bpadalino,,,,Bug: Queue Status Depends on Undefined Process Execution Order,https://github.com/UVVM/UVVM/issues/201,2023-03-03T20:03:20Z,email,UVVM queue status and process execution order,"Hey Brian,
@@ -219,19 +219,19 @@ Severin"
 The UVVM issue you filed about queue status depending on undefined process execution order (issue #201) is a fundamental simulation semantics problem. Non-deterministic behavior from delta-cycle ordering makes verification frameworks unreliable. What is the thing about VHDL tooling that frustrates you most day to day?
 
 Severin"
-45.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,kraigher,Olof Kraigher,olof.kraigher@gmail.com,,,,https://github.com/kraigher,,,,GHDL crash on subtype constraint on 'subtype attribute designator.,https://github.com/ghdl/ghdl/issues/2267,2022-12-09T20:27:44Z,email,rust_hdl and VHDL-LS,"Hey Olof,
+45.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,kraigher,Olof Kraigher,olof.kraigher@gmail.com,,,,https://github.com/kraigher,,,,GHDL crash on subtype constraint on 'subtype attribute designator.,https://github.com/ghdl/ghdl/issues/2267,2022-12-09T20:27:44Z,email,ghdl subtype attribute crash and VHDL-LS,"Hey Olof,
 
-VHDL-LS is genuinely one of the most impactful projects in the VHDL ecosystem right now. A real language server that gives you go-to-definition, error checking, and autocomplete changes the entire editing experience. Curious what the hardest part of building it has been. Is it the VHDL spec complexity, or more the LSP integration side?
+The ghdl crash you filed on subtype constraint with 'subtype attribute designator (issue #2267) hits a nasty corner of VHDL's type system. Building VHDL-LS in Rust, you are parsing the same spec from a completely different angle — do edge cases like this one show up as crashes in rust_hdl too, or does the Rust parser handle them differently?
 
 Severin"
 46.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,react66,Robert Anderson,react66@gmail.com,Tensor Logic LLC,"I have worked in the semiconductor and electronics industry for over 30 years, I like to design programs and machines including ASIC and sensor technology.",Seattle Washington area,https://github.com/react66,,,tensor-logic.com,bad type conversion caused crash,https://github.com/ghdl/ghdl/issues/278,2017-02-12T00:05:05Z,email,ghdl type conversion crash,"Hey Robert,
 
-The ghdl crash from a bad type conversion you reported (issue #278) goes back to 2017. Thirty years across semiconductors, ASICs, and sensor tech at Tensor Logic means you have seen more tooling generations than most. Has the FPGA design workflow actually improved meaningfully over that time, or does it still feel like the same problems with shinier tools?
+The ghdl crash from a bad type conversion you reported (issue #278) goes back to 2017 — type conversion edge cases in VHDL have a way of hiding for years. With 30+ years across ASICs and sensor design at Tensor Logic, has the FPGA design workflow actually improved meaningfully, or does it still feel like the same problems with shinier tools?
 
 Severin"
-47.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,bjourne,Björn Lindqvist,bjourne@gmail.com,,,,https://github.com/bjourne,,,,Crash when printing undefined real signals,https://github.com/ghdl/ghdl/issues/2299,2023-01-06T06:43:46Z,email,Contributing to ghdl,"Hey Bjorn,
+47.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,bjourne,Björn Lindqvist,bjourne@gmail.com,,,,https://github.com/bjourne,,,,Crash when printing undefined real signals,https://github.com/ghdl/ghdl/issues/2299,2023-01-06T06:43:46Z,email,ghdl crash printing undefined real signals,"Hey Bjorn,
 
-Most people who use VHDL tools just accept the pain. Contributing to ghdl means you decided to actually fix it instead. Curious what the specific trigger was. Was there a bug that bit you, a missing feature, or just wanting to understand the internals better?
+The ghdl crash you reported when printing undefined real signals (issue #2299) suggests the pretty-printer doesn't guard against uninitialized values in the signal dump path. Was this during waveform debugging, or did it come up in a testbench assertion?
 
 Severin"
 48.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,augustofg,Augusto Fraga Giachero,afg@augustofg.net,CNPEM - LNLS,Electrical Engineer. Mostly interested in embedded systems and electronics.,"São Paulo, Brasil",https://github.com/augustofg,,,https://augustofg.net,Crash when building Vivado's 2022.1 libraries,https://github.com/ghdl/ghdl/issues/2307,2023-01-10T16:11:30Z,email,ghdl crash building Vivado 2022.1 libraries,"Hey Augusto,
