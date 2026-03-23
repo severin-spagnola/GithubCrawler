@@ -1104,68 +1104,66 @@ Was this blocking a specific design you were simulating, or did you hit it explo
 
 Severin"
 229,YES,SKIP,fix module language:SystemVerilog,4,issue,lowRISC/ibex,ibex,lowRISC,Organization,120,SystemVerilog,1797,raiyyanfaisal09,Raiyyan Masumdar,,,Graduated Masters in Electrical Engineering from California State University,Northridge,https://github.com/raiyyanfaisal09,https://www.linkedin.com/in/raiyyan-masumdar-91795068/,,https://www.linkedin.com/in/raiyyan-masumdar-91795068/,Error while installing spike simulator,https://github.com/lowRISC/ibex/issues/2011,2023-04-06T17:53:53Z,linkedin,,
-230,NO,,fix module language:SystemVerilog,4,issue,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,jxc98728,Chris John,459830713@qq.com,Zhejiang University,,"Hangzhou, Zhejiang, China",https://github.com/jxc98728,,,,Porting Coyote to other platforms cannot meet the required timing constraints,https://github.com/fpgasystems/Coyote/issues/184,2026-01-21T12:23:04Z,email,Coyote timing constraints on new platforms,"Hey Chris,
+230,YES,,fix module language:SystemVerilog,4,issue,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,jxc98728,Chris John,459830713@qq.com,Zhejiang University,,"Hangzhou, Zhejiang, China",https://github.com/jxc98728,,,,Porting Coyote to other platforms cannot meet the required timing constraints,https://github.com/fpgasystems/Coyote/issues/184,2026-01-21T12:23:04Z,email,Coyote timing constraints on new platforms,"Hey Chris,
 
 Your issue about Coyote not meeting timing constraints when porting to other platforms hits one of the fundamental challenges with FPGA datacenter shells. An RDMA-capable shell optimized for one board will have completely different critical paths on another device.
 
 Which platform were you porting to, and was the bottleneck in the RDMA path, the memory subsystem, or the TLB?
 
 Severin"
-231,NO,,fix module language:SystemVerilog,4,pr,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,bo3z,Benjamin Ramhorst,,ETH Zurich,,,https://github.com/bo3z,https://www.linkedin.com/in/benjamin-ramhorst/,,https://www.linkedin.com/in/benjamin-ramhorst/,Improve timing closure in tlb_fsm,https://github.com/fpgasystems/Coyote/pull/180,2026-01-10T11:24:10Z,linkedin,,"The timing closure fix for tlb_fsm in Coyote targets one of the trickier modules in the shell — TLB FSMs have to resolve virtual-to-physical mappings fast enough to not bottleneck the data path. What was the critical path that required the fix?
+231,YES,,fix module language:SystemVerilog,4,pr,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,bo3z,Benjamin Ramhorst,,ETH Zurich,,,https://github.com/bo3z,https://www.linkedin.com/in/benjamin-ramhorst/,,https://www.linkedin.com/in/benjamin-ramhorst/,Improve timing closure in tlb_fsm,https://github.com/fpgasystems/Coyote/pull/180,2026-01-10T11:24:10Z,linkedin,,"Your tlb_fsm timing closure fix in Coyote targets a critical path in the address translation pipeline. Was the bottleneck in the TLB lookup or the FSM state transitions?
 
 Severin"
-232,NO,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,ayj,Jason Young,jasonyoung@google.com,Google ,jasonyoung@google.com,"Kirkland, WA - United States",https://github.com/ayj,,,,[bazel] Allow manufactoring code to be used by downstream repos.,https://github.com/lowRISC/opentitan/pull/29000,2025-12-23T22:52:26Z,email,Bazel downstream repo support for OpenTitan,"Hey Jason,
+232,YES,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,ayj,Jason Young,jasonyoung@google.com,Google ,jasonyoung@google.com,"Kirkland, WA - United States",https://github.com/ayj,,,,[bazel] Allow manufactoring code to be used by downstream repos.,https://github.com/lowRISC/opentitan/pull/29000,2025-12-23T22:52:26Z,email,Bazel downstream repo support for OpenTitan,"Hey Jason,
 
 Your PR allowing the lowrisc_opentitan Bazel module to work as a non-root module for downstream repos solves a real integration problem. Any team building on top of OpenTitan needs to pull it in as a dependency, not fork the entire workspace.
 
 What downstream use case drove this — was it an internal Google project consuming OpenTitan, or external partners hitting the limitation?
 
 Severin"
-233,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,hankhsu1996,Shou-Li Hsu,hank850503@gmail.com,@AheadComputing,,"Portland, OR, USA",https://github.com/hankhsu1996,,,https://hankhsu1996.github.io/,Modport interface field access via hierarchy fails,https://github.com/verilator/verilator/issues/5941,2025-04-17T21:21:00Z,email,Modport interface hierarchy access in Verilator,"Hey Shou-Li,
+233,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,hankhsu1996,Shou-Li Hsu,hank850503@gmail.com,@AheadComputing,,"Portland, OR, USA",https://github.com/hankhsu1996,,,https://hankhsu1996.github.io/,Modport interface field access via hierarchy fails,https://github.com/verilator/verilator/issues/5941,2025-04-17T21:21:00Z,email,Modport interface hierarchy access in Verilator,"Hey Shou-Li,
 
 The Verilator issue about modport interface field access via hierarchy failing is a real pain point. Modports are supposed to enforce access restrictions through the interface hierarchy, and when that breaks, designs that rely on encapsulation stop working.
 
 Did this surface in a specific bus protocol implementation, or a more general interface pattern at AheadComputing?
 
 Severin"
-234,NO,,fix module language:SystemVerilog,4,issue,openhwgroup/cv32e40p,cv32e40p,openhwgroup,Organization,90,SystemVerilog,1197,MikeOpenHWGroup,Mike Thompson,mike.thompson@eclipse-foundation.org,@openhwgroup ,"Functional verification of RTL for ASICs and FPGAs.  Sole Proprietor at Covrado and Director of Engineering, Verification Task Group at the OpenHW Foundation.","Ottawa, Ontario, Canada",https://github.com/MikeOpenHWGroup,,,https://openhwfoundation.org/,Create a single manifest file for synthesis and simulation,https://github.com/openhwgroup/cv32e40p/issues/239,2020-02-21T02:54:05Z,email,Unified manifest for CV32E40P synthesis and simulation,"Hey Mike,
+234,YES,,fix module language:SystemVerilog,4,issue,openhwgroup/cv32e40p,cv32e40p,openhwgroup,Organization,90,SystemVerilog,1197,MikeOpenHWGroup,Mike Thompson,mike.thompson@eclipse-foundation.org,@openhwgroup ,"Functional verification of RTL for ASICs and FPGAs.  Sole Proprietor at Covrado and Director of Engineering, Verification Task Group at the OpenHW Foundation.","Ottawa, Ontario, Canada",https://github.com/MikeOpenHWGroup,,,https://openhwfoundation.org/,Create a single manifest file for synthesis and simulation,https://github.com/openhwgroup/cv32e40p/issues/239,2020-02-21T02:54:05Z,email,Unified manifest for CV32E40P synthesis and simulation,"Hey Mike,
 
 Your issue on creating a single manifest file for synthesis and simulation in CV32E40P addresses a fundamental workflow problem. Having separate file lists for synthesis and simulation means they inevitably drift apart, and then bugs show up in silicon that passed simulation.
 
 What's the biggest gap in open source verification tooling right now from your perspective as someone defining methodology across multiple OpenHW cores?
 
 Severin"
-235,NO,,fix module language:SystemVerilog,4,issue,zerorisc/expo,expo,zerorisc,Organization,270,SystemVerilog,5,mkannwischer,Matthias J. Kannwischer,matthias@kannwischer.eu,"Quantum-Safe Migration Center, Chelpis Quantum Tech","Research Director @ Quantum-Safe Migration Center, Chelpis Quantum Tech","Taipei, Taiwan",https://github.com/mkannwischer,,,https://kannwischer.eu,Installation of Python dependencies fails during `jsonschema2md` build,https://github.com/zerorisc/expo/issues/183,2026-01-12T14:09:33Z,email,Python dependency issue in zerorisc expo,"Hey Matthias,
+235,YES,,fix module language:SystemVerilog,4,issue,zerorisc/expo,expo,zerorisc,Organization,270,SystemVerilog,5,mkannwischer,Matthias J. Kannwischer,matthias@kannwischer.eu,"Quantum-Safe Migration Center, Chelpis Quantum Tech","Research Director @ Quantum-Safe Migration Center, Chelpis Quantum Tech","Taipei, Taiwan",https://github.com/mkannwischer,,,https://kannwischer.eu,Installation of Python dependencies fails during `jsonschema2md` build,https://github.com/zerorisc/expo/issues/183,2026-01-12T14:09:33Z,email,Python dependency issue in zerorisc expo,"Hey Matthias,
 
 The jsonschema2md build failure from Python dependency issues in zerorisc expo is the kind of toolchain friction that blocks onboarding to the OpenTitan ecosystem. Build system reliability matters especially for security-critical projects where reproducibility is non-negotiable.
 
 Does your post-quantum work at the Quantum-Safe Migration Center involve PQC hardware implementations, or is it focused on the migration strategy side?
 
 Severin"
-236,NO,,fix module language:SystemVerilog,4,issue,openhwgroup/cva5,cva5,openhwgroup,Organization,15,SystemVerilog,128,ramonwirsch,Ramon Wirsch,ramon.wirsch@gmail.com,Daisytuner,,"Darmstadt, Germany",https://github.com/ramonwirsch,,,,"Interest in Flopoco-based FPU, Instruction invalidation on self-modifying code or Verilator Improvements?",https://github.com/openhwgroup/cva5/issues/20,2023-11-02T15:55:16Z,email,Flopoco FPU and self-modifying code in CVA5,"Hey Ramon,
+236,YES,,fix module language:SystemVerilog,4,issue,openhwgroup/cva5,cva5,openhwgroup,Organization,15,SystemVerilog,128,ramonwirsch,Ramon Wirsch,ramon.wirsch@gmail.com,Daisytuner,,"Darmstadt, Germany",https://github.com/ramonwirsch,,,,"Interest in Flopoco-based FPU, Instruction invalidation on self-modifying code or Verilator Improvements?",https://github.com/openhwgroup/cva5/issues/20,2023-11-02T15:55:16Z,email,Flopoco FPU and self-modifying code in CVA5,"Hey Ramon,
 
 Your issue exploring Flopoco-based FPU integration, instruction invalidation on self-modifying code, and Verilator improvements for CVA5 covers three very different challenges at once. Self-modifying code invalidation is especially tricky on a superscalar pipeline like CVA5.
 
 Which of the three are you actively working on, and what is Daisytuner's angle on CVA5?
 
 Severin"
-237,NO,,fix module language:SystemVerilog,4,pr,xlsynth/bedrock-rtl,bedrock-rtl,xlsynth,Organization,18,SystemVerilog,32,mgottscho,Mark Gottscho,mgottscho@ucla.edu,@openai @xlsynth,"MTS @ OpenAI. HW and SW, primarily Rust, SystemVerilog, Python, C++.","Mountain View, CA",https://github.com/mgottscho,,,markgottscho.com,Remove instability covers from flow checks modules,https://github.com/xlsynth/bedrock-rtl/pull/924,2025-11-12T23:00:10Z,email,Removing instability covers from bedrock-rtl flow checks,"Hey Mark,
+237,YES,,fix module language:SystemVerilog,4,pr,xlsynth/bedrock-rtl,bedrock-rtl,xlsynth,Organization,18,SystemVerilog,32,mgottscho,Mark Gottscho,mgottscho@ucla.edu,@openai @xlsynth,"MTS @ OpenAI. HW and SW, primarily Rust, SystemVerilog, Python, C++.","Mountain View, CA",https://github.com/mgottscho,,,markgottscho.com,Remove instability covers from flow checks modules,https://github.com/xlsynth/bedrock-rtl/pull/924,2025-11-12T23:00:10Z,email,Removing instability covers from bedrock-rtl flow checks,"Hey Mark,
 
 Your PR removing instability covers from flow checks modules in bedrock-rtl suggests the original cover properties were hitting false positives or were architecturally unnecessary. Cleaning up formal properties in a ready/valid library is important because downstream users inherit every assertion.
 
 What drove the decision to remove them — were they causing noise in formal runs, or did the flow check architecture change enough to make them irrelevant?
 
 Severin"
-238,NO,,fix module language:SystemVerilog,4,pr,HiSA-Team/Simply-V,Simply-V,HiSA-Team,Organization,5,SystemVerilog,16,MaistoV,Vincenzo Maisto,vincenzo.maisto2@unina.it,Vincenzo Maisto,,,https://github.com/MaistoV,,,,[fix/units1] Minor fixes to units flow,https://github.com/HiSA-Team/Simply-V/pull/180,2025-11-10T15:39:39Z,email,Units flow fixes in Simply-V,"Hey Vincenzo,
+238,YES,,fix module language:SystemVerilog,4,pr,HiSA-Team/Simply-V,Simply-V,HiSA-Team,Organization,5,SystemVerilog,16,MaistoV,Vincenzo Maisto,vincenzo.maisto2@unina.it,Vincenzo Maisto,,,https://github.com/MaistoV,,,,[fix/units1] Minor fixes to units flow,https://github.com/HiSA-Team/Simply-V/pull/180,2025-11-10T15:39:39Z,email,Units flow fixes in Simply-V,"Hey Vincenzo,
 
 Your PR fixing the units flow in Simply-V touches the execution pipeline of a RISC-V vector implementation, which is where correctness bugs compound fast. Getting the unit datapath right is critical given the V spec's complexity.
 
 Does Simply-V target a specific application domain like DSP or ML inference, or is it a general-purpose V implementation?
 
 Severin"
-239,NO,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,sasdf,,asdf79852@gmail.com,,,,https://github.com/sasdf,,,,"Cherry-pick to master: [sw,cov] Add on device coverage framework #28240",https://github.com/lowRISC/opentitan/pull/28478,2025-10-14T10:20:34Z,email,on-device coverage for OpenTitan,"Cherry-picking an on-device coverage framework into OpenTitan master is a big deal — runtime coverage on embedded targets is notoriously hard to get right without blowing timing or SRAM budgets. What was the overhead profile like on the Earlgrey top, and did you need to gate any of the coverage hooks behind a build flag to keep production bitstreams clean?
-
-Severin"
+239,YES,SKIP,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,sasdf,,asdf79852@gmail.com,,,,https://github.com/sasdf,,,,"Cherry-pick to master: [sw,cov] Add on device coverage framework #28240",https://github.com/lowRISC/opentitan/pull/28478,2025-10-14T10:20:34Z,email,,
 240,NO,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,sameo,Samuel Ortiz,samuel.e.ortiz@protonmail.com,Meta,,,https://github.com/sameo,,sameo,,"[sw,silicon_creator] Add a GPIO driver",https://github.com/lowRISC/opentitan/pull/28872,2025-12-04T13:17:07Z,email,GPIO driver for OpenTitan silicon creator,"Hey Samuel,
 
 Your PR adding a GPIO driver to OpenTitan's silicon_creator layer is noteworthy because anything in the silicon_creator path has to be minimal and security-hardened. A GPIO driver at that layer suggests it's needed for early boot or manufacturing test rather than general application use.
