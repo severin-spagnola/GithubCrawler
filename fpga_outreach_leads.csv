@@ -787,77 +787,63 @@ Severin"
 The segfault you reported in Synlig with certain typedef names (issue #2647) — name-dependent crashes in a SystemVerilog frontend usually point to hash collisions or missing escaping in the symbol table. Were you able to identify a pattern in which typedef names triggered it, or was it seemingly random?
 
 Severin"
-165.0,NO,,fix module language:Verilog,4,issue,CMU-SAFARI/SoftMC,SoftMC,CMU-SAFARI,Organization,4,Verilog,146,WalkerLau,,walker.lau@qq.com,,,,https://github.com/WalkerLau,,,,cable driver installation failed ,https://github.com/CMU-SAFARI/SoftMC/issues/1,2020-11-05T13:32:04Z,email,SoftMC DRAM controller,"Hey,
+165.0,YES,SKIP,fix module language:Verilog,4,issue,CMU-SAFARI/SoftMC,SoftMC,CMU-SAFARI,Organization,4,Verilog,146,WalkerLau,,walker.lau@qq.com,,,,https://github.com/WalkerLau,,,,cable driver installation failed ,https://github.com/CMU-SAFARI/SoftMC/issues/1,2020-11-05T13:32:04Z,email,,
+166.0,YES,,fix module language:Verilog,4,issue,corundum/corundum,corundum,corundum,Organization,10,Verilog,2230,jeehoonkang,Jeehoon Kang,jeehoon.kang@furiosa.ai,"@furiosa-ai, @kaist-cp","Building the ""right"" abstractions for AI systems. Chief Research Officer @furiosa-ai","Seoul, Korea",https://github.com/jeehoonkang,,,https://cp.kaist.ac.kr/jeehoon.kang,Does queue_manager ignore the back pressure on s_axil_bready?,https://github.com/corundum/corundum/issues/69,2021-09-05T16:24:59Z,email,AXI-Lite backpressure in Corundum queue_manager,"Hey Jeehoon,
 
-SoftMC at 146 stars from CMU-SAFARI. A software-defined DRAM controller on FPGA for memory research is a clever approach. Curious what kind of experiments it enables. Is it mainly for testing new memory scheduling policies, or does it go deeper into DRAM timing characterization?
-
-Severin"
-166.0,NO,,fix module language:Verilog,4,issue,corundum/corundum,corundum,corundum,Organization,10,Verilog,2230,jeehoonkang,Jeehoon Kang,jeehoon.kang@furiosa.ai,"@furiosa-ai, @kaist-cp","Building the ""right"" abstractions for AI systems. Chief Research Officer @furiosa-ai","Seoul, Korea",https://github.com/jeehoonkang,,,https://cp.kaist.ac.kr/jeehoon.kang,Does queue_manager ignore the back pressure on s_axil_bready?,https://github.com/corundum/corundum/issues/69,2021-09-05T16:24:59Z,email,Furiosa AI and Corundum FPGA NIC,"Hey Jeehoon,
-
-CRO at Furiosa AI in Seoul building AI chip abstractions, and contributing to Corundum at 2230 stars. An open source FPGA NIC framework at that scale is rare. Curious whether there's overlap between the networking work and what Furiosa needs for AI inference, or if these are separate interests.
+The backpressure issue you raised on Corundum's queue_manager ignoring s_axil_bready is a subtle one — an AXI-Lite master that doesn't respect BREADY can silently drop write responses, which makes debugging downstream failures nearly impossible. Did you hit this as actual data corruption in practice, or did you catch it during code review?
 
 Severin"
-167.0,NO,,fix module language:Verilog,4,issue,jotego/jtcores,jtcores,jotego,User,24,Verilog,287,rp-jt,RafaP,rafael.paiva@jotego.es,,Digital designer working on FPGA cores at JOTEGO,,https://github.com/rp-jt,,,,jtkcpu not running fast enough,https://github.com/jotego/jtcores/issues/878,2024-11-22T16:30:50Z,email,jtcores at JOTEGO,"Hey Rafa,
+167.0,YES,,fix module language:Verilog,4,issue,jotego/jtcores,jtcores,jotego,User,24,Verilog,287,rp-jt,RafaP,rafael.paiva@jotego.es,,Digital designer working on FPGA cores at JOTEGO,,https://github.com/rp-jt,,,,jtkcpu not running fast enough,https://github.com/jotego/jtcores/issues/878,2024-11-22T16:30:50Z,email,jtkcpu timing in jtcores,"Hey Rafa,
 
-Digital designer at JOTEGO working on jtcores at 287 stars with 24 contributors. That's one of the most active arcade FPGA core projects. Curious how the team divides work across different arcade platforms. Do you specialize in specific hardware architectures, or does everyone work across the full range?
-
-Severin"
-168.0,NO,,fix module language:Verilog,4,pr,hydra-genetics/qc,qc,hydra-genetics,Organization,12,Verilog,2,Smeds,Patrik Smeds,patrik.smeds@gmail.com,Clinical Genomics Uppsala / Uppsala University,,Uppsala,https://github.com/Smeds,,,,feat: update to snakemake 8,https://github.com/hydra-genetics/qc/pull/115,2024-03-04T14:52:30Z,email,,
-169.0,NO,,fix module language:Verilog,4,pr,Dasharo/verilog-lpc-module,verilog-lpc-module,Dasharo,Organization,6,Verilog,17,macpijan,Maciej Pijanowski,maciej.pijanowski@3mdeb.com,@3mdeb ,,Gdańsk,https://github.com/macpijan,,,,Verible verilog format,https://github.com/Dasharo/verilog-lpc-module/pull/5,2023-01-16T09:47:49Z,email,Dasharo LPC module at 3mdeb,"Hey Maciej,
-
-3mdeb and the Dasharo verilog-lpc-module from Gdansk. Open source firmware and now open hardware for the LPC bus. Curious whether this ties into Dasharo's coreboot work, like FPGA-based TPM or BMC implementations. The intersection of open firmware and open hardware is still underexplored.
+The jtkcpu timing issue you reported on jtcores — ""not running fast enough"" can mean a lot of things in arcade FPGA cores, from the CPU clock being too slow relative to the original hardware to timing closure on the target FPGA. Was this a cycle-accuracy problem where games ran at the wrong speed, or an FPGA synthesis timing constraint issue?
 
 Severin"
-170.0,NO,,fix module language:Verilog,4,pr,sethirus/The-Thiele-Machine,The-Thiele-Machine,sethirus,User,5,C++,10,sethirus,Devon Thiele,thethielemachine@gmail.com,,Independent researcher. Architect of the Thiele Machine computational model.,Pacific Northwest,https://github.com/sethirus,,,,"Integrate Kami/Bbv vendor builds, refactor Kami CPU module to flattened registers/memory, and extend cosim/test pipeline",https://github.com/sethirus/The-Thiele-Machine/pull/194,2026-02-28T09:41:30Z,email,Flattened register file in the Kami CPU module,"Refactoring a CPU module from structured to flattened registers while simultaneously integrating a vendor build system is a big architectural move -- it usually trades readability for simulation speed or synthesis compatibility. The Thiele Machine's cosim pipeline extension in PR #194 suggests you needed the flat layout to match a reference model.
+168.0,YES,SKIP,fix module language:Verilog,4,pr,hydra-genetics/qc,qc,hydra-genetics,Organization,12,Verilog,2,Smeds,Patrik Smeds,patrik.smeds@gmail.com,Clinical Genomics Uppsala / Uppsala University,,Uppsala,https://github.com/Smeds,,,,feat: update to snakemake 8,https://github.com/hydra-genetics/qc/pull/115,2024-03-04T14:52:30Z,email,,
+169.0,YES,,fix module language:Verilog,4,pr,Dasharo/verilog-lpc-module,verilog-lpc-module,Dasharo,Organization,6,Verilog,17,macpijan,Maciej Pijanowski,maciej.pijanowski@3mdeb.com,@3mdeb ,,Gdańsk,https://github.com/macpijan,,,,Verible verilog format,https://github.com/Dasharo/verilog-lpc-module/pull/5,2023-01-16T09:47:49Z,email,Verilog LPC module at Dasharo,"Hey Maciej,
 
-Was the main driver for flattening the registers a mismatch between Kami's structured representation and the Bbv cosim interface, or were you hitting synthesis tool limitations?
-
-Severin"
-171.0,NO,,fix module language:Verilog,4,issue,google/CFU-Playground,CFU-Playground,google,Organization,60,Verilog,544,davidlattimore,David Lattimore,dvdlttmr@gmail.com,,Developer currently working on Rust development tools with a focus on Rust warm build times.,"Sydney, Australia",https://github.com/davidlattimore,,,https://davidlattimore.github.io/,Instruction after CFU instruction is getting wrong result,https://github.com/google/CFU-Playground/issues/582,2022-05-12T00:44:48Z,email,CFU-Playground instruction ordering bug,"Hey David,
-
-The issue you filed in CFU-Playground about the instruction after a CFU instruction getting the wrong result is a gnarly one. That kind of pipeline hazard where a custom function unit's latency breaks assumptions in the surrounding logic is hard to catch without hitting it in practice.
-
-Coming from the Rust tooling world, how did you end up working with CFU-Playground? Curious whether it was the ML acceleration angle or something else that pulled you toward the hardware side.
+A standalone Verilog LPC module at Dasharo is unusual — LPC is mostly a firmware-level concern, so having it in RTL suggests something like FPGA-based TPM or BMC rather than bus sniffing. Does this tie into Dasharo's open firmware stack, or is it a standalone debug tool?
 
 Severin"
-172.0,NO,,fix module language:Verilog,4,pr,samitbasu/rhdl,rhdl,samitbasu,User,3,Verilog,291,zebreus,Zebreus@3,lennarteichhorn@googlemail.com,,🚶human,,https://github.com/zebreus,,,rudelb.link,Write documentation for and refactor the notetaking system,https://github.com/samitbasu/rhdl/pull/7,2024-05-25T15:19:12Z,email,RHDL at 291 stars,"Hey Lennart,
+170.0,YES,,fix module language:Verilog,4,pr,sethirus/The-Thiele-Machine,The-Thiele-Machine,sethirus,User,5,C++,10,sethirus,Devon Thiele,thethielemachine@gmail.com,,Independent researcher. Architect of the Thiele Machine computational model.,Pacific Northwest,https://github.com/sethirus,,,,"Integrate Kami/Bbv vendor builds, refactor Kami CPU module to flattened registers/memory, and extend cosim/test pipeline",https://github.com/sethirus/The-Thiele-Machine/pull/194,2026-02-28T09:41:30Z,email,Flattened register file in the Kami CPU module,"Hey Devon,
 
-Contributing to RHDL at 291 stars. Hardware design in Rust keeps gaining traction. Curious how RHDL compares to Clash or Amaranth in practice. Does the Rust type system actually translate well to hardware constraints, or do you hit cases where the language fights the design?
-
-Severin"
-173.0,NO,,fix module language:Verilog,4,issue,The-OpenROAD-Project/alpha-release,alpha-release,The-OpenROAD-Project,Organization,6,Verilog,54,oharboe,Øyvind Harboe,oyvind.harboe@zylin.com,Zylin AS,,Norway,https://github.com/oharboe,,,http://www.zylin.com,Add automated pre-merge testing procedures to match OpenROAD's ambitions,https://github.com/The-OpenROAD-Project/alpha-release/issues/23,2019-08-07T05:40:06Z,email,Zylin AS and open source EDA,"Hey Oyvind,
-
-Zylin AS in Norway contributing to OpenROAD. Open source place-and-route for ASICs is still early but moving fast. Curious whether Zylin uses OpenROAD for commercial work, or if the contribution is more about pushing the ecosystem forward for everyone.
+Refactoring a CPU module from structured to flattened registers while simultaneously integrating a vendor build system is a big architectural move — it usually trades readability for simulation speed or synthesis compatibility. The Thiele Machine's cosim pipeline extension in PR #194 suggests you needed the flat layout to match a reference model. Was the main driver for flattening the registers a mismatch between Kami's structured representation and the Bbv cosim interface, or were you hitting synthesis tool limitations?
 
 Severin"
-174.0,NO,,fix module language:Verilog,4,issue,nand2mario/usb_hid_host,usb_hid_host,nand2mario,User,5,Verilog,157,epsilon537,Epsilon,ruben.lysens2@gmail.com,,"Hacker, surfer, engineer, retro-computer enthusiast",Belgium,https://github.com/epsilon537,,2Lysens,https://github.com/epsilon537/,Sending USB reports to set keyboard LEDs?,https://github.com/nand2mario/usb_hid_host/issues/6,2024-01-09T15:39:12Z,email,USB HID host in Verilog,"Hey Ruben,
+171.0,YES,,fix module language:Verilog,4,issue,google/CFU-Playground,CFU-Playground,google,Organization,60,Verilog,544,davidlattimore,David Lattimore,dvdlttmr@gmail.com,,Developer currently working on Rust development tools with a focus on Rust warm build times.,"Sydney, Australia",https://github.com/davidlattimore,,,https://davidlattimore.github.io/,Instruction after CFU instruction is getting wrong result,https://github.com/google/CFU-Playground/issues/582,2022-05-12T00:44:48Z,email,CFU-Playground instruction ordering bug,"Hey David,
 
-Contributing to usb_hid_host at 157 stars from Belgium. USB on FPGA is one of those problems that sounds straightforward until you hit the protocol complexity. Curious whether you use this for retro computing projects or something else. The hacker/surfer/engineer/retro combo suggests MiSTer or similar.
+The issue you filed in CFU-Playground about the instruction after a CFU instruction getting the wrong result — that's a classic pipeline hazard where the CPU assumes single-cycle completion but the custom unit takes longer. Did you hit this with a specific ML operator, or was it reproducible with any multi-cycle CFU instruction?
 
 Severin"
-175.0,NO,,fix module language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD-flow-scripts,OpenROAD-flow-scripts,The-OpenROAD-Project,Organization,150,Verilog,590,jeffng-or,Jeff Ng,jeffng@precisioninno.com,,,,https://github.com/jeffng-or,,,,asap7 mock-cpu reports a very odd hold WNS,https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts/issues/3850,2026-01-30T00:32:43Z,email,asap7 mock-cpu hold WNS,"Hey Jeff,
+172.0,YES,SKIP,fix module language:Verilog,4,pr,samitbasu/rhdl,rhdl,samitbasu,User,3,Verilog,291,zebreus,Zebreus@3,lennarteichhorn@googlemail.com,,🚶human,,https://github.com/zebreus,,,rudelb.link,Write documentation for and refactor the notetaking system,https://github.com/samitbasu/rhdl/pull/7,2024-05-25T15:19:12Z,email,,
+173.0,YES,,fix module language:Verilog,4,issue,The-OpenROAD-Project/alpha-release,alpha-release,The-OpenROAD-Project,Organization,6,Verilog,54,oharboe,Øyvind Harboe,oyvind.harboe@zylin.com,Zylin AS,,Norway,https://github.com/oharboe,,,http://www.zylin.com,Add automated pre-merge testing procedures to match OpenROAD's ambitions,https://github.com/The-OpenROAD-Project/alpha-release/issues/23,2019-08-07T05:40:06Z,email,Pre-merge testing for OpenROAD,"Hey Øyvind,
+
+Your issue about adding automated pre-merge testing to OpenROAD touches a real gap — EDA tools have notoriously long runtimes, so getting meaningful test coverage in a pre-merge CI pipeline means choosing which benchmarks to gate on carefully. Did you have a specific set of designs or metrics in mind for the pre-merge checks, or was it more about establishing the infrastructure first?
+
+Severin"
+174.0,YES,,fix module language:Verilog,4,issue,nand2mario/usb_hid_host,usb_hid_host,nand2mario,User,5,Verilog,157,epsilon537,Epsilon,ruben.lysens2@gmail.com,,"Hacker, surfer, engineer, retro-computer enthusiast",Belgium,https://github.com/epsilon537,,2Lysens,https://github.com/epsilon537/,Sending USB reports to set keyboard LEDs?,https://github.com/nand2mario/usb_hid_host/issues/6,2024-01-09T15:39:12Z,email,USB HID output reports in usb_hid_host,"Hey Ruben,
+
+The issue you raised about sending USB reports to set keyboard LEDs in usb_hid_host — output reports are the tricky half of HID because the host has to handle the SET_REPORT control transfer, which is a different pipe than the interrupt IN used for input. Are you using this for a retro computing build where you need full keyboard LED support, or is there another use case driving the need for output reports?
+
+Severin"
+175.0,YES,,fix module language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD-flow-scripts,OpenROAD-flow-scripts,The-OpenROAD-Project,Organization,150,Verilog,590,jeffng-or,Jeff Ng,jeffng@precisioninno.com,,,,https://github.com/jeffng-or,,,,asap7 mock-cpu reports a very odd hold WNS,https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts/issues/3850,2026-01-30T00:32:43Z,email,asap7 mock-cpu hold WNS,"Hey Jeff,
 
 That odd hold WNS you flagged on the asap7 mock-cpu in OpenROAD-flow-scripts is curious. Hold violations that look numerically wrong usually point to something subtle in the timing library characterization or the CTS assumptions rather than the actual placement.
 
 Was that specific to the asap7 PDK or have you seen similar artifacts with other technology nodes in the flow?
 
 Severin"
-176.0,NO,,fix module language:Verilog,4,issue,lnis-uofu/OpenFPGA,OpenFPGA,lnis-uofu,Organization,90,Verilog,1058,shimoshida,,moshimoshimoshida@gmail.com,,,Japan,https://github.com/shimoshida,,,shimoshida.github.io,Simulation Failure in 4-bit Multiplier Circuit,https://github.com/lnis-uofu/OpenFPGA/issues/2335,2026-01-26T15:50:00Z,email,OpenFPGA at 1058 stars,"Hey,
+176.0,YES,SKIP,fix module language:Verilog,4,issue,lnis-uofu/OpenFPGA,OpenFPGA,lnis-uofu,Organization,90,Verilog,1058,shimoshida,,moshimoshimoshida@gmail.com,,,Japan,https://github.com/shimoshida,,,shimoshida.github.io,Simulation Failure in 4-bit Multiplier Circuit,https://github.com/lnis-uofu/OpenFPGA/issues/2335,2026-01-26T15:50:00Z,email,,
+177.0,YES,,fix module language:Verilog,4,issue,corundum/corundum,corundum,corundum,Organization,10,Verilog,2230,MarioPatetta,Mario Patetta,mario.patetta@cnam.fr,le Cnam,,"Paris, France",https://github.com/MarioPatetta,,,,Change clk period to meet timing constraints,https://github.com/corundum/corundum/issues/226,2024-12-09T11:33:01Z,email,Corundum clock period timing constraints,"Hey Mario,
 
-Contributing to OpenFPGA at 1058 stars from Japan. An open source FPGA architecture exploration framework with 90 contributors is serious infrastructure. Curious what part of the project you work on. The architecture generation, the bitstream tooling, or something else?
-
-Severin"
-177.0,NO,,fix module language:Verilog,4,issue,corundum/corundum,corundum,corundum,Organization,10,Verilog,2230,MarioPatetta,Mario Patetta,mario.patetta@cnam.fr,le Cnam,,"Paris, France",https://github.com/MarioPatetta,,,,Change clk period to meet timing constraints,https://github.com/corundum/corundum/issues/226,2024-12-09T11:33:01Z,email,Corundum FPGA NIC at le Cnam,"Hey Mario,
-
-Contributing to Corundum at 2230 stars from le Cnam in Paris. An open source 100G FPGA NIC with only 10 contributors means each person has significant impact. Curious what your focus area is. The datapath, the PCIe interface, or the network stack integration?
+The clock period change you filed on Corundum to meet timing constraints — adjusting the clock is often the pragmatic fix, but it raises the question of whether the critical path is in the NIC datapath or the PCIe interface. Was this on a specific FPGA target where the original clock period was too aggressive, or a more general timing closure issue across boards?
 
 Severin"
-178.0,NO,,fix module language:Verilog,4,pr,antonblanchard/microwatt,microwatt,antonblanchard,User,27,Verilog,712,paulusmack,Paul Mackerras,paulus@ozlabs.org,,,,https://github.com/paulusmack,,,,Improvements for the Arty A7 board,https://github.com/antonblanchard/microwatt/pull/461,2026-02-02T22:35:51Z,email,Microwatt POWER core at 712 stars,"Hey Paul,
+178.0,YES,,fix module language:Verilog,4,pr,antonblanchard/microwatt,microwatt,antonblanchard,User,27,Verilog,712,paulusmack,Paul Mackerras,paulus@ozlabs.org,,,,https://github.com/paulusmack,,,,Improvements for the Arty A7 board,https://github.com/antonblanchard/microwatt/pull/461,2026-02-02T22:35:51Z,email,Microwatt on the Arty A7,"Hey Paul,
 
-Microwatt at 712 stars is one of the most complete open source POWER ISA implementations out there, with 27 contributors. Curious how the project handles verification at the ISA compliance level. Do you run the official POWER test suites, or is it more ad-hoc testing?
+The Arty A7 improvements PR for Microwatt — fitting a POWER ISA core on an Artix-7 with limited block RAM and LUTs requires real trade-offs between feature completeness and resource usage. What were the main constraints you were working around — block RAM for the cache, or logic utilization for the core itself?
 
 Severin"
-179.0,NO,,fix module language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,yanghuaxuan,Huaxuan Yang,hyang@hyang.xyz,,CEO of vaporware,,https://github.com/yanghuaxuan,,,hyang.xyz,Issue Building OpenROAD on Arm Mac with Bazel,https://github.com/The-OpenROAD-Project/OpenROAD/issues/9529,2026-02-23T21:50:45Z,email,OpenROAD Bazel build on ARM Mac,"Hey Huaxuan,
+179.0,YES,,fix module language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,yanghuaxuan,Huaxuan Yang,hyang@hyang.xyz,,CEO of vaporware,,https://github.com/yanghuaxuan,,,hyang.xyz,Issue Building OpenROAD on Arm Mac with Bazel,https://github.com/The-OpenROAD-Project/OpenROAD/issues/9529,2026-02-23T21:50:45Z,email,OpenROAD Bazel build on ARM Mac,"Hey Huaxuan,
 
 Your issue about building OpenROAD with Bazel on ARM Mac is fighting two battles at once — Bazel's hermetic toolchain assumptions clash with Apple Silicon in ways that CMake builds dodge entirely. Was the goal reproducible builds, or was there something else pulling you toward Bazel for OpenROAD?
 
