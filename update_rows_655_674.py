@@ -8,9 +8,17 @@ CSV_PATH = "fpga_outreach_leads.csv"
 UPDATES = {
     "655": {
         "done": "YES",
-        "status": "SKIP",
-        "outreach_subject": "",
-        "outreach_message": "",
+        "status": "",
+        "outreach_subject": "Maintenance cancellation reset edge cases in AsenovoBackend",
+        "outreach_message": (
+            "Hey Sadik,\n\n"
+            "Nullable plannedDate on cancellation can trip downstream "
+            "queries that assume non-null when status != NOT_PLANNED "
+            "\u2014 a filter like `WHERE plannedDate > NOW()` silently drops "
+            "cancelled rows instead of including them. Did the fix add "
+            "a null-check path or a sentinel date?\n\n"
+            "Severin"
+        ),
     },
     "656": {
         "done": "YES",
@@ -38,9 +46,17 @@ UPDATES = {
     },
     "660": {
         "done": "YES",
-        "status": "SKIP",
-        "outreach_subject": "",
-        "outreach_message": "",
+        "status": "",
+        "outreach_subject": "TCP reset rate percentage shift in sharkclaw severity logic",
+        "outreach_message": (
+            "Hey David,\n\n"
+            "Switching TCP resets to percentage-based rates changes "
+            "severity boundary meaning \u2014 a 5% threshold on a low-traffic "
+            "link fires on a handful of packets while the same threshold "
+            "stays silent on a saturated one. Was the severity update "
+            "tied to absolute minimums or purely relative?\n\n"
+            "Severin"
+        ),
     },
     "661": {
         "done": "YES",
@@ -56,23 +72,23 @@ UPDATES = {
     },
     "663": {
         "done": "YES",
-        "status": "",
-        "outreach_subject": "Streak reset simplification tradeoffs in karman",
-        "outreach_message": (
-            "Hey Suryateja,\n\n"
-            "Simplifying streak resets risks masking timezone edge "
-            "cases \u2014 a user crossing midnight in their local zone might "
-            "see a false reset if retrieval and reset share one code "
-            "path. Did the fix unify both operations, or just trim "
-            "redundant queries?\n\n"
-            "Severin"
-        ),
-    },
-    "664": {
-        "done": "YES",
         "status": "SKIP",
         "outreach_subject": "",
         "outreach_message": "",
+    },
+    "664": {
+        "done": "YES",
+        "status": "",
+        "outreach_subject": "Connection reset handling tradeoffs in kungfu",
+        "outreach_message": (
+            "Hey yinheli,\n\n"
+            "Connection reset fixes in proxy layers have a subtle "
+            "tradeoff \u2014 retrying on RST can mask upstream failures, but "
+            "propagating it immediately drops in-flight streams that "
+            "could have landed on a healthy backend. Did the fix add "
+            "retry logic or just clean up the teardown path?\n\n"
+            "Severin"
+        ),
     },
     "665": {
         "done": "YES",
@@ -136,17 +152,9 @@ UPDATES = {
     },
     "671": {
         "done": "YES",
-        "status": "",
-        "outreach_subject": "reloadMessages and reset regression in CopilotKit",
-        "outreach_message": (
-            "Hey Jordan,\n\n"
-            "When reloadMessages and reset both stop working, it often "
-            "points to a shared state subscription that was refactored "
-            "upstream \u2014 the hook still fires but the store it reads "
-            "from was replaced. Did this surface after a specific "
-            "version bump, or was it a gradual regression?\n\n"
-            "Severin"
-        ),
+        "status": "SKIP",
+        "outreach_subject": "",
+        "outreach_message": "",
     },
     "672": {
         "done": "YES",
@@ -164,17 +172,9 @@ UPDATES = {
     },
     "673": {
         "done": "YES",
-        "status": "",
-        "outreach_subject": "Graph zoom reset on editor resize in studio-json-schema",
-        "outreach_message": (
-            "Hey Aditya,\n\n"
-            "Resetting zoom on every panel resize can fight the user "
-            "\u2014 if they\u2019ve zoomed into a deeply nested schema node, a "
-            "panel drag snaps them back to the root view. Was the fix "
-            "gating the reset on a specific resize threshold, or "
-            "preserving the viewport entirely?\n\n"
-            "Severin"
-        ),
+        "status": "SKIP",
+        "outreach_subject": "",
+        "outreach_message": "",
     },
     "674": {
         "done": "YES",
