@@ -1162,103 +1162,99 @@ Does Simply-V target a specific application domain like DSP or ML inference, or 
 
 Severin"
 239,YES,SKIP,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,sasdf,,asdf79852@gmail.com,,,,https://github.com/sasdf,,,,"Cherry-pick to master: [sw,cov] Add on device coverage framework #28240",https://github.com/lowRISC/opentitan/pull/28478,2025-10-14T10:20:34Z,email,,
-240,NO,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,sameo,Samuel Ortiz,samuel.e.ortiz@protonmail.com,Meta,,,https://github.com/sameo,,sameo,,"[sw,silicon_creator] Add a GPIO driver",https://github.com/lowRISC/opentitan/pull/28872,2025-12-04T13:17:07Z,email,GPIO driver for OpenTitan silicon creator,"Hey Samuel,
+240,YES,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,sameo,Samuel Ortiz,samuel.e.ortiz@protonmail.com,Meta,,,https://github.com/sameo,,sameo,,"[sw,silicon_creator] Add a GPIO driver",https://github.com/lowRISC/opentitan/pull/28872,2025-12-04T13:17:07Z,email,GPIO driver in OpenTitan silicon_creator,"Hey Samuel,
 
-Your PR adding a GPIO driver to OpenTitan's silicon_creator layer is noteworthy because anything in the silicon_creator path has to be minimal and security-hardened. A GPIO driver at that layer suggests it's needed for early boot or manufacturing test rather than general application use.
+Adding a GPIO driver to OpenTitan's silicon_creator layer means it needs to survive the secure boot path — a much tighter constraint than a general-purpose peripheral driver. GPIO at that layer usually signals manufacturing test or early boot strap detection.
 
-Is Meta deploying OpenTitan in server infrastructure, or is the interest more in the security architecture itself?
-
-Severin"
-241,NO,,fix module language:SystemVerilog,4,pr,acmpesuecc/TreeMultiplier,TreeMultiplier,acmpesuecc,Organization,8,SystemVerilog,1,InfiniBuilds,Infini_Builds,swaroop11.ds@gmail.com,,"Data & Tech Enthusiast  | ML + Web Dev | Video Editor & Content Creator  | Always learning, always building ",,https://github.com/InfiniBuilds,,ShivaSwaroopDS,https://x.com/ShivaSwaroopDS,(updated) parallel adder ,https://github.com/acmpesuecc/TreeMultiplier/pull/12,2025-10-17T22:57:47Z,email,,
-242,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,philipaxer,Philip Axer,philip.axer@gmail.com,,,,https://github.com/philipaxer,,,,Correct type deduction for parameterized classes fails when using variable as parameter,https://github.com/verilator/verilator/issues/6281,2025-08-11T09:14:41Z,email,Parameterized class type deduction in Verilator,"Hey Philip,
-
-The Verilator issue about type deduction failing for parameterized classes when using a variable as the parameter hits one of the harder parts of SystemVerilog semantics. The spec is ambiguous on when type resolution should happen for class parameters vs. module parameters.
-
-Were you using parameterized classes in a verification environment or in synthesizable RTL?
+Is Meta using OpenTitan as a root-of-trust in server hardware, or contributing upstream for the security architecture?
 
 Severin"
-243,NO,,fix module language:SystemVerilog,4,pr,dosadi/hydra,hydra,dosadi,User,3,C++,0,dosadi,Jon Taylor,dosadi82@gmail.com,,,,https://github.com/dosadi,,,,Add surface extraction stubs and enhance DMA validation,https://github.com/dosadi/hydra/pull/3,2025-11-24T08:35:59Z,email,DMA validation and surface extraction stubs in Hydra,"Pairing surface extraction stubs with DMA validation in the same PR is a smart sequence -- getting the DMA checks solid before the extraction logic lands avoids chasing data-corruption ghosts later. The Hydra project name and C++ context suggest this is GPU or accelerator work.
+241,YES,SKIP,fix module language:SystemVerilog,4,pr,acmpesuecc/TreeMultiplier,TreeMultiplier,acmpesuecc,Organization,8,SystemVerilog,1,InfiniBuilds,Infini_Builds,swaroop11.ds@gmail.com,,"Data & Tech Enthusiast  | ML + Web Dev | Video Editor & Content Creator  | Always learning, always building ",,https://github.com/InfiniBuilds,,ShivaSwaroopDS,https://x.com/ShivaSwaroopDS,(updated) parallel adder ,https://github.com/acmpesuecc/TreeMultiplier/pull/12,2025-10-17T22:57:47Z,email,,
+242,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,philipaxer,Philip Axer,philip.axer@gmail.com,,,,https://github.com/philipaxer,,,,Correct type deduction for parameterized classes fails when using variable as parameter,https://github.com/verilator/verilator/issues/6281,2025-08-11T09:14:41Z,email,Parameterized class type deduction in Verilator,"Hey Philip,
 
-Are the surface extraction stubs targeting a tiled memory layout, or are you working with linear framebuffer surfaces?
+Verilator failing type deduction for parameterized classes when a variable is the parameter exposes an ambiguity in the SystemVerilog spec — whether class parameter resolution should follow the same rules as module parameters. That distinction matters most in verification environments where parameterized classes are used heavily.
 
-Severin"
-244,NO,,fix module language:SystemVerilog,4,pr,pulp-platform/common_cells,common_cells,pulp-platform,Organization,90,SystemVerilog,723,Scheremo,Moritz Scherer,moritz@mosaic-soc.com,Mosaic SoC,"CTO @ Mosaic SoC, PhD in Computer Architecture",Zurich,https://github.com/Scheremo,,,,lzc: Fix edge case of WIDTH==0,https://github.com/pulp-platform/common_cells/pull/266,2025-09-12T11:30:39Z,email,LZC WIDTH==0 edge case in PULP common_cells,"Hey Moritz,
-
-Your PR fixing the LZC edge case at WIDTH==0 in PULP common_cells is the kind of corner case that breaks parameterized designs silently. A leading zero counter that fails at zero width would propagate errors through any downstream module that instantiates it with a degenerate config.
-
-Did this come up during Mosaic SoC integration, or through standalone testing of the library?
+Were you hitting this in a UVM-style testbench or in synthesizable parameterized RTL?
 
 Severin"
-245,NO,,fix module language:SystemVerilog,4,issue,openhwgroup/cv-hpdcache,cv-hpdcache,openhwgroup,Organization,16,SystemVerilog,101,celuk,Seyyid Hikmet Çelik,seyyid4091@gmail.com,TOBB ETU,,"Ankara, Turkey",https://github.com/celuk,linkedin.com/in/seyyid-hikmet-çelik-3108541b2,,linkedin.com/in/seyyid-hikmet-çelik-3108541b2,Missing semicolon,https://github.com/openhwgroup/cv-hpdcache/issues/81,2025-04-29T11:50:00Z,email,cv-hpdcache semicolon fix,"Hey Seyyid,
+243,YES,,fix module language:SystemVerilog,4,pr,dosadi/hydra,hydra,dosadi,User,3,C++,0,dosadi,Jon Taylor,dosadi82@gmail.com,,,,https://github.com/dosadi,,,,Add surface extraction stubs and enhance DMA validation,https://github.com/dosadi/hydra/pull/3,2025-11-24T08:35:59Z,email,DMA validation in Hydra,"Hey Jon,
 
-The missing semicolon issue you flagged on cv-hpdcache is a small fix but it speaks to actually compiling and running the HPDCache code. A high-performance data cache for CVA6 needs active users exercising it to shake out integration issues.
+Getting DMA validation solid before the surface extraction logic lands in Hydra avoids chasing data-corruption ghosts through an unverified transfer path. The C++ context and surface terminology suggest GPU or display pipeline work.
 
-Are you integrating cv-hpdcache into a CVA6-based design at TOBB ETU, or was this caught during a standalone build?
-
-Severin"
-246,NO,,fix module language:SystemVerilog,4,pr,KULeuven-MICAS/snax_cluster,snax_cluster,KULeuven-MICAS,Organization,29,SystemVerilog,35,IveanEx,Yunhao Deng,IveanEx@outlook.com,ESAT-MICAS,,"KU Leuven, Belgium",https://github.com/IveanEx,,,,Update XDMA with variable Cfg IO,https://github.com/KULeuven-MICAS/snax_cluster/pull/553,2025-09-08T15:42:54Z,email,XDMA variable config IO in SNAX cluster,"Hey Yunhao,
-
-Your PR updating XDMA with variable config IO in SNAX cluster addresses one of the key flexibility requirements for heterogeneous accelerator integration. Fixed IO configs limit which accelerators can plug into the framework.
-
-Does your work focus on a specific accelerator type, or the SNAX DMA infrastructure itself?
+Are the surfaces targeting a tiled memory layout, or linear framebuffers?
 
 Severin"
-247,NO,,fix module language:SystemVerilog,4,pr,MiSTer-devel/Saturn_MiSTer,Saturn_MiSTer,MiSTer-devel,Organization,13,SystemVerilog,89,Kuba-J,kuba-j,jhajda@poczta.fm,,,Poland,https://github.com/Kuba-J,,,,add 224p vertical crop option / fix the warning (CNTW parameter),https://github.com/MiSTer-devel/Saturn_MiSTer/pull/447,2025-08-15T14:33:21Z,email,224p vertical crop and CNTW parameter fix in Saturn MiSTer,"Hey Kuba,
+244,YES,,fix module language:SystemVerilog,4,pr,pulp-platform/common_cells,common_cells,pulp-platform,Organization,90,SystemVerilog,723,Scheremo,Moritz Scherer,moritz@mosaic-soc.com,Mosaic SoC,"CTO @ Mosaic SoC, PhD in Computer Architecture",Zurich,https://github.com/Scheremo,,,,lzc: Fix edge case of WIDTH==0,https://github.com/pulp-platform/common_cells/pull/266,2025-09-12T11:30:39Z,email,LZC WIDTH==0 edge case in PULP common_cells,"Hey Moritz,
 
-Your PR adding the 224p vertical crop option and fixing the CNTW parameter warning on Saturn MiSTer deals with the VDP2 display output, which is one of the trickier parts of the Saturn to get right. Vertical crop options matter because original Saturn games used non-standard resolutions.
+A leading zero counter that silently fails at WIDTH==0 would break any downstream module instantiated with a degenerate parameter config — and those failures are invisible until synthesis or formal catches them. Fixing it at the library level in common_cells prevents the bug from propagating across the PULP ecosystem.
 
-Do you work primarily on the video pipeline side of the Saturn core, or other subsystems too?
+Did this surface during Mosaic SoC integration, or through standalone testing of the library?
 
 Severin"
-248,NO,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,korran,Kor Nielsen,kor@google.com,Google,,SF Bay Area,https://github.com/korran,,,,Allow lowrisc_opentitan bazel module to be used as a non-root module by external workspaces.,https://github.com/lowRISC/opentitan/pull/25979,2025-01-22T21:29:44Z,email,OpenTitan Bazel non-root module support,"Hey Kor,
+245,YES,SKIP,fix module language:SystemVerilog,4,issue,openhwgroup/cv-hpdcache,cv-hpdcache,openhwgroup,Organization,16,SystemVerilog,101,celuk,Seyyid Hikmet Çelik,seyyid4091@gmail.com,TOBB ETU,,"Ankara, Turkey",https://github.com/celuk,linkedin.com/in/seyyid-hikmet-çelik-3108541b2,,linkedin.com/in/seyyid-hikmet-çelik-3108541b2,Missing semicolon,https://github.com/openhwgroup/cv-hpdcache/issues/81,2025-04-29T11:50:00Z,email,,
+246,YES,,fix module language:SystemVerilog,4,pr,KULeuven-MICAS/snax_cluster,snax_cluster,KULeuven-MICAS,Organization,29,SystemVerilog,35,IveanEx,Yunhao Deng,IveanEx@outlook.com,ESAT-MICAS,,"KU Leuven, Belgium",https://github.com/IveanEx,,,,Update XDMA with variable Cfg IO,https://github.com/KULeuven-MICAS/snax_cluster/pull/553,2025-09-08T15:42:54Z,email,XDMA variable config IO in SNAX cluster,"Hey Yunhao,
 
-Your PR allowing the lowrisc_opentitan Bazel module to work as a non-root module in external workspaces unblocks downstream consumers who need to depend on OpenTitan without forking the entire repo. Build system composability is critical for a project with 270+ contributors.
+Making the XDMA config IO variable in SNAX cluster removes a hard constraint on which accelerators can plug into the DMA framework. Fixed IO configs force every new accelerator to match one interface shape, which defeats the point of a heterogeneous cluster.
+
+Does your work focus on a specific accelerator type within SNAX, or the DMA infrastructure itself?
+
+Severin"
+247,YES,,fix module language:SystemVerilog,4,pr,MiSTer-devel/Saturn_MiSTer,Saturn_MiSTer,MiSTer-devel,Organization,13,SystemVerilog,89,Kuba-J,kuba-j,jhajda@poczta.fm,,,Poland,https://github.com/Kuba-J,,,,add 224p vertical crop option / fix the warning (CNTW parameter),https://github.com/MiSTer-devel/Saturn_MiSTer/pull/447,2025-08-15T14:33:21Z,email,224p vertical crop and CNTW fix in Saturn MiSTer,"Hey Kuba,
+
+The 224p vertical crop option for Saturn MiSTer addresses the fact that original Saturn games used non-standard vertical resolutions that modern scalers handle poorly. Fixing the CNTW parameter warning in the same PR suggests you were already in the VDP2 display output path.
+
+Do you focus primarily on the video pipeline side of the Saturn core, or other subsystems as well?
+
+Severin"
+248,YES,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,korran,Kor Nielsen,kor@google.com,Google,,SF Bay Area,https://github.com/korran,,,,Allow lowrisc_opentitan bazel module to be used as a non-root module by external workspaces.,https://github.com/lowRISC/opentitan/pull/25979,2025-01-22T21:29:44Z,email,OpenTitan Bazel non-root module support,"Hey Kor,
+
+Allowing lowrisc_opentitan to work as a non-root Bazel module means downstream projects can depend on OpenTitan without forking the entire repo. Without that, any external workspace that needs OpenTitan components has to vendor the whole thing.
 
 What downstream use case required this change?
 
 Severin"
-249,NO,,fix module language:SystemVerilog,4,pr,ANL-ASIC/matvec,matvec,ANL-ASIC,Organization,5,SystemVerilog,0,SEBv15,Sebastian,sebastian@strempfer.com,,ArnoldC is the future of programming languages!,Chicago,https://github.com/SEBv15,,,https://strempfer.dev,Fix subnormal results and add adder unit test,https://github.com/ANL-ASIC/matvec/pull/3,2025-06-23T20:54:31Z,email,Subnormal float fix and adder tests in ANL matvec,"Hey Sebastian,
+249,YES,,fix module language:SystemVerilog,4,pr,ANL-ASIC/matvec,matvec,ANL-ASIC,Organization,5,SystemVerilog,0,SEBv15,Sebastian,sebastian@strempfer.com,,ArnoldC is the future of programming languages!,Chicago,https://github.com/SEBv15,,,https://strempfer.dev,Fix subnormal results and add adder unit test,https://github.com/ANL-ASIC/matvec/pull/3,2025-06-23T20:54:31Z,email,Subnormal float handling in ANL matvec,"Hey Sebastian,
 
-Your PR fixing subnormal results and adding adder unit tests in ANL-ASIC matvec addresses a corner of floating-point that most accelerator designs skip entirely. Subnormal handling is expensive in hardware but ignoring it causes silent numerical drift in scientific workloads.
+Fixing subnormal results in ANL-ASIC's matvec addresses a detail most accelerator designs skip because handling subnormals is expensive in hardware. Ignoring them causes silent numerical drift that compounds across matrix operations — exactly the kind of error scientific workloads cannot tolerate.
 
-Does matvec target scientific computing workloads specific to Argonne, or is it a more general-purpose matrix accelerator?
-
-Severin"
-250,NO,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,marcelocarvalhoLowRisc,Marcelo Carvalho F. de Almeida,marcelo.carvalho@lowrisc.org,LowRisc CIC,Senior Design Hardware Verification Engineer.,"Cambridge, UK",https://github.com/marcelocarvalhoLowRisc,,,,Gpio straps func cov,https://github.com/lowRISC/opentitan/pull/26009,2025-01-24T17:45:20Z,email,GPIO straps functional coverage in OpenTitan,"Hey Marcelo,
-
-Your PR adding GPIO straps functional coverage to OpenTitan gets at one of the more underspecified areas in chip verification. Strap configurations determine boot mode and security state, so covering all valid strap combinations is essential for a root-of-trust chip.
-
-What coverage model are you using — cross-coverage across all strap pins, or targeted bins for the security-critical configurations?
+Does matvec target specific Argonne scientific computing workloads, or is it a general-purpose matrix accelerator?
 
 Severin"
-251,NO,,fix module language:SystemVerilog,4,pr,HiSA-Team/Simply-V,Simply-V,HiSA-Team,Organization,5,SystemVerilog,16,Granp4sso,Stefano Mercogliano,stefanomercogliano@gmail.com,"University of Naples Federico II, Qualcomm","Computer Engineer, Researcher and CPU designer",Naples,https://github.com/Granp4sso,,,,[feature/rv64/cv64a6] RV64: Integrate CV64A6,https://github.com/HiSA-Team/Simply-V/pull/129,2025-06-16T08:16:23Z,email,RV64 CV64A6 integration in Simply-V,"Hey Stefano,
+250,YES,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,marcelocarvalhoLowRisc,Marcelo Carvalho F. de Almeida,marcelo.carvalho@lowrisc.org,LowRisc CIC,Senior Design Hardware Verification Engineer.,"Cambridge, UK",https://github.com/marcelocarvalhoLowRisc,,,,Gpio straps func cov,https://github.com/lowRISC/opentitan/pull/26009,2025-01-24T17:45:20Z,email,GPIO straps functional coverage in OpenTitan,"Hey Marcelo,
 
-Your PR integrating CV64A6 into Simply-V for RV64 support is a significant milestone. Extending a RISC-V vector implementation from 32-bit to 64-bit means reworking the datapath, the address generation, and the CSR handling all at once.
+GPIO strap configurations determine boot mode and security state in OpenTitan, so missing a strap combination in verification means a root-of-trust chip could enter an untested configuration in production. The coverage gap is especially dangerous for security-critical straps.
 
-How does the academic vector work on Simply-V relate to what you see at Qualcomm — different constraints entirely, or some overlap?
+Are you using cross-coverage across all strap pins, or targeted bins for the security-critical configurations?
 
 Severin"
-252,NO,,fix module language:SystemVerilog,4,issue,NVlabs/verilog-eval,verilog-eval,NVlabs,Organization,6,SystemVerilog,386,stefanpie,Stefan Abi-Karam,stefanabikaram@gatech.edu,,"🐝 Graduate Student + Research Faculty at Georgia Tech
+251,YES,,fix module language:SystemVerilog,4,pr,HiSA-Team/Simply-V,Simply-V,HiSA-Team,Organization,5,SystemVerilog,16,Granp4sso,Stefano Mercogliano,stefanomercogliano@gmail.com,"University of Naples Federico II, Qualcomm","Computer Engineer, Researcher and CPU designer",Naples,https://github.com/Granp4sso,,,,[feature/rv64/cv64a6] RV64: Integrate CV64A6,https://github.com/HiSA-Team/Simply-V/pull/129,2025-06-16T08:16:23Z,email,RV64 CV64A6 integration in Simply-V,"Hey Stefano,
+
+Integrating CV64A6 into Simply-V for RV64 means reworking the datapath, address generation, and CSR handling at the same time — the vector extension touches all three when the base ISA widens from 32 to 64 bits.
+
+How does the academic vector work on Simply-V relate to what you see at Qualcomm — entirely different constraints, or some overlap?
+
+Severin"
+252,YES,,fix module language:SystemVerilog,4,issue,NVlabs/verilog-eval,verilog-eval,NVlabs,Organization,6,SystemVerilog,386,stefanpie,Stefan Abi-Karam,stefanabikaram@gatech.edu,,"🐝 Graduate Student + Research Faculty at Georgia Tech
 -
 ✨ I Work On AI for Chip Design Research ","Atlanta, GA, USA",https://github.com/stefanpie,,,https://stefanabikaram.com/,Provided Golden Testbenches Not Compiling With iverilog (wire used before declared) / Support iverilog 13,https://github.com/NVlabs/verilog-eval/issues/9,2025-01-03T05:29:01Z,email,Golden testbench iverilog compatibility in verilog-eval,"Hey Stefan,
 
-Your issue about golden testbenches in NVlabs verilog-eval not compiling with iverilog due to wire declaration ordering is a real benchmark infrastructure problem. If the evaluation testbenches are tied to one simulator, you cannot fairly compare LLM-generated RTL across tools.
+The wire-before-declaration issue in verilog-eval's golden testbenches means the benchmark is implicitly tied to one simulator's parsing order. If evaluation testbenches don't compile across tools, you can't fairly compare LLM-generated RTL quality.
 
-How well do current LLMs actually handle RTL generation compared to HLS based on what verilog-eval shows?
-
-Severin"
-253,NO,,fix module language:SystemVerilog,4,pr,pulp-platform/axi,axi,pulp-platform,Organization,60,SystemVerilog,1516,Aquaticfuller,Zexin Fu,zexifu@iis.ee.ethz.ch,,,,https://github.com/Aquaticfuller,,,,Bug fixing for axi_burst_unwrap module,https://github.com/pulp-platform/axi/pull/369,2025-03-18T14:03:25Z,email,axi_burst_unwrap bug fix in PULP AXI,"Hey Zexin,
-
-Your PR fixing bugs in the axi_burst_unwrap module in PULP's AXI library touches one of the trickiest parts of the AXI protocol. Burst unwrapping has to correctly handle wrapping bursts at every valid size and length combination, and getting it wrong causes silent data corruption.
-
-What triggered the bug — a specific burst size and address alignment combination, or a more general protocol compliance issue?
+Based on what verilog-eval shows, how well do current LLMs actually handle RTL generation compared to HLS approaches?
 
 Severin"
-254,NO,,fix module language:SystemVerilog,4,pr,MiSTer-devel/S32X_MiSTer,S32X_MiSTer,MiSTer-devel,Organization,11,SystemVerilog,63,asturur,Andrea Bogazzi,andreabogazzi79@gmail.com,,,"Italy, Rome",https://github.com/asturur,,,,"DO NOT MERGE: SH7604 and SH, all the fixes for the saturn, backported ( testing/unofficial )",https://github.com/MiSTer-devel/S32X_MiSTer/pull/49,2023-07-01T10:50:04Z,email,SH7604 Saturn fixes backported to S32X MiSTer,"Hey Andrea,
+253,YES,,fix module language:SystemVerilog,4,pr,pulp-platform/axi,axi,pulp-platform,Organization,60,SystemVerilog,1516,Aquaticfuller,Zexin Fu,zexifu@iis.ee.ethz.ch,,,,https://github.com/Aquaticfuller,,,,Bug fixing for axi_burst_unwrap module,https://github.com/pulp-platform/axi/pull/369,2025-03-18T14:03:25Z,email,axi_burst_unwrap bug fix in PULP AXI,"Hey Zexin,
 
-Your PR backporting the SH7604 and SH fixes from the Saturn core to S32X_MiSTer is smart — the 32X shares the dual SH2 architecture with the Saturn, so fixes should flow between the two cores. The ""DO NOT MERGE"" tag suggests you were testing compatibility before committing.
+Burst unwrapping in AXI has to correctly handle every valid size and length combination at every alignment — getting it wrong causes silent data corruption that only shows up under specific transfer patterns. Fixing this in PULP's AXI library prevents the bug from propagating to every downstream SoC that uses it.
 
-Did the Saturn SH2 fixes apply cleanly to the 32X, or did the different memory maps require additional changes?
+What triggered the bug — a specific burst size and alignment combination, or a protocol compliance check?
+
+Severin"
+254,YES,,fix module language:SystemVerilog,4,pr,MiSTer-devel/S32X_MiSTer,S32X_MiSTer,MiSTer-devel,Organization,11,SystemVerilog,63,asturur,Andrea Bogazzi,andreabogazzi79@gmail.com,,,"Italy, Rome",https://github.com/asturur,,,,"DO NOT MERGE: SH7604 and SH, all the fixes for the saturn, backported ( testing/unofficial )",https://github.com/MiSTer-devel/S32X_MiSTer/pull/49,2023-07-01T10:50:04Z,email,SH7604 Saturn fixes backported to S32X MiSTer,"Hey Andrea,
+
+The 32X shares the Saturn's dual-SH2 architecture, so SH7604 bug fixes should apply to both cores. The ""DO NOT MERGE"" tag on your PR suggests you were verifying the fixes didn't break anything given the different S32X memory map.
+
+Did the Saturn SH2 fixes apply cleanly, or did the memory map differences require additional changes?
 
 Severin"
 255,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,cyyself,Yangyu Chen,cyy@cyyself.name,Chongqing University,Ph.D. Student. Computer Architecture & Software co-design. Open-source enthusiast.,"(Beijing|Chongqing|Xiamen), China",https://github.com/cyyself,,yangyuc,https://blog.cyyself.name,Proposal to remove automatic assignment of processor affinity,https://github.com/verilator/verilator/issues/6826,2025-12-16T17:21:49Z,email,Removing automatic processor affinity in Verilator,"Hey Yangyu,
