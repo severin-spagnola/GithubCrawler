@@ -244,9 +244,9 @@ Severin"
 Your fix for the ghdl regression with locally static entity attributes in the A2I core (issue #53) shows how tightly coupled processor design is to simulator correctness. With a small contributor team on a full OpenPOWER core, do you hit cases where changes in one pipeline stage silently break assumptions in another?
 
 Severin"
-50.0,NO,fix entity language:VHDL,4,issue,MiSTer-devel/SMS_MiSTer,SMS_MiSTer,MiSTer-devel,Organization,22,VHDL,47,jotego,JOTEGO,jose.tejada@jotego.es,,"Creator of arcade FPGA cores for MiSTer, Pocket and other platforms","Valencia, Spain",https://github.com/jotego,,topapate,https://www.patreon.com/jotego,Cannot compile the core,https://github.com/MiSTer-devel/SMS_MiSTer/issues/137,2022-07-16T18:24:32Z,email,MiSTer SMS core compilation issues,"Hey Jose,
+50.0,NO,fix entity language:VHDL,4,issue,MiSTer-devel/SMS_MiSTer,SMS_MiSTer,MiSTer-devel,Organization,22,VHDL,47,jotego,JOTEGO,jose.tejada@jotego.es,,"Creator of arcade FPGA cores for MiSTer, Pocket and other platforms","Valencia, Spain",https://github.com/jotego,,topapate,https://www.patreon.com/jotego,Cannot compile the core,https://github.com/MiSTer-devel/SMS_MiSTer/issues/137,2022-07-16T18:24:32Z,email,SMS MiSTer core compilation failure,"Hey Jose,
 
-Creating arcade FPGA cores for MiSTer and Pocket is some of the most visible FPGA work happening right now. The SMS MiSTer core compilation issue (issue #137) suggests fragile build dependencies. Do you have a way to catch when changes break compatibility before synthesis?
+The SMS MiSTer core failing to compile (issue #137) points to fragile build dependencies — the kind that silently break when a toolchain or library version shifts. With that many cores across MiSTer and Pocket, do you pin specific toolchain versions per core, or is there a different strategy for keeping builds reproducible?
 
 Severin"
 51.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,jamochl,jamochl,james.lim@jamochl.com,,"Linux enthusiast and DevOps Engineer who loves virtual machines, containers and cool code.",,https://github.com/jamochl,,,jamochl.com,error: choice must be locally static expression,https://github.com/ghdl/ghdl/issues/2184,2022-08-30T21:37:22Z,email,ghdl locally static expression error,"Hey James,
@@ -254,14 +254,14 @@ Severin"
 The ghdl error about choices needing to be locally static expressions (issue #2184) is a common friction point when writing parameterized VHDL. With a DevOps background in Linux and containers, are you working on the CI/build infrastructure side of ghdl, or something closer to the simulator itself?
 
 Severin"
-52.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,sjaeckel,Steffen Jaeckel,gh@jaeckel.eu,@SUSE @libtom @strophe,"Software, Hardware, Cryptography, Systems Design","Freiburg Area, Germany",https://github.com/sjaeckel,,,,Elaboration error with sid-gcc-9.1.0,https://github.com/ghdl/ghdl/issues/883,2019-08-06T12:59:52Z,email,"SUSE, libtom, and VHDL","Hey Steffen,
+52.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,sjaeckel,Steffen Jaeckel,gh@jaeckel.eu,@SUSE @libtom @strophe,"Software, Hardware, Cryptography, Systems Design","Freiburg Area, Germany",https://github.com/sjaeckel,,,,Elaboration error with sid-gcc-9.1.0,https://github.com/ghdl/ghdl/issues/883,2019-08-06T12:59:52Z,email,ghdl elaboration error with sid-gcc-9.1.0,"Hey Steffen,
 
-Software, hardware, and cryptography at SUSE while maintaining libtom is a wide stack. Curious how the hardware side fits in. Do you use VHDL for crypto implementations, or is the ghdl contribution coming from a different angle entirely?
+The ghdl elaboration error you hit with sid-gcc-9.1.0 (issue #883) suggests a compiler-backend sensitivity that probably affects anyone building ghdl against newer GCC versions. With the crypto work on libtom, were you exploring VHDL for hardware crypto implementations, or was ghdl more of a packaging concern?
 
 Severin"
 53.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,DanielG,Daniel Gröber (dxld),dxld@darkboxed.org,@Debian,,,https://github.com/DanielG,,,http://dxld.at,synth error: raised TYPES.INTERNAL_ERROR : synth-vhdl_stmts.adb:2034,https://github.com/ghdl/ghdl/issues/2019,2022-03-29T08:30:57Z,email,ghdl synth internal error in synth-vhdl_stmts,"Hey Daniel,
 
-The ghdl synth internal error you reported in synth-vhdl_stmts.adb (issue #2019) looks like an unhandled statement type during synthesis lowering. As a Debian maintainer, did the contribution start from trying to get ghdl to build cleanly in Debian, or did the VHDL interest come first?
+The TYPES.INTERNAL_ERROR in synth-vhdl_stmts.adb you reported (issue #2019) looks like an unhandled statement type during synthesis lowering — the kind of thing that only surfaces with specific VHDL patterns. Did you hit it while trying to get a design through ghdl synth for Debian packaging, or was it a standalone VHDL project?
 
 Severin"
 54.0,NO,fix entity language:VHDL,4,pr,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,mkj,Matt Johnston,matt@ucc.asn.au,@CodeConstruct,,"Perth, Australia",https://github.com/mkj,,,https://matt.ucc.asn.au,Fix opening files relative to the current vhdl,https://github.com/ghdl/ghdl/pull/1929,2021-12-07T05:43:01Z,email,ghdl file path resolution fix,"Hey Matt,
@@ -269,9 +269,9 @@ Severin"
 Your PR fixing how ghdl opens files relative to the current VHDL source (PR #1929) solves a real portability problem for multi-directory projects. Is ghdl something you use at CodeConstruct, or is the contribution separate from client work?
 
 Severin"
-55.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,talonmyburgh,Talon,myburgh.talon@gmail.com,@MydonSolutions ,,,https://github.com/talonmyburgh,,,,"Component binding issue in GHDL, Vivado succeeds.",https://github.com/ghdl/ghdl/issues/1902,2021-10-27T13:41:30Z,email,MydonSolutions and ghdl,"Hey Talon,
+55.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,talonmyburgh,Talon,myburgh.talon@gmail.com,@MydonSolutions ,,,https://github.com/talonmyburgh,,,,"Component binding issue in GHDL, Vivado succeeds.",https://github.com/ghdl/ghdl/issues/1902,2021-10-27T13:41:30Z,email,ghdl component binding divergence from Vivado,"Hey Talon,
 
-MydonSolutions and ghdl contributions. Curious what pulled you into the project. Did it start from needing open source VHDL simulation for work, or was it more of a tooling interest that grew into active contribution?
+The component binding issue you filed (issue #1902) — ghdl fails where Vivado succeeds — is a sharp example of tool divergence on VHDL binding rules. Did it turn out to be a genuine ghdl bug in how it resolves component bindings, or was Vivado being permissive on something the spec actually disallows?
 
 Severin"
 56.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,suzizecat,Julien FAUCHER,julien.faucher@gmx.fr,,,,https://github.com/suzizecat,,,,GHDL doesn't seems to add file dependencies in VHDL-2000,https://github.com/ghdl/ghdl/issues/912,2019-09-01T23:49:30Z,email,GHDL file dependencies in VHDL-2000,"GHDL silently dropping file dependencies in VHDL-2000 mode sounds like a subtle elaboration ordering problem. That kind of bug can cascade into phantom errors that look completely unrelated.
@@ -289,9 +289,9 @@ Severin"
 Your PR implementing textDocument/hover for VHDL-LS (PR #104) is one of those features that transforms the editing experience from tolerable to actually productive. Was the hover implementation mostly about type resolution, or did signal tracing through hierarchies add unexpected complexity?
 
 Severin"
-59.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,hrvach,Hrvoje Čavrak,github@hrvoje.org,@facebook,"Geek, dev, sysadmin. Production engineer @ fb by day, maker and retro computing enthusiast by night. Fan of FPGAs, C and low-level stuff.","Munich, Germany",https://github.com/hrvach,,,http://blog.hrvoje.org,How to use GHDL .o from an external C program?,https://github.com/ghdl/ghdl/issues/1512,2020-11-18T13:57:32Z,email,Using ghdl .o files from external C programs,"Hey Hrvoje,
+59.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,hrvach,Hrvoje Čavrak,github@hrvoje.org,@facebook,"Geek, dev, sysadmin. Production engineer @ fb by day, maker and retro computing enthusiast by night. Fan of FPGAs, C and low-level stuff.","Munich, Germany",https://github.com/hrvach,,,http://blog.hrvoje.org,How to use GHDL .o from an external C program?,https://github.com/ghdl/ghdl/issues/1512,2020-11-18T13:57:32Z,email,ghdl .o FFI from external C,"Hey Hrvoje,
 
-Your ghdl issue about using compiled .o files from an external C program (issue #1512) is essentially asking for a clean FFI boundary between VHDL simulation and C. Does any of the infrastructure thinking from Meta-scale production engineering influence how you approach your FPGA side projects?
+Using ghdl-compiled .o files from an external C program (issue #1512) is essentially asking for a clean FFI boundary between VHDL simulation and native code. Were you trying to drive the simulation from C as a testbench harness, or embed the compiled VHDL as a functional block inside a larger C application?
 
 Severin"
 60.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,JulianKemmerer,Julian Kemmerer,julian.v.kemmerer@gmail.com,,,"Philadelphia, PA",https://github.com/JulianKemmerer,,,dusers.drexel.edu/~julian,Resizing unsigned's: unhandled (static) function: IIR_PREDEFINED_IEEE_NUMERIC_STD_RESIZE_UNS_NAT,https://github.com/ghdl/ghdl/issues/1531,2020-12-06T02:31:48Z,email,ghdl unhandled unsigned resize function,"Hey Julian,
