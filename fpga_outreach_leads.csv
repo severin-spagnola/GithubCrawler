@@ -1339,202 +1339,152 @@ The dcsr cause mismatch when entering debug after a step in CV32E40X is a subtle
 Was the mismatch specific to the single-step-then-halt transition, or did it also show up when entering debug from other causes like breakpoints?
 
 Severin"
-270,NO,,signal width mismatch language:SystemVerilog,4,pr,pulp-platform/axi,axi,pulp-platform,Organization,60,SystemVerilog,1516,suehtamacv,Matheus Cavalcante,,Arago Computing Inc.,Ohm Sweet Ohm,Arcueil,https://github.com/suehtamacv,https://www.linkedin.com/in/matheuscvlc/,,https://www.linkedin.com/in/matheuscvlc/,AXI DW Conversion,https://github.com/pulp-platform/axi/pull/43,2020-01-30T12:19:59Z,linkedin,,"AXI data width conversion in PULP's AXI library is one of the hardest protocol features to implement correctly — the transaction splitting and merging has to preserve ordering and atomicity guarantees. What's Arago Computing building on top of the PULP AXI infrastructure?
+270,YES,WRITE,signal width mismatch language:SystemVerilog,4,pr,pulp-platform/axi,axi,pulp-platform,Organization,60,SystemVerilog,1516,suehtamacv,Matheus Cavalcante,,Arago Computing Inc.,Ohm Sweet Ohm,Arcueil,https://github.com/suehtamacv,https://www.linkedin.com/in/matheuscvlc/,,https://www.linkedin.com/in/matheuscvlc/,AXI DW Conversion,https://github.com/pulp-platform/axi/pull/43,2020-01-30T12:19:59Z,linkedin,,"PR #43 on PULP's AXI lib — getting data width conversion right while preserving transaction ordering and atomicity is brutal protocol work. What was the hardest corner case?
 
 Severin"
-271,NO,,fix port map language:VHDL,4,issue,MiSTer-devel/Atari800_MiSTer,Atari800_MiSTer,MiSTer-devel,Organization,6,VHDL,42,happycube,Chad Page,Chad.Page@gmail.com,,,"Goleta, CA, US",https://github.com/happycube,,,,Atari 800 mode support,https://github.com/MiSTer-devel/Atari800_MiSTer/issues/4,2019-08-27T04:23:20Z,email,Atari 800 mode support in MiSTer,"Hey Chad,
+271,YES,WRITE,fix port map language:VHDL,4,issue,MiSTer-devel/Atari800_MiSTer,Atari800_MiSTer,MiSTer-devel,Organization,6,VHDL,42,happycube,Chad Page,Chad.Page@gmail.com,,,"Goleta, CA, US",https://github.com/happycube,,,,Atari 800 mode support,https://github.com/MiSTer-devel/Atari800_MiSTer/issues/4,2019-08-27T04:23:20Z,email,Atari 800 mode in MiSTer,"Hey Chad,
 
-Your issue requesting Atari 800 mode support in the MiSTer core is about getting the differences between the 800 and later XL/XE models right. The original 800 has different OS ROM, different memory mapping, and the personality board architecture.
-
-What part of the Atari 800 do you focus on — the ANTIC/GTIA video system, the POKEY audio, or system-level compatibility?
+The Atari 800 mode request on MiSTer goes deeper than a ROM swap — the original 800's memory mapping and personality board architecture differ enough from the XL/XE that the core needs real structural changes. Did you ever get further with testing the OS ROM bank differences?
 
 Severin"
-272,NO,,fix port map language:VHDL,4,issue,open-power/capi2-bsp,capi2-bsp,open-power,Organization,8,VHDL,10,jsvogt,Joerg-Stephan Vogt,jsvogt@de.ibm.com,IBM Germany R&D,,"Böblingen, Germany",https://github.com/jsvogt,,,https://www.ibm.com/de-de/marketing/entwicklung,Reset of N250SP on P9 leads to lost PCIe link ,https://github.com/open-power/capi2-bsp/issues/15,2018-10-09T13:22:17Z,email,N250SP PCIe link loss on CAPI2 BSP reset,"Hey Joerg-Stephan,
+272,YES,WRITE,fix port map language:VHDL,4,issue,open-power/capi2-bsp,capi2-bsp,open-power,Organization,8,VHDL,10,jsvogt,Joerg-Stephan Vogt,jsvogt@de.ibm.com,IBM Germany R&D,,"Böblingen, Germany",https://github.com/jsvogt,,,https://www.ibm.com/de-de/marketing/entwicklung,Reset of N250SP on P9 leads to lost PCIe link ,https://github.com/open-power/capi2-bsp/issues/15,2018-10-09T13:22:17Z,email,N250SP PCIe link loss after CAPI2 reset,"Hey Joerg-Stephan,
 
-The PCIe link loss on N250SP reset you reported on the CAPI2 BSP is a nasty hardware-level issue. Losing the PCIe link during reset means the FPGA disappears from the host bus, and recovering requires a full host-side rescan or reboot.
-
-Does this work continue under IBM's current POWER strategy, or has the focus shifted to CXL?
+Losing the PCIe link on N250SP reset in the CAPI2 BSP means the FPGA vanishes from the host bus entirely — recovery requires a full host-side rescan or reboot. Was this specific to the P9 platform, or did you see similar link instability on P8 with the first-gen CAPI?
 
 Severin"
-273,NO,,fix port map language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,fransschreuder,Frans Schreuder,info@usbpicprog.org,Schreuder Electronics,,Netherlands,https://github.com/fransschreuder,,,http://schreuderelectronics.com,Exception TYPES.INTERNAL_ERROR raised (VHDL 2008),https://github.com/ghdl/ghdl/issues/1521,2020-11-24T10:50:14Z,email,VHDL 2008 internal error in ghdl,"Hey Frans,
+273,YES,WRITE,fix port map language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,fransschreuder,Frans Schreuder,info@usbpicprog.org,Schreuder Electronics,,Netherlands,https://github.com/fransschreuder,,,http://schreuderelectronics.com,Exception TYPES.INTERNAL_ERROR raised (VHDL 2008),https://github.com/ghdl/ghdl/issues/1521,2020-11-24T10:50:14Z,email,ghdl VHDL 2008 internal error,"Hey Frans,
 
-The TYPES.INTERNAL_ERROR you hit in ghdl with VHDL 2008 code points to a parser or elaboration bug rather than a user error. Internal errors in an open-source VHDL simulator are the kind of report that actually improves the tool for everyone.
-
-Do you use ghdl in your commercial work at Schreuder Electronics, or is the contribution more about giving back to the ecosystem?
+The TYPES.INTERNAL_ERROR in ghdl on VHDL 2008 code points to a parser or elaboration bug rather than a user-side issue — internal errors in a simulator usually mean an unhandled language construct. Was the trigger a specific VHDL 2008 feature like type generics or conditional analysis?
 
 Severin"
-274,NO,,fix port map language:Verilog,4,pr,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,Divinesoumyadip,Soumyadip  Das Mahapatra,soumyacode7@gmail.com,Divineshield,"Hi, I'm Soumyadip Das Mahapatra, a competitive programmer pursuing a B.Tech at JIS University, currently in my 4th year. I am a  Candidate Master on Codeforces ",Kolkata,https://github.com/Divinesoumyadip,,,https://soumyadip.vercel.app/,grt: fix cugr memory crash on out-of-bounds grid access,https://github.com/The-OpenROAD-Project/OpenROAD/pull/9739,2026-03-12T07:19:48Z,email,CUgr out-of-bounds grid crash in OpenROAD,"Fixing an out-of-bounds grid access crash in CUgr is the kind of bug that silently corrupts routing results before anyone notices — memory crashes are actually the lucky outcome. Was the out-of-bounds access triggered by a specific floorplan geometry (e.g., non-uniform gcell grids), or was it a general off-by-one in the grid indexing?
+274,YES,WRITE,fix port map language:Verilog,4,pr,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,Divinesoumyadip,Soumyadip  Das Mahapatra,soumyacode7@gmail.com,Divineshield,"Hi, I'm Soumyadip Das Mahapatra, a competitive programmer pursuing a B.Tech at JIS University, currently in my 4th year. I am a  Candidate Master on Codeforces ",Kolkata,https://github.com/Divinesoumyadip,,,https://soumyadip.vercel.app/,grt: fix cugr memory crash on out-of-bounds grid access,https://github.com/The-OpenROAD-Project/OpenROAD/pull/9739,2026-03-12T07:19:48Z,email,CUgr out-of-bounds grid crash in OpenROAD,"Hey Soumyadip,
+
+The out-of-bounds grid access crash in CUgr means routing results were silently corrupting before anyone noticed — a memory crash is actually the lucky outcome. Was it triggered by a specific floorplan geometry like non-uniform gcell grids, or a general off-by-one in the grid indexing?
 
 Severin"
-275,NO,,fix port map language:Verilog,4,issue,gardners/c65gs,c65gs,gardners,User,5,Verilog,86,AnttiLukats,Antti Lukats,Antti.Lukats@googlemail.com,@micro-FPGA ,Electronics since 1979,"Bünde, Germany",https://github.com/AnttiLukats,,AnttiBrain,http://antti-brain.blogspot.com/," unsigned(r_blnd) => antialiased_red,",https://github.com/gardners/c65gs/issues/48,2016-04-09T08:28:21Z,email,C65GS video antialiasing,"Hey Antti,
+275,YES,WRITE,fix port map language:Verilog,4,issue,gardners/c65gs,c65gs,gardners,User,5,Verilog,86,AnttiLukats,Antti Lukats,Antti.Lukats@googlemail.com,@micro-FPGA ,Electronics since 1979,"Bünde, Germany",https://github.com/AnttiLukats,,AnttiBrain,http://antti-brain.blogspot.com/," unsigned(r_blnd) => antialiased_red,",https://github.com/gardners/c65gs/issues/48,2016-04-09T08:28:21Z,email,C65GS video blending,"Hey Antti,
 
-Your issue on the antialiased red blending in c65gs touches the video output path of an open-source Commodore 65 reimplementation. Getting color blending right in FPGA requires careful handling of the unsigned-to-signal conversion in the video pipeline.
-
-What is micro-FPGA working on currently — development boards, tooling, or something else?
+The antialiased red blending issue on c65gs touches the unsigned-to-signal conversion in the video output path — getting color math wrong in FPGA video pipelines usually shows up as visible banding or color shifts. Was this a simulation-vs-synthesis mismatch, or was the blending visibly wrong on real hardware?
 
 Severin"
-276,NO,,fix port map language:Verilog,4,pr,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,ahmed532,Ahmed Refaat Mohamed,i@ahmedr.xyz,,,,https://github.com/ahmed532,,,,odb: impl 3dblox checker checkFloatingChips,https://github.com/The-OpenROAD-Project/OpenROAD/pull/9421,2026-02-04T14:52:11Z,email,3D-Blox floating chip checker in OpenROAD,"Hey Ahmed,
+276,YES,WRITE,fix port map language:Verilog,4,pr,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,ahmed532,Ahmed Refaat Mohamed,i@ahmedr.xyz,,,,https://github.com/ahmed532,,,,odb: impl 3dblox checker checkFloatingChips,https://github.com/The-OpenROAD-Project/OpenROAD/pull/9421,2026-02-04T14:52:11Z,email,3D-Blox floating chip checker in OpenROAD,"Hey Ahmed,
 
-Your PR implementing the floating chip checker for 3D-Blox in OpenROAD's odb catches physically unsupported chiplets before they hit DRC. For 3D integration flows, validating mechanical support early prevents costly failures downstream.
-
-What criteria does the checker use to determine whether a chip is ""floating"" — does it account for partial bonding overlap, or only fully disconnected cases?
+The floating chip checker for 3D-Blox in OpenROAD's odb catches physically unsupported chiplets before they hit DRC — for 3D integration, validating mechanical support early prevents costly downstream failures. Does the checker account for partial bonding overlap, or only fully disconnected cases?
 
 Severin"
-277,NO,,fix port map language:Verilog,4,pr,MiSTer-devel/Jaguar_MiSTer,Jaguar_MiSTer,MiSTer-devel,Organization,7,Verilog,21,kconger,Keith Conger,keith.conger@gmail.com,"Black Box Embedded, LLC",,,https://github.com/kconger,,,,Mouse in port one fixed.,https://github.com/MiSTer-devel/Jaguar_MiSTer/pull/14,2025-04-03T18:09:52Z,email,Mouse port fix in Jaguar MiSTer,"Hey Keith,
+277,YES,WRITE,fix port map language:Verilog,4,pr,MiSTer-devel/Jaguar_MiSTer,Jaguar_MiSTer,MiSTer-devel,Organization,7,Verilog,21,kconger,Keith Conger,keith.conger@gmail.com,"Black Box Embedded, LLC",,,https://github.com/kconger,,,,Mouse in port one fixed.,https://github.com/MiSTer-devel/Jaguar_MiSTer/pull/14,2025-04-03T18:09:52Z,email,Jaguar MiSTer mouse port fix,"Hey Keith,
 
-Your PR fixing the mouse in port one on Jaguar MiSTer addresses one of the more obscure input peripherals on an already obscure console. The Jaguar's I/O controller handles mice differently from standard joysticks, so getting the port assignment right requires digging into the Tom chip's peripheral logic.
-
-How far along is the Jaguar core overall — does it handle the Tom and Jerry custom chips accurately enough for most games?
+The mouse port fix on Jaguar MiSTer digs into the Tom chip's peripheral I/O handling — the Jaguar treats mice differently from standard joysticks at the hardware level. Was the issue in the port detection logic or in how the mouse data stream was being decoded?
 
 Severin"
-278,NO,,fix port map language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,donn,Mohamed Gaber,me@donn.website,@fossi-foundation,LibreLane Maintainer @fossi-foundation + a bunch of other things,"Cairo, Egypt",https://github.com/donn,,,,"Post-GRT, resizer fails with cryptic error",https://github.com/The-OpenROAD-Project/OpenROAD/issues/5590,2024-08-15T16:56:37Z,email,Post-GRT resizer error in OpenROAD,"Hey Mohamed,
+278,YES,WRITE,fix port map language:Verilog,4,issue,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,donn,Mohamed Gaber,me@donn.website,@fossi-foundation,LibreLane Maintainer @fossi-foundation + a bunch of other things,"Cairo, Egypt",https://github.com/donn,,,,"Post-GRT, resizer fails with cryptic error",https://github.com/The-OpenROAD-Project/OpenROAD/issues/5590,2024-08-15T16:56:37Z,email,Post-GRT resizer crash in OpenROAD,"Hey Mohamed,
 
-Your issue about the resizer failing with a cryptic error after global routing in OpenROAD hits a pain point that affects anyone using the full RTL-to-GDS flow. Post-GRT resizing is supposed to fix timing, but if it crashes, you are stuck between a timing-unclean design and no way to fix it.
-
-What does LibreLane's roadmap look like — maintaining compatibility with existing OpenLane flows, or pushing in new directions?
+The cryptic resizer failure after global routing in OpenROAD blocks the entire timing repair step — you end up stuck between a timing-unclean design and no way to fix it. Did the error correlate with specific net topologies, or did it fail consistently on any post-GRT netlist?
 
 Severin"
-279,NO,,fix port map language:Verilog,4,pr,zeroasiccorp/umi,umi,zeroasiccorp,Organization,16,Verilog,157,zephray,Wenting Zhang,zephray@outlook.com,Modos Tech Inc,"Co-founder of Modos Tech Inc, open source software and hardware enthusiast, he/him, love retro computing.","Boston, MA",https://github.com/zephray,,zephray_wenting,https://zephray.me,Move TL2UMI injected bits in the address,https://github.com/zeroasiccorp/umi/pull/83,2023-10-01T13:55:05Z,email,TL2UMI address bit injection in ZeroASIC UMI,"Hey Wenting,
+279,YES,WRITE,fix port map language:Verilog,4,pr,zeroasiccorp/umi,umi,zeroasiccorp,Organization,16,Verilog,157,zephray,Wenting Zhang,zephray@outlook.com,Modos Tech Inc,"Co-founder of Modos Tech Inc, open source software and hardware enthusiast, he/him, love retro computing.","Boston, MA",https://github.com/zephray,,zephray_wenting,https://zephray.me,Move TL2UMI injected bits in the address,https://github.com/zeroasiccorp/umi/pull/83,2023-10-01T13:55:05Z,email,TL2UMI address bit placement in UMI,"Hey Wenting,
 
-Your PR moving TL2UMI injected bits in the address for ZeroASIC's UMI protocol is a subtle but important change. Where protocol bits sit in the address field affects how downstream decoders interpret transactions and can silently break routing if the convention changes.
-
-How does UMI fit into what Modos Tech is building — chiplet integration, or more general infrastructure?
+Moving the TL2UMI injected bits in the address field is subtle but critical — where protocol bits sit affects how downstream decoders interpret transactions, and a convention change can silently break routing. Did the original bit placement cause actual decode failures, or was this preventive?
 
 Severin"
-280,NO,,fix port map language:Verilog,4,pr,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,macd,Don MacMillen,don _at_ macmillen __dot__ net,,,,https://github.com/macd,,,,Python wrapper for pdn and core set of regression tests,https://github.com/The-OpenROAD-Project/OpenROAD/pull/2714,2023-01-07T05:52:28Z,email,OpenROAD PDN Python wrapper,"Hey Don,
+280,YES,WRITE,fix port map language:Verilog,4,pr,The-OpenROAD-Project/OpenROAD,OpenROAD,The-OpenROAD-Project,Organization,240,Verilog,2482,macd,Don MacMillen,don _at_ macmillen __dot__ net,,,,https://github.com/macd,,,,Python wrapper for pdn and core set of regression tests,https://github.com/The-OpenROAD-Project/OpenROAD/pull/2714,2023-01-07T05:52:28Z,email,OpenROAD PDN Python wrapper,"Hey Don,
 
-Writing the Python wrapper for the PDN module in OpenROAD plus a core regression test suite is foundational work. Power distribution network generation is one of those stages where small API design decisions ripple into every downstream flow script.
-
-What drove the decision to add Python bindings at that layer specifically? Curious whether it was about enabling scripted PDN exploration or more about making the regression tests easier to maintain.
+The Python wrapper for OpenROAD's PDN module plus a regression test suite means API design decisions at that layer ripple into every downstream flow script. Was the primary goal enabling scripted PDN exploration, or making the regression tests easier to maintain?
 
 Severin"
-281,NO,,fix port map language:Verilog,4,issue,lnis-uofu/OpenFPGA,OpenFPGA,lnis-uofu,Organization,90,Verilog,1058,tornupnegatives,Joseph Bellahcen,joeclb@icloud.com,NHanced Semiconductors,Digital Design Engineer,,https://github.com/tornupnegatives,,,josephbellahcen.com,Pin Constraint Explicit Port Direction,https://github.com/lnis-uofu/OpenFPGA/issues/776,2022-09-09T17:21:02Z,email,Pin constraint port direction in OpenFPGA,"Hey Joseph,
+281,YES,WRITE,fix port map language:Verilog,4,issue,lnis-uofu/OpenFPGA,OpenFPGA,lnis-uofu,Organization,90,Verilog,1058,tornupnegatives,Joseph Bellahcen,joeclb@icloud.com,NHanced Semiconductors,Digital Design Engineer,,https://github.com/tornupnegatives,,,josephbellahcen.com,Pin Constraint Explicit Port Direction,https://github.com/lnis-uofu/OpenFPGA/issues/776,2022-09-09T17:21:02Z,email,Pin constraint port direction in OpenFPGA,"Hey Joseph,
 
-Your issue about explicit port direction in pin constraints for OpenFPGA touches one of the details that matters for real FPGA architecture exploration. If pin constraints cannot distinguish input from output, the resulting architecture model does not accurately reflect physical I/O bank limitations.
-
-How does the advanced packaging work at NHanced connect to the FPGA architecture side?
+Explicit port direction in pin constraints for OpenFPGA matters because without input/output distinction, the architecture model can't accurately reflect physical I/O bank limitations. Was this blocking a specific architecture exploration you were running, or a general correctness issue you spotted?
 
 Severin"
-282,NO,,fix port map language:Verilog,4,issue,YosysHQ/apicula,apicula,YosysHQ,Organization,60,Verilog,647,Chandler-Kluser,Chandler Klüser,chandler.kluser@gmail.com,,,,https://github.com/Chandler-Kluser,,,,Cannot generate PNR for tangnano4k,https://github.com/YosysHQ/apicula/issues/113,2022-06-17T03:19:43Z,email,Tang Nano 4K PNR generation in Apicula,"Hey Chandler,
+282,YES,WRITE,fix port map language:Verilog,4,issue,YosysHQ/apicula,apicula,YosysHQ,Organization,60,Verilog,647,Chandler-Kluser,Chandler Klüser,chandler.kluser@gmail.com,,,,https://github.com/Chandler-Kluser,,,,Cannot generate PNR for tangnano4k,https://github.com/YosysHQ/apicula/issues/113,2022-06-17T03:19:43Z,email,Tang Nano 4K PNR in Apicula,"Hey Chandler,
 
-Your issue about not being able to generate PNR for the Tang Nano 4K in Apicula hits a real barrier for anyone trying to use open-source toolchains with Gowin FPGAs. If place-and-route fails for a specific device, that board is effectively locked to the vendor tools.
-
-What part of the Gowin bitstream format have you worked on — routing, logic configuration, or IO?
+Not being able to generate PNR for the Tang Nano 4K in Apicula effectively locks that board to Gowin's vendor tools — open toolchain support is the deciding factor for a lot of dev board choices. What part of the Gowin bitstream format have you dug into — routing, logic configuration, or IO?
 
 Severin"
-283,NO,,fix port map language:Verilog,4,issue,GaloisInc/BESSPIN-CloudGFE,BESSPIN-CloudGFE,GaloisInc,Organization,9,Verilog,2,kiniry,Joseph Kiniry,kiniry@acm.org,@FreeAndFair @Sigil-Logic @GaloisInc ,"Dad. Partner. Scientist. Activist. Maker.
+283,YES,WRITE,fix port map language:Verilog,4,issue,GaloisInc/BESSPIN-CloudGFE,BESSPIN-CloudGFE,GaloisInc,Organization,9,Verilog,2,kiniry,Joseph Kiniry,kiniry@acm.org,@FreeAndFair @Sigil-Logic @GaloisInc ,"Dad. Partner. Scientist. Activist. Maker.
 CEO and Chief Scientist at Free & Fair and Sigil Logic.
 Principal Scientist at Galois.","Portland, OR",https://github.com/kiniry,,kiniry,https://freeandfair.us/ https://sigillogic.com/ https://galois.com/ ,why doesn't FireSim Just Work?,https://github.com/GaloisInc/BESSPIN-CloudGFE/issues/26,2020-04-13T20:53:07Z,email,FireSim integration in BESSPIN CloudGFE,"Hey Joseph,
 
-Your BESSPIN-CloudGFE issue about FireSim not working out of the box captures the core frustration with FPGA-accelerated simulation toolchains. The integration complexity multiplies when you layer DARPA's security evaluation requirements on top.
-
-Is Sigil Logic bringing formal verification to commercial hardware design, or is it focused purely on the security evaluation side?
+The BESSPIN-CloudGFE issue about FireSim not working out of the box exposes how integration complexity multiplies when you layer DARPA's security evaluation requirements on top of an FPGA-accelerated simulation toolchain. Was the root cause in the FireSim build itself, or in the CloudGFE Docker environment configuration?
 
 Severin"
-284,NO,,fix port map language:Verilog,4,issue,redacted173/sd2snes,sd2snes,redacted173,User,19,Verilog,80,craysiii,Charles,charles@cray.codes,,,"Bay Area, CA",https://github.com/craysiii,,,,Link Cable possible?,https://github.com/redacted173/sd2snes/issues/23,2020-09-13T18:59:02Z,email,Link cable support for sd2snes,"Hey Charles,
+284,YES,WRITE,fix port map language:Verilog,4,issue,redacted173/sd2snes,sd2snes,redacted173,User,19,Verilog,80,craysiii,Charles,charles@cray.codes,,,"Bay Area, CA",https://github.com/craysiii,,,,Link Cable possible?,https://github.com/redacted173/sd2snes/issues/23,2020-09-13T18:59:02Z,email,sd2snes link cable support,"Hey Charles,
 
-Your issue asking about link cable support for sd2snes raises a hard question. Implementing a link cable protocol on an FPGA flash cart means cycle-accurate timing on serial I/O while simultaneously managing the main cartridge bus, which is a different challenge from the enhancement chip emulation.
-
-Do you work on the SNES enhancement chip emulation side, or the base cartridge functionality?
+Link cable support on sd2snes means cycle-accurate timing on serial I/O while simultaneously managing the main cartridge bus — that's a fundamentally different challenge from enhancement chip emulation. Has anyone attempted the serial protocol implementation, or is this still unexplored territory?
 
 Severin"
-285,NO,,fix port map language:Verilog,4,issue,GaloisInc/BESSPIN-CloudGFE,BESSPIN-CloudGFE,GaloisInc,Organization,9,Verilog,2,podhrmic,Michal Podhradsky,mpodhradsky@galois.com,@GaloisInc ,,Portland,https://github.com/podhrmic,,,http://podhrmic.github.io/,investigate building Debian image inside GFE docker,https://github.com/GaloisInc/BESSPIN-CloudGFE/issues/90,2020-05-18T20:15:31Z,email,Debian image builds inside GFE Docker,"Hey Michal,
+285,YES,WRITE,fix port map language:Verilog,4,issue,GaloisInc/BESSPIN-CloudGFE,BESSPIN-CloudGFE,GaloisInc,Organization,9,Verilog,2,podhrmic,Michal Podhradsky,mpodhradsky@galois.com,@GaloisInc ,,Portland,https://github.com/podhrmic,,,http://podhrmic.github.io/,investigate building Debian image inside GFE docker,https://github.com/GaloisInc/BESSPIN-CloudGFE/issues/90,2020-05-18T20:15:31Z,email,Debian image builds in BESSPIN GFE Docker,"Hey Michal,
 
-Your issue about building the Debian image inside the GFE Docker container for BESSPIN-CloudGFE is about making the development environment self-contained. If the Linux image build requires tools outside the container, reproducibility breaks for every new contributor.
-
-Does your focus on BESSPIN center on the FPGA cloud infrastructure or the security evaluation side?
+Building the Debian image inside the GFE Docker container is the difference between a reproducible dev environment and one that breaks for every new contributor who tries to set up BESSPIN. Was the main obstacle cross-compilation toolchain dependencies, or Docker layer size constraints?
 
 Severin"
-286,NO,,fix port map language:Verilog,4,issue,EttusResearch/uhd,uhd,EttusResearch,Organization,240,Verilog,1212,TheNageek,Keegan Walsh,keegan.k.walsh@gmail.com,,,"Salt Lake City, UT",https://github.com/TheNageek,,,,Build/Compile Tuple Error,https://github.com/EttusResearch/uhd/issues/327,2020-02-04T21:41:27Z,email,UHD build tuple error,"Hey Keegan,
+286,YES,WRITE,fix port map language:Verilog,4,issue,EttusResearch/uhd,uhd,EttusResearch,Organization,240,Verilog,1212,TheNageek,Keegan Walsh,keegan.k.walsh@gmail.com,,,"Salt Lake City, UT",https://github.com/TheNageek,,,,Build/Compile Tuple Error,https://github.com/EttusResearch/uhd/issues/327,2020-02-04T21:41:27Z,email,UHD build tuple error,"Hey Keegan,
 
-The build/compile tuple error you hit in Ettus UHD is the kind of toolchain compatibility issue that blocks new users from even getting started with USRP hardware. Build failures in the driver framework affect a large downstream SDR community.
-
-Do you work on the FPGA RFNoC blocks, the host driver, or the overall framework integration?
+The build tuple error in Ettus UHD blocks new users before they can even start using USRP hardware — build failures in the driver framework affect the entire downstream SDR community. Was this specific to a particular compiler version, or a general build configuration issue?
 
 Severin"
-287,NO,,fix port map language:Verilog,4,issue,esa-tu-darmstadt/tapasco,tapasco,esa-tu-darmstadt,Organization,28,Verilog,118,sommerlukas,Lukas Sommer,lsommer@amd.com,@amd,,Germany,https://github.com/sommerlukas,,,,"Local memory slots not considered in area estimation, causing DSE to fail",https://github.com/esa-tu-darmstadt/tapasco/issues/30,2019-01-22T16:16:30Z,email,Local memory area estimation in TaPaSCo DSE,"Hey Lukas,
+287,YES,WRITE,fix port map language:Verilog,4,issue,esa-tu-darmstadt/tapasco,tapasco,esa-tu-darmstadt,Organization,28,Verilog,118,sommerlukas,Lukas Sommer,lsommer@amd.com,@amd,,Germany,https://github.com/sommerlukas,,,,"Local memory slots not considered in area estimation, causing DSE to fail",https://github.com/esa-tu-darmstadt/tapasco/issues/30,2019-01-22T16:16:30Z,email,TaPaSCo DSE local memory area estimation,"Hey Lukas,
 
-Your issue about local memory slots not being considered in TaPaSCo's area estimation causing DSE to fail is a real problem. If the design space exploration underestimates resource usage, it suggests compositions that do not fit on the target FPGA, wasting synthesis runs.
-
-Does AMD use TaPaSCo internally, or is this continuation of your TU Darmstadt research?
+Local memory slots not being counted in TaPaSCo's area estimation means DSE suggests accelerator compositions that don't physically fit on the target FPGA — wasting entire synthesis runs on impossible configurations. Was this an oversight in the resource model, or did certain accelerator types expose it more than others?
 
 Severin"
-288,NO,,fix port map language:Verilog,4,issue,GideonZ/1541ultimate,1541ultimate,GideonZ,User,60,Verilog,248,xlar54,Scott Hutter,scott.hutter@gmail.com,,Software developer & general nerd :),"Tennessee, USA",https://github.com/xlar54,,,www.scotthutter.net,Alternate kernal rom for 64 mode not working on C128 (in 64 mode),https://github.com/GideonZ/1541ultimate/issues/47,2018-11-25T08:36:55Z,email,C128 alternate kernal ROM in 1541 Ultimate,"Hey Scott,
+288,YES,WRITE,fix port map language:Verilog,4,issue,GideonZ/1541ultimate,1541ultimate,GideonZ,User,60,Verilog,248,xlar54,Scott Hutter,scott.hutter@gmail.com,,Software developer & general nerd :),"Tennessee, USA",https://github.com/xlar54,,,www.scotthutter.net,Alternate kernal rom for 64 mode not working on C128 (in 64 mode),https://github.com/GideonZ/1541ultimate/issues/47,2018-11-25T08:36:55Z,email,C128 alternate kernal ROM in 1541 Ultimate,"Hey Scott,
 
-Your issue about the alternate kernal ROM for 64 mode not working on the C128 in 1541 Ultimate is a tricky compatibility case. The C128's 64 mode is supposed to be hardware-compatible, but ROM banking behaves differently depending on which mode initiated the switch.
-
-Do you focus on the drive emulation accuracy or the cartridge and expansion functionality?
+The alternate kernal ROM not working in C128's 64 mode on the 1541 Ultimate is a tricky edge case — ROM banking behaves differently depending on which mode initiated the switch, even though 64 mode is supposed to be hardware-compatible. Does the issue also affect custom kernals in native C128 mode?
 
 Severin"
-289,NO,,fix port map language:Verilog,4,issue,ZipCPU/openarty,openarty,ZipCPU,User,3,Verilog,131,tomtor,Tom Vijlbrief,tvijlbrief@gmail.com,,"Interested in controllers/CPUs (ESP,ARM,AVR,PowerPC/Risc-V), FPGAs (Verilog, Yosys, Xilinx Vivado) and many OS-projects",Netherlands,https://github.com/tomtor,,,https://v7f.eu,Arty A7 100 flash error,https://github.com/ZipCPU/openarty/issues/2,2018-11-03T10:56:46Z,email,Arty A7 100 flash error in OpenArty,"Hey Tom,
+289,YES,WRITE,fix port map language:Verilog,4,issue,ZipCPU/openarty,openarty,ZipCPU,User,3,Verilog,131,tomtor,Tom Vijlbrief,tvijlbrief@gmail.com,,"Interested in controllers/CPUs (ESP,ARM,AVR,PowerPC/Risc-V), FPGAs (Verilog, Yosys, Xilinx Vivado) and many OS-projects",Netherlands,https://github.com/tomtor,,,https://v7f.eu,Arty A7 100 flash error,https://github.com/ZipCPU/openarty/issues/2,2018-11-03T10:56:46Z,email,Arty A7 100 flash error in OpenArty,"Hey Tom,
 
-Your flash error issue on the Arty A7 100 in OpenArty points to a board variant compatibility problem. The A7-35T and A7-100T share the same PCB but have different FPGA dies, and flash configuration that works on one can fail on the other.
-
-Have you found open toolchains like Yosys competitive with Vivado for real Xilinx projects, or is there still a significant gap?
+The flash error on the Arty A7 100 in OpenArty is likely a board variant issue — the A7-35T and A7-100T share the same PCB but have different FPGA dies, and flash configuration that works on one can fail on the other. Was this a bitstream programming failure or a runtime flash access issue?
 
 Severin"
-290,NO,,fix port map language:Verilog,4,pr,EttusResearch/uhd,uhd,EttusResearch,Organization,240,Verilog,1212,ejk43,EJ Kreinar,ejkreinar@gmail.com,,,,https://github.com/ejk43,,,,Rfnoc radio channel map,https://github.com/EttusResearch/uhd/pull/164,2018-03-21T13:20:40Z,email,RFNoC radio channel mapping in UHD,"Mapping radio channels correctly in RFNoC is critical because a wrong channel-to-block-port binding silently routes samples to the wrong DSP chain, and the data looks plausible enough to waste days debugging. PR #164 on UHD suggests this was more than a cosmetic fix.
+290,YES,WRITE,fix port map language:Verilog,4,pr,EttusResearch/uhd,uhd,EttusResearch,Organization,240,Verilog,1212,ejk43,EJ Kreinar,ejkreinar@gmail.com,,,,https://github.com/ejk43,,,,Rfnoc radio channel map,https://github.com/EttusResearch/uhd/pull/164,2018-03-21T13:20:40Z,email,RFNoC radio channel mapping in UHD,"Hey EJ,
 
-Were you remapping channels to support a multi-radio configuration, or fixing incorrect default mappings for a specific daughterboard?
-
-Severin"
-291,NO,,fix port map language:Verilog,4,issue,The-OpenROAD-Project/RePlAce,RePlAce,The-OpenROAD-Project,Organization,9,Verilog,247,kunalg123,Kunal Ghosh,kunalpghosh@gmail.com,VLSI System Design Corp. Pvt. Ltd.,Kunal Ghosh Co-founder of VLSI System Design (VSD) Corp. Pvt. Ltd. ,"Bangalore, India",https://github.com/kunalg123,,,https://www.vlsisystemdesign.com/,/usr/bin/ld: cannot find -lverilog_parser,https://github.com/The-OpenROAD-Project/RePlAce/issues/17,2018-12-17T08:28:05Z,email,Verilog parser linker error in RePlAce,"Hey Kunal,
-
-The verilog_parser linker error you hit building RePlAce is one of those dependency issues that blocks anyone from trying out open-source placement tools. If the build fails before you can even run the placer, adoption stalls at step one.
-
-With 90K students through VSD's courses, what do you see as the tipping point for open source tools replacing commercial EDA in production?
+Mapping radio channels correctly in RFNoC is critical because a wrong channel-to-block-port binding silently routes samples to the wrong DSP chain — the data looks plausible enough to waste days debugging. Were you remapping channels to support a multi-radio configuration, or fixing incorrect default mappings for a specific daughterboard?
 
 Severin"
-292,NO,,fix port map language:SystemVerilog,4,pr,MiSTer-devel/NES_MiSTer,NES_MiSTer,MiSTer-devel,Organization,25,SystemVerilog,194,jefchaves,Jeferson Chaves,jefchaves@gmail.com,,"Fan of Douglas Adams, Emmy Noether, and Gilberto Gil. Cyclist. Professionally interested in designing energy efficient computers. BSc in EE, and PhD in CS.",,https://github.com/jefchaves,,,,Fix Verilog-2001 violation: enforce standard-compliant inout handling.,https://github.com/MiSTer-devel/NES_MiSTer/pull/426,2025-09-18T23:13:19Z,email,Verilog-2001 inout compliance fix for NES MiSTer,"Hey Jeferson,
+291,YES,WRITE,fix port map language:Verilog,4,issue,The-OpenROAD-Project/RePlAce,RePlAce,The-OpenROAD-Project,Organization,9,Verilog,247,kunalg123,Kunal Ghosh,kunalpghosh@gmail.com,VLSI System Design Corp. Pvt. Ltd.,Kunal Ghosh Co-founder of VLSI System Design (VSD) Corp. Pvt. Ltd. ,"Bangalore, India",https://github.com/kunalg123,,,https://www.vlsisystemdesign.com/,/usr/bin/ld: cannot find -lverilog_parser,https://github.com/The-OpenROAD-Project/RePlAce/issues/17,2018-12-17T08:28:05Z,email,Verilog parser linker error in RePlAce,"Hey Kunal,
 
-Your PR enforcing standard-compliant inout handling in NES_MiSTer fixes the kind of Verilog-2001 violation that works in some tools but breaks in others. Strict compliance matters because MiSTer cores get synthesized across different Quartus versions and community forks.
-
-Does your energy efficiency research connect to the FPGA reimplementation work, or is MiSTer purely a hobby?
+The verilog_parser linker error building RePlAce blocks anyone from trying out open-source placement — if the build fails at step one, adoption stalls completely. Was this a missing library path issue, or did verilog_parser need a specific build configuration that wasn't documented?
 
 Severin"
-293,NO,,fix port map language:SystemVerilog,4,pr,KULeuven-MICAS/snax_cluster,snax_cluster,KULeuven-MICAS,Organization,29,SystemVerilog,35,rgantonio,Ryan Antonio,ryan.antonio@esat.kuleuven.be,"University of the Philippines, Diliman (UPD) and Katholieke Universiteit Leuven (KUL)",,Leuven,https://github.com/rgantonio,,,,Add custom TCDM assignment feature,https://github.com/KULeuven-MICAS/snax_cluster/pull/249,2024-08-19T10:13:26Z,email,Custom TCDM assignment in SNAX cluster,"Hey Ryan,
+292,YES,WRITE,fix port map language:SystemVerilog,4,pr,MiSTer-devel/NES_MiSTer,NES_MiSTer,MiSTer-devel,Organization,25,SystemVerilog,194,jefchaves,Jeferson Chaves,jefchaves@gmail.com,,"Fan of Douglas Adams, Emmy Noether, and Gilberto Gil. Cyclist. Professionally interested in designing energy efficient computers. BSc in EE, and PhD in CS.",,https://github.com/jefchaves,,,,Fix Verilog-2001 violation: enforce standard-compliant inout handling.,https://github.com/MiSTer-devel/NES_MiSTer/pull/426,2025-09-18T23:13:19Z,email,Verilog-2001 inout compliance in NES MiSTer,"Hey Jeferson,
 
-Your PR adding custom TCDM assignment to SNAX cluster gives accelerator designers control over how tightly-coupled data memory is allocated. Default TCDM mapping does not work when different accelerators have conflicting bandwidth or latency requirements.
-
-What type of accelerator are you integrating into the SNAX framework?
+Enforcing standard-compliant inout handling in NES_MiSTer fixes the kind of Verilog-2001 violation that works in some synthesis tools but silently breaks in others — strict compliance matters because MiSTer cores get built across different Quartus versions and community forks. What tool or version flagged the non-compliant inout usage?
 
 Severin"
-294,NO,,fix port map language:SystemVerilog,4,issue,grayresearch/CX,CX,grayresearch,User,3,SystemVerilog,70,grayresearch,Jan Gray,jan@fpga.org,Gray Research LLC,Easy parallel computing with FPGAs,"Bellevue, WA, USA",https://github.com/grayresearch,,jangray,http://fpga.org,add CX scoped custom CSRs (CX CSRs),https://github.com/grayresearch/CX/issues/27,2024-02-23T21:32:28Z,email,Scoped custom CSRs for CX extensions,"Hey Jan,
+293,YES,WRITE,fix port map language:SystemVerilog,4,pr,KULeuven-MICAS/snax_cluster,snax_cluster,KULeuven-MICAS,Organization,29,SystemVerilog,35,rgantonio,Ryan Antonio,ryan.antonio@esat.kuleuven.be,"University of the Philippines, Diliman (UPD) and Katholieke Universiteit Leuven (KUL)",,Leuven,https://github.com/rgantonio,,,,Add custom TCDM assignment feature,https://github.com/KULeuven-MICAS/snax_cluster/pull/249,2024-08-19T10:13:26Z,email,Custom TCDM assignment in SNAX cluster,"Hey Ryan,
 
-Your issue on adding CX scoped custom CSRs to the composable extensions spec addresses a real namespacing problem. Without scoped CSRs, custom extensions from different vendors would collide in the CSR address space, which defeats the whole point of composability.
-
-Where does the standardization effort stand — is the RISC-V Foundation engaging with CX, or is it still in the proposal phase?
+Custom TCDM assignment in SNAX gives accelerator designers control over tightly-coupled data memory allocation — default mapping breaks down when different accelerators have conflicting bandwidth or latency requirements. What type of accelerator are you integrating into the SNAX framework?
 
 Severin"
-295,NO,,fix instantiation language:VHDL,4,issue,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,robhancocksed,Robert Hancock,robert.hancock@calian.com,Calian Advanced Technologies,Senior hardware architect and section lead for embedded software at Calian Advanced Technologies.,"Saskatoon, SK, Canada",https://github.com/robhancocksed,,,https://www.calian.com/,Possible SLINK RX FIFO overflow,https://github.com/stnolting/neorv32/issues/826,2024-02-23T00:21:31Z,email,SLINK RX FIFO overflow in neorv32,"Hey Robert,
+294,YES,WRITE,fix port map language:SystemVerilog,4,issue,grayresearch/CX,CX,grayresearch,User,3,SystemVerilog,70,grayresearch,Jan Gray,jan@fpga.org,Gray Research LLC,Easy parallel computing with FPGAs,"Bellevue, WA, USA",https://github.com/grayresearch,,jangray,http://fpga.org,add CX scoped custom CSRs (CX CSRs),https://github.com/grayresearch/CX/issues/27,2024-02-23T21:32:28Z,email,Scoped custom CSRs for CX extensions,"Hey Jan,
 
-The possible SLINK RX FIFO overflow you reported on neorv32 is the kind of edge case that only surfaces under sustained high-throughput streaming. If the RX FIFO overflows silently, downstream data gets corrupted without any error flag.
-
-Is neorv32 something Calian deploys in production systems, or is it a personal contribution to the ecosystem?
+Scoped custom CSRs in the CX composable extensions spec solve a real namespacing problem — without them, custom extensions from different vendors collide in the CSR address space, defeating composability entirely. Is the RISC-V Foundation actively engaging with the CX proposal, or is it still in the early stages?
 
 Severin"
-296,NO,,fix instantiation language:VHDL,4,issue,the-aerospace-corporation/satcat5,satcat5,the-aerospace-corporation,Organization,5,VHDL,492,stamenkovicsasa,Sasa Stamenkovic,,OneSpin,,"San Jose, CA",https://github.com/stamenkovicsasa,https://www.linkedin.com/in/sasastamenkovic/,,https://www.linkedin.com/in/sasastamenkovic/,[port_axi_mailbox block] axi_bvalid should not be high during or after reset,https://github.com/the-aerospace-corporation/satcat5/issues/1,2020-09-25T18:43:34Z,linkedin,,"The axi_bvalid reset behavior you flagged on SatCat5's port_axi_mailbox is a protocol compliance issue — AXI requires BVALID low during reset, and getting this wrong can cause spurious write acknowledgments when the system comes out of reset. What's your focus area at OneSpin when it comes to formal verification on networking hardware?
+295,YES,WRITE,fix instantiation language:VHDL,4,issue,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,robhancocksed,Robert Hancock,robert.hancock@calian.com,Calian Advanced Technologies,Senior hardware architect and section lead for embedded software at Calian Advanced Technologies.,"Saskatoon, SK, Canada",https://github.com/robhancocksed,,,https://www.calian.com/,Possible SLINK RX FIFO overflow,https://github.com/stnolting/neorv32/issues/826,2024-02-23T00:21:31Z,email,SLINK RX FIFO overflow in neorv32,"Hey Robert,
+
+The SLINK RX FIFO overflow in neorv32 only surfaces under sustained high-throughput streaming, and if it overflows silently, downstream data gets corrupted without any error flag. Was this triggered by a specific streaming peripheral, or did you catch it through simulation?
 
 Severin"
-297,NO,,fix instantiation language:VHDL,4,pr,firesim/aws-fpga-firesim,aws-fpga-firesim,firesim,Organization,60,VHDL,13,davidbiancolin,David Biancolin,david.biancolin@gmail.com,@sifive,Engineer @sifive; U of T + Cal Alum,Berkeley,https://github.com/davidbiancolin,,,davidbiancolin.github.io,FireSim 1.10.0 Release (Dev -> Master PR),https://github.com/firesim/aws-fpga-firesim/pull/25,2020-02-06T02:18:57Z,email,FireSim 1.10 AWS FPGA release,"Hey David,
-
-The FireSim 1.10.0 release merging dev to master on the AWS FPGA fork is the kind of integration milestone that unblocks everyone running FPGA-accelerated RISC-V simulation on F1 instances. Each release has to reconcile FireSim's simulation model changes with AWS's shell constraints.
-
-Is FireSim part of SiFive's internal chip development flow, or do you maintain the connection separately?
+296,YES,WRITE,fix instantiation language:VHDL,4,issue,the-aerospace-corporation/satcat5,satcat5,the-aerospace-corporation,Organization,5,VHDL,492,stamenkovicsasa,Sasa Stamenkovic,,OneSpin,,"San Jose, CA",https://github.com/stamenkovicsasa,https://www.linkedin.com/in/sasastamenkovic/,,https://www.linkedin.com/in/sasastamenkovic/,[port_axi_mailbox block] axi_bvalid should not be high during or after reset,https://github.com/the-aerospace-corporation/satcat5/issues/1,2020-09-25T18:43:34Z,linkedin,,"The axi_bvalid reset bug you flagged on SatCat5 is a real AXI compliance issue — BVALID high during reset causes spurious write acks. Did you catch this through formal or simulation?
 
 Severin"
-298,NO,,fix instantiation language:Verilog,4,issue,chipsalliance/f4pga-examples,f4pga-examples,chipsalliance,Organization,60,Verilog,287,jhu960213,Jack Hu,jingxujaster@hotmail.com,AMD,"Tiger/vLLM of ML Frameworks - AIG @ AMD. I've explored SLU model compression techniques as an M.Sc. student. Recently, I've been exploring MCP & AI agents.","Toronto, ON",https://github.com/jhu960213,,,,"Symbiflow build error when using ""Linux-on-litex-vexriscv"" project from Enjoy Digital",https://github.com/chipsalliance/f4pga-examples/issues/143,2021-04-28T18:08:53Z,email,SymbiFlow + LiteX build issue,"Hey Jack,
+297,YES,WRITE,fix instantiation language:VHDL,4,pr,firesim/aws-fpga-firesim,aws-fpga-firesim,firesim,Organization,60,VHDL,13,davidbiancolin,David Biancolin,david.biancolin@gmail.com,@sifive,Engineer @sifive; U of T + Cal Alum,Berkeley,https://github.com/davidbiancolin,,,davidbiancolin.github.io,FireSim 1.10.0 Release (Dev -> Master PR),https://github.com/firesim/aws-fpga-firesim/pull/25,2020-02-06T02:18:57Z,email,FireSim 1.10 AWS FPGA release,"Hey David,
 
-The SymbiFlow build error you hit trying to run Linux-on-LiteX-VexRiscv is one of those issues that sits right at the intersection of open source FPGA tooling and SoC generation. Working on ML frameworks at AMD and then running into f4pga build issues on the FPGA side is a pretty wide range.
-
-Curious whether the LiteX-VexRiscv project was related to your AMD work or more of a personal exploration, and what the f4pga experience was like compared to Vivado for that kind of SoC design.
+The FireSim 1.10 release on the AWS FPGA fork has to reconcile simulation model changes with AWS's shell constraints — each release is a nontrivial integration effort. What was the hardest part of getting 1.10 through the AWS shell compatibility layer?
 
 Severin"
-299,NO,,fix instantiation language:Verilog,4,issue,TeamVoss/VossII,VossII,TeamVoss,Organization,10,Verilog,56,gussmith23,Gus Smith,gussmith@cs.washington.edu,,PL/EDA/AI researcher,"Seattle, WA",https://github.com/gussmith23,,gushfsmith,justg.us,Compilation failed on Ubuntu,https://github.com/TeamVoss/VossII/issues/31,2024-04-04T21:27:35Z,email,VossII compilation on Ubuntu,"Hey Gus,
+298,YES,WRITE,fix instantiation language:Verilog,4,issue,chipsalliance/f4pga-examples,f4pga-examples,chipsalliance,Organization,60,Verilog,287,jhu960213,Jack Hu,jingxujaster@hotmail.com,AMD,"Tiger/vLLM of ML Frameworks - AIG @ AMD. I've explored SLU model compression techniques as an M.Sc. student. Recently, I've been exploring MCP & AI agents.","Toronto, ON",https://github.com/jhu960213,,,,"Symbiflow build error when using ""Linux-on-litex-vexriscv"" project from Enjoy Digital",https://github.com/chipsalliance/f4pga-examples/issues/143,2021-04-28T18:08:53Z,email,SymbiFlow + LiteX-VexRiscv build error,"Hey Jack,
 
-The compilation failure you hit building VossII on Ubuntu is the kind of portability issue that limits adoption of an already niche formal verification tool. If it does not build on the most common Linux distro, most potential users never get past the install step.
+The SymbiFlow build error on Linux-on-LiteX-VexRiscv sits at the intersection of open-source FPGA tooling and SoC generation — that's a lot of moving parts to get aligned. Was the failure in f4pga's synthesis stage, the place-and-route, or in the LiteX build system itself?
 
-Does your research focus on using PL techniques to improve hardware design tools, or on applying AI to the EDA flow?
+Severin"
+299,YES,WRITE,fix instantiation language:Verilog,4,issue,TeamVoss/VossII,VossII,TeamVoss,Organization,10,Verilog,56,gussmith23,Gus Smith,gussmith@cs.washington.edu,,PL/EDA/AI researcher,"Seattle, WA",https://github.com/gussmith23,,gushfsmith,justg.us,Compilation failed on Ubuntu,https://github.com/TeamVoss/VossII/issues/31,2024-04-04T21:27:35Z,email,VossII compilation on Ubuntu,"Hey Gus,
+
+VossII failing to compile on Ubuntu limits adoption of an already niche formal verification tool — if it doesn't build on the most common Linux distro, most users never get past install. Was this a specific library version incompatibility, or a deeper build system issue?
 
 Severin"
 300,NO,,fix instantiation language:Verilog,4,pr,pConst/basic_verilog,basic_verilog,pConst,User,4,Verilog,1937,JacyCui,Jacy,jiacaicui@smail.nju.edu.cn,Nanjing University,,Nanjing,https://github.com/JacyCui,,,https://www.cuijiacai.com/,Fix undefined `clk_div` in `freq_meter.sv`,https://github.com/pConst/basic_verilog/pull/7,2025-07-25T08:53:04Z,email,Undefined clk_div fix in freq_meter.sv,"Hey Jacy,
