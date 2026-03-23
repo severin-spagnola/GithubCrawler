@@ -1980,54 +1980,54 @@ Severin"
 An endianness mismatch in a root-of-trust’s SHA3 register documentation is security-relevant in a way most doc fixes aren’t — an integrator configuring the wrong byte order gets silently incorrect hashes from hardware they’ve decided to trust. How did you find the discrepancy — integration testing, or reviewing the RDL against the SHA3 spec?
 
 Severin"
-"405","NO","","fix rtl language:SystemVerilog","4","pr","lowRISC/ibex","ibex","lowRISC","Organization","120","SystemVerilog","1797","akashlevy","Akash Levy","me@akashlevy.com","@silimate","Entrepreneur, researcher, developer.
+"405","YES","","fix rtl language:SystemVerilog","4","pr","lowRISC/ibex","ibex","lowRISC","Organization","120","SystemVerilog","1797","akashlevy","Akash Levy","me@akashlevy.com","@silimate","Entrepreneur, researcher, developer.
 
-Silimate (YC S23) | Stanford PhD '23 | Princeton '18 | Allderdice '14","Mountain View, CA","https://github.com/akashlevy","","akashlevy","akashlevy.com","Fix DSim support","https://github.com/lowRISC/ibex/pull/2297","2025-07-16T23:07:07Z","email","Silimate and chip design AI","Hey Akash,
+Silimate (YC S23) | Stanford PhD '23 | Princeton '18 | Allderdice '14","Mountain View, CA","https://github.com/akashlevy","","akashlevy","akashlevy.com","Fix DSim support","https://github.com/lowRISC/ibex/pull/2297","2025-07-16T23:07:07Z","email","DSim support in Ibex and Silimate's EDA AI","Hey Akash,
 
-Silimate (YC S23) with a Stanford PhD and three tapeouts, contributing to Ibex. Building an AI debugger for chip designers is exactly the kind of tool the industry needs. Curious what the biggest debugging bottleneck is that Silimate solves. Is it RTL bugs, timing closure, or something else?
-
-Severin"
-"406","NO","","fix rtl language:SystemVerilog","4","pr","lowRISC/opentitan","opentitan","lowRISC","Organization","270","SystemVerilog","3226","nbdd0121","Gary Guo","gary@garyguo.net","","","Cambridge, United Kingdom","https://github.com/nbdd0121","","","https://garyguo.net","[ci] support merge queues","https://github.com/lowRISC/opentitan/pull/25947","2025-01-20T14:49:11Z","email","OpenTitan merge queue CI","Getting merge queue support working in OpenTitan's CI is a deceptively hard infrastructure problem. The interaction between merge queues and the sheer number of verification jobs OpenTitan runs creates interesting scheduling tradeoffs.
-
-How did you handle the case where merge queue batching invalidates test results that depend on the exact commit ordering?
+Fixing DSim support in Ibex suggests Silimate is targeting simulator-agnostic flows — or using Ibex as a benchmark for AI-assisted debugging. What does the hardest bottleneck look like for AI-assisted chip debugging: catching RTL logic bugs, timing closure, or something further down the flow like DRC sign-off?
 
 Severin"
-"407","NO","","fix rtl language:SystemVerilog","4","issue","chipsalliance/caliptra-rtl","caliptra-rtl","chipsalliance","Organization","60","SystemVerilog","133","bluegate010","Jeff Andersen","bluegate010@gmail.com","Google, LLC","","Kirkland, Washington","https://github.com/bluegate010","","","","Tag KV slots as whether or not HMAC operations can reveal results to FW","https://github.com/chipsalliance/caliptra-rtl/issues/688","2025-01-09T22:29:07Z","email","HMAC key vault slot tagging in Caliptra","Hey Jeff,
+"406","YES","","fix rtl language:SystemVerilog","4","pr","lowRISC/opentitan","opentitan","lowRISC","Organization","270","SystemVerilog","3226","nbdd0121","Gary Guo","gary@garyguo.net","","","Cambridge, United Kingdom","https://github.com/nbdd0121","","","https://garyguo.net","[ci] support merge queues","https://github.com/lowRISC/opentitan/pull/25947","2025-01-20T14:49:11Z","email","Merge queue CI for OpenTitan's verification scale","Hey Gary,
 
-Your issue about tagging KV slots to control whether HMAC operations can reveal results to firmware addresses a critical security boundary in Caliptra — without that distinction, firmware could potentially extract key material through the HMAC interface. What's the threat model driving this feature — compromised firmware, or establishing a hardware-enforced key hierarchy?
-
-Severin"
-"408","NO","","fix rtl language:SystemVerilog","4","pr","lowRISC/opentitan","opentitan","lowRISC","Organization","270","SystemVerilog","3226","suehnel","Christoph Suehnel","christoph.suehnel@ensilica.com","","","","https://github.com/suehnel","","","","[pwm] FIX SMOKE TEST","https://github.com/lowRISC/opentitan/pull/10745","2022-02-10T13:10:50Z","email","OpenTitan PWM smoke test fix","Hey Christoph,
-
-Your PWM smoke test fix in OpenTitan is the kind of verification work that catches peripheral bugs before they reach silicon — a broken smoke test means the PWM block could ship with undetected regressions. Was the smoke test failure caused by a change in the PWM RTL, or was the test itself not matching the spec?
+Merge queues in OpenTitan's CI hit a verification integrity problem that smaller projects don't face — when batching commits, a test result that passed in one queue state doesn't necessarily hold after a different batch lands first. How did you handle the case where merge queue batching invalidates results that depend on exact commit ordering?
 
 Severin"
-"409","NO","","fix rtl language:SystemVerilog","4","pr","CS350C-SP25/ozone-processor","ozone-processor","CS350C-SP25","Organization","15","SystemVerilog","5","karmanyaahm","Karmanyaah Malhotra","karmanyaah.gh@malhotra.cc","The University of Texas at Austin","random student hacker on the internet.  
+"407","YES","","fix rtl language:SystemVerilog","4","issue","chipsalliance/caliptra-rtl","caliptra-rtl","chipsalliance","Organization","60","SystemVerilog","133","bluegate010","Jeff Andersen","bluegate010@gmail.com","Google, LLC","","Kirkland, Washington","https://github.com/bluegate010","","","","Tag KV slots as whether or not HMAC operations can reveal results to FW","https://github.com/chipsalliance/caliptra-rtl/issues/688","2025-01-09T22:29:07Z","email","HMAC key vault slot exposure in Caliptra","Hey Jeff,
 
-I have worked on network protocols (@UnifiedPush) and robots (@ut-ras, @vexu-ghost, @vex-76513)","Austin, TX, US","https://github.com/karmanyaahm","","","https://karmanyaah.malhotra.cc","get RAT building w/ quartus","https://github.com/CS350C-SP25/ozone-processor/pull/6","2025-04-23T21:22:59Z","email","Getting Ozone processor RAT building with Quartus","Hey Karmanyaah,
-
-Getting the register alias table building with Quartus for the Ozone processor is a key milestone — RAT synthesis is where out-of-order designs often hit their first timing closure challenges on FPGA targets. What ISA does Ozone target, and how far along is the pipeline implementation?
+Without KV slot tagging, HMAC becomes an extraction oracle — firmware can feed chosen inputs through an HMAC keyed with a protected slot and observe outputs, which is a known key derivation attack path in HSMs. Is the threat model here compromised firmware specifically, or hardware-enforced key isolation that holds even if the attestation identity key is exposed?
 
 Severin"
-"410","NO","","fix rtl language:SystemVerilog","4","pr","chipsalliance/caliptra-rtl","caliptra-rtl","chipsalliance","Organization","60","SystemVerilog","133","steven-bellock","Steven Bellock","sbellock@nvidia.com","@NVIDIA","System software security engineer who works on confidential computing.","Folsom, CA","https://github.com/steven-bellock","","","","Integration doc - use RTL signal names","https://github.com/chipsalliance/caliptra-rtl/pull/570","2024-08-14T17:58:04Z","email","Caliptra integration docs RTL signal names","Hey Steven,
+"408","YES","","fix rtl language:SystemVerilog","4","pr","lowRISC/opentitan","opentitan","lowRISC","Organization","270","SystemVerilog","3226","suehnel","Christoph Suehnel","christoph.suehnel@ensilica.com","","","","https://github.com/suehnel","","","","[pwm] FIX SMOKE TEST","https://github.com/lowRISC/opentitan/pull/10745","2022-02-10T13:10:50Z","email","OpenTitan PWM smoke test failure root cause","Hey Christoph,
 
-Your PR to use RTL signal names in Caliptra's integration documentation is a practical improvement — when the docs reference abstract signal names that don't match the actual RTL, integrators waste hours mapping between the two. How does Caliptra's hardware root of trust fit into Nvidia's broader confidential computing architecture?
-
-Severin"
-"411","NO","","fix sensitivity list"" language:vhdl","5","pr","PacktPublishing/Learn-FPGA-Programming","Learn-FPGA-Programming","PacktPublishing","Organization","5","VHDL","205","ncde","Niyazi Cem Degirmenci","ncde@kth.se","kth","","stockholm","https://github.com/ncde","","","www.csc.kth.se/~ncde","Update tb.sv","https://github.com/PacktPublishing/Learn-FPGA-Programming/pull/4","2022-07-10T09:21:31Z","email","Testbench update for Learn FPGA Programming","Hey Niyazi,
-
-Your testbench update PR on Learn FPGA Programming fixes code that students depend on — broken testbenches in educational repos are especially harmful because beginners can't tell if they made a mistake or the reference is wrong. What was the specific issue in the testbench you fixed?
+A failing PWM smoke test looks identical whether the peripheral RTL changed or the test expectation drifted — the failure mode doesn't tell you which side is wrong. Was the failure caused by a change in the PWM RTL, or was the test itself out of sync with the current spec?
 
 Severin"
-"412","NO","","fix sensitivity list"" language:vhdl","5","pr","robinsonb5/ZPUFlex","ZPUFlex","robinsonb5","User","4","VHDL","36","ikorb","Ingo Korb","ingo@akana.de","","","","https://github.com/ikorb","","","http://www.sd2iec.de","Fix sensitivity list of decodeControl process","https://github.com/robinsonb5/ZPUFlex/pull/4","2014-06-19T22:01:35Z","email","ZPUFlex decodeControl sensitivity list fix","Hey Ingo,
+"409","YES","","fix rtl language:SystemVerilog","4","pr","CS350C-SP25/ozone-processor","ozone-processor","CS350C-SP25","Organization","15","SystemVerilog","5","karmanyaahm","Karmanyaah Malhotra","karmanyaah.gh@malhotra.cc","The University of Texas at Austin","random student hacker on the internet.  
 
-Your sensitivity list fix for the decodeControl process in ZPUFlex addresses a classic VHDL simulation-synthesis mismatch — incomplete sensitivity lists simulate correctly in some tools but synthesize to different behavior. Did the fix change the actual hardware behavior, or was it a simulation-only correctness issue?
+I have worked on network protocols (@UnifiedPush) and robots (@ut-ras, @vexu-ghost, @vex-76513)","Austin, TX, US","https://github.com/karmanyaahm","","","https://karmanyaah.malhotra.cc","get RAT building w/ quartus","https://github.com/CS350C-SP25/ozone-processor/pull/6","2025-04-23T21:22:59Z","email","RAT synthesis in Quartus for Ozone out-of-order processor","Hey Karmanyaah,
+
+Getting a register alias table through Quartus synthesis is where most student out-of-order implementations hit their first hard constraint — the multi-port lookup the RAT needs either bloats to unusable LUT counts or needs structural changes that break the microarchitecture. What ISA does Ozone target, and how far along is the pipeline beyond the RAT?
+
+Severin"
+"410","YES","","fix rtl language:SystemVerilog","4","pr","chipsalliance/caliptra-rtl","caliptra-rtl","chipsalliance","Organization","60","SystemVerilog","133","steven-bellock","Steven Bellock","sbellock@nvidia.com","@NVIDIA","System software security engineer who works on confidential computing.","Folsom, CA","https://github.com/steven-bellock","","","","Integration doc - use RTL signal names","https://github.com/chipsalliance/caliptra-rtl/pull/570","2024-08-14T17:58:04Z","email","Caliptra RTL signal names in integration docs","Hey Steven,
+
+Caliptra integration docs that reference abstract names instead of RTL signal names create silent mapping errors — and for a hardware root of trust, an integrator building confidential computing attestation needs exact register and signal names to write correct firmware. How does Caliptra fit into Nvidia's broader confidential computing stack?
+
+Severin"
+"411","YES","","fix sensitivity list"" language:vhdl","5","pr","PacktPublishing/Learn-FPGA-Programming","Learn-FPGA-Programming","PacktPublishing","Organization","5","VHDL","205","ncde","Niyazi Cem Degirmenci","ncde@kth.se","kth","","stockholm","https://github.com/ncde","","","www.csc.kth.se/~ncde","Update tb.sv","https://github.com/PacktPublishing/Learn-FPGA-Programming/pull/4","2022-07-10T09:21:31Z","email","Learn FPGA Programming testbench fix","Hey Niyazi,
+
+Broken testbenches in educational FPGA repos cause more damage than broken testbenches in production code — a student can't distinguish their own mistake from a faulty reference, which means they doubt their understanding before they doubt the book. What was the specific issue in the tb.sv you fixed?
+
+Severin"
+"412","YES","","fix sensitivity list"" language:vhdl","5","pr","robinsonb5/ZPUFlex","ZPUFlex","robinsonb5","User","4","VHDL","36","ikorb","Ingo Korb","ingo@akana.de","","","","https://github.com/ikorb","","","http://www.sd2iec.de","Fix sensitivity list of decodeControl process","https://github.com/robinsonb5/ZPUFlex/pull/4","2014-06-19T22:01:35Z","email","ZPUFlex decodeControl sensitivity list fix","Hey Ingo,
+
+An incomplete sensitivity list in a VHDL decode process causes simulation to treat it as edge-triggered when synthesis infers combinational logic — the synthesized hardware is correct but simulation diverges, so testbenches pass while the actual device behaves differently. Did the ZPUFlex fix change what the synthesized hardware did, or was it purely a simulation correctness issue?
 
 Severin"
 "413","YES","SKIP","fix sensitivity list"" language:verilog","5","issue","The-OpenROAD-Project/OpenROAD","OpenROAD","The-OpenROAD-Project","Organization","240","Verilog","2482","mingodad","Domingo Alvarez Duarte","mingodad@gmail.com","","","","https://github.com/mingodad","","","","Grammar railroad diagram","https://github.com/The-OpenROAD-Project/OpenROAD/issues/2488","2022-11-12T10:36:35Z","email","",""
-"414","NO","","fix sensitivity list"" language:verilog","5","issue","betrusted-io/betrusted-soc","betrusted-soc","betrusted-io","Organization","7","Verilog","157","DurandA","Arnaud Durand","a.durand@tokiwi.ch","","","Switzerland","https://github.com/DurandA","","","","TRNG and crypto cores","https://github.com/betrusted-io/betrusted-soc/issues/13","2020-01-02T03:31:57Z","email","TRNG and crypto cores for Betrusted SoC","Hey Arnaud,
+"414","YES","","fix sensitivity list"" language:verilog","5","issue","betrusted-io/betrusted-soc","betrusted-soc","betrusted-io","Organization","7","Verilog","157","DurandA","Arnaud Durand","a.durand@tokiwi.ch","","","Switzerland","https://github.com/DurandA","","","","TRNG and crypto cores","https://github.com/betrusted-io/betrusted-soc/issues/13","2020-01-02T03:31:57Z","email","TRNG architecture for Betrusted SoC","Hey Arnaud,
 
-Your issue about TRNG and crypto cores for betrusted-soc gets at a fundamental design question — the quality of the TRNG directly determines the security guarantees of everything built on top of it. What TRNG approach were you evaluating for the Betrusted platform — ring oscillator jitter, metastability-based, or something else?
+Ring-oscillator TRNGs are the default FPGA choice but also the most well-characterized attack target — digital post-processing can mask low entropy if the oscillator sources are correlated. What TRNG approach were you evaluating for Betrusted — ring oscillator jitter, metastability-based, or something else?
 
 Severin"
 "415","NO","","fix clock domain crossing","5","commit","zhangxuezhi1234561/rocket-chip","rocket-chip","zhangxuezhi1234561","User","180","Scala","0","jerryz123","Jerry Zhao","jerry@openai.com","OpenAI","Computer Architect at OpenAI.
