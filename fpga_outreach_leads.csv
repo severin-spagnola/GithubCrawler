@@ -90,7 +90,7 @@ Severin"
 The assertion you hit in ghdl when a constant array contains bitstrings of different lengths inside a record (issue #3055) is a subtle type-checking edge case. Records with heterogeneous array elements seem to stress the analyzer in ways most designs never reach. Did you find a workaround, or is the construct still broken?
 
 Severin"
-20.0,YES,fix entity language:VHDL,4,pr,open-logic/open-logic,open-logic,open-logic,Organization,13,VHDL,899,tasgomes,Tiago Gomes,,,,,https://github.com/tasgomes,https://www.linkedin.com/in/tiagoasgomes,,https://www.linkedin.com/in/tiagoasgomes,Add scoped constraint for olo_base_ram_sdp.tcl,https://github.com/open-logic/open-logic/pull/203,2025-08-08T15:20:55Z,linkedin,,"Hey Tiago, your PR adding scoped constraints for olo_base_ram_sdp in open-logic (PR #203) touches timing closure directly. Do scoped constraints solve the false-path problem you were seeing, or was it more about keeping the SDC clean for downstream tools?
+20.0,YES,fix entity language:VHDL,4,pr,open-logic/open-logic,open-logic,open-logic,Organization,13,VHDL,899,tasgomes,Tiago Gomes,,,,,https://github.com/tasgomes,https://www.linkedin.com/in/tiagoasgomes,,https://www.linkedin.com/in/tiagoasgomes,Add scoped constraint for olo_base_ram_sdp.tcl,https://github.com/open-logic/open-logic/pull/203,2025-08-08T15:20:55Z,linkedin,scoped constraints in open-logic,"Hey Tiago, your PR adding scoped constraints for olo_base_ram_sdp in open-logic (PR #203) touches timing closure directly. Do scoped constraints solve the false-path problem you were seeing, or was it more about keeping the SDC clean for downstream tools?
 
 Severin"
 21.0,YES,fix entity language:VHDL,4,pr,ISEL-GT/SEM2.LIC.PROJ.ROULETTE,SEM2.LIC.PROJ.ROULETTE,ISEL-GT,Organization,4,VHDL,0,MrKelpy,Alexandre Silva,alexandresilva.coding@gmail.com,Instituto Superior de Engenharia de Lisboa,"Java/C#/Python programmer.
@@ -314,7 +314,7 @@ The ghdl crash from a syntactically incorrect cross-file entity reference you re
 Severin"
 64.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,benreynwar,Ben Reynwar,ben@reynwar.net,Independent,,"Tucson, Arizona, USA",https://github.com/benreynwar,,,http://www.reynwar.net/ben,Declaration of array of record subtype triggers bug.,https://github.com/ghdl/ghdl/issues/1287,2020-05-07T04:48:30Z,email,ghdl array of record subtype bug,"Hey Ben,
 
-The ghdl bug you reported where declaring an array of record subtype triggers a crash (issue #1287) sounds like a type elaboration failure. As an independent engineer, does the ghdl work tie into consulting or contract FPGA projects, or is it more of a personal contribution to the ecosystem?
+The ghdl bug you reported where declaring an array of record subtype triggers a crash (issue #1287) sounds like a type elaboration failure. As an independent engineer, does the ghdl work tie into consulting or contract FPGA projects, or is it more of a personal deep-dive?
 
 Severin"
 65.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,forrestv,Forrest Voight,forrest.voight@gmail.com,,,USA,https://github.com/forrestv,,,http://forre.st/,"Process ""drives"" entries in a record type that it can never set when array is indexed by a non-constant expression",https://github.com/ghdl/ghdl/issues/1438,2020-08-15T05:10:51Z,email,ghdl phantom record drivers with non-constant indexing,"Hey Forrest,
@@ -384,7 +384,7 @@ Severin"
 The ghdl crash you reported when a process in a generate body accesses a signal in the generate clause (issue #155) is a scoping bug in the elaboration engine. Criteo does serious data processing at scale. Is there an FPGA acceleration angle at Criteo that connects to this work?
 
 Severin"
-78.0,NO,fix entity language:VHDL,4,issue,DerekYu177/425G14,425G14,DerekYu177,User,3,VHDL,1,DerekYu177,Derek Y,derek.yu.lind@gmail.com,@Shopify @ressystlab ,,Montreal,https://github.com/DerekYu177,,,,TODO,https://github.com/DerekYu177/425G14/issues/16,2017-03-12T05:31:26Z,email,,
+78.0,SKIP,fix entity language:VHDL,4,issue,DerekYu177/425G14,425G14,DerekYu177,User,3,VHDL,1,DerekYu177,Derek Y,derek.yu.lind@gmail.com,@Shopify @ressystlab ,,Montreal,https://github.com/DerekYu177,,,,TODO,https://github.com/DerekYu177/425G14/issues/16,2017-03-12T05:31:26Z,email,,
 79.0,NO,fix entity language:VHDL,4,issue,ghdl/ghdl-yosys-plugin,ghdl-yosys-plugin,ghdl,Organization,20,VHDL,356,Obijuan,Juan Gonzalez-Gomez,obijuan.cube@gmail.com,URJC,Hola!Soy Obijuan! I'm an assitant professor at the Engineering school of the  URJC University.  I really believe in the opensource spirit of sharing information,Madrid (Spain),https://github.com/Obijuan,,Obijuan_cube,https://obijuan.github.io/,Crash when an vector bit with index different than 0 is assigned to a signal,https://github.com/ghdl/ghdl-yosys-plugin/issues/6,2017-02-14T19:58:31Z,email,Open source FPGA at URJC,"Hey Juan,
 
 An assistant professor at URJC who genuinely believes in open source, contributing to the ghdl-yosys-plugin. Curious how you use open source FPGA tooling in your teaching. Do students actually use ghdl and yosys in coursework, or is it still mostly Vivado and Quartus in the classroom?
