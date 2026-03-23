@@ -384,18 +384,18 @@ Severin"
 The ghdl crash when a process in a generate body accesses a signal in the generate clause (issue #155) is a scoping bug in the elaboration engine — the signal should be visible but the compiler loses track of it across the generate boundary. Were you using generate statements heavily in that design?
 
 Severin"
-"78","YES","","fix entity language:VHDL","4","issue","DerekYu177/425G14","425G14","DerekYu177","User","3","VHDL","1","DerekYu177","Derek Y","derek.yu.lind@gmail.com","@Shopify @ressystlab ","","Montreal","https://github.com/DerekYu177","","","","TODO","https://github.com/DerekYu177/425G14/issues/16","2017-03-12T05:31:26Z","email","",""
-"79","YES","","fix entity language:VHDL","4","issue","ghdl/ghdl-yosys-plugin","ghdl-yosys-plugin","ghdl","Organization","20","VHDL","356","Obijuan","Juan Gonzalez-Gomez","obijuan.cube@gmail.com","URJC","Hola!Soy Obijuan! I'm an assitant professor at the Engineering school of the  URJC University.  I really believe in the opensource spirit of sharing information","Madrid (Spain)","https://github.com/Obijuan","","Obijuan_cube","https://obijuan.github.io/","Crash when an vector bit with index different than 0 is assigned to a signal","https://github.com/ghdl/ghdl-yosys-plugin/issues/6","2017-02-14T19:58:31Z","email","ghdl-yosys-plugin crash on non-zero vector bit assignment","Hey Juan,
+"78","YES","SKIP","fix entity language:VHDL","4","issue","DerekYu177/425G14","425G14","DerekYu177","User","3","VHDL","1","DerekYu177","Derek Y","derek.yu.lind@gmail.com","@Shopify @ressystlab ","","Montreal","https://github.com/DerekYu177","","","","TODO","https://github.com/DerekYu177/425G14/issues/16","2017-03-12T05:31:26Z","email","",""
+"79","YES","email","fix entity language:VHDL","4","issue","ghdl/ghdl-yosys-plugin","ghdl-yosys-plugin","ghdl","Organization","20","VHDL","356","Obijuan","Juan Gonzalez-Gomez","obijuan.cube@gmail.com","URJC","Hola!Soy Obijuan! I'm an assitant professor at the Engineering school of the  URJC University.  I really believe in the opensource spirit of sharing information","Madrid (Spain)","https://github.com/Obijuan","","Obijuan_cube","https://obijuan.github.io/","Crash when an vector bit with index different than 0 is assigned to a signal","https://github.com/ghdl/ghdl-yosys-plugin/issues/6","2017-02-14T19:58:31Z","email","ghdl-yosys-plugin crash on non-zero vector bit assignment","Hey Juan,
 
-The ghdl-yosys-plugin crash when assigning a vector bit with a non-zero index to a signal (issue #6) suggests the synthesis bridge was only handling the base-case indexing. Was this from a design you were running through the full open-source flow (ghdl to yosys to nextpnr), or were you specifically testing the plugin?
+ghdl-yosys-plugin issue #6 suggests the synthesis bridge was only wired for base-case index assignment. Was this from a full open-source flow (ghdl→yosys→nextpnr), or targeted plugin testing?
 
 Severin"
-"80","YES","","fix entity language:VHDL","4","pr","LaNoC-UFC/NoCThor","NoCThor","LaNoC-UFC","Organization","6","VHDL","1","rafaelgmota","Rafael Mota","faelmota@gmail.com","","","","https://github.com/rafaelgmota","","","","Create of circular fifo buffer entity","https://github.com/LaNoC-UFC/NoCThor/pull/34","2016-10-21T18:25:08Z","email","Circular FIFO in NoCThor","Hey Rafael,
+"80","YES","email","fix entity language:VHDL","4","pr","LaNoC-UFC/NoCThor","NoCThor","LaNoC-UFC","Organization","6","VHDL","1","rafaelgmota","Rafael Mota","faelmota@gmail.com","","","","https://github.com/rafaelgmota","","","","Create of circular fifo buffer entity","https://github.com/LaNoC-UFC/NoCThor/pull/34","2016-10-21T18:25:08Z","email","Circular FIFO in NoCThor","Hey Rafael,
 
 Circular FIFOs in NoC routers are deceptively tricky once you need backpressure across virtual channels. Did you end up needing separate read/write pointer domains, or does NoCThor keep everything in a single clock domain?
 
 Severin"
-"81","YES","","fix entity language:VHDL","4","pr","LaNoC-UFC/NoCThor","NoCThor","LaNoC-UFC","Organization","6","VHDL","1","jmferreiratech","JM Ferreira","marcelo@trincatech.com.br","@TrincaTech ","Software Engineer","Brazil","https://github.com/jmferreiratech","","jmFerreiraTech","","Fixes compilation flags","https://github.com/LaNoC-UFC/NoCThor/pull/58","2016-10-31T17:58:57Z","email","NoCThor compilation flags","Hey JM,
+"81","YES","email","fix entity language:VHDL","4","pr","LaNoC-UFC/NoCThor","NoCThor","LaNoC-UFC","Organization","6","VHDL","1","jmferreiratech","JM Ferreira","marcelo@trincatech.com.br","@TrincaTech ","Software Engineer","Brazil","https://github.com/jmferreiratech","","jmFerreiraTech","","Fixes compilation flags","https://github.com/LaNoC-UFC/NoCThor/pull/58","2016-10-31T17:58:57Z","email","NoCThor compilation flags","Hey JM,
 
 Fixing compilation flags on NoCThor (PR #58) suggests the build was probably silently accepting non-standard VHDL constructs that would fail on stricter tools. What simulator or synthesis tool exposed the flag issues — was it a move from one toolchain to another?
 
@@ -1878,14 +1878,10 @@ http://mgwoo.github.io","San Diego","https://github.com/mgwoo","","","http://mgw
 The TritonMP fix for the border error and missing liberty check addresses a silent failure mode — missing liberty files should be a hard error, not something the placer guesses around, especially with real tapeouts downstream. How do you prioritize which placement edge cases to fix first in OpenROAD?
 
 Severin"
-"384","YES","","fix rtl language:Verilog","4","pr","MiSTer-devel/Arduboy_MiSTer","Arduboy_MiSTer","MiSTer-devel","Organization","4","Verilog","12","MorgothCreator","Iulian Gheorghiu","morgoth.creator@gmail.com","","","","https://github.com/MorgothCreator","","","","Core, IO optimizations and fix SBIW instruction due to wrong descript…","https://github.com/MiSTer-devel/Arduboy_MiSTer/pull/2","2020-02-17T05:49:07Z","email","SBIW instruction fix in Arduboy MiSTer core","Hey Iulian,
+"384","YES","SKIP","fix rtl language:Verilog","4","pr","MiSTer-devel/Arduboy_MiSTer","Arduboy_MiSTer","MiSTer-devel","Organization","4","Verilog","12","MorgothCreator","Iulian Gheorghiu","morgoth.creator@gmail.com","","","","https://github.com/MorgothCreator","","","","Core, IO optimizations and fix SBIW instruction due to wrong descript…","https://github.com/MiSTer-devel/Arduboy_MiSTer/pull/2","2020-02-17T05:49:07Z","email","",""
+"385","YES","email","fix rtl language:Verilog","4","issue","smunaut/ice40-playground","ice40-playground","smunaut","User","4","Verilog","259","ghanesimit","ghane simit datturav","ghanesimit26592@gmail.com","student","","ahmedabad","https://github.com/ghanesimit","","","","Regarding riscv_usb simulation issue.","https://github.com/smunaut/ice40-playground/issues/11","2020-01-09T08:40:41Z","email","RISC-V USB simulation in ice40-playground","Hey Ghane,
 
-The SBIW instruction fix in the Arduboy MiSTer core is a subtle one — getting word-subtract-immediate wrong would silently corrupt 16-bit pointer arithmetic, which is basically all of AVR stack management. Was the wrong descriptor causing an off-by-one on the high byte carry, or a more fundamental decode issue?
-
-Severin"
-"385","YES","","fix rtl language:Verilog","4","issue","smunaut/ice40-playground","ice40-playground","smunaut","User","4","Verilog","259","ghanesimit","ghane simit datturav","ghanesimit26592@gmail.com","student","","ahmedabad","https://github.com/ghanesimit","","","","Regarding riscv_usb simulation issue.","https://github.com/smunaut/ice40-playground/issues/11","2020-01-09T08:40:41Z","email","RISC-V USB simulation in ice40-playground","Hey Ghane,
-
-The riscv_usb simulation issue on ice40-playground is a tricky one — getting USB device simulation working with the open-source iCE40 toolchain requires careful coordination between RISC-V core timing and the USB peripheral. Did you end up resolving it in simulation, or move to testing on hardware directly?
+The riscv_usb simulation issue on ice40-playground likely hits USB timing constraints that only appear in simulation — did you resolve it in sim, or move to testing on hardware directly?
 
 Severin"
 "386","NO","","fix rtl language:Verilog","4","issue","im-tomu/fomu-workshop","fomu-workshop","im-tomu","Organization","60","Verilog","169","lromor","Leonardo Romor","leonardo.romor@gmail.com","New Theory","","Amsterdam","https://github.com/lromor","","","","wishbone-tool and CSRStorage access","https://github.com/im-tomu/fomu-workshop/issues/154","2020-02-08T13:59:47Z","email","Wishbone-tool and CSRStorage access in Fomu","Hey Leonardo,
@@ -1903,7 +1899,7 @@ Severin"
 Being able to prototype AIB chiplet interfaces on FPGAs before committing to silicon would dramatically reduce integration risk — especially for validating the PHY training sequences that are hardest to debug post-tapeout. With UCIe gaining traction, is the goal to validate AIB-specific designs on FPGA, or to build a more general chiplet prototyping flow?
 
 Severin"
-"389","NO","","fix rtl language:Verilog","4","issue","darklife/darkriscv","darkriscv","darklife","Organization","22","Verilog","2498","hyf6661669","HYF","hyf_sysu@qq.com","","Digital IC Designer","Beijing, China","https://github.com/hyf6661669","","","","Something about riscv-tests from https://github.com/riscv","https://github.com/darklife/darkriscv/issues/9","2018-12-19T17:40:07Z","email","DarkRISCV riscv-tests compliance","Hey,
+"389","YES","email","fix rtl language:Verilog","4","issue","darklife/darkriscv","darkriscv","darklife","Organization","22","Verilog","2498","hyf6661669","HYF","hyf_sysu@qq.com","","Digital IC Designer","Beijing, China","https://github.com/hyf6661669","","","","Something about riscv-tests from https://github.com/riscv","https://github.com/darklife/darkriscv/issues/9","2018-12-19T17:40:07Z","email","DarkRISCV riscv-tests compliance","Hey,
 
 Your issue about running the official riscv-tests suite against DarkRISCV gets at a fundamental question for any RISC-V implementation — without passing the compliance tests, it's hard to trust that the core handles all the edge cases in the ISA spec. Which specific test categories were failing when you tried running them?
 
@@ -1916,11 +1912,11 @@ Severin"
 "391","NO","","fix rtl language:Verilog","4","issue","alangarf/apple-one","apple-one","alangarf","User","13","Verilog","149","mobluse","Mikael O. Bonnier","","Orbin.SE","Physicist MSc teacher coder: Asm Awk Bash BASIC C++ Forth Java JavaScript Matlab Maxima Perl PHP Python Scratch SQL XML. Supports UDHR.🇸🇪 swish 0730307498","Lund, Sweden","https://github.com/mobluse","https://www.linkedin.com/in/mikaelobonnier","","https://www.linkedin.com/in/mikaelobonnier","Fix to Makefile for board olimex_ice40hx8k_evb_ice40-io","https://github.com/alangarf/apple-one/issues/16","2018-03-08T20:51:40Z","linkedin","","The Olimex iCE40-HX8K EVB needs its own Makefile path in apple-one — was the issue pin constraints or synthesis flags?
 
 Severin"
-"392","NO","","fix rtl language:Verilog","4","issue","openrisc/orpsoc-cores","orpsoc-cores","openrisc","Organization","21","Verilog","125","oleg-nenashev","Oleg Nenashev","o.v.nenashev@gmail.com","@jenkinsci, @wiremock, @testcontainers","Dev Tools engineer and community builder with HW/Embedded background. Jenkins core maintainer. CNCF Ambassador. PhD.
+"392","YES","email","fix rtl language:Verilog","4","issue","openrisc/orpsoc-cores","orpsoc-cores","openrisc","Organization","21","Verilog","125","oleg-nenashev","Oleg Nenashev","o.v.nenashev@gmail.com","@jenkinsci, @wiremock, @testcontainers","Dev Tools engineer and community builder with HW/Embedded background. Jenkins core maintainer. CNCF Ambassador. PhD.
 
 All opinions are my own ","Neuchatel, Switzerland","https://github.com/oleg-nenashev","","oleg_nenashev","https://linktr.ee/onenashev","Sockit: Syntax error in orpsoc_top.v","https://github.com/openrisc/orpsoc-cores/issues/105","2016-09-08T11:25:20Z","email","Sockit syntax error in orpsoc-cores","Hey Oleg,
 
-The syntax error you found in orpsoc_top.v for the Sockit target is the kind of issue that blocks anyone trying to bring up that board. With your Jenkins background, have you ever considered applying CI to hardware build targets — catching exactly this kind of breakage before someone tries to synthesize?
+The orpsoc_top.v syntax error for the Sockit target blocks anyone trying to bring up that board. With your Jenkins background, have you considered applying CI to hardware build targets?
 
 Severin"
 "393","NO","","fix rtl language:Verilog","4","issue","rbarzic/nanorv32","nanorv32","rbarzic","User","8","Verilog","32","rbarzic","Ronan Barzic","rbarzic@gmail.com","Onio","","Trondheim (Norway)","https://github.com/rbarzic","","","http://rbarzic.github.io","Loop in RTL","https://github.com/rbarzic/nanorv32/issues/35","2016-03-18T14:01:32Z","email","nanorv32 RTL loop bug","Hey Ronan,
