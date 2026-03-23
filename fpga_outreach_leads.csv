@@ -933,59 +933,57 @@ Severin"
 The duplicate grammar import causing annotation errors in Silver (issue #57) suggests the runtime was treating the same grammar as two distinct identities rather than deduplicating by canonical path. Was the fix a reference equality check at import resolution, or did it require changes to how Silver tracks which grammars have already been elaborated?
 
 Severin"
-200.0,NO,,fix module language:SystemVerilog,4,pr,adam-maj/tiny-gpu,tiny-gpu,adam-maj,User,3,SystemVerilog,11919,niyas-sait,Niyas Sait,niyassait@gmail.com,,Empowering Arm platforms and beyond,"Cambridge, UK",https://github.com/niyas-sait,,,,Couple of changes to get this running on ubuntu 2204 with iverilog 11,https://github.com/adam-maj/tiny-gpu/pull/13,2024-04-30T12:21:01Z,email,tiny-gpu at 11919 stars,"Hey Niyas,
+200.0,YES,,fix module language:SystemVerilog,4,pr,adam-maj/tiny-gpu,tiny-gpu,adam-maj,User,3,SystemVerilog,11919,niyas-sait,Niyas Sait,niyassait@gmail.com,,Empowering Arm platforms and beyond,"Cambridge, UK",https://github.com/niyas-sait,,,,Couple of changes to get this running on ubuntu 2204 with iverilog 11,https://github.com/adam-maj/tiny-gpu/pull/13,2024-04-30T12:21:01Z,email,tiny-gpu Ubuntu 22.04 / iverilog 11 compatibility,"Hey Niyas,
 
-tiny-gpu at nearly 12K stars is viral-level traction for a hardware project. Your bio mentions empowering Arm platforms. Curious how the GPU architecture connects to that mission. Is there a real application in edge inference on Arm, or was it more of an educational exercise that took off?
-
-Severin"
-201.0,NO,,fix module language:SystemVerilog,4,issue,veripool/verilog-mode,verilog-mode,veripool,Organization,60,SystemVerilog,282,LapinFou,Sébastien Charpentier,lapin.iphone@gmail.com,,,Caen,https://github.com/LapinFou,,,http://opentx-doc.fr/,"Issue when using `\` followed by `""`",https://github.com/veripool/verilog-mode/issues/1831,2023-06-21T08:09:57Z,email,Verilog-mode backslash-quote parsing,"Hey Sebastien,
-
-Your issue about the backslash followed by double-quote parsing bug in verilog-mode touches string handling that a lot of chip designers hit daily. Emacs verilog-mode is one of those tools few people actively maintain. Curious what drives your contributions -- scratching your own itch, or community maintenance.
+The Ubuntu 22.04 / iverilog 11 compatibility fix on tiny-gpu — iverilog 11 tightened implicit net declarations and some initial block semantics that break designs written against older versions. Were the changes on the RTL side, or in the simulation scripts?
 
 Severin"
-202.0,NO,,fix module language:SystemVerilog,4,issue,lowRISC/ibex,ibex,lowRISC,Organization,120,SystemVerilog,1797,ZhongYic00,RubbishZhYic,rubbishzyc@outlook.com,"Gallydon University, Riverbank, Civil Engineering Co,Ltd","Unemployed, carrying bricks part-time",Great Wall Aside,https://github.com/ZhongYic00,,,blog.graphorall.top,[rtl] IbexSimpleSystem missing instruction address check,https://github.com/lowRISC/ibex/issues/2311,2025-08-24T07:47:34Z,email,Ibex instruction address check issue,"Hey,
+201.0,YES,,fix module language:SystemVerilog,4,issue,veripool/verilog-mode,verilog-mode,veripool,Organization,60,SystemVerilog,282,LapinFou,Sébastien Charpentier,lapin.iphone@gmail.com,,,Caen,https://github.com/LapinFou,,,http://opentx-doc.fr/,"Issue when using `\` followed by `""`",https://github.com/veripool/verilog-mode/issues/1831,2023-06-21T08:09:57Z,email,verilog-mode backslash-quote parsing (issue #1831),"Hey Sebastien,
 
-The missing instruction address check in IbexSimpleSystem you reported could let invalid fetches slip through undetected in simulation. Detailed verification bug reports on a core that complex are genuinely valuable. Curious whether you are running Ibex in a specific project, or if the verification work is more research-driven.
-
-Severin"
-203.0,NO,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,Mo0nbase,Julian Carrier,gpggit.difficult148@passmail.net,@polarityorg ,"Michigan CE -
-Monero - Rust - Nix","Ann Arbor, MI",https://github.com/Mo0nbase,,juliankc,,Fix recursive default assignment for subarrays (#4589),https://github.com/verilator/verilator/pull/7202,2026-03-05T17:28:21Z,email,CE and Verilator at Michigan,"Hey Julian,
-
-Computer engineering at Michigan with Monero, Rust, and Verilator contributions. That's an interesting mix of crypto and hardware simulation. Curious what brought you to Verilator specifically. Is it tied to your CE coursework, or a personal project?
+The backslash-double-quote parsing bug in verilog-mode (issue #1831) — if the lexer treats `\\""` as an escaped quote inside a string context rather than a string terminator, everything after it misparsed as continuation of the previous token. Did you trace it to the font-lock regex pattern or to the underlying elisp string state machine?
 
 Severin"
-204.0,NO,,fix module language:SystemVerilog,4,pr,lowRISC/ibex,ibex,lowRISC,Organization,120,SystemVerilog,1797,rickliu2000,Ruikai (Rick) Liu,rickliu2000@outlook.com,,,"Nanjing, China",https://github.com/rickliu2000,,rickliu2000,rickliu.im,Fix incorrect privilege mode detection causing failed dret riscv-dv tests,https://github.com/lowRISC/ibex/pull/2301,2025-07-23T07:12:23Z,email,Ibex privilege mode detection fix,"Hey Rick,
+202.0,YES,,fix module language:SystemVerilog,4,issue,lowRISC/ibex,ibex,lowRISC,Organization,120,SystemVerilog,1797,ZhongYic00,RubbishZhYic,rubbishzyc@outlook.com,"Gallydon University, Riverbank, Civil Engineering Co,Ltd","Unemployed, carrying bricks part-time",Great Wall Aside,https://github.com/ZhongYic00,,,blog.graphorall.top,[rtl] IbexSimpleSystem missing instruction address check,https://github.com/lowRISC/ibex/issues/2311,2025-08-24T07:47:34Z,email,IbexSimpleSystem instruction address check (issue #2311),"Hey,
 
-The fix for incorrect privilege mode detection in Ibex that was causing dret riscv-dv test failures is a subtle one. Debug mode privilege handling in RISC-V has a lot of corner cases, and getting that wrong means the debug spec tests fail in ways that are hard to trace.
-
-Curious how you tracked it down. Was it a matter of reading the RISC-V debug spec closely and comparing to the RTL, or did the riscv-dv test output point you in the right direction?
+The missing instruction address check you reported in IbexSimpleSystem (issue #2311) — without bounds checking, invalid fetch addresses can silently pass through the simple system model even though real hardware would trigger an access fault. Is this for a specific project running on Ibex, or are you working through the verification gaps more systematically?
 
 Severin"
-205.0,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,abarajithan11,Abarajithan G,abarajithang@uom.lk,University of Moratuwa,Mostly Harmless,Sri Lanka,https://github.com/abarajithan11,,,aba-blog.xyz,Can't find instance insertion point (Internal Error: V3LinkDot.cpp:1237),https://github.com/verilator/verilator/issues/7153,2026-02-25T23:10:19Z,email,Verilator at University of Moratuwa,"Hey Abarajithan,
+203.0,YES,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,Mo0nbase,Julian Carrier,gpggit.difficult148@passmail.net,@polarityorg ,"Michigan CE -
+Monero - Rust - Nix","Ann Arbor, MI",https://github.com/Mo0nbase,,juliankc,,Fix recursive default assignment for subarrays (#4589),https://github.com/verilator/verilator/pull/7202,2026-03-05T17:28:21Z,email,Verilator recursive subarray default assignment (PR #7202),"Hey Julian,
 
-Contributing to Verilator from the University of Moratuwa. Getting undergrad or early-career contributions into a tool with 330 contributors is no small thing. Curious what part of Verilator you've worked on. Simulation performance, language features, or something else?
-
-Severin"
-206.0,NO,,fix module language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,GregAC,Greg Chadwick,mail@gregchadwick.co.uk,,,"Bristol, UK",https://github.com/GregAC,,GregAChadwick,gregchadwick.co.uk/blog,[dv] Remaining OTBN DV TODOs,https://github.com/lowRISC/opentitan/issues/19034,2023-06-23T08:03:46Z,email,Ibex and OpenTitan at lowRISC,"Hey Greg,
-
-Digital design lead at lowRISC with Arm CPU memory systems and Broadcom GPU in the background. That's a strong path into open source silicon. Curious how the experience at Arm and Broadcom shaped your approach to OpenTitan. Do open source silicon projects fundamentally require different design practices?
+Your fix for recursive default assignment in Verilator subarrays (PR #7202) — getting the recursion right matters because a partial default initialization in a packed array of arrays can leave some dimensions uninitialized while appearing correct at the outer level. Was the bug producing wrong simulation values, or a compilation error in specific array configurations?
 
 Severin"
-207.0,NO,,fix module language:SystemVerilog,4,pr,IEEE-UCF/Gaming-CPU-Project,Gaming-CPU-Project,IEEE-UCF,Organization,12,SystemVerilog,10,MatiasYezzi,Matias Yezzi,matias@ybhome.net,,,"Orlando, FL",https://github.com/MatiasYezzi,,,,Decode,https://github.com/IEEE-UCF/Gaming-CPU-Project/pull/68,2026-03-05T17:54:22Z,email,Gaming CPU decode stage at UCF IEEE,"Hey Matias,
+204.0,YES,,fix module language:SystemVerilog,4,pr,lowRISC/ibex,ibex,lowRISC,Organization,120,SystemVerilog,1797,rickliu2000,Ruikai (Rick) Liu,rickliu2000@outlook.com,,,"Nanjing, China",https://github.com/rickliu2000,,rickliu2000,rickliu.im,Fix incorrect privilege mode detection causing failed dret riscv-dv tests,https://github.com/lowRISC/ibex/pull/2301,2025-07-23T07:12:23Z,email,Ibex privilege mode detection in dret (PR #2301),"Hey Rick,
 
-Your PR implementing the decode stage for the UCF IEEE Gaming CPU Project is core pipeline work. Building a CPU as a 12-person student team is ambitious. Curious how far along the design is -- have you gotten it running on an FPGA, or is it still in simulation.
-
-Severin"
-208.0,NO,,fix module language:SystemVerilog,4,pr,black-parrot/black-parrot,black-parrot,black-parrot,Organization,60,SystemVerilog,780,RKNAGA18,R NAGA ARJUN,rknarjun396@gmail.com,"vellore institute of technolgy,chennai",INFORMATION IS WEALTH,chennai,https://github.com/RKNAGA18,,,,Enhance interface verifier with derived cache and flit stats (Fixes #…,https://github.com/black-parrot/black-parrot/pull/1241,2026-03-09T12:37:36Z,email,Black Parrot at VIT Chennai,"Hey Naga Arjun,
-
-Contributing to Black Parrot at 780 stars from VIT Chennai. Black Parrot is one of the more serious open source RISC-V multicore projects. Curious what part of the design you work on. The core pipeline, the cache coherence, or the uncore infrastructure?
+The privilege mode detection bug in Ibex causing dret riscv-dv test failures (PR #2301) is tricky because the RISC-V debug spec and the privileged ISA spec have overlapping but distinct privilege level semantics at the resume point. Did the riscv-dv test output give you enough signal to isolate the problem, or did you end up comparing the debug spec directly against the RTL?
 
 Severin"
-209.0,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,Weissnix4711,Thomas Aldrian,aldrian.thom@proton.me,,"I occasionally write good code.
+205.0,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,abarajithan11,Abarajithan G,abarajithang@uom.lk,University of Moratuwa,Mostly Harmless,Sri Lanka,https://github.com/abarajithan11,,,aba-blog.xyz,Can't find instance insertion point (Internal Error: V3LinkDot.cpp:1237),https://github.com/verilator/verilator/issues/7153,2026-02-25T23:10:19Z,email,Verilator V3LinkDot instance insertion point error (issue #7153),"Hey Abarajithan,
 
-College mail: thomas.aldrian24@imperial.ac.uk",United Kingdom,https://github.com/Weissnix4711,,,https://thomasaldrian.net,Fix parameterized class module parameters,https://github.com/verilator/verilator/issues/6754,2025-12-04T12:03:00Z,email,Verilator contributions from Imperial,"Hey Thomas,
+The V3LinkDot internal error you hit in Verilator (issue #7153) — ""can't find instance insertion point"" in the link phase usually means the hierarchical name resolver lost track of where a module binding should land, often triggered by parameterized hierarchies or conditional generate blocks. What was the design structure that triggered it?
 
-Contributing to Verilator from Imperial College. Getting into open source EDA as an undergrad puts you ahead of most people in the space. Curious what part of Verilator you've worked on and whether it connects to your coursework or is a separate interest.
+Severin"
+206.0,YES,,fix module language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,GregAC,Greg Chadwick,mail@gregchadwick.co.uk,,,"Bristol, UK",https://github.com/GregAC,,GregAChadwick,gregchadwick.co.uk/blog,[dv] Remaining OTBN DV TODOs,https://github.com/lowRISC/opentitan/issues/19034,2023-06-23T08:03:46Z,email,OTBN remaining DV TODOs (issue #19034),"Hey Greg,
+
+The OTBN remaining DV TODOs tracker you filed (issue #19034) — BigNumber coprocessor verification has some uniquely difficult cases, particularly around secure wipe and key isolation where the simulation environment has to model threat boundaries explicitly. Were the remaining TODOs mostly around the secure wipe sequences, or were there algorithmic corner cases in the modular math operations?
+
+Severin"
+207.0,YES,,fix module language:SystemVerilog,4,pr,IEEE-UCF/Gaming-CPU-Project,Gaming-CPU-Project,IEEE-UCF,Organization,12,SystemVerilog,10,MatiasYezzi,Matias Yezzi,matias@ybhome.net,,,"Orlando, FL",https://github.com/MatiasYezzi,,,,Decode,https://github.com/IEEE-UCF/Gaming-CPU-Project/pull/68,2026-03-05T17:54:22Z,email,Gaming CPU decode stage at UCF IEEE,"Hey Matias,
+
+Your decode stage PR for the UCF IEEE Gaming CPU (PR #68) — decode is where most pipeline surprises live, since instruction encoding decisions made early ripple into hazard detection and forwarding paths later. Has the design reached the point of running on FPGA yet, or is the focus still on simulation correctness?
+
+Severin"
+208.0,YES,,fix module language:SystemVerilog,4,pr,black-parrot/black-parrot,black-parrot,black-parrot,Organization,60,SystemVerilog,780,RKNAGA18,R NAGA ARJUN,rknarjun396@gmail.com,"vellore institute of technolgy,chennai",INFORMATION IS WEALTH,chennai,https://github.com/RKNAGA18,,,,Enhance interface verifier with derived cache and flit stats (Fixes #…,https://github.com/black-parrot/black-parrot/pull/1241,2026-03-09T12:37:36Z,email,Black Parrot interface verifier cache and flit stats (PR #1241),"Hey Naga Arjun,
+
+Adding derived cache and flit stats to Black Parrot's interface verifier (PR #1241) gives the verification environment observability into the cache coherence traffic that wasn't there before. Were the derived stats exposing a coverage gap where tests were passing but cache behavior wasn't actually being checked, or is this primarily for performance characterization?
+
+Severin"
+209.0,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,Weissnix4711,Thomas Aldrian,aldrian.thom@proton.me,,"I occasionally write good code.
+
+College mail: thomas.aldrian24@imperial.ac.uk",United Kingdom,https://github.com/Weissnix4711,,,https://thomasaldrian.net,Fix parameterized class module parameters,https://github.com/verilator/verilator/issues/6754,2025-12-04T12:03:00Z,email,Verilator parameterized class module parameters (issue #6754),"Hey Thomas,
+
+The parameterized class module parameter bug in Verilator you filed (issue #6754) touches one of the trickier parts of SystemVerilog elaboration — class parameters and module parameters have different scoping rules, and resolving them correctly when they interact requires the elaborator to track which parameter context is active. What design were you trying to simulate when you hit it?
 
 Severin"
 210.0,NO,,fix module language:SystemVerilog,4,issue,openhwgroup/core-v-mcu,core-v-mcu,openhwgroup,Organization,15,SystemVerilog,195,cst-ayushm,Ayush Mewati,ayush.mewati@circuitsutra.com,@CircuitSutra ,Member of Consulting Staff @ CircuitSutra Technologies Pvt. Ltd.,,https://github.com/cst-ayushm,,,,Clarification for usage scenarios for FCFETCH and FCBOOT CSRs,https://github.com/openhwgroup/core-v-mcu/issues/347,2025-07-25T07:18:27Z,email,Core-V-MCU at CircuitSutra,"Hey Ayush,
