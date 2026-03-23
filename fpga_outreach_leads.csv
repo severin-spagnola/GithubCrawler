@@ -591,77 +591,71 @@ Currently studying computer science",Norway,https://github.com/LorgeN,,l0rg3n,,P
 Sound playback bugs in arcade FPGA cores are tricky — the original hardware often used custom DACs or unusual sample rates that are hard to replicate exactly. With the Inferno core, was the audio completely broken or more of a pitch/timing issue where it sounded wrong but was partially working?
 
 Severin"
-120.0,NO,,fix module language:VHDL,4,issue,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,haggaie,Haggai Eran,haggai.eran@gmail.com,NVIDIA,Networked systems research and software architect at NVIDIA Networking. Graduated from @acsl-technion. He/him.,"Yokneam, Israel",https://github.com/haggaie,,,https://haggaie.github.io/,.dat input files not found,https://github.com/VUnit/vunit/issues/589,2019-11-22T09:11:11Z,email,VUnit and NVIDIA networking,"Hey Haggai,
+120.0,YES,,fix module language:VHDL,4,issue,VUnit/vunit,vunit,VUnit,Organization,120,VHDL,820,haggaie,Haggai Eran,haggai.eran@gmail.com,NVIDIA,Networked systems research and software architect at NVIDIA Networking. Graduated from @acsl-technion. He/him.,"Yokneam, Israel",https://github.com/haggaie,,,https://haggaie.github.io/,.dat input files not found,https://github.com/VUnit/vunit/issues/589,2019-11-22T09:11:11Z,email,VUnit .dat file path resolution,"Hey Haggai,
 
-Networked systems research at NVIDIA Networking, contributing to VUnit. Curious whether VUnit is part of the verification flow on the SmartNIC FPGA side, or more of a personal tool you bring into projects.
-
-Severin"
-121.0,NO,,fix module language:VHDL,4,issue,lucask07/covg_fpga,covg_fpga,lucask07,User,9,VHDL,7,lucask07,Lucas Koerner,koerner.lucas@gmail.com,,,,https://github.com/lucask07,,,,DAC80508_ADS8686_test.py executes open_rigol_supply fails during pytest collection,https://github.com/lucask07/covg_fpga/issues/14,2022-06-22T14:14:52Z,email,DAC80508/ADS8686 test failure during pytest collection in covg_fpga,"Having pytest collection fail because a hardware function like open_rigol_supply gets invoked at import time is a classic embedded-test pain point -- it couples test discovery to physical instrument availability. The covg_fpga project looks like a solid mixed-signal acquisition platform.
-
-Did you end up gating the Rigol calls behind a fixture or a hardware-present flag, or restructuring the test module to defer the connection?
+The .dat input file resolution issue you reported on VUnit (#589) hits a common pain point when test data paths depend on the simulator's working directory vs. the source file location. Did you end up working around it with absolute paths, or was it a VUnit runner config issue?
 
 Severin"
-122.0,NO,,fix module language:VHDL,4,issue,ghdl/ghdl-yosys-plugin,ghdl-yosys-plugin,ghdl,Organization,20,VHDL,356,71GA,Žiga Lausegger,ziga.lausegger@gmail.com,,,"Slovenia, Ljubljana",https://github.com/71GA,,,,make fails,https://github.com/ghdl/ghdl-yosys-plugin/issues/149,2021-05-18T16:54:30Z,email,ghdl-yosys-plugin build issue,"Hey Ziga,
+121.0,YES,,fix module language:VHDL,4,issue,lucask07/covg_fpga,covg_fpga,lucask07,User,9,VHDL,7,lucask07,Lucas Koerner,koerner.lucas@gmail.com,,,,https://github.com/lucask07,,,,DAC80508_ADS8686_test.py executes open_rigol_supply fails during pytest collection,https://github.com/lucask07/covg_fpga/issues/14,2022-06-22T14:14:52Z,email,DAC80508/ADS8686 test failure during pytest collection in covg_fpga,"Hey Lucas,
 
-Your issue about the ghdl-yosys-plugin make failing is a common pain point for the open source VHDL synthesis flow. The bridge between GHDL and Yosys is one of the key pieces for that toolchain. Curious whether you got it working and what your experience has been for actual designs.
-
-Severin"
-123.0,NO,,fix module language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,Godhart,Nikolay Gniteev,godhart@gmail.com,,,,https://github.com/Godhart,,,,pyGHDL module is not found even though it's installed (with pip) ,https://github.com/ghdl/ghdl/issues/1927,2021-12-02T19:07:48Z,email,pyGHDL module import issue,"Hey Nikolay,
-
-The pyGHDL import failure after pip install is one of those integration issues where environment paths and shared library dependencies create surprisingly brittle setups. Curious whether the root cause turned out to be a path issue, a version mismatch, or something else entirely.
+Having pytest collection fail because open_rigol_supply gets invoked at import time is a classic embedded-test problem — test discovery becomes coupled to physical instrument availability. Did you end up gating the Rigol calls behind a fixture or a hardware-present flag, or restructuring the module to defer the connection?
 
 Severin"
-124.0,NO,,fix module language:VHDL,4,pr,MiSTer-devel/X68000_MiSTer,X68000_MiSTer,MiSTer-devel,Organization,8,VHDL,70,Kitrinx,Jamie Blanks,kitrinx@gmail.com,Unity Technologies,,"Brooklyn, NY",https://github.com/Kitrinx,,,,fix ce hookups in top module,https://github.com/MiSTer-devel/X68000_MiSTer/pull/4,2021-10-31T14:17:58Z,email,X68000 MiSTer clock enable fix,"Hey Jamie,
+122.0,YES,SKIP,fix module language:VHDL,4,issue,ghdl/ghdl-yosys-plugin,ghdl-yosys-plugin,ghdl,Organization,20,VHDL,356,71GA,Žiga Lausegger,ziga.lausegger@gmail.com,,,"Slovenia, Ljubljana",https://github.com/71GA,,,,make fails,https://github.com/ghdl/ghdl-yosys-plugin/issues/149,2021-05-18T16:54:30Z,email,,
+123.0,YES,,fix module language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,Godhart,Nikolay Gniteev,godhart@gmail.com,,,,https://github.com/Godhart,,,,pyGHDL module is not found even though it's installed (with pip) ,https://github.com/ghdl/ghdl/issues/1927,2021-12-02T19:07:48Z,email,pyGHDL module import issue,"Hey Nikolay,
 
-Your fix for the clock enable hookups in the X68000 MiSTer top module touches one of the trickiest parts of retro FPGA cores. The Sharp X68000 is one of the more obscure machines to recreate in hardware. Curious what drew you to that specific platform over other MiSTer cores.
-
-Severin"
-125.0,NO,,fix module language:VHDL,4,pr,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,torerams,Tore Ramsland,tore.ramsland@firmwaredesign.no,Firmware Design AS,,"Stavanger, Norway",https://github.com/torerams,,,www.firmwaredesign.no,Add argument to makefile to simplify Continuous Integration flow,https://github.com/stnolting/neorv32/pull/173,2021-10-06T10:57:16Z,email,neorv32 CI makefile improvement,"Hey Tore,
-
-Your PR adding a makefile argument to simplify CI flow for neorv32 is the kind of contribution that makes the project more accessible. Curious whether Firmware Design AS deploys neorv32 in client projects, or if the contribution is separate from the commercial work.
+The pyGHDL import failure after pip install (#1927) is one of those integration issues where environment paths and shared library dependencies create surprisingly brittle setups. Did the root cause turn out to be a path issue, a version mismatch between ghdl and pyGHDL, or something else entirely?
 
 Severin"
-126.0,NO,,fix module language:VHDL,4,issue,TerosTechnology/vscode-terosHDL,vscode-terosHDL,TerosTechnology,Organization,20,VHDL,702,AriesKo,김상일,sangil@satreci.com,Satrec Initiative,,,https://github.com/AriesKo,,,,Module documentation error in 0.0.2,https://github.com/TerosTechnology/vscode-terosHDL/issues/7,2020-06-26T17:40:20Z,email,TerosHDL at Satrec Initiative,"Hey,
+124.0,YES,,fix module language:VHDL,4,pr,MiSTer-devel/X68000_MiSTer,X68000_MiSTer,MiSTer-devel,Organization,8,VHDL,70,Kitrinx,Jamie Blanks,kitrinx@gmail.com,Unity Technologies,,"Brooklyn, NY",https://github.com/Kitrinx,,,,fix ce hookups in top module,https://github.com/MiSTer-devel/X68000_MiSTer/pull/4,2021-10-31T14:17:58Z,email,X68000 MiSTer clock enable fix,"Hey Jamie,
 
-Satrec Initiative does satellite imaging systems, and you're contributing to TerosHDL. Space-grade FPGA firmware for Earth observation satellites has extreme reliability requirements. Curious whether open source HDL tooling like TerosHDL is making its way into the workflow at a satellite company, or if it's still all vendor tools.
-
-Severin"
-127.0,NO,,fix module language:VHDL,4,issue,TerosTechnology/vscode-terosHDL,vscode-terosHDL,TerosTechnology,Organization,20,VHDL,702,evgeniyBolnov,Evgeniy,evgeniy.bolnov@gmail.com,Yadro MP,,St.-Petersburg,https://github.com/evgeniyBolnov,,,,parser problem with wavedrom,https://github.com/TerosTechnology/vscode-terosHDL/issues/12,2020-08-24T06:33:17Z,email,TerosHDL wavedrom parser issue,"Hey Evgeniy,
-
-Your issue about the wavedrom parser problem in TerosHDL touches the documentation generation side that most HDL editors skip entirely. Yadro does serious hardware work. Curious whether there is appetite for open source HDL tooling internally, or if it is mostly commercial EDA.
+Clock enable hookups in the X68000 MiSTer top module are easy to get wrong — a misrouted CE can silently break peripherals while the CPU keeps running. What drew you to the X68000 over other MiSTer cores?
 
 Severin"
-128.0,NO,,fix module language:VHDL,4,issue,MiSTer-devel/SNES_MiSTer,SNES_MiSTer,MiSTer-devel,Organization,25,VHDL,235,molnara,Adam Molnar,molnarad@outlook.com,,Senior Solutions Architect,"Hamilton, ON, Canada",https://github.com/molnara,,,,Final Fantasy III Intro,https://github.com/MiSTer-devel/SNES_MiSTer/issues/204,2020-01-31T08:39:28Z,email,SNES MiSTer Final Fantasy III intro bug,"Hey Adam,
+125.0,YES,,fix module language:VHDL,4,pr,stnolting/neorv32,neorv32,stnolting,User,60,VHDL,2000,torerams,Tore Ramsland,tore.ramsland@firmwaredesign.no,Firmware Design AS,,"Stavanger, Norway",https://github.com/torerams,,,www.firmwaredesign.no,Add argument to makefile to simplify Continuous Integration flow,https://github.com/stnolting/neorv32/pull/173,2021-10-06T10:57:16Z,email,neorv32 CI makefile argument,"Hey Tore,
 
-The Final Fantasy III intro issue you reported on the SNES MiSTer core is the kind of bug that tests edge cases in the PPU or DMA timing. Curious what part of the SNES core you focus on -- the PPU rendering, the audio DSP, or something else.
-
-Severin"
-129.0,NO,,fix module language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,dominiksalvet,Dominik Salvet,dominik.salvet@gmail.com,,,,https://github.com/dominiksalvet,,,,Add uninstall target to Makefile,https://github.com/ghdl/ghdl/issues/849,2019-06-18T10:54:18Z,email,uninstall target for ghdl,"Adding an uninstall target to ghdl's Makefile is one of those housekeeping fixes that makes the simulator actually usable for people who build from source — most EDA tools never bother with clean uninstall paths. Did you run into packaging or CI issues that motivated the PR, or was it more about keeping a dev machine tidy between ghdl versions?
+Adding a makefile argument to simplify CI flow for neorv32 (#173) addresses the gap between building the soft core locally and running it in an automated pipeline. Does Firmware Design AS use neorv32 in production designs, or is the CI work separate from the commercial side?
 
 Severin"
-130.0,NO,,fix module language:VHDL,4,issue,t-crest/patmos,patmos,t-crest,Organization,90,VHDL,153,henrikh,heh,henrik.enggaard@gmail.com,,,Denmark,https://github.com/henrikh,,,,Generating Aegean/t-crest makes the emulator build fail,https://github.com/t-crest/patmos/issues/16,2017-07-19T13:56:04Z,email,Patmos Aegean emulator build failure,"Hey Henrik,
+126.0,YES,,fix module language:VHDL,4,issue,TerosTechnology/vscode-terosHDL,vscode-terosHDL,TerosTechnology,Organization,20,VHDL,702,AriesKo,김상일,sangil@satreci.com,Satrec Initiative,,,https://github.com/AriesKo,,,,Module documentation error in 0.0.2,https://github.com/TerosTechnology/vscode-terosHDL/issues/7,2020-06-26T17:40:20Z,email,TerosHDL module documentation error,"Hey,
 
-Your issue about the Aegean/T-CREST build breaking the emulator suggests some tight coupling between the multicore generator and the simulation target. A time-predictable processor with 90 contributors is unique -- most designs optimize for average-case throughput. Curious what the main application domain is for Patmos.
-
-Severin"
-131.0,NO,,fix module language:VHDL,4,pr,MiSTer-devel/SMS_MiSTer,SMS_MiSTer,MiSTer-devel,Organization,22,VHDL,47,rattboi,Bradon Kanyid,rattboi@gmail.com,@BlueOwlDev,,"Portland, OR",https://github.com/rattboi,,,http://kanyid.org/,Fix lite build,https://github.com/MiSTer-devel/SMS_MiSTer/pull/7,2018-10-24T21:33:37Z,email,SMS MiSTer lite build fix,"Hey Bradon,
-
-Your fix for the SMS MiSTer lite build is the kind of contribution that keeps the broader community running. Getting the VDP timing right in the Sega Master System FPGA core is trickier than it looks. Curious whether the SMS core is feature-complete at this point, or if there are still edge cases in specific games.
+The module documentation error you reported on TerosHDL v0.0.2 (#7) suggests you were trying the auto-doc generation early on. Was the goal to integrate HDL documentation into your team’s workflow, or were you evaluating TerosHDL more broadly as an editor?
 
 Severin"
-132.0,NO,,fix module language:VHDL,4,pr,casper-astro/mlib_devel,mlib_devel,casper-astro,Organization,150,VHDL,67,bjbford,Brian Bradford,bjbford@iastate.edu,,,,https://github.com/bjbford,https://www.linkedin.com/in/brian-bradford-0a0b9a14b/,,https://www.linkedin.com/in/brian-bradford-0a0b9a14b/,XPS library v1.0 and verilog.py restructuring/comments,https://github.com/casper-astro/mlib_devel/pull/38,2018-06-26T21:55:08Z,email,CASPER FPGA at Iowa State,"Hey Brian,
+127.0,YES,,fix module language:VHDL,4,issue,TerosTechnology/vscode-terosHDL,vscode-terosHDL,TerosTechnology,Organization,20,VHDL,702,evgeniyBolnov,Evgeniy,evgeniy.bolnov@gmail.com,Yadro MP,,St.-Petersburg,https://github.com/evgeniyBolnov,,,,parser problem with wavedrom,https://github.com/TerosTechnology/vscode-terosHDL/issues/12,2020-08-24T06:33:17Z,email,TerosHDL wavedrom parser issue,"Hey Evgeniy,
 
-CASPER mlib_devel at Iowa State with 150 contributors. Radio astronomy signal processing on FPGAs is some of the most demanding DSP work in the field. Curious how the CASPER framework handles the diversity of telescope backends. Is it flexible enough for different instruments, or do you end up customizing heavily per deployment?
-
-Severin"
-133.0,NO,,fix module language:VHDL,4,pr,slaclab/surf,surf,slaclab,Organization,60,VHDL,450,slacrherbst,Ryan Herbst,rherbst@slac.stanford.edu,,,,https://github.com/slacrherbst,,,,default value for read,https://github.com/slaclab/surf/pull/107,2017-11-09T17:05:28Z,email,SURF framework at SLAC,"Hey Ryan,
-
-SURF at 450 stars with 60 contributors is one of the most widely used FPGA firmware frameworks in physics. Curious how you manage backward compatibility as the framework evolves. With so many instruments depending on it, changes to core modules must require careful coordination.
+The wavedrom parser issue you reported on TerosHDL (#12) touches the inline timing diagram rendering — getting wavedrom JSON to parse correctly inside an editor is surprisingly finicky. Was the parser failing on specific waveform syntax, or was it a broader rendering problem?
 
 Severin"
-134.0,NO,,fix module language:VHDL,4,issue,machinekit/mksocfpga,mksocfpga,machinekit,Organization,12,VHDL,33,cdsteinkuehler,Charles Steinkuehler,charles@steinkuehler.net,NewTek,,,https://github.com/cdsteinkuehler,,,,Support Sensible Firmware Names & Multiple Configurations,https://github.com/machinekit/mksocfpga/issues/9,2016-04-14T17:57:45Z,email,Machinekit SoC FPGA,"Hey Charles,
+128.0,YES,,fix module language:VHDL,4,issue,MiSTer-devel/SNES_MiSTer,SNES_MiSTer,MiSTer-devel,Organization,25,VHDL,235,molnara,Adam Molnar,molnarad@outlook.com,,Senior Solutions Architect,"Hamilton, ON, Canada",https://github.com/molnara,,,,Final Fantasy III Intro,https://github.com/MiSTer-devel/SNES_MiSTer/issues/204,2020-01-31T08:39:28Z,email,SNES MiSTer Final Fantasy III intro bug,"Hey Adam,
 
-The Machinekit SoC FPGA project is interesting. Bridging Linux-based CNC control with FPGA acceleration is a niche that needs more attention. Curious how the FPGA side handles real-time motion control. Is it mostly custom IP, or do you use the SoC FPGA fabric for the timing-critical parts?
+The Final Fantasy III intro bug you reported on the SNES MiSTer core (#204) — those intro sequences tend to stress Mode 7 or HDMA timing in ways most games don’t. Did it manifest as graphical corruption, or was it more of a hang during the intro?
+
+Severin"
+129.0,YES,,fix module language:VHDL,4,issue,ghdl/ghdl,ghdl,ghdl,Organization,150,VHDL,2767,dominiksalvet,Dominik Salvet,dominik.salvet@gmail.com,,,,https://github.com/dominiksalvet,,,,Add uninstall target to Makefile,https://github.com/ghdl/ghdl/issues/849,2019-06-18T10:54:18Z,email,uninstall target for ghdl,"Hey Dominik,
+
+Adding an uninstall target to ghdl’s Makefile (#849) is one of those fixes that makes the simulator actually usable for people who build from source — most EDA tools never bother with clean uninstall paths. Did packaging or CI issues motivate the request, or was it more about keeping a dev machine tidy between ghdl versions?
+
+Severin"
+130.0,YES,,fix module language:VHDL,4,issue,t-crest/patmos,patmos,t-crest,Organization,90,VHDL,153,henrikh,heh,henrik.enggaard@gmail.com,,,Denmark,https://github.com/henrikh,,,,Generating Aegean/t-crest makes the emulator build fail,https://github.com/t-crest/patmos/issues/16,2017-07-19T13:56:04Z,email,Patmos Aegean emulator build failure,"Hey Henrik,
+
+The Aegean/T-CREST build breaking the Patmos emulator (#16) suggests tight coupling between the multicore configuration generator and the simulation target. Did the issue end up being in the generated interconnect code, or was it a toolchain version mismatch?
+
+Severin"
+131.0,YES,SKIP,fix module language:VHDL,4,pr,MiSTer-devel/SMS_MiSTer,SMS_MiSTer,MiSTer-devel,Organization,22,VHDL,47,rattboi,Bradon Kanyid,rattboi@gmail.com,@BlueOwlDev,,"Portland, OR",https://github.com/rattboi,,,http://kanyid.org/,Fix lite build,https://github.com/MiSTer-devel/SMS_MiSTer/pull/7,2018-10-24T21:33:37Z,email,,
+132.0,YES,,fix module language:VHDL,4,pr,casper-astro/mlib_devel,mlib_devel,casper-astro,Organization,150,VHDL,67,bjbford,Brian Bradford,bjbford@iastate.edu,,,,https://github.com/bjbford,https://www.linkedin.com/in/brian-bradford-0a0b9a14b/,,https://www.linkedin.com/in/brian-bradford-0a0b9a14b/,XPS library v1.0 and verilog.py restructuring/comments,https://github.com/casper-astro/mlib_devel/pull/38,2018-06-26T21:55:08Z,email,CASPER mlib_devel XPS library restructuring,"Hey Brian,
+
+Your PR restructuring the XPS library and verilog.py in mlib_devel (#38) touches the build tooling that every CASPER instrument depends on for synthesis. What drove the restructuring — a specific breakage in the XPS flow, or was it more about making the codebase maintainable as more backends got added?
+
+Severin"
+133.0,YES,,fix module language:VHDL,4,pr,slaclab/surf,surf,slaclab,Organization,60,VHDL,450,slacrherbst,Ryan Herbst,rherbst@slac.stanford.edu,,,,https://github.com/slacrherbst,,,,default value for read,https://github.com/slaclab/surf/pull/107,2017-11-09T17:05:28Z,email,SURF default read value behavior,"Hey Ryan,
+
+Your PR adding a default value for read operations in SURF (#107) affects how every downstream instrument handles uninitialized or unmapped register reads. Was the previous behavior returning garbage on unmapped addresses, or was it more about providing a known-safe fallback?
+
+Severin"
+134.0,YES,,fix module language:VHDL,4,issue,machinekit/mksocfpga,mksocfpga,machinekit,Organization,12,VHDL,33,cdsteinkuehler,Charles Steinkuehler,charles@steinkuehler.net,NewTek,,,https://github.com/cdsteinkuehler,,,,Support Sensible Firmware Names & Multiple Configurations,https://github.com/machinekit/mksocfpga/issues/9,2016-04-14T17:57:45Z,email,mksocfpga firmware naming and multi-config support,"Hey Charles,
+
+Your issue requesting sensible firmware names and multiple configuration support for mksocfpga (#9) hits a real deployment problem — managing multiple FPGA bitstreams on a single SoC without a clear naming convention gets messy fast. Were the multiple configurations for different CNC machine types, or more about separating development and production builds?
 
 Severin"
 135.0,NO,,fix module language:VHDL,4,pr,timvideos/HDMI2USB-jahanzeb-firmware,HDMI2USB-jahanzeb-firmware,timvideos,Organization,11,VHDL,108,cfelton,Christopher Felton,chris.felton@gmail.com,,,"Rochester, MN",https://github.com/cfelton,,FeltonChris,,DCT1 register initial vs. register reset values.,https://github.com/timvideos/HDMI2USB-jahanzeb-firmware/pull/92,2014-08-11T15:53:41Z,email,HDMI2USB firmware,"Hey Christopher,
