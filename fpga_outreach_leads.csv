@@ -1257,92 +1257,86 @@ The 32X shares the Saturn's dual-SH2 architecture, so SH7604 bug fixes should ap
 Did the Saturn SH2 fixes apply cleanly, or did the memory map differences require additional changes?
 
 Severin"
-255,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,cyyself,Yangyu Chen,cyy@cyyself.name,Chongqing University,Ph.D. Student. Computer Architecture & Software co-design. Open-source enthusiast.,"(Beijing|Chongqing|Xiamen), China",https://github.com/cyyself,,yangyuc,https://blog.cyyself.name,Proposal to remove automatic assignment of processor affinity,https://github.com/verilator/verilator/issues/6826,2025-12-16T17:21:49Z,email,Removing automatic processor affinity in Verilator,"Hey Yangyu,
+255,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,cyyself,Yangyu Chen,cyy@cyyself.name,Chongqing University,Ph.D. Student. Computer Architecture & Software co-design. Open-source enthusiast.,"(Beijing|Chongqing|Xiamen), China",https://github.com/cyyself,,yangyuc,https://blog.cyyself.name,Proposal to remove automatic assignment of processor affinity,https://github.com/verilator/verilator/issues/6826,2025-12-16T17:21:49Z,email,Removing automatic processor affinity in Verilator,"Hey Yangyu,
 
 Your proposal to remove automatic assignment of processor affinity in Verilator raises a legitimate performance concern. Automatic pinning can hurt throughput on NUMA systems or when Verilator runs alongside other workloads, and the user should control scheduling.
 
 Did this come up in your own architecture simulation workloads where the auto-pinning caused performance regressions?
 
 Severin"
-256,NO,,fix module language:SystemVerilog,4,pr,0xArt/Tiny_But_Mighty_I2C_Master_Verilog,Tiny_But_Mighty_I2C_Master_Verilog,0xArt,User,3,SystemVerilog,37,hasseily,Henri Asseily,henri@asseily.com,,,,https://github.com/hasseily,,,henri.tel,Fix to wrong device id after RESTART state,https://github.com/0xArt/Tiny_But_Mighty_I2C_Master_Verilog/pull/10,2025-05-02T09:46:27Z,email,Wrong device ID after I2C RESTART in Tiny_But_Mighty,"Getting the wrong device ID after a RESTART is a subtle I2C bug -- the state machine has to re-latch the address byte from the new transaction without completing a full STOP condition. That fix in PR #10 likely saved people hours of logic analyzer debugging.
+256,YES,,fix module language:SystemVerilog,4,pr,0xArt/Tiny_But_Mighty_I2C_Master_Verilog,Tiny_But_Mighty_I2C_Master_Verilog,0xArt,User,3,SystemVerilog,37,hasseily,Henri Asseily,henri@asseily.com,,,,https://github.com/hasseily,,,henri.tel,Fix to wrong device id after RESTART state,https://github.com/0xArt/Tiny_But_Mighty_I2C_Master_Verilog/pull/10,2025-05-02T09:46:27Z,email,Wrong device ID after I2C RESTART in Tiny_But_Mighty,"Getting the wrong device ID after a RESTART is a subtle I2C bug -- the state machine has to re-latch the address byte from the new transaction without completing a full STOP condition. That fix in PR #10 likely saved people hours of logic analyzer debugging.
 
 Was the root cause that the FSM was holding the device ID register from the previous transaction instead of reloading it on the repeated START?
 
 Severin"
-257,NO,,fix module language:SystemVerilog,4,pr,KULeuven-MICAS/snax_cluster,snax_cluster,KULeuven-MICAS,Organization,29,SystemVerilog,35,jorendumoulin,Joren Dumoulin,joren.dumoulin@kuleuven.be,MICAS (KU Leuven),,"Leuven, Belgium",https://github.com/jorendumoulin,,,,fix docker environment settings,https://github.com/KULeuven-MICAS/snax_cluster/pull/455,2025-03-19T11:35:10Z,email,SNAX cluster Docker environment fix,"Hey Joren,
-
-Your PR fixing the Docker environment settings for SNAX cluster is the kind of infrastructure work that unblocks everyone else. If the containerized dev environment is broken, no one outside the core team can reproduce builds or run tests.
-
-Is your focus on the SNAX hardware accelerator integration or the MLIR compiler toolchain side?
-
-Severin"
-258,NO,,signal width mismatch language:VHDL,4,pr,OpenResearchInstitute/pluto_msk,pluto_msk,OpenResearchInstitute,Organization,5,Python,15,Abraxas3d,Abraxas3d,w5nyv@arrl.net,Optimized Tomfoolery,I enjoy thinking and doing. Not necessarily in that order.,"San Diego, CA, USA",https://github.com/Abraxas3d,,,www.optimizedtomfoolery.com,Add AXI stream frame-based TX with continuous TVALID flow control,https://github.com/OpenResearchInstitute/pluto_msk/pull/14,2025-10-17T01:21:10Z,email,AXI stream frame-based TX for Pluto MSK,"Hey,
+257,YES,SKIP,fix module language:SystemVerilog,4,pr,KULeuven-MICAS/snax_cluster,snax_cluster,KULeuven-MICAS,Organization,29,SystemVerilog,35,jorendumoulin,Joren Dumoulin,joren.dumoulin@kuleuven.be,MICAS (KU Leuven),,"Leuven, Belgium",https://github.com/jorendumoulin,,,,fix docker environment settings,https://github.com/KULeuven-MICAS/snax_cluster/pull/455,2025-03-19T11:35:10Z,email,,
+258,YES,,signal width mismatch language:VHDL,4,pr,OpenResearchInstitute/pluto_msk,pluto_msk,OpenResearchInstitute,Organization,5,Python,15,Abraxas3d,Abraxas3d,w5nyv@arrl.net,Optimized Tomfoolery,I enjoy thinking and doing. Not necessarily in that order.,"San Diego, CA, USA",https://github.com/Abraxas3d,,,www.optimizedtomfoolery.com,Add AXI stream frame-based TX with continuous TVALID flow control,https://github.com/OpenResearchInstitute/pluto_msk/pull/14,2025-10-17T01:21:10Z,email,AXI stream frame-based TX for Pluto MSK,"Hey,
 
 Your PR adding AXI stream frame-based TX with continuous TVALID flow control to Pluto MSK solves a fundamental throughput problem. Gaps in TVALID during MSK modulation would cause phase discontinuities in the transmitted signal.
 
 Is this for AMSAT satellite digital comms, or terrestrial amateur microwave work?
 
 Severin"
-259,NO,,signal width mismatch language:Verilog,4,pr,explosionnnn/vending-machine,vending-machine,explosionnnn,User,3,Verilog,1,kitakaaki,HUANG YU CHIEN,s11327155@cycu.edu.tw,,,,https://github.com/kitakaaki,,,,12/24 21:40 update,https://github.com/explosionnnn/vending-machine/pull/2,2025-12-24T13:38:47Z,email,,
-260,NO,,signal width mismatch language:Verilog,4,pr,tancheng/VectorCGRA,VectorCGRA,tancheng,User,17,Python,44,yyan7223,,22B305016@stu.hit.edu.cn,,,,https://github.com/yyan7223,,,,Resolves conflicts and fixes some bugs,https://github.com/tancheng/VectorCGRA/pull/84,2025-02-25T03:20:23Z,email,,
-261,NO,,signal width mismatch language:Verilog,4,pr,chipsalliance/yosys-f4pga-plugins,yosys-f4pga-plugins,chipsalliance,Organization,60,Verilog,83,mkurc-ant,Maciej Kurc,mkurc@antmicro.com,Antmicro,,,https://github.com/mkurc-ant,,,http://www.antmicro.com,[k6n10f] RAM functional modes for TDP36K,https://github.com/chipsalliance/yosys-f4pga-plugins/pull/381,2022-08-30T11:36:50Z,email,TDP36K RAM modes for K6N10F in Yosys F4PGA,"Hey Maciej,
+259,YES,SKIP,signal width mismatch language:Verilog,4,pr,explosionnnn/vending-machine,vending-machine,explosionnnn,User,3,Verilog,1,kitakaaki,HUANG YU CHIEN,s11327155@cycu.edu.tw,,,,https://github.com/kitakaaki,,,,12/24 21:40 update,https://github.com/explosionnnn/vending-machine/pull/2,2025-12-24T13:38:47Z,email,,
+260,YES,SKIP,signal width mismatch language:Verilog,4,pr,tancheng/VectorCGRA,VectorCGRA,tancheng,User,17,Python,44,yyan7223,,22B305016@stu.hit.edu.cn,,,,https://github.com/yyan7223,,,,Resolves conflicts and fixes some bugs,https://github.com/tancheng/VectorCGRA/pull/84,2025-02-25T03:20:23Z,email,,
+261,YES,,signal width mismatch language:Verilog,4,pr,chipsalliance/yosys-f4pga-plugins,yosys-f4pga-plugins,chipsalliance,Organization,60,Verilog,83,mkurc-ant,Maciej Kurc,mkurc@antmicro.com,Antmicro,,,https://github.com/mkurc-ant,,,http://www.antmicro.com,[k6n10f] RAM functional modes for TDP36K,https://github.com/chipsalliance/yosys-f4pga-plugins/pull/381,2022-08-30T11:36:50Z,email,TDP36K RAM modes for K6N10F in Yosys F4PGA,"Hey Maciej,
 
-Your PR adding RAM functional modes for TDP36K on the K6N10F target in the Yosys F4PGA plugins is critical work. Getting block RAM inference right for a specific FPGA family determines whether the open-source toolchain produces competitive results or wastes LUTs on distributed RAM.
+Mapping TDP36K block RAM modes to the QuickLogic K6N10F in the Yosys F4PGA plugins determines whether synthesis produces efficient memory inference or falls back to wasting LUTs on distributed RAM. Getting all the TDP modes — simple dual-port, true dual-port, split — to infer correctly is one of the harder parts of adding a new FPGA target.
 
-What FPGA family does K6N10F target, and how close is the RAM inference to matching the vendor tool's output?
+How many of the TDP36K modes does the plugin currently infer automatically versus requiring manual instantiation?
 
 Severin"
-262,NO,,signal width mismatch language:Verilog,4,pr,bespoke-silicon-group/basejump_stl,basejump_stl,bespoke-silicon-group,Organization,60,SystemVerilog,650,Songchun-Li,Songchun,rafael.fc.lee@outlook.com,University of Washington,"Master Student in Electrical & Computer Engineering, University of Washington","Seattle, WA",https://github.com/Songchun-Li,,,,Adding cache block data width support to bsg_cache,https://github.com/bespoke-silicon-group/basejump_stl/pull/374,2020-12-31T00:22:23Z,email,Cache block data width support in bsg_cache,"Hey Songchun,
+262,YES,,signal width mismatch language:Verilog,4,pr,bespoke-silicon-group/basejump_stl,basejump_stl,bespoke-silicon-group,Organization,60,SystemVerilog,650,Songchun-Li,Songchun,rafael.fc.lee@outlook.com,University of Washington,"Master Student in Electrical & Computer Engineering, University of Washington","Seattle, WA",https://github.com/Songchun-Li,,,,Adding cache block data width support to bsg_cache,https://github.com/bespoke-silicon-group/basejump_stl/pull/374,2020-12-31T00:22:23Z,email,Cache block data width support in bsg_cache,"Hey Songchun,
 
 Your PR adding cache block data width support to bsg_cache in BaseJump STL makes the cache parameterizable in a dimension that most cache implementations hardcode. Flexible block widths matter when the same cache IP needs to work across different memory bus configurations.
 
 What memory interface drove the need for configurable block widths — was it a specific tapeout target?
 
 Severin"
-263,NO,,signal width mismatch language:Verilog,4,pr,bespoke-silicon-group/basejump_stl,basejump_stl,bespoke-silicon-group,Organization,60,SystemVerilog,650,xusine,Cyan Lin,xusine@outlook.com,,"Explorer, Pioneer, and Caretaker. ",,https://github.com/xusine,,,,Iterative Multiplier with Configurable Stride,https://github.com/bespoke-silicon-group/basejump_stl/pull/22,2019-04-15T13:12:35Z,email,Configurable-stride iterative multiplier in BaseJump STL,"An iterative multiplier with configurable stride is a clean area-vs-latency knob -- wider strides burn more LUTs per cycle but finish in fewer iterations. Contributing that to BaseJump STL means it has to be generic enough to synthesize across ASIC and FPGA targets.
+263,YES,,signal width mismatch language:Verilog,4,pr,bespoke-silicon-group/basejump_stl,basejump_stl,bespoke-silicon-group,Organization,60,SystemVerilog,650,xusine,Cyan Lin,xusine@outlook.com,,"Explorer, Pioneer, and Caretaker. ",,https://github.com/xusine,,,,Iterative Multiplier with Configurable Stride,https://github.com/bespoke-silicon-group/basejump_stl/pull/22,2019-04-15T13:12:35Z,email,Configurable-stride iterative multiplier in BaseJump STL,"An iterative multiplier with configurable stride is a clean area-vs-latency knob -- wider strides burn more LUTs per cycle but finish in fewer iterations. Contributing that to BaseJump STL means it has to be generic enough to synthesize across ASIC and FPGA targets.
 
 Does the stride parameter map directly to the number of partial-product bits accumulated per cycle, or is there an intermediate Booth-encoding step?
 
 Severin"
-264,NO,,signal width mismatch language:SystemVerilog,4,pr,bespoke-silicon-group/basejump_stl,basejump_stl,bespoke-silicon-group,Organization,60,SystemVerilog,650,stdavids,Scott Davidson,scottdavidson1992@gmail.com,University of Washington,,"Seattle, WA",https://github.com/stdavids,,,,Cocotb Demo (Pseudo PR),https://github.com/bespoke-silicon-group/basejump_stl/pull/153,2019-09-16T05:11:55Z,email,Cocotb demo for BaseJump STL,"Hey Scott,
+264,YES,,signal width mismatch language:SystemVerilog,4,pr,bespoke-silicon-group/basejump_stl,basejump_stl,bespoke-silicon-group,Organization,60,SystemVerilog,650,stdavids,Scott Davidson,scottdavidson1992@gmail.com,University of Washington,,"Seattle, WA",https://github.com/stdavids,,,,Cocotb Demo (Pseudo PR),https://github.com/bespoke-silicon-group/basejump_stl/pull/153,2019-09-16T05:11:55Z,email,Cocotb demo for BaseJump STL,"Hey Scott,
 
 Your Cocotb demo PR for BaseJump STL is an early example of Python-based verification applied to a production-proven SystemVerilog IP library. BaseJump STL has been used in actual tapeouts including the Celerity RISC-V chip, so demonstrating Cocotb compatibility opens it up to a different verification workflow.
 
 Did Cocotb handle the SystemVerilog parameterized modules in BaseJump STL cleanly, or were there interface limitations?
 
 Severin"
-265,NO,,signal width mismatch language:SystemVerilog,4,pr,xlsynth/bedrock-rtl,bedrock-rtl,xlsynth,Organization,18,SystemVerilog,32,tbunker-openai,Trevor Bunker,tbunker@openai.com,,,,https://github.com/tbunker-openai,,,,amba: add axi4 to axi4-lite bridge,https://github.com/xlsynth/bedrock-rtl/pull/277,2024-12-20T21:35:46Z,email,AXI4 to AXI4-Lite bridge in bedrock-rtl,"Hey Trevor,
+265,YES,,signal width mismatch language:SystemVerilog,4,pr,xlsynth/bedrock-rtl,bedrock-rtl,xlsynth,Organization,18,SystemVerilog,32,tbunker-openai,Trevor Bunker,tbunker@openai.com,,,,https://github.com/tbunker-openai,,,,amba: add axi4 to axi4-lite bridge,https://github.com/xlsynth/bedrock-rtl/pull/277,2024-12-20T21:35:46Z,email,AXI4 to AXI4-Lite bridge in bedrock-rtl,"Hey Trevor,
 
 Your PR adding the AXI4 to AXI4-Lite bridge in bedrock-rtl is a foundational bus infrastructure piece. The protocol downconversion from full AXI4 to AXI4-Lite determines how efficiently high-bandwidth masters can access low-bandwidth control registers without stalling.
 
 What was the biggest design challenge at OpenAI scale that bedrock-rtl is trying to solve?
 
 Severin"
-266,NO,,signal width mismatch language:SystemVerilog,4,pr,chipsalliance/Cores-VeeR-EL2,Cores-VeeR-EL2,chipsalliance,Organization,60,SystemVerilog,321,wallento,Stefan Wallentowitz,stefan@wallentowitz.de,,,,https://github.com/wallento,,,,FuseSoC and Github Linter Action,https://github.com/chipsalliance/Cores-VeeR-EL2/pull/4,2020-06-17T17:46:15Z,email,FuseSoC and linter CI for VeeR-EL2,"Hey Stefan,
+266,YES,,signal width mismatch language:SystemVerilog,4,pr,chipsalliance/Cores-VeeR-EL2,Cores-VeeR-EL2,chipsalliance,Organization,60,SystemVerilog,321,wallento,Stefan Wallentowitz,stefan@wallentowitz.de,,,,https://github.com/wallento,,,,FuseSoC and Github Linter Action,https://github.com/chipsalliance/Cores-VeeR-EL2/pull/4,2020-06-17T17:46:15Z,email,FuseSoC and linter CI for VeeR-EL2,"Hey Stefan,
 
-Your PR adding FuseSoC integration and a GitHub linter action to VeeR-EL2 was one of the earliest CI setups on a CHIPS Alliance core. Automated linting catches RTL quality issues before they reach contributors, which is essential for a project that needs to stay production-grade.
+Adding FuseSoC and a GitHub linter action to VeeR-EL2 as PR #4 meant defining the CI contract before most contributors had even joined. Without automated lint gating, RTL style drift would silently accumulate across PRs on a core intended for production use.
 
-What do you see as the next big bottleneck for open hardware adoption — tools, IP quality, or something else?
+Did the FuseSoC integration require restructuring VeeR-EL2's file hierarchy, or did the existing layout map cleanly to core files?
 
 Severin"
-267,NO,,signal width mismatch language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,iamkarthikbk,Karthik B K,karthik.bk@incoresemi.com,@incoresemi,cpu core uarch at incore and ms-r ee at iitm,"Chennai, India",https://github.com/iamkarthikbk,,,iamkarthikbk.github.io,Verilator lint warnings/errors result in build failure,https://github.com/lowRISC/opentitan/issues/14764,2022-09-05T07:24:14Z,email,Verilator lint build failure in OpenTitan,"Hey Karthik,
+267,YES,,signal width mismatch language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,iamkarthikbk,Karthik B K,karthik.bk@incoresemi.com,@incoresemi,cpu core uarch at incore and ms-r ee at iitm,"Chennai, India",https://github.com/iamkarthikbk,,,iamkarthikbk.github.io,Verilator lint warnings/errors result in build failure,https://github.com/lowRISC/opentitan/issues/14764,2022-09-05T07:24:14Z,email,Verilator lint build failure in OpenTitan,"Hey Karthik,
 
 Your issue about Verilator lint warnings and errors causing build failures in OpenTitan highlights the tension between strict lint policies and development velocity. Treating warnings as errors is the right default for security-critical silicon, but it blocks contributors who didn't cause the warnings.
 
 How does InCore's own core development handle the lint-as-error tradeoff?
 
 Severin"
-268,NO,,signal width mismatch language:SystemVerilog,4,issue,chipsalliance/aib-protocols,aib-protocols,chipsalliance,Organization,6,SystemVerilog,29,nij-intel,Nij Dorairaj,nij.dorairaj@intel.com,,,,https://github.com/nij-intel,,,,AXI4-MM regression failures,https://github.com/chipsalliance/aib-protocols/issues/58,2021-12-21T01:57:38Z,email,AXI4-MM regression failures in AIB protocols,"AXI4-MM regression failures in the AIB protocol stack could stem from several places -- ordering violations, burst boundary misalignment, or the AIB PHY-to-protocol handoff. The CHIPS Alliance AIB spec has tight constraints on credit-based flow control that can silently break under certain traffic patterns.
+268,YES,,signal width mismatch language:SystemVerilog,4,issue,chipsalliance/aib-protocols,aib-protocols,chipsalliance,Organization,6,SystemVerilog,29,nij-intel,Nij Dorairaj,nij.dorairaj@intel.com,,,,https://github.com/nij-intel,,,,AXI4-MM regression failures,https://github.com/chipsalliance/aib-protocols/issues/58,2021-12-21T01:57:38Z,email,AXI4-MM regression failures in AIB protocols,"AXI4-MM regression failures in the AIB protocol stack could stem from several places -- ordering violations, burst boundary misalignment, or the AIB PHY-to-protocol handoff. The CHIPS Alliance AIB spec has tight constraints on credit-based flow control that can silently break under certain traffic patterns.
 
 Were the failures showing up as data corruption on the read path or as hangs in the write channel handshake?
 
 Severin"
-269,NO,,signal width mismatch language:SystemVerilog,4,issue,openhwgroup/cv32e40x,cv32e40x,openhwgroup,Organization,90,SystemVerilog,261,strichmo,Steve Richmond,steve.richmond@silabs.com,Silicon Labs,"Design Verification Manager
+269,YES,,signal width mismatch language:SystemVerilog,4,issue,openhwgroup/cv32e40x,cv32e40x,openhwgroup,Organization,90,SystemVerilog,261,strichmo,Steve Richmond,steve.richmond@silabs.com,Silicon Labs,"Design Verification Manager
 Central R&D ",Austin TX,https://github.com/strichmo,,,,dcsr cause mismatch when entering debug after a step,https://github.com/openhwgroup/cv32e40x/issues/340,2021-12-03T22:01:55Z,email,dcsr cause mismatch on debug step in CV32E40X,"Hey Steve,
 
 The dcsr cause mismatch when entering debug after a step in CV32E40X is a subtle spec compliance issue. Debug CSR state has to be precisely correct because debuggers rely on the cause field to determine why the core halted, and a wrong value means GDB misinterprets the stop reason.
 
-What's the biggest difference between verifying proprietary Silicon Labs cores and open source OpenHW cores?
+Was the mismatch specific to the single-step-then-halt transition, or did it also show up when entering debug from other causes like breakpoints?
 
 Severin"
 270,NO,,signal width mismatch language:SystemVerilog,4,pr,pulp-platform/axi,axi,pulp-platform,Organization,60,SystemVerilog,1516,suehtamacv,Matheus Cavalcante,,Arago Computing Inc.,Ohm Sweet Ohm,Arcueil,https://github.com/suehtamacv,https://www.linkedin.com/in/matheuscvlc/,,https://www.linkedin.com/in/matheuscvlc/,AXI DW Conversion,https://github.com/pulp-platform/axi/pull/43,2020-01-30T12:19:59Z,linkedin,,"AXI data width conversion in PULP's AXI library is one of the hardest protocol features to implement correctly — the transaction splitting and merging has to preserve ordering and atomicity guarantees. What's Arago Computing building on top of the PULP AXI infrastructure?
