@@ -986,68 +986,64 @@ College mail: thomas.aldrian24@imperial.ac.uk",United Kingdom,https://github.com
 The parameterized class module parameter bug in Verilator you filed (issue #6754) touches one of the trickier parts of SystemVerilog elaboration — class parameters and module parameters have different scoping rules, and resolving them correctly when they interact requires the elaborator to track which parameter context is active. What design were you trying to simulate when you hit it?
 
 Severin"
-210,NO,,fix module language:SystemVerilog,4,issue,openhwgroup/core-v-mcu,core-v-mcu,openhwgroup,Organization,15,SystemVerilog,195,cst-ayushm,Ayush Mewati,ayush.mewati@circuitsutra.com,@CircuitSutra ,Member of Consulting Staff @ CircuitSutra Technologies Pvt. Ltd.,,https://github.com/cst-ayushm,,,,Clarification for usage scenarios for FCFETCH and FCBOOT CSRs,https://github.com/openhwgroup/core-v-mcu/issues/347,2025-07-25T07:18:27Z,email,Core-V-MCU at CircuitSutra,"Hey Ayush,
+210,YES,,fix module language:SystemVerilog,4,issue,openhwgroup/core-v-mcu,core-v-mcu,openhwgroup,Organization,15,SystemVerilog,195,cst-ayushm,Ayush Mewati,ayush.mewati@circuitsutra.com,@CircuitSutra ,Member of Consulting Staff @ CircuitSutra Technologies Pvt. Ltd.,,https://github.com/cst-ayushm,,,,Clarification for usage scenarios for FCFETCH and FCBOOT CSRs,https://github.com/openhwgroup/core-v-mcu/issues/347,2025-07-25T07:18:27Z,email,FCFETCH and FCBOOT CSR usage on Core-V-MCU,"Hey Ayush,
 
-Member of consulting staff at CircuitSutra working on Core-V-MCU. CircuitSutra's SystemC and verification expertise applied to the OpenHW ecosystem is a natural fit. Curious what CircuitSutra's focus area is on Core-V. Verification, integration, or something else?
+The FCFETCH and FCBOOT CSR usage question you raised on Core-V-MCU hits a gap in the documentation that affects anyone trying to bring up the boot flow. Those CSRs control fetch and boot behavior but the intended use cases are underspecified.
 
-Severin"
-211,NO,,fix module language:SystemVerilog,4,pr,openhwgroup/cve2,cve2,openhwgroup,Organization,120,SystemVerilog,60,davideschiavone,Davide Schiavone,davide@openhwgroup.org,"EPFL, OpenHW Group",PostDoc at EPFL and Director of Eng. in the OpenHW Group. He received his Ph.D. from ETH Zurich.,Geneva,https://github.com/davideschiavone,,DavideSchiavo10,,fix #300,https://github.com/openhwgroup/cve2/pull/313,2026-02-14T11:43:16Z,email,CVE2 fix #300,"Hey Davide,
-
-Your PR fixing #300 on CVE2 touches the kind of bug that matters when you are pushing an academic core toward industrial verification. Getting those edge cases right is what separates a research prototype from something a company can actually tape out.
-
-What was the root cause behind #300, and how much of CVE2 verification is still manual versus automated at this point?
+Did you end up mapping out the correct CSR sequence for your boot scenario, or is CircuitSutra still working through it?
 
 Severin"
-212,NO,,fix module language:SystemVerilog,4,issue,melt-umn/silver,silver,melt-umn,Organization,60,SystemVerilog,69,krame505,Lucas Kramer,lucas@matx.com,"MatX, Inc",,"Mountain View, CA",https://github.com/krame505,,,,Using type classes,https://github.com/melt-umn/silver/issues/401,2020-12-29T04:13:15Z,email,Type classes in Silver,"Hey Lucas,
+211,YES,,fix module language:SystemVerilog,4,pr,openhwgroup/cve2,cve2,openhwgroup,Organization,120,SystemVerilog,60,davideschiavone,Davide Schiavone,davide@openhwgroup.org,"EPFL, OpenHW Group",PostDoc at EPFL and Director of Eng. in the OpenHW Group. He received his Ph.D. from ETH Zurich.,Geneva,https://github.com/davideschiavone,,DavideSchiavo10,,fix #300,https://github.com/openhwgroup/cve2/pull/313,2026-02-14T11:43:16Z,email,CVE2 bug fix #300 and verification gaps,"Hey Davide,
 
-The type class issue you opened on Silver raises a real question about how far expressive type systems can go in hardware description. Silver already pushes beyond what most HDLs attempt with its attribute grammar foundation.
+The fix for #300 on CVE2 looks like the kind of bug that only surfaces under specific pipeline conditions. With CVE2 being a relatively new fork from CV32E40P, these edge cases are the hard part of establishing a clean verification baseline.
 
-How much of what you explored with Silver's type class system translates to the hardware abstraction problems at MatX?
-
-Severin"
-213,NO,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,RRozak,Ryszard Rozak,ryszard.rozak@gmail.com,@antmicro ,,"Wroclaw, Poland",https://github.com/RRozak,,,,Support disabling blocks containing forks,https://github.com/verilator/verilator/pull/6514,2025-09-30T10:24:32Z,email,Disabling blocks with forks in Verilator,"Hey Ryszard,
-
-Your PR adding support for disabling blocks containing forks in Verilator addresses one of those SystemVerilog features that commercial simulators handle but open-source tools have long ignored. Fork/join inside disable blocks creates tricky lifetime semantics.
-
-What was the design pattern that required this, and how did you handle the interaction between disable and active fork threads?
+Was #300 caught through directed tests or did it fall out of constrained-random runs?
 
 Severin"
-214,NO,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,gdessouky,Ghada Dessouky,gdessouky@google.com,Google | OpenTitan Team,,"Munich, Germany",https://github.com/gdessouky,,,,"[prim_sha2,pre_dv] Add pre_dv Verilator testbenches",https://github.com/lowRISC/opentitan/pull/20473,2023-11-27T10:11:42Z,email,Pre-DV Verilator testbenches for prim_sha2,"Hey Ghada,
+212,YES,,fix module language:SystemVerilog,4,issue,melt-umn/silver,silver,melt-umn,Organization,60,SystemVerilog,69,krame505,Lucas Kramer,lucas@matx.com,"MatX, Inc",,"Mountain View, CA",https://github.com/krame505,,,,Using type classes,https://github.com/melt-umn/silver/issues/401,2020-12-29T04:13:15Z,email,Type classes in Silver,"Hey Lucas,
 
-Your PR adding pre-DV Verilator testbenches for prim_sha2 in OpenTitan is the kind of early verification that catches bugs before they compound. Getting SHA-2 primitive verification right early saves enormous pain in the full chip DV flow.
+The type class issue you opened on Silver gets at whether attribute grammars can support the kind of polymorphism that hardware generators need. Type classes would let Silver specifications compose without manually threading attributes through every production.
 
-Did you choose Verilator for the pre-DV stage specifically because of cycle time, or was it more about catching lint and basic functionality before the UVM environment?
-
-Severin"
-215,NO,,fix module language:SystemVerilog,4,pr,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,lucat1,Luca Tagliavini,luca@teapot.ovh,,"Into infrastructure, distributed systems and compilers/languages.",Zurich,https://github.com/lucat1,,,teapot.ovh/~luca,fix cmake install files,https://github.com/fpgasystems/Coyote/pull/190,2026-02-07T10:30:21Z,email,Coyote cmake install fix,"Hey Luca,
-
-Your PR fixing the cmake install files on Coyote matters more than it looks. Build system issues on FPGA shell projects silently block anyone trying to deploy, and RDMA-capable FPGA shells have enough setup complexity already.
-
-With your distributed systems background, are you working on Coyote's networking stack or the reconfiguration framework?
+Does any of that type-level abstraction work carry over to what you are building at MatX?
 
 Severin"
-216,NO,,fix module language:SystemVerilog,4,issue,pulp-platform/pulpissimo,pulpissimo,pulp-platform,Organization,60,SystemVerilog,463,HarshitSharm-a,Harshit Sharma,ha2442sh-s@student.lu.se,,,Sweden,https://github.com/HarshitSharm-a,,,,Accelerator hwme test example stuck ,https://github.com/pulp-platform/pulpissimo/issues/143,2020-07-21T11:29:04Z,email,PULPissimo accelerator hwme test,"Hey Harshit,
+213,YES,,fix module language:SystemVerilog,4,pr,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,RRozak,Ryszard Rozak,ryszard.rozak@gmail.com,@antmicro ,,"Wroclaw, Poland",https://github.com/RRozak,,,,Support disabling blocks containing forks,https://github.com/verilator/verilator/pull/6514,2025-09-30T10:24:32Z,email,Disabling blocks with forks in Verilator,"Hey Ryszard,
 
-The stuck hwme accelerator test you reported on PULPissimo is a tricky debug problem. When a hardware accelerator test hangs, it could be the accelerator interface, the interconnect, or the software driver, and narrowing it down requires visibility into all three.
+Fork/join inside disable blocks creates tricky lifetime semantics that commercial simulators handle but Verilator has long skipped. The interaction between disable and active fork threads is the hard part — killing a thread mid-fork without corrupting shared state requires careful scheduling.
 
-Curious whether the issue turned out to be on the hardware side (the accelerator interface or the interconnect) or a software configuration problem. That distinction matters a lot for how you approach debugging on the PULP platform.
-
-Severin"
-217,NO,,fix module language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,hcallahan-lowrisc,Harry Callahan,hcallahan@lowrisc.org,lowRISC C.I.C,,,https://github.com/hcallahan-lowrisc,,,,"[dv,dvsim,tooling] Questa Support",https://github.com/lowRISC/opentitan/issues/24341,2024-08-15T20:50:47Z,email,Questa support for OpenTitan dvsim,"Hey Harry,
-
-Your issue on bringing Questa support into OpenTitan's dvsim tooling is a big deal for adoption. Most commercial chip teams run Questa or VCS, and if dvsim only supports one simulator, it limits who can contribute to DV.
-
-What was the main blocker for Questa integration — the compilation model differences, or the way dvsim manages test dispatch?
+What design pattern at Antmicro needed this, and did you have to change how Verilator models thread lifetimes?
 
 Severin"
-218,NO,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,certainly-param,Param Chaudhari,paramchaudhari.work@gmail.com,University of North Carolina at Chapel Hill,"Ok, maybe, I like mathematics and chaos too...","Chapel Hill, NC",https://github.com/certainly-param,,,,Verilator Internal Fault When Compiling CVA6 RISC-V CPU,https://github.com/verilator/verilator/issues/6947,2026-01-22T09:12:33Z,email,Verilator internal fault on CVA6,"Hey Param,
+214,YES,,fix module language:SystemVerilog,4,pr,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,gdessouky,Ghada Dessouky,gdessouky@google.com,Google | OpenTitan Team,,"Munich, Germany",https://github.com/gdessouky,,,,"[prim_sha2,pre_dv] Add pre_dv Verilator testbenches",https://github.com/lowRISC/opentitan/pull/20473,2023-11-27T10:11:42Z,email,Pre-DV Verilator testbenches for prim_sha2,"Hey Ghada,
 
-The Verilator internal fault you hit when compiling CVA6 is the kind of bug report that actually moves the tool forward. CVA6 exercises enough SystemVerilog features that it tends to find elaboration bugs other designs miss.
+Pre-DV Verilator testbenches for prim_sha2 catch hash computation bugs before they propagate into the full chip DV environment where debug cycles are much longer. SHA-2 primitives are particularly worth catching early since errors there silently corrupt downstream crypto flows.
 
-Did you manage to isolate which CVA6 construct triggered the fault, or was it only reproducible with the full design?
+Did you choose Verilator for pre-DV because of cycle time, or was it more about catching basic functional issues before the UVM environment was ready?
 
 Severin"
-219,NO,,fix module language:SystemVerilog,4,issue,pulp-platform/pulpissimo,pulpissimo,pulp-platform,Organization,60,SystemVerilog,463,vignajeth,Vignajeth,,,,Denmark,https://github.com/vignajeth,https://www.linkedin.com/in/vignajeth/,,https://www.linkedin.com/in/vignajeth/,Post Synthesis Simulation Fails in RI5CY Core,https://github.com/pulp-platform/pulpissimo/issues/255,2021-05-11T09:07:35Z,linkedin,,"Post-synthesis sim failures in RI5CY are often caused by missing timing annotations or uninitialized flip-flop states that behavioral sim hides. Did the failure show up as X-propagation in the datapath or as incorrect control flow in the decode stage?
+215,YES,,fix module language:SystemVerilog,4,pr,fpgasystems/Coyote,Coyote,fpgasystems,Organization,28,SystemVerilog,329,lucat1,Luca Tagliavini,luca@teapot.ovh,,"Into infrastructure, distributed systems and compilers/languages.",Zurich,https://github.com/lucat1,,,teapot.ovh/~luca,fix cmake install files,https://github.com/fpgasystems/Coyote/pull/190,2026-02-07T10:30:21Z,email,Coyote cmake install fix,"Hey Luca,
+
+Build system breakage on FPGA shell projects like Coyote silently blocks anyone trying to deploy, and RDMA-capable shells already have enough setup complexity without cmake failing on install paths. The fix you pushed keeps the onramp working.
+
+With your distributed systems background, are you using Coyote's networking stack or the reconfiguration framework?
+
+Severin"
+216,YES,SKIP,fix module language:SystemVerilog,4,issue,pulp-platform/pulpissimo,pulpissimo,pulp-platform,Organization,60,SystemVerilog,463,HarshitSharm-a,Harshit Sharma,ha2442sh-s@student.lu.se,,,Sweden,https://github.com/HarshitSharm-a,,,,Accelerator hwme test example stuck ,https://github.com/pulp-platform/pulpissimo/issues/143,2020-07-21T11:29:04Z,email,,
+217,YES,,fix module language:SystemVerilog,4,issue,lowRISC/opentitan,opentitan,lowRISC,Organization,270,SystemVerilog,3226,hcallahan-lowrisc,Harry Callahan,hcallahan@lowrisc.org,lowRISC C.I.C,,,https://github.com/hcallahan-lowrisc,,,,"[dv,dvsim,tooling] Questa Support",https://github.com/lowRISC/opentitan/issues/24341,2024-08-15T20:50:47Z,email,Questa support for OpenTitan dvsim,"Hey Harry,
+
+Most commercial chip teams run Questa or VCS, and if dvsim only supports one simulator it limits who can contribute to OpenTitan DV. Questa and VCS have different enough compilation models that adding support is more than a flag swap.
+
+Was the main blocker the compilation model differences, or the way dvsim manages test dispatch and result parsing?
+
+Severin"
+218,YES,,fix module language:SystemVerilog,4,issue,verilator/verilator,verilator,verilator,Organization,330,SystemVerilog,3419,certainly-param,Param Chaudhari,paramchaudhari.work@gmail.com,University of North Carolina at Chapel Hill,"Ok, maybe, I like mathematics and chaos too...","Chapel Hill, NC",https://github.com/certainly-param,,,,Verilator Internal Fault When Compiling CVA6 RISC-V CPU,https://github.com/verilator/verilator/issues/6947,2026-01-22T09:12:33Z,email,Verilator internal fault on CVA6,"Hey Param,
+
+CVA6 exercises enough SystemVerilog features that it tends to find Verilator elaboration bugs simpler designs never hit. An internal fault during compilation usually means something in the AST transform pipeline choked on a legal construct.
+
+Did you isolate which CVA6 module or construct triggered the fault, or was it only reproducible with the full design?
+
+Severin"
+219,YES,,fix module language:SystemVerilog,4,issue,pulp-platform/pulpissimo,pulpissimo,pulp-platform,Organization,60,SystemVerilog,463,vignajeth,Vignajeth,,,,Denmark,https://github.com/vignajeth,https://www.linkedin.com/in/vignajeth/,,https://www.linkedin.com/in/vignajeth/,Post Synthesis Simulation Fails in RI5CY Core,https://github.com/pulp-platform/pulpissimo/issues/255,2021-05-11T09:07:35Z,linkedin,,"Post-synth sim failures in RI5CY — was it X-propagation in the datapath or control flow in decode? Curious how you debugged it.
 
 Severin"
 220,NO,,fix module language:SystemVerilog,4,issue,openhwgroup/cv32e40x,cv32e40x,openhwgroup,Organization,90,SystemVerilog,261,StMiky,Michele Caon,st.miky77@gmail.com,EPFL,Postdoc @ ESL-EPFL,"Lausanne, Switzerland",https://github.com/StMiky,,,,[XIF] Coprocessor XIF Issue response not sampled by ID-EX pipeline registers,https://github.com/openhwgroup/cv32e40x/issues/941,2023-09-07T14:27:58Z,email,XIF issue response timing on CV32E40X,"Hey Michele,
