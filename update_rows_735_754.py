@@ -47,12 +47,12 @@ UPDATES = {
         "outreach_subject": "MySQL auto_increment counter bleed in TestCase",
         "outreach_message": (
             "Hey Ni,\n\n"
-            "Resetting auto_increment in TestCase prevents counter "
+            "Resetting auto_increment in TestCase stops counter "
             "bleed between tests, but TRUNCATE vs ALTER TABLE "
-            "behave differently under InnoDB — TRUNCATE resets the "
-            "counter implicitly while ALTER TABLE does it without "
-            "dropping data. Which approach did you go with, and "
-            "did foreign key constraints complicate it?\n\n"
+            "differ under InnoDB — TRUNCATE resets implicitly "
+            "while ALTER TABLE preserves data. Which did you "
+            "pick, and did foreign key constraints complicate "
+            "the reset?\n\n"
             "Severin"
         ),
     },
@@ -83,7 +83,7 @@ UPDATES = {
             "debounce timer. Was the root cause a stale reference "
             "in the debounce closure, or did compaction not signal "
             "downstream consumers?\n\n"
-            "Severin"
+            "Sev"
         ),
     },
     "741": {
@@ -188,7 +188,7 @@ UPDATES = {
             "in the client are hints, not controls. Did the PR "
             "add server-side middleware, or is the frontend gate "
             "the sole enforcement point?\n\n"
-            "Severin"
+            "Sev"
         ),
     },
     "751": {
@@ -197,12 +197,12 @@ UPDATES = {
         "outreach_subject": "CallbackRequestID idempotency for CHASM Schedules",
         "outreach_message": (
             "Hey Sean,\n\n"
-            "Adding CallbackRequestID to workflow execution gives "
-            "CHASM Schedules a dedup key, but idempotency depends "
-            "on where the ID is generated — if it's derived from "
-            "schedule time, clock skew between schedulers creates "
-            "duplicates. Is the ID deterministic from schedule "
-            "input, or minted at dispatch?\n\n"
+            "Adding CallbackRequestID gives CHASM Schedules a "
+            "dedup key, but idempotency depends on where the ID "
+            "is generated — if derived from schedule time, clock "
+            "skew between schedulers creates duplicates. Is the "
+            "ID deterministic from schedule input, or minted at "
+            "dispatch?\n\n"
             "Severin"
         ),
     },
@@ -218,12 +218,12 @@ UPDATES = {
         "outreach_subject": "PIA iOS reconnection on server reboot vs disappearance",
         "outreach_message": (
             "Hey Diego,\n\n"
-            "Server reboot and server disappearance look identical "
-            "from the client until the TCP timeout fires — but the "
-            "reconnection strategy should differ. Reboots warrant "
-            "fast retry to the same endpoint; disappearance needs "
-            "failover. Did the improved mechanism distinguish "
-            "between the two, or use a single backoff?\n\n"
+            "Server reboot and disappearance look identical from "
+            "the client until TCP timeout fires — but reconnect "
+            "strategy should differ. Reboots warrant fast retry "
+            "to the same endpoint; disappearance needs failover. "
+            "Does the new mechanism distinguish the two, or use "
+            "a single backoff?\n\n"
             "Severin"
         ),
     },
@@ -234,11 +234,11 @@ UPDATES = {
         "outreach_message": (
             "Hey Jackson,\n\n"
             "Migrating raw SQL to Drizzle usually surfaces edge "
-            "cases where the ORM's query builder generates "
-            "subtly different SQL — especially around NULL "
-            "handling, implicit casts, and JOIN ordering. Did "
-            "you find cases where Drizzle's output diverged "
-            "from the raw queries in behavior, not just syntax?\n\n"
+            "cases where the ORM generates subtly different SQL "
+            "— especially around NULL handling, implicit casts, "
+            "and JOIN ordering. Did you find cases where Drizzle "
+            "diverged from raw queries in behavior, not just "
+            "syntax?\n\n"
             "Severin"
         ),
     },
